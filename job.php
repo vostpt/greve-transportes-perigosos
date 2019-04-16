@@ -45,7 +45,7 @@ $json = array(
 );
 
 $fp = fopen('data.json', 'w');
-fwrite($fp, json_encode($json));
+fwrite($fp, json_encode($json, JSON_UNESCAPED_UNICODE));
 fclose($fp);
 
 echo 'Done' . PHP_EOL;
