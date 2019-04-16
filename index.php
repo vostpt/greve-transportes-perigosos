@@ -105,26 +105,26 @@ $antiXss = new AntiXSS();
 
 
         //        echo '<pre>';
+        /*
+                $csvData
+                       = file_get_contents('file.csv');
+                $lines = explode(PHP_EOL, $csvData);
+                $array = array();
+                foreach ($lines as $line) {
+                    $x = str_getcsv($line);
+                    if ($x[8] === '1') {
+                        $array[] = $x;
+                    }
+                }
+                //        print_r($array);
+                unset($array[0]);
+                $array = array_reverse($array);
 
-        $csvData
-               = file_get_contents('file.csv');
-        $lines = explode(PHP_EOL, $csvData);
-        $array = array();
-        foreach ($lines as $line) {
-            $x = str_getcsv($line);
-            if ($x[8] === '1') {
-                $array[] = $x;
-            }
-        }
-        //        print_r($array);
-        unset($array[0]);
-        $array = array_reverse($array);
 
+                $stats = array_count_values(array_column($array, 5));
 
-        $stats = array_count_values(array_column($array, 5));
-
-        // close curl resource to free up system resources
-        //        curl_close($ch);
+                // close curl resource to free up system resources
+                //        curl_close($ch);*/
         ?>
         <br>
         <table id="dataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -141,7 +141,7 @@ $antiXss = new AntiXSS();
             </thead>
             <tbody>
             <?php
-            foreach ($array as $a): ?>
+            /*foreach ($array as $a): ?>
                 <tr>
                     <td><span data-livestamp="<?php echo htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8'); ?>"></span></td>
                     <td><?php echo htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8'); ?>
@@ -152,20 +152,13 @@ $antiXss = new AntiXSS();
                     <td><?php echo htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8'); ?></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php endforeach;*/ ?>
             </tbody>
         </table>
 
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
         <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
             favor.🚘⛽️ℹ️</p>
-
-        <br>
-        <div class="row">
-            <div class="col-md-offset-3 col-md-6 col-sd-12">
-                <canvas id="myChart" width="400" height="400"></canvas>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -173,8 +166,6 @@ $antiXss = new AntiXSS();
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
-        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/pt.js" integrity="sha256-eCtywrvMfbXvLM79yCZ1CaX24qPM1EbloAq/Rf3ImL4="
@@ -186,43 +177,15 @@ $antiXss = new AntiXSS();
 
 <script>
     $(document).ready(function () {
-        $("#dataTable").DataTable({
-            "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]]
+        moment().locale("pt");
+        var table = $("#dataTable").DataTable({
+            "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]],
+            "ajax": '/data.json',
         });
-    });
-    moment().locale("pt");
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-            labels: ['Gasóleo', 'Gasolina', 'Ambos'],
-            datasets: [{
-                label: '',
-                data: [<?= $stats['Gasóleo'] ?>, <?= $stats['Gasolina'] ?>, <?= $stats['Ambos'] ?>],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            animation: {
-                animateScale: true,
-                animateRotate: true
-            }
-        }
+        table.on('xhr', function () {
+            var json = table.ajax.json();
+        });
     });
 </script>
 
