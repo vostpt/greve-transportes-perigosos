@@ -96,10 +96,11 @@ require_once 'vendor/autoload.php';
         $lines = explode(PHP_EOL, $csvData);
         $array = array();
         foreach ($lines as $line) {
-            $array[] = str_getcsv($line);
+            $x = str_getcsv($line);
+            if($x[8] === '1'){
+                $array[] = $x;
+            }
         }
-//        print_r($array);
-        unset($array[0]);
         $array = array_reverse($array);
 
 
