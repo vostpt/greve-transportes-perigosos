@@ -107,7 +107,7 @@ $antiXss = new AntiXSS();
         //        echo '<pre>';
 
         $csvData
-               = file_get_contents('https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
+               = file_get_contents('file.csv');
         $lines = explode(PHP_EOL, $csvData);
         $array = array();
         foreach ($lines as $line) {
