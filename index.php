@@ -43,10 +43,14 @@ $antiXss = new AntiXSS();
             padding-bottom: 20px;
         }
     </style>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap.min.css"
+          integrity="sha256-PbaYLBab86/uCEz3diunGMEYvjah3uDFIiID+jAtIfw=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -121,22 +125,22 @@ $antiXss = new AntiXSS();
             <input type="text" id="js-search" placeholder="Pesquisar">
         </div>
         <br>
-        <table id="dtBasicExample" class="js-table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <table id="dataTable" class="js-table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th class="th-sm">Data <i class="fas fa-sort"></i>
+                <th class="th-sm">Data
                 </th>
-                <th class="th-sm">Nome <i class="fas fa-sort"></i>
+                <th class="th-sm">Nome
                 </th>
-                <th class="th-sm">Concelho <i class="fas fa-sort"></i>
+                <th class="th-sm">Concelho
                 </th>
-                <th class="th-sm">Distrito <i class="fas fa-sort"></i>
+                <th class="th-sm">Distrito
                 </th>
-                <th class="th-sm">Tipo de Combustível não disponível<i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo de Combustível não disponível
                 </th>
-                <th class="th-sm">Tipo Gasóleo não disponível<i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo Gasóleo não disponível
                 </th>
-                <th class="th-sm">Tipo de Gasolina não disponível<i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo de Gasolina não disponível
                 </th>
             </tr>
             </thead>
@@ -185,12 +189,19 @@ $antiXss = new AntiXSS();
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/pt.js" integrity="sha256-eCtywrvMfbXvLM79yCZ1CaX24qPM1EbloAq/Rf3ImL4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha256-8r65KJgULBDiZhwDydfWrEkx3yyV/grGsGzaekobngI=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.1/js/jquery.tablesorter.min.js" integrity="sha256-uC1JMW5e1U5D28+mXFxzTz4SSMCywqhxQIodqLECnfU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/pt.js" integrity="sha256-eCtywrvMfbXvLM79yCZ1CaX24qPM1EbloAq/Rf3ImL4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha256-8r65KJgULBDiZhwDydfWrEkx3yyV/grGsGzaekobngI="
+        crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="js/main.js?cachebuster=lel"></script>
 
 <script>
+    $(document).ready(function () {
+        $("#dataTable").DataTable({
+            "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]]
+        });
+    });
     moment().locale("pt");
 
     var ctx = document.getElementById('myChart').getContext('2d');

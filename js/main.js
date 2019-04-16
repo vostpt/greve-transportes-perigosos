@@ -1,10 +1,10 @@
-$(function() {
-    $("#dtBasicExample").tablesorter();
+$(function () {
+    //$("#dtBasicExample").dataTable();
 
-    $("#js-search").keyup(function(){
+    $("#js-search").keyup(function () {
         _this = this;
-        $.each($(".js-table tbody tr"), function() {
-            if($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
+        $.each($(".js-table tbody tr"), function () {
+            if ($(this).text().toLowerCase().indexOf($(_this).val().toLowerCase()) === -1)
                 $(this).hide();
             else
                 $(this).show();
