@@ -22,3 +22,23 @@ curl_exec ($ch);
 
 curl_close ($ch);
 fclose($fp);
+
+
+
+$csvData
+    = file_get_contents('file.csv');
+$lines = explode(PHP_EOL, $csvData);
+$array = array();
+foreach ($lines as $line) {
+    $x = str_getcsv($line);
+    if ($x[8] === '1') {
+        $array[] = $x;
+    }
+}
+//        print_r($array);
+unset($array[0]);
+$array = array_reverse($array);
+
+$fp = fopen('data.json', 'w');
+fwrite($fp, json_encode($array));
+fclose($fp);
