@@ -69,6 +69,13 @@ $antiXss = new AntiXSS();
             </button>
             <a class="navbar-brand" href="#">VOST.pt - Greve Transportes perigosos</a>
         </div>
+
+        <nav class="collapse navbar-collapse" id="bs-navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="index.php">Início</a></li>
+                <li><a href="stats.php">Estatísticas</a></li>
+            </ul>
+        </nav>
     </div>
 </nav>
 
