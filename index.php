@@ -227,7 +227,7 @@ $antiXss = new AntiXSS();
 </script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-<script>
+<script async>
     (function (b, o, i, l, e, r) {
         b.GoogleAnalyticsObject = l;
         b[l] || (b[l] =
