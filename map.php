@@ -77,7 +77,7 @@
 <div class="jumbotron">
     <div class="container">
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
+        <p>Preenche <a href="/form.php">este formulário</a>, por
             favor.🚘⛽️ℹ️</p>
     </div>
 
