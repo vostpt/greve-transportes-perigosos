@@ -7,9 +7,10 @@
  */
 
 require_once 'vendor/autoload.php';
-        use voku\helper\AntiXSS;
 
-        $antiXss = new AntiXSS();
+use voku\helper\AntiXSS;
+
+$antiXss = new AntiXSS();
 ?>
 
 <!doctype html>
@@ -32,7 +33,8 @@ require_once 'vendor/autoload.php';
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css"
+          integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous"/>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
@@ -41,10 +43,14 @@ require_once 'vendor/autoload.php';
             padding-bottom: 20px;
         }
     </style>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap.min.css"
+          integrity="sha256-PbaYLBab86/uCEz3diunGMEYvjah3uDFIiID+jAtIfw=" crossorigin="anonymous"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" integrity="sha256-0rguYS0qgS6L4qVzANq4kjxPLtvnp5nn2nB5G1lWRv4="
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <!--[if lt IE 8]>
@@ -70,98 +76,79 @@ require_once 'vendor/autoload.php';
 <div class="jumbotron">
     <div class="container">
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por favor.🚘⛽️ℹ️</p>
+        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
+            favor.🚘⛽️ℹ️</p>
 
         <?php
 
-        // create curl resource
-        //        $ch = curl_init();
-        //
-        //        // set url
-        //        curl_setopt($ch, CURLOPT_URL,
-        //            "https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973");
-        //
-        //        //return the transfer as a string
-        //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        //
-        //        // $output contains the output string
-        //        $output = curl_exec($ch);
-        //
-        //        var_dump($output);
-
-
-//        echo '<pre>';
-
-        $csvData = file_get_contents('https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
+        $csvData
+               = file_get_contents('https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
         $lines = explode(PHP_EOL, $csvData);
         $array = array();
         foreach ($lines as $line) {
-            $array[] = str_getcsv($line);
+            $x = str_getcsv($line);
+            if ($x[8] === '1') {
+                $array[] = $x;
+            }
         }
-//        print_r($array);
-
+        //        print_r($array);
         unset($array[0]);
+        $array = array_reverse($array);
+
 
         $stats = array_count_values(array_column($array, 5));
 
-        // close curl resource to free up system resources
-        //        curl_close($ch);
+        $counter = [
+            'galp'     => 0,
+            'prio'     => 0,
+            'bp'       => 0,
+            'repsol'   => 0,
+            'cepsa'    => 0,
+            'outros'   => 0,
+            'jumbo'    => 0,
+            'inter'    => 0,
+            'pingo'    => 0,
+            'bandeira' => 0,
+        ];
+        foreach ($array as $item) {
+            if (strpos(strtolower($item[1]), 'galp') !== false) {
+                $counter['galp']++;
+            } elseif (strpos(strtolower($item[1]), 'repsol') !== false) {
+                $counter['repsol']++;
+            } elseif (strpos(strtolower($item[1]), 'bp') !== false) {
+                $counter['bp']++;
+            } elseif (strpos(strtolower($item[1]), 'prio') !== false) {
+                $counter['prio']++;
+            } elseif (strpos(strtolower($item[1]), 'cepsa') !== false) {
+                $counter['cepsa']++;
+            } elseif (strpos(strtolower($item[1]), 'bandeira') !== false) {
+                $counter['bandeira']++;
+            } elseif (strpos(strtolower($item[1]), 'jumbo') !== false) {
+                $counter['jumbo']++;
+            } elseif (strpos(strtolower($item[1]), 'intermarch') !== false) {
+                $counter['inter']++;
+            } elseif (strpos(strtolower($item[1]), 'pingo') !== false) {
+                $counter['pingo']++;
+            } else {
+                $counter['outros']++;
+            }
+
+        }
         ?>
 
-        <div>
-            <span>Pesquisar:</span>
-            <input type="text" id="js-search" placeholder="Pesquisar">
-        </div>
         <br>
-        <table id="dtBasicExample" class="js-table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th class="th-sm">Data <i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Nome <i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Localização <i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Concelho <i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Distrito <i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Tipo de Combustível não disponível<i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Tipo Gasóleo não disponível<i class="fas fa-sort"></i>
-                </th>
-                <th class="th-sm">Tipo de Gasolina não disponível<i class="fas fa-sort"></i>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-                foreach($array as $a){
-                      $h = "<tr>
-                            <td>" . $antiXss->xss_clean($a[0]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[1]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[2]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[3]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[4]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[5]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[6]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[7]) . "</td>
-
-                            ";
-
-
-                    echo $h;
-                }
-
-
-            ?>
-            </tbody>
-        </table>
-
-        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por favor.🚘⛽️ℹ️</p>
-
-        <canvas id="myChart" width="400" height="400"></canvas>
+        <div class="row">
+            <div class="col-md-offset-3 col-md-6 col-sd-12">
+                <h3>Tipos de Combustivel</h3>
+                <br>
+                <canvas id="gasTypes" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-offset-3 col-md-6 col-sd-12">
+                <h3>Marcas</h3>
+                <br>
+                <canvas id="gasBrands" width="400" height="400"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -169,13 +156,26 @@ require_once 'vendor/autoload.php';
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
-<script src="js/vendor/bootstrap.min.js"></script>
-<script src="js/jquery.tablesorter.js?cachebuster=lel"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/pt.js" integrity="sha256-eCtywrvMfbXvLM79yCZ1CaX24qPM1EbloAq/Rf3ImL4="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha256-8r65KJgULBDiZhwDydfWrEkx3yyV/grGsGzaekobngI="
+        crossorigin="anonymous"></script>
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="js/main.js?cachebuster=lel"></script>
 
 <script>
-    var ctx = document.getElementById('myChart').getContext('2d');
+    $(document).ready(function () {
+        $("#dataTable").DataTable({
+            "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]]
+        });
+    });
+    moment().locale("pt");
+
+    var ctx = document.getElementById('gasTypes').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
@@ -192,6 +192,63 @@ require_once 'vendor/autoload.php';
                     'rgba(255, 99, 132, 1)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+
+    var bgas = document.getElementById('gasBrands').getContext('2d');
+    var myChart = new Chart(bgas, {
+        type: 'doughnut',
+        data: {
+            labels: ['Prio', 'BP', 'Galp', 'Repsol', 'Cepsa', 'Jumbo', 'Intermarché', 'Alves Bandeira', 'Pingo Doce', 'Outros'],
+            datasets: [{
+                label: '',
+                data: [<?= $counter['prio'] ?>,
+                    <?= $counter['bp'] ?>,
+                    <?= $counter['galp'] ?>,
+                    <?= $counter['repsol'] ?>,
+                    <?= $counter['cepsa'] ?>,
+                    <?= $counter['jumbo'] ?>,
+                    <?= $counter['inter'] ?>,
+                    <?= $counter['bandeira'] ?>,
+                    <?= $counter['pingo'] ?>,
+                    <?= $counter['outros'] ?>
+                ],
+                backgroundColor: [
+                    'rgba(51, 255, 255, 0.5)',
+                    'rgba(51, 255, 51, 0.5)',
+                    'rgba(255, 128, 0, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(255, 51, 51, 0.5)',
+                    'rgba(255, 102, 102, 0.5)',
+                    'rgba(204, 0, 0, 0.5)',
+                    'rgba(0, 0, 204, 0.5)',
+                    'rgba(0, 153, 0, 0.5)',
+                    'rgba(96, 96, 96, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(51, 255, 255, 1)',
+                    'rgba(51, 255, 51, 1)',
+                    'rgba(255, 128, 0, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 51, 51, 1)',
+                    'rgba(255, 102, 102, 1)',
+                    'rgba(204, 0, 0, 1)',
+                    'rgba(0, 0, 204, 1)',
+                    'rgba(0, 153, 0, 1)',
+                    'rgba(96, 96, 96, 1)',
                 ],
                 borderWidth: 1
             }]
