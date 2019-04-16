@@ -35,7 +35,7 @@ foreach ($lines as $line) {
     if ($x[8] === '1') {
         $x[1] = $x[1] . ' - ' . $x[2];
         unset($x[2]);
-        $array[] = $x;
+        $array[] = array_map('array_values', $x);
     }
 }
 //        print_r($array);
