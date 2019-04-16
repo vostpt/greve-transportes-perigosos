@@ -119,53 +119,33 @@ $antiXss = new AntiXSS();
         // close curl resource to free up system resources
         //        curl_close($ch);
         ?>
-
-        <div>
-            <span>Pesquisar:</span>
-            <input type="text" id="js-search" placeholder="Pesquisar">
-        </div>
         <br>
-        <table id="dataTable" class="js-table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+        <table id="dataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th class="th-sm">Data
-                </th>
-                <th class="th-sm">Nome
-                </th>
-                <th class="th-sm">Concelho
-                </th>
-                <th class="th-sm">Distrito
-                </th>
-                <th class="th-sm">Tipo de Combustível não disponível
-                </th>
-                <th class="th-sm">Tipo Gasóleo não disponível
-                </th>
-                <th class="th-sm">Tipo de Gasolina não disponível
-                </th>
+                <th class="th-sm">Data</th>
+                <th class="th-sm">Nome</th>
+                <th class="th-sm">Concelho</th>
+                <th class="th-sm">Distrito</th>
+                <th class="th-sm">Tipo de Combustível não disponível</th>
+                <th class="th-sm">Tipo Gasóleo não disponível</th>
+                <th class="th-sm">Tipo de Gasolina não disponível</th>
             </tr>
             </thead>
             <tbody>
             <?php
-            foreach ($array as $a) {
-                $h
-                    = "<tr>
-                            <td><span data-livestamp='".htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8')."'></span></td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8')."
-                            - ".htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[3]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[4]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[5]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8')."</td>
-
-                            ";
-
-
-                echo $h;
-            }
-
-
-            ?>
+            foreach ($array as $a): ?>
+                <tr>
+                    <td><span data-livestamp="<?php echo htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8'); ?>"></span></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8'); ?>
+                        - <?php echo htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[3]), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[4]), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[5]), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8'); ?></td>
+                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8'); ?></td>
+                </tr>
+            <?php endforeach; ?>
             </tbody>
         </table>
 
@@ -173,7 +153,8 @@ $antiXss = new AntiXSS();
         <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
             favor.🚘⛽️ℹ️</p>
 
-        <div class="row ">
+        <br>
+        <div class="row">
             <div class="col-md-offset-3 col-md-6 col-sd-12">
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
