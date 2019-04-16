@@ -91,7 +91,13 @@
         // close curl resource to free up system resources
         //        curl_close($ch);
         ?>
-        <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+
+        <div>
+            <span>Pesquisar:</span>
+            <input type="text" id="js-search" placeholder="Pesquisar">
+        </div>
+        <br>
+        <table id="dtBasicExample" class="js-table table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
             <tr>
                 <th class="th-sm">Data <i class="fas fa-sort"></i>
@@ -145,6 +151,7 @@
 
 <script src="js/vendor/bootstrap.min.js"></script>
 <script src="js/jquery.tablesorter.js"></script>
+<script src="js/search.js"></script>
 <script src="js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
