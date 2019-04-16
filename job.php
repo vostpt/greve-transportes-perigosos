@@ -40,8 +40,12 @@ foreach ($lines as $line) {
 unset($array[0]);
 $array = array_reverse($array);
 
+$json = array(
+    'data' => $array
+);
+
 $fp = fopen('data.json', 'w');
-fwrite($fp, json_encode($array));
+fwrite($fp, json_encode($json));
 fclose($fp);
 
 echo 'Done' . PHP_EOL;
