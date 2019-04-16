@@ -11,7 +11,7 @@ $ch = curl_init();
 /**
  * Set the URL of the page or file to download.
  */
-curl_setopt($ch, CURLOPT_URL,'https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
+curl_setopt($ch, CURLOPT_URL,'https://docs.google.com/spreadsheets/u/1/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
 
 $fp = fopen('file.csv', 'w+');
 /**
@@ -32,10 +32,11 @@ $lines = explode(PHP_EOL, $csvData);
 $array = array();
 foreach ($lines as $line) {
     $x = str_getcsv($line);
-    if ($x[8] === '1') {
+    if ($x[9] === '1') {
         $x[1] = $x[1] . ' - ' . $x[2];
         unset($x[2]);
-        $array[] = array_values($x);
+        $x =  array_values($x);
+        $array[] = $x;
     }
 }
 //        print_r($array);
