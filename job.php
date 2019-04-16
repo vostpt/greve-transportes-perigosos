@@ -6,6 +6,7 @@
  * Time: 20:00
  */
 
+echo 'Start......';
 $ch = curl_init();
 /**
  * Set the URL of the page or file to download.
@@ -42,3 +43,5 @@ $array = array_reverse($array);
 $fp = fopen('data.json', 'w');
 fwrite($fp, json_encode($array));
 fclose($fp);
+
+echo 'Done' . PHP_EOL;
