@@ -99,8 +99,9 @@ require_once 'vendor/autoload.php';
             $array[] = str_getcsv($line);
         }
 //        print_r($array);
-
         unset($array[0]);
+        $array = array_reverse($array);
+
 
         $stats = array_count_values(array_column($array, 5));
 
@@ -138,14 +139,14 @@ require_once 'vendor/autoload.php';
             <?php
                 foreach($array as $a){
                       $h = "<tr>
-                            <td>" . $antiXss->xss_clean($a[0]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[1]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[2]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[3]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[4]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[5]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[6]) . "</td>
-                            <td>" . $antiXss->xss_clean($a[7]) . "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8') . "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[1]) , ENT_QUOTES, 'UTF-8'). "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[2]) , ENT_QUOTES, 'UTF-8'). "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[3]) , ENT_QUOTES, 'UTF-8'). "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[4]) , ENT_QUOTES, 'UTF-8'). "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[5]) , ENT_QUOTES, 'UTF-8'). "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[6]) , ENT_QUOTES, 'UTF-8') . "</td>
+                            <td>" . htmlspecialchars($antiXss->xss_clean($a[7]) , ENT_QUOTES, 'UTF-8'). "</td>
 
                             ";
 
