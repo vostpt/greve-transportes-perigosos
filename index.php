@@ -18,6 +18,8 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous" />
+    
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
@@ -92,21 +94,21 @@
         <table id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
             <thead>
             <tr>
-                <th class="th-sm">Data
+                <th class="th-sm">Data <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Nome
+                <th class="th-sm">Nome <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Localização
+                <th class="th-sm">Localização <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Concelho
+                <th class="th-sm">Concelho <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Distrito
+                <th class="th-sm">Distrito <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo de Combustível
+                <th class="th-sm">Tipo de Combustível <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo Gasóleo
+                <th class="th-sm">Tipo Gasóleo <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo de Gasolina
+                <th class="th-sm">Tipo de Gasolina <i class="fas fa-sort"></i>
                 </th>
             </tr>
             </thead>
@@ -130,26 +132,6 @@
 
             ?>
             </tbody>
-            <tfoot>
-            <tr>
-                <th class="th-sm">Data
-                </th>
-                <th class="th-sm">Nome
-                </th>
-                <th class="th-sm">Localização
-                </th>
-                <th class="th-sm">Concelho
-                </th>
-                <th class="th-sm">Distrito
-                </th>
-                <th class="th-sm">Tipo de Combustível
-                </th>
-                <th class="th-sm">Tipo Gasóleo
-                </th>
-                <th class="th-sm">Tipo de Gasolina
-                </th>
-            </tr>
-            </tfoot>
         </table>
 
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
@@ -162,7 +144,7 @@
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
 <script src="js/vendor/bootstrap.min.js"></script>
-
+<script src="js/jquery.tablesorter.js"></script>
 <script src="js/main.js"></script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
