@@ -181,6 +181,9 @@ $antiXss = new AntiXSS();
         var table = $("#dataTable").DataTable({
             "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]],
             "ajax": '/data.json',
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+            }
         });
 
         table.on('xhr', function () {
