@@ -10,7 +10,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>VOST.pt - Informação de Posto de Abastecimento sem combustível</title>
+    <meta name="Description" content="Lista de posto de abastecimento sem combustível">
+    <meta name="og:description" content="Lista de posto de abastecimento sem combustível">
+    <meta name="og:title" content="VOST.pt - Informação de Posto de Abastecimento sem combustível">
+    <meta name="Keywords" content="vost, greve, transportes, perigosos, gasolina, gasoleo">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
