@@ -7,9 +7,10 @@
  */
 
 require_once 'vendor/autoload.php';
-        use voku\helper\AntiXSS;
 
-        $antiXss = new AntiXSS();
+use voku\helper\AntiXSS;
+
+$antiXss = new AntiXSS();
 ?>
 
 <!doctype html>
@@ -32,7 +33,8 @@ require_once 'vendor/autoload.php';
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css"
+          integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous"/>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
@@ -70,7 +72,8 @@ require_once 'vendor/autoload.php';
 <div class="jumbotron">
     <div class="container">
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por favor.🚘⛽️ℹ️</p>
+        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
+            favor.🚘⛽️ℹ️</p>
 
         <?php
 
@@ -90,15 +93,16 @@ require_once 'vendor/autoload.php';
         //        var_dump($output);
 
 
-//        echo '<pre>';
+        //        echo '<pre>';
 
-        $csvData = file_get_contents('https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
+        $csvData
+               = file_get_contents('https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973');
         $lines = explode(PHP_EOL, $csvData);
         $array = array();
         foreach ($lines as $line) {
             $array[] = str_getcsv($line);
         }
-//        print_r($array);
+        //        print_r($array);
         unset($array[0]);
         $array = array_reverse($array);
 
@@ -137,22 +141,23 @@ require_once 'vendor/autoload.php';
             </thead>
             <tbody>
             <?php
-                foreach($array as $a){
-                      $h = "<tr>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8') . "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[1]) , ENT_QUOTES, 'UTF-8'). "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[2]) , ENT_QUOTES, 'UTF-8'). "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[3]) , ENT_QUOTES, 'UTF-8'). "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[4]) , ENT_QUOTES, 'UTF-8'). "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[5]) , ENT_QUOTES, 'UTF-8'). "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[6]) , ENT_QUOTES, 'UTF-8') . "</td>
-                            <td>" . htmlspecialchars($antiXss->xss_clean($a[7]) , ENT_QUOTES, 'UTF-8'). "</td>
+            foreach ($array as $a) {
+                $h
+                    = "<tr>
+                            <td><span data-livestamp='".htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8')."'></span></td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[3]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[4]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[5]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8')."</td>
 
                             ";
 
 
-                    echo $h;
-                }
+                echo $h;
+            }
 
 
             ?>
@@ -160,7 +165,8 @@ require_once 'vendor/autoload.php';
         </table>
 
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por favor.🚘⛽️ℹ️</p>
+        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
+            favor.🚘⛽️ℹ️</p>
 
         <div class="row ">
             <div class="col-md-offset-3 col-md-6 col-sd-12">
@@ -174,12 +180,17 @@ require_once 'vendor/autoload.php';
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
+        crossorigin="anonymous"></script>
 <script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/moment.js"></script>
+<script src="js/livestamp.js"></script>
 <script src="js/jquery.tablesorter.js?cachebuster=lel"></script>
 <script src="js/main.js?cachebuster=lel"></script>
 
 <script>
+    moment().locale("pt");
+
     var ctx = document.getElementById('myChart').getContext('2d');
     var myChart = new Chart(ctx, {
         type: 'doughnut',
