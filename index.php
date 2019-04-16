@@ -19,7 +19,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" integrity="sha256-BbA16MRVnPLkcJWY/l5MsqhyOIQr7OpgUAkYkKVvYco=" crossorigin="anonymous" />
-    
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
@@ -104,11 +104,11 @@
                 </th>
                 <th class="th-sm">Distrito <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo de Combustível <i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo de Combustível não disponível<i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo Gasóleo <i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo Gasóleo não disponível<i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Tipo de Gasolina <i class="fas fa-sort"></i>
+                <th class="th-sm">Tipo de Gasolina não disponível<i class="fas fa-sort"></i>
                 </th>
             </tr>
             </thead>
