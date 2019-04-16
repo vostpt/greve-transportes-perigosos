@@ -128,8 +128,6 @@ $antiXss = new AntiXSS();
                 </th>
                 <th class="th-sm">Nome <i class="fas fa-sort"></i>
                 </th>
-                <th class="th-sm">Localização <i class="fas fa-sort"></i>
-                </th>
                 <th class="th-sm">Concelho <i class="fas fa-sort"></i>
                 </th>
                 <th class="th-sm">Distrito <i class="fas fa-sort"></i>
@@ -148,8 +146,8 @@ $antiXss = new AntiXSS();
                 $h
                     = "<tr>
                             <td><span data-livestamp='".htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8')."'></span></td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8')."</td>
-                            <td>".htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8')."</td>
+                            <td>".htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8')."
+                            - ".htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8')."</td>
                             <td>".htmlspecialchars($antiXss->xss_clean($a[3]), ENT_QUOTES, 'UTF-8')."</td>
                             <td>".htmlspecialchars($antiXss->xss_clean($a[4]), ENT_QUOTES, 'UTF-8')."</td>
                             <td>".htmlspecialchars($antiXss->xss_clean($a[5]), ENT_QUOTES, 'UTF-8')."</td>
