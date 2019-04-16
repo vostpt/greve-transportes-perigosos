@@ -33,6 +33,8 @@ $array = array();
 foreach ($lines as $line) {
     $x = str_getcsv($line);
     if ($x[8] === '1') {
+        $x[1] = $x[1] . ' - ' . $x[2];
+        unset($x[2]);
         $array[] = $x;
     }
 }
