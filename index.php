@@ -145,7 +145,7 @@
             </tfoot>
         </table>
 
-
+        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento? Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por favor.🚘⛽️ℹ️</p>
     </div>
 </div>
 
@@ -171,7 +171,7 @@
         e.src = '//www.google-analytics.com/analytics.js';
         r.parentNode.insertBefore(e, r)
     }(window, document, 'script', 'ga'));
-    ga('create', 'UA-XXXXX-X', 'auto');
+    ga('create', 'UA-138398529-1\n', 'auto');
     ga('send', 'pageview');
 </script>
 </body>
