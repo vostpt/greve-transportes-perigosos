@@ -31,6 +31,6 @@
     color: #ff4500;
 }
 
-.show {
-    visibility: visible;
+.navbar .show {
+    visibility: inherit;
 }
