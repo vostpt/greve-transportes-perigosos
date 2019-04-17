@@ -73,6 +73,7 @@ $antiXss = new AntiXSS();
             <ul class="nav navbar-nav">
                 <li><a href="index.php">Início</a></li>
                 <li><a href="stats.php">Estatísticas</a></li>
+                <li><a href="info.php">Informação Importante</a></li>
             </ul>
         </nav>
     </div>
