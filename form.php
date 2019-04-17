@@ -85,7 +85,6 @@ $antiXss = new AntiXSS();
             <p>Preenche <a href="/form.php">este formulário</a>, por
                 favor.🚘⛽️ℹ️</p>
             <form method="POST" action="/submit.php">
-                <input type="hidden" hidden id="g-recaptcha-response" name="g-recaptcha-response">
                 <div class="form-group">
                     <label for="name">Nome do Posto de Combustível</label>
                     <input class="form-control" type="text" placeholder="Nome do Posto de Combustível" name="name" id="name">
@@ -161,17 +160,6 @@ $antiXss = new AntiXSS();
         }(window, document, 'script', 'ga'));
         ga('create', 'UA-138398529-1\n', 'auto');
         ga('send', 'pageview');
-    </script>
-    <script src="https://www.google.com/recaptcha/api.js?render=RECAPTCHA_SITE"></script>
-    <script>
-        grecaptcha.ready(function() {
-            grecaptcha.execute('RECAPTCHA_SITE', {
-                action: 'login'
-            }).then(function(token) {
-                console.log(token);
-                $("#g-recaptcha-response").val(token);
-            });
-        });
     </script>
 </body>
 
