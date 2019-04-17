@@ -47,6 +47,37 @@ $antiXss = new AntiXSS();
             padding-bottom: 20px;
         }
     </style>
+
+    <style>
+        #map {
+            min-height: 600px;
+            width: 100%;
+            margin: 0;
+        }
+        .popup table, .popup th, .popup td {
+            border: 1px solid black;
+        }
+        .popup table {
+            border-collapse: collapse;
+        }
+
+        .info {
+            padding: 6px 8px;
+            background: white;
+            box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            line-height: 25px;
+        }
+        .info > img {
+            margin: 0 !important;
+            display: inline;
+            position: inherit;
+            padding-right: 10px;
+            vertical-align:middle;
+        }
+    </style>
+
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/dataTables.bootstrap.min.css"
           integrity="sha256-PbaYLBab86/uCEz3diunGMEYvjah3uDFIiID+jAtIfw=" crossorigin="anonymous"/>
