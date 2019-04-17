@@ -57,13 +57,16 @@ $antiXss = new AntiXSS();
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
+
 <?php include_once('modules/navbar.php'); ?>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <p>Os dados constantes neste website são da responsabilidade dos utilizadores que os inserem. Os voluntários da VOST Portugal fazem todos os possíveis para validar os mesmos e eliminar aqueles que não correspondem à realidade.</p>
-        <p>Em caso do <b>seu</b> estabelecimento estar identificado erradamente envie por favor um e-mail para <a href="mailto:alertas@vost.pt">alertas@vost.pt</a>️</p>
+        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
+        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
+            favor.🚘⛽️ℹ️</p>
+		<iframe id="by_county" src="https://jndpabastecer.maps.arcgis.com/apps/SummaryViewer/index.html?appid=3a41232f6b9c412f8fcde7af7ed11238"></iframe>
     </div>
 </div>
 
