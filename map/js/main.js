@@ -28,7 +28,7 @@ const icons = {
     only_diesel: icon('⚫'),
     only_gas: icon('🔵'),
     empty: icon('🔴'),
-    unknown: icon('🟢'),
+    unknown: icon('🟡'),
     known: icon('🔵')
 };
 
