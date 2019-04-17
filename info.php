@@ -83,83 +83,8 @@ $antiXss = new AntiXSS();
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
-            favor.🚘⛽️ℹ️</p>
-
-        <?php
-
-        // create curl resource
-        //        $ch = curl_init();
-        //
-        //        // set url
-        //        curl_setopt($ch, CURLOPT_URL,
-        //            "https://docs.google.com/spreadsheets/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=59515973");
-        //
-        //        //return the transfer as a string
-        //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        //
-        //        // $output contains the output string
-        //        $output = curl_exec($ch);
-        //
-        //        var_dump($output);
-
-
-        //        echo '<pre>';
-        /*
-                $csvData
-                       = file_get_contents('file.csv');
-                $lines = explode(PHP_EOL, $csvData);
-                $array = array();
-                foreach ($lines as $line) {
-                    $x = str_getcsv($line);
-                    if ($x[8] === '1') {
-                        $array[] = $x;
-                    }
-                }
-                //        print_r($array);
-                unset($array[0]);
-                $array = array_reverse($array);
-
-
-                $stats = array_count_values(array_column($array, 5));
-
-                // close curl resource to free up system resources
-                //        curl_close($ch);*/
-        ?>
-        <br>
-        <table id="dataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
-            <thead>
-            <tr>
-                <th class="th-sm">Data</th>
-                <th class="th-sm">Nome</th>
-                <th class="th-sm">Concelho</th>
-                <th class="th-sm">Distrito</th>
-                <th class="th-sm">Tipo de Combustível não disponível</th>
-                <th class="th-sm">Tipo Gasóleo não disponível</th>
-                <th class="th-sm">Tipo de Gasolina não disponível</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            /*foreach ($array as $a): ?>
-                <tr>
-                    <td><span data-livestamp="<?php echo htmlspecialchars($antiXss->xss_clean($a[0]), ENT_QUOTES, 'UTF-8'); ?>"></span></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[1]), ENT_QUOTES, 'UTF-8'); ?>
-                        - <?php echo htmlspecialchars($antiXss->xss_clean($a[2]), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[3]), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[4]), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[5]), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8'); ?></td>
-                    <td><?php echo htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8'); ?></td>
-                </tr>
-            <?php endforeach;*/ ?>
-            </tbody>
-        </table>
-
-        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
-        <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
-            favor.🚘⛽️ℹ️</p>
+        <p>Os dados constantes neste website são da responsabilidade dos utilizadores que os inserem. Os voluntários da VOST Portugal fazem todos os possíveis para validar os mesmos e eliminar aqueles que não correspondem à realidade.</p>
+        <p>Em caso do <b>seu</b> estabelecimento estar identificado erradamente envie por favor um e-mail para <a href="mailto:alertas@vost.pt">alertas@vost.pt</a>️</p>
     </div>
 </div>
 
