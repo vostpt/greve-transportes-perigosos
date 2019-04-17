@@ -32,7 +32,8 @@ $lines = explode(PHP_EOL, $csvData);
 $array = array();
 foreach ($lines as $line) {
     $x = str_getcsv($line);
-    if ($x[9] === '1') {
+//    print_r($x);
+    if ($x[10] === '1') {
         $x[1] = $x[1] . ' - ' . $x[2];
         unset($x[2]);
         $x =  array_values($x);
@@ -43,6 +44,10 @@ foreach ($lines as $line) {
 unset($array[0]);
 $array = array_reverse($array);
 
+//print_r($array);
+//var_dump(count($array));
+//$input = array_map("unserialize", array_unique(array_map("serialize", $array)));
+//var_dump(count($input));
 $json = array(
     'data' => $array
 );
