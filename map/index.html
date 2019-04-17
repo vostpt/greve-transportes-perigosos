@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Postos de Combustível</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <style>
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        .popup table, .popup th, .popup td {
+            border: 1px solid black;
+        }
+
+        .popup table {
+            border-collapse: collapse;
+        }
+        
+        .info {
+            padding: 6px 8px;
+            background: white;
+            box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+            border-radius: 4px;
+            -webkit-border-radius: 4px;
+            line-height: 25px;
+        }
+
+        .info > img {
+            margin: 0 !important;
+            display: inline;
+            position: inherit;
+            padding-right: 10px;
+            vertical-align:middle;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.4.0/leaflet.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twemoji/11.4.0/2/twemoji.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" crossorigin="anonymous"></script>
+
+    <script src="vendor/leaflet.canvas-markers.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

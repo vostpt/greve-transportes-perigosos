@@ -1,0 +1,4 @@
+requests
+fuzzywuzzy
+unidecode
+python-Levenshtein

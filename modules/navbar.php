@@ -15,6 +15,7 @@
 			<ul class="nav navbar-nav">
 				<li><a href="index.php">Início</a></li>
 				<li><a href="info.php">Informação Importante</a></li>
+				<li><a href="map">Mapa</a></li>
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 						Estatísticas
