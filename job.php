@@ -11,7 +11,8 @@ $ch = curl_init();
 /**
  * Set the URL of the page or file to download.
  */
-curl_setopt($ch, CURLOPT_URL,'https://docs.google.com/spreadsheets/u/1/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=1149462056');
+curl_setopt($ch, CURLOPT_URL,
+    'https://docs.google.com/spreadsheets/u/1/d/1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4/export?format=csv&id=1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4&gid=1149462056');
 
 $fp = fopen('file.csv', 'w+');
 /**
@@ -19,12 +20,13 @@ $fp = fopen('file.csv', 'w+');
  */
 curl_setopt($ch, CURLOPT_FILE, $fp);
 
-curl_exec ($ch);
+curl_exec($ch);
 
-curl_close ($ch);
+curl_close($ch);
 fclose($fp);
 
 
+$asneirasRegex = '/(merda|cona|caralho|winterfell|wall|shit|cunt|fuck)/i';
 
 $csvData
     = file_get_contents('file.csv');
@@ -34,10 +36,21 @@ foreach ($lines as $line) {
     $x = str_getcsv($line);
 //    print_r($x);
 //    if ($x[10] === '1') {
-        $x[1] = $x[1] . ' - ' . $x[2];
-        unset($x[2]);
-        $x =  array_values($x);
+    $x[1] = $x[1] . ' - ' . $x[2];
+    unset($x[2]);
+    $x = array_values($x);
+
+    $isAsneira = false;
+    foreach($x as $xx){
+        if(preg_match($asneirasRegex, $xx)){
+            $isAsneira = true;
+        }
+    }
+
+    if(!$isAsneira){
         $array[] = $x;
+    }
+
 //    }
 }
 //        print_r($array);
