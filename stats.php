@@ -139,6 +139,7 @@ $antiXss = new AntiXSS();
     </div>
 </div>
 
+<?php include_once('modules/footer.php'); ?>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
@@ -152,7 +153,7 @@ $antiXss = new AntiXSS();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha256-8r65KJgULBDiZhwDydfWrEkx3yyV/grGsGzaekobngI="
         crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="js/main.js?cachebuster=lel2"></script>
+<script src="js/main.js?cachebuster=lel3"></script>
 
 <script>
     $(document).ready(function () {
