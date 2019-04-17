@@ -75,6 +75,8 @@ $antiXss = new AntiXSS();
                 <li><a href="index.php">Início</a></li>
                 <li><a href="stats.php">Estatísticas</a></li>
                 <li><a href="info.php">Informação Importante</a></li>
+				<li><a href="by_county.php">Postos por Concelho</a></li>
+				<li><a href="by_gas_type.php">Postos Gasolina vs Gasóleo</a></li>
             </ul>
         </nav>
     </div>

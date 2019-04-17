@@ -3,8 +3,14 @@
  * Created by PhpStorm.
  * User: tomahock
  * Date: 16/04/2019
- * Time: 22:08
+ * Time: 16:09
  */
+
+require_once 'vendor/autoload.php';
+
+use voku\helper\AntiXSS;
+
+$antiXss = new AntiXSS();
 ?>
 
 <!doctype html>
@@ -61,7 +67,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">VOST.pt - Greve Transportes perigosos</a>
+            <a class="navbar-brand" href="#">VOST.pt - Greve Transportes de Matérias Perigosas</a>
         </div>
 
         <nav class="collapse navbar-collapse" id="bs-navbar">
@@ -82,15 +88,7 @@
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
         <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
             favor.🚘⛽️ℹ️</p>
-    </div>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <iframe width="100%" height="800px" src="https://www.arcgis.com/home/webmap/viewer.html?webmap=c2cea24ed18d49b18a9d9f8a0b937c7f&extent=-15.916,34.343,6.7378,43.0043"></iframe>
-            </div>
-
-        </div>
+		<iframe id="by_gas_type" src="https://jndpabastecer.maps.arcgis.com/apps/Compare/index.html?appid=d611080a64d341a29eadc6332f3a70a3"></iframe>
     </div>
 </div>
 
@@ -98,8 +96,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
-        crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/pt.js" integrity="sha256-eCtywrvMfbXvLM79yCZ1CaX24qPM1EbloAq/Rf3ImL4="
@@ -108,6 +104,23 @@
         crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="js/main.js?cachebuster=lel2"></script>
+
+<script>
+    $(document).ready(function () {
+        moment().locale("pt");
+        var table = $("#dataTable").DataTable({
+            "lengthMenu": [[30, 50, 100, -1], [30, 50, 100, "All"]],
+            "ajax": '/data.json',
+            "language": {
+                "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese.json"
+            }
+        });
+
+        table.on('xhr', function () {
+            var json = table.ajax.json();
+        });
+    });
+</script>
 
 <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
 <script async>
