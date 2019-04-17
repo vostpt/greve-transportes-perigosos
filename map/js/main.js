@@ -77,11 +77,6 @@ $.getJSON('postos-reports.json', function(data) {
             <b>${p.name}</b><hr/>
             <b>Distrito: </b> ${p.distrito}<br/>
             <b>Concelho: </b> ${p.municipio}<br/>
-            <ul>
-                ${
-                    p.types.map(t => `<li>${t}</li>`).join('')
-                }
-            </ul>
             <table>
                 <tr>
                     <th>Certeza</th>
@@ -93,7 +88,6 @@ $.getJSON('postos-reports.json', function(data) {
                 </tr>
                 ${
                     p.matches.map(t => `<tr>
-                        <td>${t['certainty']}</td>
                         <td>${t['Nome Posto Combustível']}</td>
                         <td>${t['Localidade']}</td>
                         <td>${t['Tipo de Combustível Não Disponível']}</td>
