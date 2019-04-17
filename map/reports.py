@@ -21,6 +21,7 @@ def eprint(*args, **kwargs):
 def get_stations():
     with open('postos.json') as f:
         stations = json.load(f)
+
         return stations
 
 # load reports
@@ -46,9 +47,9 @@ def get_reports():
 def find_station_reports(station, reports):
     scores = {}
 
-    distrito = station['distrito']
-    municipio = station['municipio']
-    name = station['name']
+    distrito = unidecode(station['distrito'])
+    municipio = unidecode(station['municipio'])
+    name = unidecode(station['name'])
 
     for i, r in enumerate(reports):
         # filter distrito
