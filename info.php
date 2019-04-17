@@ -79,7 +79,7 @@ $antiXss = new AntiXSS();
 <script src="https://cdnjs.cloudflare.com/ajax/libs/livestamp/1.1.2/livestamp.min.js" integrity="sha256-8r65KJgULBDiZhwDydfWrEkx3yyV/grGsGzaekobngI="
         crossorigin="anonymous"></script>
 <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-<script src="js/main.js?cachebuster=lel2"></script>
+<script src="js/main.js?cachebuster=lel5"></script>
 
 <script>
     $(document).ready(function () {
