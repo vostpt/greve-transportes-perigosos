@@ -11,7 +11,7 @@ import time
 
 KEY = '1WD3ojeEd-ll2T-xCXMda5UJrQhVxX6TgvEbEtkqL2J4'
 SHEET = 'clean-export'
-CSV_URL = f'https://docs.google.com/spreadsheets/d/{KEY}/gviz/tq?tqx=out:csv&sheet={SHEET}'
+CSV_URL = 'https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet=%s' % (KEY, SHEET)
 
 # print to stderr
 def eprint(*args, **kwargs):
@@ -42,29 +42,6 @@ def get_reports():
 
     return reports
 
-# fuzzy find station
-def find_station(concelho, distrito, localidade, nome):
-    scores = {}
-
-    eprint(f"{distrito} > {concelho} {nome} - {localidade}")
-
-    for id, meta in POSTOS.items():
-        scores[id] = (
-            20 * fuzz.token_set_ratio(distrito, meta['distrito']) + 
-            10 * fuzz.token_set_ratio(concelho, meta['municipio']) + 
-            5 * fuzz.token_set_ratio(f'{nome} {localidade}', meta['name'])) / 35
-
-    ranking = sorted(scores.items(), key=lambda r: r[1], reverse=True)
-    match = ranking[0]
-    if match[1] > 95:
-        eprint(f"Match ({match[1]}%)")
-        #POSTOS[match[1]]
-
-    #for row in ranking[:10]:
-    #    p = POSTOS[row[0]]
-    #    print(f'{row[1]}: {p["name"]}')
-    #    print("--------")
-
 # find report station
 def find_station_reports(station, reports):
     scores = {}
@@ -82,7 +59,7 @@ def find_station_reports(station, reports):
         if fuzz.ratio(r['Concelho'], municipio) < 95:
             continue
 
-        scores[i] = fuzz.token_set_ratio(f"{r['Nome Posto Combustível']} {r['Localidade']}", name)
+        scores[i] = fuzz.token_set_ratio("%s %s" % (r['Nome Posto Combustível'], r['Localidade']), name)
 
     # filtered
     matches = sorted(
@@ -112,7 +89,7 @@ if __name__ == "__main__":
     total = len(stations)
 
     for id, station in stations.items():
-        eprint(f'{i} / {total}')
+        eprint('%s / %s' % (i, total))
         i += 1
 
         matches = find_station_reports(station, reports)
