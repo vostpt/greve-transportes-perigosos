@@ -8,16 +8,23 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">VOST.pt - Greve Transportes de Matérias Perigosas</a>
+			<a class="navbar-brand" href="/">VOST.pt - Greve Transportes de Matérias Perigosas</a>
 		</div>
 
 		<nav class="collapse navbar-collapse" id="bs-navbar">
 			<ul class="nav navbar-nav">
 				<li><a href="index.php">Início</a></li>
-				<li><a href="stats.php">Estatísticas</a></li>
 				<li><a href="info.php">Informação Importante</a></li>
-				<li><a href="by_county.php">Postos por Concelho</a></li>
-				<li><a href="by_gas_type.php">Postos Gasolina vs Gasóleo</a></li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Estatísticas
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li><a class="dropdown-item" href="stats.php">Estatísticas Gerais</a></li>
+						<li><a class="dropdown-item" href="by_county.php">Postos por Concelho</a></li>
+						<li><a class="dropdown-item" href="by_gas_type.php">Postos Gasolina vs Gasóleo</a></li>
+					</ul>
+				</li>
 			</ul>
 		</nav>
 	</div>
