@@ -47,9 +47,12 @@ def get_reports():
 def find_station_reports(station, reports):
     scores = {}
 
-    distrito = unidecode(station['distrito'])
-    municipio = unidecode(station['municipio'])
-    name = unidecode(station['name'])
+    try:
+        distrito = unidecode(station['distrito'])
+        municipio = unidecode(station['municipio'])
+        name = unidecode(station['name'])
+    except AttributeError:
+        return []
 
     for i, r in enumerate(reports):
         # filter distrito
