@@ -75,6 +75,7 @@ $antiXss = new AntiXSS();
             position: inherit;
             padding-right: 10px;
             vertical-align:middle;
+            width: initial !important;
         }
     </style>
 
