@@ -70,7 +70,13 @@ $antiXss = new AntiXSS();
         <p>Em caso do <b>seu</b> estabelecimento estar identificado erradamente envie por favor um e-mail para <a href="mailto:alertas@vost.pt">alertas@vost.pt</a>️</p>
     </div>
 </div>
-<div id="map"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="map" class="col-md-12 col-sd-12"></div>
+    </div>
+</div>
+
+
 
 <?php include_once('../modules/footer.php'); ?>
 
