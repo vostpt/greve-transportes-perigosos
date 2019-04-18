@@ -121,6 +121,72 @@ $antiXss = new AntiXSS();
             }
 
         }
+
+        $counterCounty = [
+            'Aveiro'     => 0,
+            'Beja'     => 0,
+            'Braga'       => 0,
+            'Bragança'   => 0,
+            'CasteloBranco'    => 0,
+            'Coimbra'   => 0,
+            'Evora'    => 0,
+            'Faro'    => 0,
+            'Guarda'    => 0,
+            'Leiria' => 0,
+            'Lisboa' => 0,
+            'Portalegre' => 0,
+            'Porto' => 0,
+            'Santarem' => 0,
+            'Setubal' => 0,
+            'VianaCastelo' => 0,
+            'VilaReal' => 0,
+            'Viseu' => 0,
+        ];
+
+
+        foreach ($array as $item) {
+
+            if (strtolower($item[4]) === 'aveiro') {
+                $counterCounty['Aveiro']++;
+            }elseif (strtolower($item[4]) === 'beja') {
+                $counterCounty['Beja']++;
+            }elseif (strtolower($item[4]) === 'braga') {
+                $counterCounty['Braga']++;
+            }elseif (strtolower($item[4]) === 'bragança') {
+                $counterCounty['Braganca']++;
+            }elseif (strtolower($item[4]) === 'castelo branco') {
+                $counterCounty['CasteloBranco']++;
+            }elseif (strtolower($item[4]) === 'coimbra') {
+                $counterCounty['Coimbra']++;
+            }elseif (strtolower($item[4]) === 'évora') {
+                $counterCounty['Evora']++;
+            }elseif (strtolower($item[4]) === 'faro') {
+                $counterCounty['Faro']++;
+            }elseif (strtolower($item[4]) === 'guarda') {
+                $counterCounty['Guarda']++;
+            }elseif (strtolower($item[4]) === 'leiria') {
+                $counterCounty['Leiria']++;
+            }elseif (strtolower($item[4]) === 'lisboa') {
+                $counterCounty['Lisboa']++;
+            }elseif (strtolower($item[4]) === 'portalegre') {
+                $counterCounty['Portalegre']++;
+            }elseif (strtolower($item[4]) === 'porto') {
+                $counterCounty['Porto']++;
+            }elseif (strtolower($item[4]) === 'santarem') {
+                $counterCounty['Santarem']++;
+            }elseif (strtolower($item[4]) === 'setubal') {
+                $counterCounty['Setubal']++;
+            }elseif (strtolower($item[4]) === 'viana do castelo') {
+                $counterCounty['VianaCastelo']++;
+            }elseif (strtolower($item[4]) === 'vila real') {
+                $counterCounty['VilaReal']++;
+            }elseif (strtolower($item[4]) === 'viseu') {
+                $counterCounty['Viseu']++;
+            }
+
+
+        }
+
         ?>
 
         <br>
@@ -129,6 +195,11 @@ $antiXss = new AntiXSS();
                 <h3>Tipos de Combustivel</h3>
                 <br>
                 <canvas id="gasTypes" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-offset-3 col-md-6 col-sd-12">
+                <h3>Distritos</h3>
+                <br>
+                <canvas id="countyGraph" width="400" height="400"></canvas>
             </div>
             <div class="col-md-offset-3 col-md-6 col-sd-12">
                 <h3>Marcas</h3>
@@ -237,6 +308,89 @@ $antiXss = new AntiXSS();
                     'rgba(0, 0, 204, 1)',
                     'rgba(0, 153, 0, 1)',
                     'rgba(96, 96, 96, 1)',
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            animation: {
+                animateScale: true,
+                animateRotate: true
+            }
+        }
+    });
+
+
+
+    var bCounty = document.getElementById('countyGraph').getContext('2d');
+    var myChartCounty = new Chart(bCounty, {
+        type: 'doughnut',
+        data: {
+            labels: ['Aveiro', 'Beja', 'Braga', 'Bragança', 'Castelo Branco', 'Coimbra', 'Évora', 'Faro', 'Guarda', 'Leiria', 'Lisboa', 'Portalegre', 'Porto', 'Santarém', 'Setúbal', 'Viana do Castelo', 'Vila Real', 'Viseu'],
+            datasets: [{
+                label: '',
+                data: [<?= $counterCounty['Aveiro'] ?>,
+                    <?= $counterCounty['Beja'] ?>,
+                    <?= $counterCounty['Braga'] ?>,
+                    <?= $counterCounty['Braganca'] ?>,
+                    <?= $counterCounty['CasteloBranco'] ?>,
+                    <?= $counterCounty['Coimbra'] ?>,
+                    <?= $counterCounty['Evora'] ?>,
+                    <?= $counterCounty['Faro'] ?>,
+                    <?= $counterCounty['Guarda'] ?>,
+                    <?= $counterCounty['Leiria'] ?>,
+                    <?= $counterCounty['Lisboa'] ?>,
+                    <?= $counterCounty['Portalegre'] ?>,
+                    <?= $counterCounty['Porto'] ?>,
+                    <?= $counterCounty['Santarem'] ?>,
+                    <?= $counterCounty['Setubal'] ?>,
+                    <?= $counterCounty['VianaCastelo'] ?>,
+                    <?= $counterCounty['VilaReal'] ?>,
+                    <?= $counterCounty['Viseu'] ?>
+                ],
+                backgroundColor: [
+                    'rgba(51, 255, 255, 0.5)',
+                    'rgba(51, 255, 51, 0.5)',
+                    'rgba(255, 128, 0, 0.5)',
+                    'rgba(255, 206, 86, 0.5)',
+                    'rgba(255, 51, 51, 0.5)',
+                    'rgba(255, 102, 102, 0.5)',
+                    'rgba(204, 0, 0, 0.5)',
+                    'rgba(0, 0, 204, 0.5)',
+                    'rgba(0, 153, 0, 0.5)',
+                    'rgba(96, 96, 96, 0.5)',
+                    'rgba(243, 109, 80, 0.5)',
+                    'rgba(52, 196, 35, 0.5)',
+                    'rgba(167, 35, 196, 0.5)',
+                    'rgba(255, 95, 0, 0.5)',
+                    'rgba(111, 0, 10, 0.5)',
+                    'rgba(230, 0, 160, 0.5)',
+                    'rgba(41, 33, 38, 0.5)',
+                    'rgba(22, 86, 0, 0.5)',
+                ],
+                borderColor: [
+                    'rgba(51, 255, 255, 1)',
+                    'rgba(51, 255, 51, 1)',
+                    'rgba(255, 128, 0, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(255, 51, 51, 1)',
+                    'rgba(255, 102, 102, 1)',
+                    'rgba(204, 0, 0, 1)',
+                    'rgba(0, 0, 204, 1)',
+                    'rgba(0, 153, 0, 1)',
+                    'rgba(96, 96, 96, 1)',
+                    'rgba(243, 109, 80, 1)',
+                    'rgba(52, 196, 35, 1)',
+                    'rgba(167, 35, 196, 1)',
+                    'rgba(255, 95, 0, 1)',
+                    'rgba(111, 0, 10, 1)',
+                    'rgba(230, 0, 160, 1)',
+                    'rgba(41, 33, 38, 1)',
+                    'rgba(22, 86, 0, 1)',
                 ],
                 borderWidth: 1
             }]
