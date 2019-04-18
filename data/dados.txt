@@ -1,0 +1,2258 @@
+{
+  "data": [
+    {
+      "distrito": "Aveiro",
+      "posto": "INTERMARCHÉ",
+      "morada": "RUA DO ALTEIRALTO,81",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GALP",
+      "morada": "EN1 - KM 217",
+      "cap": 136,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GALP",
+      "morada": "P.Galp-Sto Anto.-E.N.326-Km 37,100",
+      "cap": 134,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "JUMBO",
+      "morada": "E.N. 109 Centro Comercial Glicinias\nAradas",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "PINGO DOCE",
+      "morada": "Estrada Nacional 109 - Esgueira",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GALP",
+      "morada": "Auto Estrada A25 / Itinerário Principal\nIP5, ao km 15.200, Sublanço Nó do\nEstádio",
+      "cap": 208,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "Rua 19 no 1578",
+      "cap": 117,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "PRIO",
+      "morada": "Av. dos Bacalhoeiros",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "INTERMARCHÉ",
+      "morada": "PEDRINHAS",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "PRIO",
+      "morada": "E.N. 1 - IC2 - km 204,05",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "REPSOL",
+      "morada": "Rua Frei Caetano Brandão",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GENÉRICO",
+      "morada": "AV DA REPÚBLICA No1056",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "PINGO DOCE",
+      "morada": "Rua de S. Sebastião, EN 235",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Machado Santos",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "INTERMARCHÉ",
+      "morada": "RUA DA ILHA No73",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "Lanço IC1 Angreja (IP5)/Sublanço\nOvar/Maceda - KM 13.400/13.800",
+      "cap": 199,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "REPSOL",
+      "morada": "Rua Dr. Crespim Borges Castro",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "Avenida 25 de Abril",
+      "cap": 118,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "PINGO DOCE",
+      "morada": "Lugar da Aldeira Nova - Travanca",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "INTERMARCHÉ",
+      "morada": "RUA ALIANÇA FUTEBOL CLUBE",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GALP",
+      "morada": "P.Galp-Avenida da Liberdade",
+      "cap": 112,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "Av.Infante D.Henrique, No6",
+      "cap": 150,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "AV DR NOGUEIRA E MELO",
+      "cap": 83,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "BP",
+      "morada": "R. Dr. Manuel Ferreira da Silva, no 1 F",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Aveiro",
+      "posto": "GALP",
+      "morada": "EN 1, Km 259",
+      "cap": 94,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "CEPSA",
+      "morada": "A2, KM 193, SUB-LANÇO CASTRO\nVERDE/ALMODÔVAR, APARTADO 93",
+      "cap": 286,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "GALP",
+      "morada": "P.Galp - E.N.2 ao Km. 664",
+      "cap": 108,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "INTERMARCHÉ",
+      "morada": "Av. Fialho de Almeida - Apartado 433",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "BP",
+      "morada": "Rua António Sardinha - Posto BP",
+      "cap": 116,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "GENÉRICO",
+      "morada": "RUA DE ALMODOVAR, 92",
+      "cap": 200,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "CARLOS BALTAZAR",
+      "morada": "Rua Irene Lisboa, 1 A",
+      "cap": 70,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "GALP",
+      "morada": "EN 390, Km 39.400",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "GALP",
+      "morada": "Estrada nacional no120 km 115 POSTO\nGALP",
+      "cap": 168,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "INTERMARCHÉ",
+      "morada": "HORTINHA",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Beja",
+      "posto": "INTERMARCHÉ",
+      "morada": "Ramal de Beja",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "PRIO",
+      "morada": "Rua da Cintura, 72 - Lugar de\nVasconcelos - Ferreiros",
+      "cap": 85,
+      "gpl": "Info não\ndisponível"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "ESSO",
+      "morada": "RUA DA PORTELA No 86",
+      "cap": 103,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "REPSOL",
+      "morada": "Av. João Duarte - Arcozelo",
+      "cap": 110,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "PRIO",
+      "morada": "Rua Frei Pedro de Perelhal, 856",
+      "cap": 98,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "BP",
+      "morada": "RUA S. MARTINHO, S/N - POSTO BP",
+      "cap": 140,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "CEPSA",
+      "morada": "Variante Braga/V.N.Famalicão- Quinta de\nMadredeus - Lado Poente",
+      "cap": 208,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "REPSOL",
+      "morada": "Av. Frei Bartolomeu dos Mártires\n(Circular)",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "REPSOL",
+      "morada": "Av. Frei Bartolomeu dos Mártires\n(Circular)",
+      "cap": 128,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "PRIO",
+      "morada": "Variante do Fojo - Este (São Pedro) -\nAvenida General Carrilho Pinto",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "GALP",
+      "morada": "Boavista - Refojos de Basto",
+      "cap": 78,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "GALP",
+      "morada": "Lugar de Campos de Alhos-Gandra",
+      "cap": 193,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "LECLERC",
+      "morada": "Rua Cidade de Guimarães",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "JUMBO",
+      "morada": "Rua 25 de Abril, 999 Silvares",
+      "cap": 198,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "INTERMARCHÉ",
+      "morada": "RUA DA EIRA 85",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Pinheiro Manso no 443 / lote 10",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Comandante Carvalho Crato (EN\n101)",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "JUMBO",
+      "morada": "EN 206 Av.do Brasil lote, no2",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "GENÉRICO",
+      "morada": "AV.JOÃO XXI",
+      "cap": 171,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "LECLERC",
+      "morada": "RUA DE TALVAI S/N",
+      "cap": 135,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "REPSOL",
+      "morada": "Av. Engo. Pinheiro Braga, 1392",
+      "cap": 140,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "REPSOL",
+      "morada": "Avenida da Liberdade, No175",
+      "cap": 65,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "ILÍDIO MOTA",
+      "morada": "Rua Comendador João Pereira Magalhães\nno910",
+      "cap": 85,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Braga",
+      "posto": "INTERMARCHÉ",
+      "morada": "LUGAR DO SOUTO",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "REPSOL",
+      "morada": "AV. SÁ CARNEIRO ES REPSOL",
+      "cap": 95,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "GASPE",
+      "morada": "Av. Comendador Joaquim António\nFerreira",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "INTERMARCHÉ",
+      "morada": "LUGAR VALE DE CERDEIRA",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "TUACAR",
+      "morada": "Largo do Santo Cristo (EN 221)",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "GENÉRICO",
+      "morada": "Rua Cabo das Tapadas- EN 220",
+      "cap": 20,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "GASPE",
+      "morada": "E. N. 103, km. 234,2- Bairro Souto Covo",
+      "cap": 102,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Bragança",
+      "posto": "GASPE",
+      "morada": "Estrada de Separicos",
+      "cap": 70,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "INTERMARCHÉ",
+      "morada": "varanda de pilatos",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "JUMBO",
+      "morada": "Zona Industrial Castelo Branco",
+      "cap": 128,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "GALP",
+      "morada": "Quinta do Alvito",
+      "cap": 98,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "REPSOL",
+      "morada": "Cruzamento da Cumeada",
+      "cap": 98,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "BP",
+      "morada": "Rua da Mina",
+      "cap": 113,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "INTERMARCHÉ",
+      "morada": "Zona Nova Expansão",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "GALP",
+      "morada": "Estrada Nacional 238 - Oleiros",
+      "cap": 85,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Castelo Branco",
+      "posto": "BP",
+      "morada": "Estrada Nacional N.18",
+      "cap": 60,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "CEPSA",
+      "morada": "Estrada Nacional 342-4, km 1.5",
+      "cap": 92,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "JUMBO",
+      "morada": "Rua Ferrer Correia (Estrada das Beiras)",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "PRIO",
+      "morada": "Lugar de Vale ou Presa e Telhões (ao lado\ndo Retail Park de Taveiro)",
+      "cap": 125,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "GALP",
+      "morada": "EN 1 IC 2 (Ponte das Eiras Adémia)",
+      "cap": 144,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "JUMBO",
+      "morada": "Av. Dr. Francisco de Sá Carneiro, Vila\nRobim",
+      "cap": 158,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "BP",
+      "morada": "AV. SARAIVA DE CARVALHO, 16",
+      "cap": 110,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "INTERMARCHÉ",
+      "morada": "RUA DE COIMBRA - ZONA INDUSTRIAL\nDOS MATINHOS",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "INTERMARCHÉ",
+      "morada": "URBANIZAÇÃO VINHA DA\nPARREIRA,LOTE No3",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "BP",
+      "morada": "Rua do Ameal, 18",
+      "cap": 96,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "REPSOL",
+      "morada": "cruz-nova",
+      "cap": 91,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "INTERMARCHÉ",
+      "morada": "Lugar da Barreira",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "GENÉRICO",
+      "morada": "Alameda Dra. Helena Fernandes\nBarateiro",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Coimbra",
+      "posto": "PRIO",
+      "morada": "Zona Industrial de Penela, Lote 1",
+      "cap": 87,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Évora",
+      "posto": "PINGO DOCE",
+      "morada": "EN 255",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Évora",
+      "posto": "BP",
+      "morada": "Zona Industrial, lote 63",
+      "cap": 76,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Évora",
+      "posto": "BP",
+      "morada": "Portas de Machede",
+      "cap": 119,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Évora",
+      "posto": "REPSOL",
+      "morada": "E.N. 18, Largo Chaf.D`El Rei",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Évora",
+      "posto": "BP",
+      "morada": "Av gago coutinho n 74",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "TFUEL",
+      "morada": "SI CRUZAMENTO ALCOUTIM LT 20",
+      "cap": 60,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "REPSOL",
+      "morada": "Sítio Bolota",
+      "cap": 139,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "INTERMARCHÉ",
+      "morada": "VALE SERVES FERREIRAS",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "JUMBO",
+      "morada": "Av. Cidade Hayward",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "JUMBO",
+      "morada": "EN 125 - Quinta da Bem Posta",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "INTERMARCHÉ",
+      "morada": "AMEIJEIRA VERDE- PEDRA ALÇADA",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "GALP",
+      "morada": "A. E. 22 Km 62.5 Sublanço Guia /\nLoulé_Aparta",
+      "cap": 193,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "GALP",
+      "morada": "Av. João Pires Meireles",
+      "cap": 104,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "BP",
+      "morada": "Av. de Ceuta",
+      "cap": 160,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "REPSOL",
+      "morada": "EN 125 - Brancanes",
+      "cap": 137,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "JUMBO",
+      "morada": "EN 125 Rua S.Pedro",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "GALP",
+      "morada": "Urbanização Alto do Quintão, Avenida V6",
+      "cap": 119,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "PRIO",
+      "morada": "Rua Almirante Candido dos Reis n° 245 -\nTavira",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "INTERMARCHÉ",
+      "morada": "Largo da Estação",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "CEPSA",
+      "morada": "APT. 2068, AEROPORTO FARO",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "GALP",
+      "morada": "P.Galp - E.N.125 ao Km.63,123 - Pêra",
+      "cap": 128,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "ILÍDIO MOTA",
+      "morada": "IC1",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "GALP",
+      "morada": "P.Galp - E.N.120 - Lt. Barrada - Junto\nquartel Bombeiros",
+      "cap": 112,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua João de Deus",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Faro",
+      "posto": "CEPSA",
+      "morada": "EN 397, Km 0.5 Cachopo",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GALP",
+      "morada": "I. P. 5 Km 141",
+      "cap": 187,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "ALVES BANDEIRA",
+      "morada": "EN232 - ZONA INDUSTRIAL -\nNESPEREIRA",
+      "cap": 60,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GALP",
+      "morada": "Av. Rainha D. Amelia - (EN 18, km 1,900)",
+      "cap": 94,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "REPSOL",
+      "morada": "Avenida Cidade de Bejar, Castelos Velhos",
+      "cap": 157,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GENÉRICO",
+      "morada": "EN 233, km 8,500 - Santana da Azinha",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "PINGO DOCE",
+      "morada": "Sem dados",
+      "cap": 222,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GALP",
+      "morada": "Posto Galp-Largo Feira",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "INTERMARCHÉ",
+      "morada": "Fontaínhas - Zona Industrial, LOTE 53",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "PRIO",
+      "morada": "Av. da Fronteira, n.o14",
+      "cap": 122,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GASPE",
+      "morada": "avenida combatentes do ultramar, lote 5",
+      "cap": 90,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Guarda",
+      "posto": "GALP",
+      "morada": "Rua Cidade da Guarda, 20",
+      "cap": 89,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha da Madeira",
+      "posto": "REPSOL",
+      "morada": "Rua Padre Pita Ferreira no 152 A",
+      "cap": 40,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Ilha da Madeira",
+      "posto": "REPSOL",
+      "morada": "Via Rápida Cota 200 lado A",
+      "cap": 60,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha da Madeira",
+      "posto": "GALP",
+      "morada": "Rua Comandante Camacho de Freitas,\nno4",
+      "cap": 88,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha da Madeira",
+      "posto": "REPSOL",
+      "morada": "Sitio da Lombadinha",
+      "cap": 93,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha da Madeira",
+      "posto": "GALP",
+      "morada": "Sitio do Serrado",
+      "cap": 15,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha das Flores",
+      "posto": "GALP",
+      "morada": "Travessa da Cruz, S/N",
+      "cap": 30,
+      "gpl": "Info não\ndisponível"
+    },
+    {
+      "distrito": "Ilha de Santa\nMaria",
+      "posto": "REPSOL",
+      "morada": "Pedras S. Pedro",
+      "cap": 40,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha de São Jorge",
+      "posto": "GALP",
+      "morada": "Travessas, Ribeira Seca",
+      "cap": 54,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Ilha de São\nMiguel",
+      "posto": "GALP",
+      "morada": "Estrada Regional no 1-1a 46 D",
+      "cap": 58,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Ilha Terceira",
+      "posto": "GALP",
+      "morada": "RUA COMENDADOR FRANCISCO JOSE\nBARCELOS",
+      "cap": 40,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "IC2(EN1), Km 101+100 - Sentido\nLeiria/Lisboa",
+      "cap": 97,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "TRANSFORPEL",
+      "morada": "Av Nossa Senhora da Nazaré Km 21",
+      "cap": 98,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "REPSOL",
+      "morada": "IC2 no 10",
+      "cap": 171,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "INTERMARCHÉ",
+      "morada": "ARROTEIAS - PRAÇA DA REPUBLICA -\nBOMBARRAL",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "LECLERC",
+      "morada": "QUINTA DO SALGADO",
+      "cap": 208,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua da Baquelite - Gândara dos Olivais",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "Ava Nossa Senhora de Fátima",
+      "cap": 144,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "REPSOL",
+      "morada": "Av.Urbanização da Almoinha Grande",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "REPSOL",
+      "morada": "EN1 (IC2) ES Repsol Norte/Sul",
+      "cap": 91,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "BP",
+      "morada": "Estrada dos Pinheiros, 550",
+      "cap": 93,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "Avenida Vitor Gallo 123",
+      "cap": 136,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "Estrada Nacional 242",
+      "cap": 136,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "BP",
+      "morada": "Av. Monsenhor Bastos",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "A 1 - Km 166,7 - Lisboa/Porto",
+      "cap": 320,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "INTERMARCHÉ",
+      "morada": "VARZEA",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "INTERMARCHÉ",
+      "morada": "Serrado da Estrada no 24",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "PINGO DOCE",
+      "morada": "IC2 Km 107,4",
+      "cap": 40,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "REPSOL",
+      "morada": "EN 360 ( Nó de Lig. ao IC1) Águas Santas",
+      "cap": 138,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "GALP",
+      "morada": "P. Galp - Av. General Humberto Delgado",
+      "cap": 112,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "CEPSA",
+      "morada": "RUA CONDE DE AVELAR",
+      "cap": 96,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "CEPSA",
+      "morada": "EN 110 (Variante Cabaços)",
+      "cap": 70,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Leiria",
+      "posto": "INTERMARCHÉ",
+      "morada": "Zona Industrial do Campores",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "JUMBO",
+      "morada": "Av Lima de Freitas Parcela A",
+      "cap": 197,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "A.E.1 Km 44,000",
+      "cap": 270,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "REPSOL",
+      "morada": "Estrada Mata da Torre E.S.REPSOL",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Rua Florêncio Freire - Três Cantos,\nTrajouce",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "CEPSA",
+      "morada": "EN 9, LUGAR DA ABUXARDA, PAI DO\nVENTO",
+      "cap": 102,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Av. Bombeiros Voluntários, n.o 48-A",
+      "cap": 152,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Ava Marechal Craveiro Lopes",
+      "cap": 280,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Av Eng. Duarte Pacheco",
+      "cap": 251,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Rua Frederico George - Eixo N/S -\nSentido S/N",
+      "cap": 224,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "Nova Rotunda Aeroporto de Lisboa - Av.\nde Berlim",
+      "cap": 210,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "Praça José Queirós",
+      "cap": 210,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "Posto De abastecimento BP Estrada da\nLuz",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "CEPSA",
+      "morada": "Avenida do Santo Condestável - Bairro\ndos Loios - Lisboa",
+      "cap": 160,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "REPSOL",
+      "morada": "2a Circular sentido Sul/Norte Avenida\nMarechal Craveiro Lopes",
+      "cap": 290,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "Avenida das Descobertas, posto BP",
+      "cap": 210,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Av. Almirante Gago Coutinho",
+      "cap": 240,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Rua José Malhoa,1- Paradela",
+      "cap": 192,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "LECLERC",
+      "morada": "Rua Dom Nuno Alvares Pereira, 30 30A",
+      "cap": 180,
+      "gpl": "Info não\ndisponível"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "Estrada Nacional 115 Olival da Qta. Nova",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "E. N. 10 - Km 138,4",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua da Lagoa, 27 - Edifício Intermarché\nMalveira",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Almirante Gago Coutinho, 7",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Rua Sara Afonso, Lote AE10 (Cruzamento\nAvenida das Acacias)",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "Avenida Miguel Torga, Lote 2, Casal da\nTroca",
+      "cap": 184,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Quinta do Cebolim",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "A 5 A. E. Lisboa/Cascais Km 9.6",
+      "cap": 300,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "JUMBO",
+      "morada": "Rua da Quinta do Salrego - Lote 12",
+      "cap": 180,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Avenida Marginal - Largo de St. Amaro de\nOeiras - (EN 6 Km 8,200)",
+      "cap": 70,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "JUMBO",
+      "morada": "Rua francisco lyon de castro",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "BP",
+      "morada": "IC 19 (EN 249) Estrada Sintra-Lisboa -\nSão Marcos",
+      "cap": 216,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "A16, km 9,500 – Sintra (lanço\nLourel/Ranholas)",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "A16, km 9,500 – Sintra (lanço\nRanholas/Lourel)",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "REPSOL",
+      "morada": "Gaveto da Av Gil Eanes e Av das\nDescobertas - Rinchoa",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "A 16 - IC16 - km 2,600 a 3,100",
+      "cap": 120,
+      "gpl": "Info não\ndisponível"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "A 8 Km 12.07",
+      "cap": 320,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "JUMBO",
+      "morada": "Rua António Alves Ferreira, No 2",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "JUMBO",
+      "morada": "Qta. Drogas da Verdelha E.N.10",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "EN 10 Km 131+200, Freguesia Forte da\nCasa",
+      "cap": 122,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "REPSOL",
+      "morada": "ESTRADA NACIONAL 1- KM 25,5- POVOS",
+      "cap": 140,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "PRIO",
+      "morada": "Avenida Carlos Cumbre Tavares - Parque\nNeudel - Damaia",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "ALVES BANDEIRA",
+      "morada": "Estrada Nacional no 1 km 57,3 -\nAlcoentre",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Ildo Hermogenes da Silva Marques,1",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Lisboa",
+      "posto": "GALP",
+      "morada": "AV.MARQUÊS DE POMBAL No30",
+      "cap": 106,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Portalegre",
+      "posto": "BP",
+      "morada": "Av.de Badajoz -Posto BP",
+      "cap": 108,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Portalegre",
+      "posto": "LECLERC",
+      "morada": "Rua do Joinal",
+      "cap": 107,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Portalegre",
+      "posto": "CEPSA",
+      "morada": "Rua Hortas do Chão, Lote 16",
+      "cap": 122,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Portalegre",
+      "posto": "GENÉRICO",
+      "morada": "Rua 25 de Abril no156",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "RUA DOS PINHEIROS MANSOS",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "Av. Alto da Lixa, 562",
+      "cap": 77,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "Av. Dr. Ribeiro Magalhães",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "JUMBO",
+      "morada": "Rua Exterior Circunvalação, 1730",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Av.General Humberto Delgado",
+      "cap": 137,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "LECLERC",
+      "morada": "EN 106-1",
+      "cap": 140,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "JUMBO",
+      "morada": "Av. Fernando Távora, no 1570",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "JUMBO",
+      "morada": "Rua Velha de Mandim, no67",
+      "cap": 197,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "A 4 - Km 9,8 - Porto/Amarante",
+      "cap": 320,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Rua Agostinho da Silva Rocha",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "INTERMARCHÉ",
+      "morada": "Av. Futebol Clube do Porto - Rua Maria\nGil - Zona Industrial",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "A4/ IP4 Km 3,08 e 4,10 Sublanço Nó de\nCustóias",
+      "cap": 295,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Rua Belchior Robles - Leça da Palmeira",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "PROLONGAMENTO DA AVENIDA\nREPÚBLICA, S/N",
+      "cap": 121,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "INTERMARCHÉ",
+      "morada": "AVENIDA DR.JAIME BARROS",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "BP",
+      "morada": "Av. Porta da Capital do Móvel n.o 191",
+      "cap": 130,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "INTERMARCHÉ",
+      "morada": "Quinta da Quebrada- mouriz",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "AV. PONTE DE AREIAS",
+      "cap": 71,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PINGO DOCE",
+      "morada": "Quinta da Lagarteira, EN 593",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "INTERMARCHÉ",
+      "morada": "Quinta do Sardoal",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "JUMBO",
+      "morada": "Alameda de Cartes no 429/485",
+      "cap": 190,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PRIO",
+      "morada": "Sem dados",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PRIO",
+      "morada": "Rua Engenheiro Ferreira Dias, Freguesia\nde Ramalde, 1104,1150",
+      "cap": 130,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "CEPSA",
+      "morada": "ESTRADA EXTERIOR DA\nCIRCUNVALAÇÃO No.7446 E 7448",
+      "cap": 150,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Estrada Exterior Circunvalação 82 E 130\n- Freixo",
+      "cap": 136,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PRIO",
+      "morada": "Avenida 25 de Abril, no224",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Avenida do Mar",
+      "cap": 112,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "JUMBO",
+      "morada": "Rua das Rãs",
+      "cap": 150,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "Avenida da Indústria Textil 590",
+      "cap": 156,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "A3- A.E. PORTO/BRAGA, Km 11",
+      "cap": 305,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "REPSOL",
+      "morada": "RUA DO NEGRAL N 1 - Campo",
+      "cap": 94,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "BP",
+      "morada": "Rua Central de Campo",
+      "cap": 200,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "CEPSA",
+      "morada": "RUA 5 DE OUTUBRO",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "IC1 Km 328",
+      "cap": 345,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Av. Prof Orlando Ribeiro",
+      "cap": 300,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PINGO DOCE",
+      "morada": "Business Park -Rua Boavista - Lugar\nBarrancas",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PRIO",
+      "morada": "Gaveto da Avenida Vasco da Gama c/ a\nRua de Baiza, no1243 Vilar de Andorinho",
+      "cap": 365,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PRIO",
+      "morada": "Rua das Lajes, Canelas, Vila Nova de Gaia",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "BP",
+      "morada": "Rua Nova do Fojo, 399",
+      "cap": 150,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "PINGO DOCE",
+      "morada": "Rua Aldeias de Cima",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Porto",
+      "posto": "GALP",
+      "morada": "Av.a 1.o de Maio, 131",
+      "cap": 125,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "PINGO DOCE",
+      "morada": "Av. 14 de Junho",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua das Escolas Alferrarede Abrantes",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "Lugar do Peral",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "GENÉRICO",
+      "morada": "Zona Industrial, Lote 10",
+      "cap": 133,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "PRIO",
+      "morada": "E.N. 10, km 108,7 - Porto Alto",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "PRIO",
+      "morada": "E.N. 10, km 108,7 - Porto Alto",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "Av.Mestre Cid",
+      "cap": 110,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "EN 118 KM 99- QUINTA ARNEIRO DE\nCIMA",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Açude da Agolada no 2",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "GALP",
+      "morada": "E.N. 238 - GRAVULHA",
+      "cap": 122,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "CC Vila Shopping, Rua dos Namorados,\nLoja13",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "CEPSA",
+      "morada": "AV. D.JOSÉ ALVES CORREIA DA SILVA",
+      "cap": 140,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "PRIO",
+      "morada": "Avenida dos Combatentes, Fonte Lagoa",
+      "cap": 86,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "GENÉRICO",
+      "morada": "RUA MANUEL DA LIDIA, 171",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "BP",
+      "morada": "A. E. 1 - Km 84",
+      "cap": 260,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "BP",
+      "morada": "A. E. 1 - Km 84",
+      "cap": 240,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "BP",
+      "morada": "Circular Urbana D. Luís I",
+      "cap": 110,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "REPSOL",
+      "morada": "Av. Aurélio Ribeiro",
+      "cap": 127,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "OLEOFAT",
+      "morada": "Estrada de Alvorão, Quinta Val da Cortiça",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Santarém",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Cancela do Leão, No6, Várzea dos\nMesiões",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "JUMBO",
+      "morada": "Estrada Vale Mourelos no 20 Qta.\nEspadeiros",
+      "cap": 200,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "JUMBO",
+      "morada": "E.N. No 10 Km18,5",
+      "cap": 140,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "BP",
+      "morada": "E,N,120 km,17,50",
+      "cap": 176,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "PINGO DOCE",
+      "morada": "EN 11 - Quinta Fonte da Prata",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "Zona Industrial Pau Queimado - Rua da\nAzinheira",
+      "cap": 300,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "PRIO",
+      "morada": "EN 5 km 3,700 a 3,900 (Apeadeiro de\nSarilhos)",
+      "cap": 112,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "A2 - Km 31,200",
+      "cap": 250,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "JUMBO",
+      "morada": "E. N. 379 Bombas Lage-S.Julião",
+      "cap": 130,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "BP",
+      "morada": "EN 10 Km 5,9 Posto BP",
+      "cap": 202,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "REPSOL",
+      "morada": "Rua Oliveira Martins",
+      "cap": 137,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "JUMBO",
+      "morada": "Rua Engo Ferreira Dias",
+      "cap": 215,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "REPSOL",
+      "morada": "EN no 10 km 24",
+      "cap": 128,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "Avenida General Humberto Delgado no1\nSines",
+      "cap": 112,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "REPSOL",
+      "morada": "E.S. Repsol Vila Chã",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "EN 10 - KM 47 PONTES",
+      "cap": 122,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "A. E. Sul A. 2 Km 68",
+      "cap": 320,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "Acesso Sul da Ponte Vasco da Gama Km\n13.6",
+      "cap": 385,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "P.Galp - Lugar da Regateira, Via L-3 / A33\nMontijo/Almada",
+      "cap": 139,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "BP",
+      "morada": "EN 261 Km 78,3 - Posto BP",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "INTERMARCHÉ",
+      "morada": "Bairro da Petrogal lote a1",
+      "cap": 70,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "Avenida José Saramago - Quinta do Olival\nQueimado",
+      "cap": 122,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "REPSOL",
+      "morada": "Av. Bento Goncalves",
+      "cap": 117,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "EN 378 No38 - FERNÃO FERRO",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "BP",
+      "morada": "Ava de Belverde",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "BP",
+      "morada": "Est. Nacional 378, Venda Nova",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Setúbal",
+      "posto": "GALP",
+      "morada": "EN 378 - KM 23,700 SESIMBRA",
+      "cap": 112,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "REPSOL",
+      "morada": "EN 101 - Silzares - Vila Fonche",
+      "cap": 110,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "INTERMARCHÉ",
+      "morada": "POÇO LINHO - EN13",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "GALP",
+      "morada": "EN 101 - Km 19,600 - Lugar da Estrada",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "REPSOL",
+      "morada": "S.Gonçalo",
+      "cap": 131,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "LECLERC",
+      "morada": "Lugar de Santoinho – Quinta de São Brás",
+      "cap": 180,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "INTERMARCHÉ",
+      "morada": "Lugar de Galvão - Vila",
+      "cap": 80,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viana do Castelo",
+      "posto": "REPSOL",
+      "morada": "Av. Capitão Gaspar Castro",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "TUACAR",
+      "morada": "Av 25 de Abril",
+      "cap": 70,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "REPSOL",
+      "morada": "R.da Pedisqueira, Ed. Europa, Loja 2",
+      "cap": 138,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "REPSOL",
+      "morada": "Variante à Estrada Nacional 15",
+      "cap": 113,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "INTERMARCHÉ",
+      "morada": "Lugar do Freixo",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "REPSOL",
+      "morada": "EN 2 - Lugar dos Lavadouros",
+      "cap": 100,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "REPSOL",
+      "morada": "Av.Aureliano Barrigas",
+      "cap": 99,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "CEPSA",
+      "morada": "AV. DA NORUEGA,",
+      "cap": 195,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "GALP",
+      "morada": "EN 108, Km 113,100 - Rua da Ferreirinha",
+      "cap": 94,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Vila Real",
+      "posto": "PRIO",
+      "morada": "Av. Nuno Álvares Pereira",
+      "cap": 94,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "PRIO",
+      "morada": "ARRUAMENTO URBANO A SUL DA VILA",
+      "cap": 90,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "GALP",
+      "morada": "Rua Gen.H. Delgado - P.Galp EN 321, Km\n24,792 - Lugar do Outeirinhos (Cinfães)",
+      "cap": 54,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "PINGO DOCE",
+      "morada": "Av. Heróis do Ultramar",
+      "cap": 120,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "REPSOL",
+      "morada": "Av. 25 de Abril no 25 A",
+      "cap": 70,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "INTERMARCHÉ",
+      "morada": "AV.BOMBEIROS VOLUNTARIOS",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "INTERMARCHÉ",
+      "morada": "VALE SENHORIM OU AREAL",
+      "cap": 80,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "INTERMARCHÉ",
+      "morada": "Quinta de Santa Cruz - Várzea",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "CEPSA",
+      "morada": "Av. Dr. Francisco Sá Carneiro, 600",
+      "cap": 75,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "GALP",
+      "morada": "Coração de Jesus - Largo da Feira",
+      "cap": 153,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "GALP",
+      "morada": "Praça Carlos Lopes, s/n",
+      "cap": 110,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "LECLERC",
+      "morada": "Quinta dos Prados de Baixo - Lugar da\nRina",
+      "cap": 120,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "CEPSA",
+      "morada": "IP 3, LANÇO CHAMADOURO - RAIVA\n(ANTIGA EN2), KM 222,100",
+      "cap": 170,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "GALP",
+      "morada": "Avenida Maria Alcina Fadista, 1156",
+      "cap": 171,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "CEPSA",
+      "morada": "Av. Marquês de Soveral, n.o 69",
+      "cap": 86,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "INTERMARCHÉ",
+      "morada": "Rua Cidade de Lescar",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "GENÉRICO",
+      "morada": "EN 226-2 Tabuaço",
+      "cap": 79,
+      "gpl": "Não"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "PRIO",
+      "morada": "RUA PADRE RAMOS PINTO No63",
+      "cap": 100,
+      "gpl": "Sim"
+    },
+    {
+      "distrito": "Viseu",
+      "posto": "CEPSA",
+      "morada": "ESTRADA NACIONAL No333 KM1.2",
+      "cap": 100,
+      "gpl": "Sim"
+    }
+  ]
+}
