@@ -5,7 +5,8 @@
  * Date: 16/04/2019
  * Time: 16:09
  */
-
+header('Location: /');
+die;
 require_once '../vendor/autoload.php';
 
 use voku\helper\AntiXSS;
@@ -54,9 +55,11 @@ $antiXss = new AntiXSS();
             width: 100%;
             margin: 0;
         }
+
         .popup table, .popup th, .popup td {
             border: 1px solid black;
         }
+
         .popup table {
             border-collapse: collapse;
         }
@@ -64,17 +67,18 @@ $antiXss = new AntiXSS();
         .info {
             padding: 6px 8px;
             background: white;
-            box-shadow: 0 1px 7px rgba(0,0,0,0.65);
+            box-shadow: 0 1px 7px rgba(0, 0, 0, 0.65);
             border-radius: 4px;
             -webkit-border-radius: 4px;
             line-height: 25px;
         }
+
         .info > img {
             margin: 0 !important;
             display: inline;
             position: inherit;
             padding-right: 10px;
-            vertical-align:middle;
+            vertical-align: middle;
             width: initial !important;
         }
     </style>
@@ -99,8 +103,10 @@ $antiXss = new AntiXSS();
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <p>Os dados constantes neste website são da responsabilidade dos utilizadores que os inserem. Os voluntários da VOST Portugal fazem todos os possíveis para validar os mesmos e eliminar aqueles que não correspondem à realidade.</p>
-        <p>Em caso do <b>seu</b> estabelecimento estar identificado erradamente envie por favor um e-mail para <a href="mailto:alertas@vost.pt">alertas@vost.pt</a>️</p>
+        <p>Os dados constantes neste website são da responsabilidade dos utilizadores que os inserem. Os voluntários da VOST Portugal fazem todos os possíveis
+            para validar os mesmos e eliminar aqueles que não correspondem à realidade.</p>
+        <p>Em caso do <b>seu</b> estabelecimento estar identificado erradamente envie por favor um e-mail para <a
+                    href="mailto:alertas@vost.pt">alertas@vost.pt</a>️</p>
     </div>
 </div>
 <div class="container-fluid">
@@ -108,7 +114,6 @@ $antiXss = new AntiXSS();
         <div id="map" class="col-md-12 col-sd-12"></div>
     </div>
 </div>
-
 
 
 <?php include_once('../modules/footer.php'); ?>
