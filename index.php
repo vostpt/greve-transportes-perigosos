@@ -62,7 +62,36 @@ $antiXss = new AntiXSS();
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
+        <div class="text-center">
+            <h2>ℹ️⛽️🚘 Greve Desconvocada 🚘⛽️ℹ️</h2>
+            <p>Após a desconvocação da greve, a nossa missão chegou ao fim. Obrigado a todos os que contribuíram com informação válida, que tantas pessoas
+                ajudou. Obrigado a todos os que contribuíram com informação inválida, que tanto nos ajudou a aprender e a crescer. Ficam aqui os números, que
+                falam por si.</p>
+
+            <h4><strong>Site</strong></h4>
+            <p>Número de respostas ao formulário: 19 976</p>
+            <p>Pageviews totais: 1 707 422</p>
+            <p>Utilizadores: 901 451</p>
+            <p>Pico: 3ª. Feira 18h - 70 655 utilizadores</p>
+
+            <h4><strong>Twitter</strong></h4>
+            <p>296 300 Impressions em dois dias</p>
+
+            <div class="row">
+                <div class="col-md-offset-2 col-md-8">
+                    <blockquote class="twitter-tweet" data-lang="pt" data-align="center"><p lang="pt" dir="ltr">ℹ️⛽️🚘 Há poucos segundos estavam assim os
+                            acessos ao <a
+                                    href="https://t.co/WY43SLT5qD">https://t.co/WY43SLT5qD</a>. Se souberem de algum posto que não tenha tipo de combustível, ou
+                            ambos, podem preencher o formulário aqui: <a href="https://t.co/Yd10PZajSJ">https://t.co/Yd10PZajSJ</a> <a
+                                    href="https://twitter.com/hashtag/ContamosContigo?src=hash&amp;ref_src=twsrc%5Etfw">#ContamosContigo</a> 🚘⛽️ℹ️ <a
+                                    href="https://t.co/3DKOCs2IAs">pic.twitter.com/3DKOCs2IAs</a></p>&mdash; VOST Portugal 🇵🇹 (@VOSTPT) <a
+                                href="https://twitter.com/VOSTPT/status/1118162729053958144?ref_src=twsrc%5Etfw">16 de abril de 2019</a></blockquote>
+                    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
+        </div>
+
+        <?php /* <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
         <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
             favor.🚘⛽️ℹ️</p>
 
@@ -104,7 +133,7 @@ $antiXss = new AntiXSS();
                 $stats = array_count_values(array_column($array, 5));
 
                 // close curl resource to free up system resources
-                //        curl_close($ch);*/
+                //        curl_close($ch);/
         ?>
         <br>
         <table id="dataTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
@@ -132,13 +161,13 @@ $antiXss = new AntiXSS();
                     <td><?php echo htmlspecialchars($antiXss->xss_clean($a[6]), ENT_QUOTES, 'UTF-8'); ?></td>
                     <td><?php echo htmlspecialchars($antiXss->xss_clean($a[7]), ENT_QUOTES, 'UTF-8'); ?></td>
                 </tr>
-            <?php endforeach;*/ ?>
+            <?php endforeach;/ ?>
             </tbody>
         </table>
 
         <p>ℹ️⛽️🚘 Sabes de algum posto de combustível onde não seja possível abastecer neste momento?</p>
         <p>Preenche <a href="https://docs.google.com/forms/d/e/1FAIpQLSemmYZ-KF6mSa_aqFN0bXwEnZiBnSUC3BXghcVRK0bvwuA6gA/viewform">este formulário</a>, por
-            favor.🚘⛽️ℹ️</p>
+            favor.🚘⛽️ℹ️</p> */ ?>
     </div>
 </div>
 
