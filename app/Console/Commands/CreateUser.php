@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\User;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 
 class CreateUser extends Command
@@ -40,10 +41,10 @@ class CreateUser extends Command
     public function handle()
     {
         //
-        $user = new User();
-        $user->name = $this->argument('name');
+        $user           = new User();
+        $user->name     = $this->argument('name');
         $user->password = Hash::make($this->argument('password'));
-        $user->email = $this->argument('email');
+        $user->email    = $this->argument('email');
         $user->save();
     }
 }
