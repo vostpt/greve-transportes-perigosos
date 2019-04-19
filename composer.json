@@ -57,6 +57,12 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "cs-fix": [
+            "php-cs-fixer --allow-risky=yes -v fix"
+        ],
+        "cs-check": [
+            "php-cs-fixer --allow-risky=yes -v --dry-run fix"
         ]
     }
 }
