@@ -1,5 +1,7 @@
 {
     "require": {
-        "voku/anti-xss": "^4.1"
+        "voku/anti-xss": "^4.1",
+        "querypath/querypath": "^3.0",
+        "paquettg/php-html-parser": "^2.0"
     }
 }
