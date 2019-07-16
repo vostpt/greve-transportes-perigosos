@@ -46,8 +46,8 @@
                             aria-expanded="false" v-pre>{{ __('Users') }}</a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownUsers">
-                            <a class="dropdown-item" href="#">{{ __('Add') }}</a>
-                            <a class="dropdown-item" href="#">{{ __('List') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.add') }}">{{ __('Add') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.list') }}">{{ __('List') }}</a>
                         </div>
                     </li>
                     <li class="nav-item">
@@ -82,6 +82,7 @@
         @yield('content')
     </main>
     <script src="{{ mix('/js/app.js') }}" charset="utf-8"></script>
+    @yield('javascript')
 </body>
 
 </html>
