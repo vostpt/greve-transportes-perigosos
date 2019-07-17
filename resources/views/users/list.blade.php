@@ -95,14 +95,14 @@
         $('#action_title').html("Validar Email do Utilizador nº"+id);
         $('#action_description').html("Esta ação irá validar o Email do Utilizador nº"+id+", evitando que o mesmo o faça através do email enviado.");
         $("#user_id").val(id);
-        $('.ui.modal').modal('show');
+        $('.modal').modal('show');
     }
     function deleteUser(id) {
         $('#modal_form').attr('action', '{{ route('users.delete') }}');
         $('#action_title').html("Eliminar Utilizador nº"+id);
         $('#action_description').html("Esta ação irá eliminar o Utilizador nº"+id+", este não poderá aceder à conta nem ser utilizado noutras funcionalidades.");
         $("#user_id").val(id);
-        $('.ui.modal').modal('show');
+        $('.modal').modal('show');
     }
     $(document).ready(function() {
         $('#users_list_verified').DataTable( {
