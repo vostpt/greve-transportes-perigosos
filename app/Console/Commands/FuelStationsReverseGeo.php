@@ -40,7 +40,6 @@ class FuelStationsReverseGeo extends Command
      */
     public function handle()
     {
-        //http://api.mapbox.com/geocoding/v5/mapbox.places/-8.19017,41.35664.json?access_token=sk.eyJ1IjoiY290ZW1lcm8iLCJhIjoiY2p5OG15Ymw2MDlhbDNlbjFyNXJmMmYzMyJ9.w_Ed_VWcujJ7lV7nP1RY3g
         $api_key         = env('MAPBOX_API_FOR_REVERSEGEO', '');
         $fuel_stations   = FuelStation::all();
         $num_updated     = 0;
