@@ -153,13 +153,13 @@
     let helping = false;
     function consult() {
         $("#selector_view").hide();
-        $("#map_view").show();
+        $("#map_view").css("visibility", "visible");
         helping = false;
     }
 
     function help() {
         $("#selector_view").hide();
-        $("#map_view").show();
+        $("#map_view").css("visibility", "visible");
         helping = true;
     }
 
@@ -266,7 +266,7 @@
                         },
                         "properties": {
                             "repa": fuelStation.repa,
-                            "with_gasoline": with_gasoline, 
+                            "with_gasoline": with_gasoline,
                             "with_diesel": with_diesel,
                             "with_lpg": with_lpg,
                             "icon": icon,
@@ -297,7 +297,7 @@
     var filterGroup = document.getElementById('filter-group');
 
     map.on('load', function() {
-        promises.push(loadBrandImage('REPA','/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));  
+        promises.push(loadBrandImage('REPA','/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));
         promises.push(loadBrandImage('NONE','/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
         promises.push(loadBrandImage('PARTIAL','/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
         promises.push(loadBrandImage('ALL','/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png'));
@@ -329,33 +329,33 @@
                 input.id = layerID;
                 input.checked = true;
                 filterGroup.appendChild(input);
-                        
+
                 var label = document.createElement('label');
                 label.setAttribute('for', layerID);
                 label.textContent = element;
                 filterGroup.appendChild(label);
-                        
+
                 input.addEventListener('change', function(e) {
                     map.setLayoutProperty(layerID, 'visibility', e.target.checked ? 'visible' : 'none');
                 });
                 map.on('click', layerID, function (e) {
                     var coordinates = e.features[0].geometry.coordinates.slice();
                     var description = e.features[0].properties.description;
-                    
+
                     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
                         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
                     }
-                    
+
                     new mapboxgl.Popup()
                     .setLngLat(coordinates)
                     .setHTML(description)
                     .addTo(map);
                 });
-                    
+
                 map.on('mouseenter', layerID, function () {
                     map.getCanvas().style.cursor = 'pointer';
                 });
-                    
+
                 // Change it back to a pointer when it leaves.
                 map.on('mouseleave', layerID, function () {
                     map.getCanvas().style.cursor = '';
