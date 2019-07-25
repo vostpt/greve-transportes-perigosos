@@ -48,4 +48,3 @@ Route::prefix('stations')->name('stations.')->middleware('auth')->group(function
     });
     Route::post('update', 'FuelStationsController@update')->name('update');
 });
-
