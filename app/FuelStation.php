@@ -10,4 +10,9 @@ class FuelStation extends Model
     protected $table = 'fuel_stations';
 
     protected $guarded = ['id'];
+
+    public function getStringAttribute()
+    {
+        return "{$this->name} ({$this->brand}) ID #{$this->id}";
+    }
 }

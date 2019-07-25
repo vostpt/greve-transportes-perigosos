@@ -45,27 +45,6 @@
         </div>
     </div>
 </div>
-<div class="ui tiny modal">
-    <i class="close icon"></i>
-    <div class="header">
-        Confirmar Ação - <span id="action_title">Titulo da ação</span>
-    </div>
-    <div class="content">
-        <div class="description">
-            <span id="action_description">Descrição da ação</span>
-        </div>
-    </div>
-    <div class="actions">
-        <form method="POST" id="modal_form" class="ui form" action="{{ route('users.verify') }}">
-            @csrf
-            <input id="user_id" type="hidden" name="id" value="0" />
-            <div class="ui negative button">Cancelar</div>
-            <button type="submit" class="ui positive button">
-                Confirmar
-            </button>
-        </form>
-    </div>
-</div>
 <div class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -110,7 +89,7 @@
                 "url": "{{ route('users.fetch.verified') }}",
                 "dataSrc": function (json) {
                     json.data.forEach((element,index) => {
-                        json.data[index]["actions"] = '<a href="#" onclick="deleteUser('+json.data.id+')"><i class="fas fa-trash"></i></a>';
+                        json.data[index]["actions"] = '<a href="#" onclick="deleteUser('+json.data[index]["id"]+')"><i class="fas fa-trash"></i></a>';
                     });
                     return json.data;
                 }
@@ -127,7 +106,7 @@
                 "url": "{{ route('users.fetch.not_verified') }}",
                 "dataSrc": function (json) {
                     json.data.forEach((element,index) => {
-                        json.data[index]["actions"] = '<a href="#" onclick="validateUser('+json.data.id+')"><i class="fas fa-check"></i></a>';
+                        json.data[index]["actions"] = '<a href="#" onclick="validateUser('+json.data[index]["id"]+')"><i class="fas fa-check"></i></a>';
                     });
                     return json.data;
                 }

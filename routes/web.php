@@ -13,8 +13,8 @@ declare(strict_types=1);
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('map');
+})->name('map');
 
 
 Auth::routes(['register' => false, 'verify' => true]);
@@ -32,3 +32,20 @@ Route::prefix('users')->name('users.')->middleware('auth')->group(function () {
     Route::post('verify', 'UsersController@verify')->name('verify');
     Route::post('delete', 'UsersController@delete')->name('delete');
 });
+
+Route::prefix('entries')->name('entries.')->middleware('auth')->group(function () {
+    Route::get('list', 'EntriesController@list')->name('list');
+    Route::prefix('fetch')->name('fetch.')->group(function () {
+        Route::get('pending', 'EntriesController@fetch_pending')->name('pending');
+    });
+    Route::post('push', 'EntriesController@push')->name('push');
+});
+
+Route::prefix('stations')->name('stations.')->middleware('auth')->group(function () {
+    Route::get('list', 'FuelStationsController@list')->name('list');
+    Route::prefix('fetch')->name('fetch.')->group(function () {
+        Route::get('pending', 'FuelStationsController@fetch_all')->name('all');
+    });
+    Route::post('update', 'FuelStationsController@update')->name('update');
+});
+

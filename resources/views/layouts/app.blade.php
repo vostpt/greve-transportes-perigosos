@@ -34,14 +34,22 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('map') }}">{{ __('Map') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('map') }}">{{ __('Stats') }}</a>
+                    </li>
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Entries') }}</a>
+                        <a class="nav-link" href="{{ route('entries.list') }}">{{ __('Entries') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('stations.list') }}">{{ __('Fuel Stations') }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdownUsers" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
