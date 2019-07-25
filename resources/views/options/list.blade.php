@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <form action="{{ route('options.update') }}" method="POST">
+                @csrf
                 <h2 id="num_required_entries_desc">Loading...</h2>
                 <input type="hidden" name="name" value="num_entries_required">
                 <div class="form-group">
@@ -13,6 +14,7 @@
                 <button type="submit" class="btn btn-primary">Confirmar</button>
             </form>
             <form action="{{ route('options.update') }}" method="POST">
+                @csrf
                 <h2 id="stress_lockdown_desc">Loading...</h2>
                 <input type="hidden" name="name" value="stress_lockdown">
                 <div class="form-group">

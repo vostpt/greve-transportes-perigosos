@@ -42,6 +42,7 @@
                 <h5 class="modal-title"> Confirmar Ação - <span id="action_title">Titulo da ação</span></h5>
             </div>
             <form method="POST" id="modal_form" class="ui form" action="{{ route('stations.update') }}">
+                @csrf
                 <div class="modal-body">
                     <p><span id="action_description">Descrição da ação</span></p>
                     @csrf
