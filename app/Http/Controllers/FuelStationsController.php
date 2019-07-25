@@ -18,7 +18,11 @@ class FuelStationsController extends Controller
 
     public function list()
     {
-        return response()->view('stations/list');
+        if (Option::find('stress_lockdown')->value == 0) {
+            return response()->view('stations/list');
+        } else {
+            return response('Feature Disabled due to Stress Lockdown (Disable at Options)', 200)->header('Content-Type', 'text/plain');
+        }
     }
 
     public function update(Request $request)

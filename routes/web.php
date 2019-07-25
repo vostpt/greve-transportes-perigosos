@@ -48,3 +48,11 @@ Route::prefix('stations')->name('stations.')->middleware('auth')->group(function
     });
     Route::post('update', 'FuelStationsController@update')->name('update');
 });
+
+Route::prefix('options')->name('options.')->middleware('auth')->group(function () {
+    Route::get('list', 'OptionsController@list')->name('list');
+    Route::prefix('fetch')->name('fetch.')->group(function () {
+        Route::get('all', 'OptionsController@fetch_all')->name('all');
+    });
+    Route::post('update', 'OptionsController@update')->name('update');
+});
