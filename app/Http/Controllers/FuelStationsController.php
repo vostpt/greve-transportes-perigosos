@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\FuelStation;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class FuelStationsController extends Controller
 {
@@ -13,7 +14,27 @@ class FuelStationsController extends Controller
     {
         $json = FuelStation::all('name', 'brand', 'usage', 'district', 'county', 'address', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg')->toJson();
         Storage::disk('public')->put('data/cache.json', $json);
-        //TODO: Clear Cloudflare Cache
+        $path_to_clear = URL::to('/storage/data/cache.json');
+        $auth_email    = env('CLOUDFLARE_API_EMAIL');
+        $auth_key      = env('CLOUDFLARE_API_KEY');
+        $api_endpoint  = 'https://api.cloudflare.com/client/v4/zones/' + env('CLOUDFLARE_API_IDENTIFIER') + '/purge_cache';
+        $headers       = [
+            'X-Auth-Email' => $auth_email,
+            'X-Auth-Key'   => $auth_key,
+            'content-type' => 'application/json',
+        ];
+        $data = [
+            'files' => [$path_to_clear],
+        ];
+        $client = new \GuzzleHttp\Client();
+        $client->request(
+            'POST',
+            $api_endpoint,
+            [
+            'headers' => $headers,
+            'json'    => $data,
+        ]
+        );
     }
 
     public function list()
