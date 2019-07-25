@@ -61,10 +61,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Options') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Metrics') }}</a>
+                        <a class="nav-link" href="{{ route('options.list') }}">{{ __('Options') }}</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdownMyUse" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
