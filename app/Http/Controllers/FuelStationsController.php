@@ -17,7 +17,7 @@ class FuelStationsController extends Controller
         $path_to_clear = URL::to('/storage/data/cache.json');
         $auth_email    = env('CLOUDFLARE_API_EMAIL');
         $auth_key      = env('CLOUDFLARE_API_KEY');
-        $api_endpoint  = 'https://api.cloudflare.com/client/v4/zones/' + env('CLOUDFLARE_API_IDENTIFIER') + '/purge_cache';
+        $api_endpoint  = 'https://api.cloudflare.com/client/v4/zones/'.env('CLOUDFLARE_API_IDENTIFIER').'/purge_cache';
         $headers       = [
             'X-Auth-Email' => $auth_email,
             'X-Auth-Key'   => $auth_key,
