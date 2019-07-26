@@ -56,3 +56,19 @@ Route::prefix('options')->name('options.')->middleware('auth')->group(function (
     });
     Route::post('update', 'OptionsController@update')->name('update');
 });
+
+Route::prefix('externalauth')->name('externalauth.')->middleware('auth')->group(function () {
+    Route::get('add', 'ExternalAuthController@add')->name('add');
+    Route::post('create', 'ExternalAuthController@create')->name('create');
+    Route::get('list', 'ExternalAuthController@list')->name('list');
+    Route::prefix('fetch')->name('fetch.')->group(function () {
+        Route::get('all', 'ExternalAuthController@fetch_all')->name('all');
+    });
+    Route::post('delete', 'ExternalAuthController@delete')->name('delete');
+});
+
+Route::prefix('api/v1')->name('api.')->middleware('auth')->group(function () {
+    Route::get('/', 'APIController@home')->name('home');
+    Route::post('fetch', 'APIController@fetch')->name('fetch');
+    Route::post('push', 'APIController@push')->name('push');
+});
