@@ -173,6 +173,10 @@
     #legend div {
         line-height: 3vh;
     }
+
+    .grecaptcha-badge { 
+        visibility: hidden;
+    }
 </style>
 @endsection
 
@@ -305,7 +309,8 @@
         container: 'map', // container id,
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [-7.8536599, 39.557191],
-        zoom: 6
+        zoom: 6,
+        attributionControl: false
     });
     function consult() {
         $("#map").css({"border": "0"});
@@ -541,6 +546,12 @@
                     map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 14});
                 });
             }
+            map.addControl(new mapboxgl.AttributionControl({
+                compact: false,
+                customAttribution: [
+                    'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
+                ]
+            }));
         });
     });
     map.on('error', function(error) {
