@@ -62,16 +62,66 @@
         margin-bottom: 0 !important;
     }
 
+    .mapboxgl-popup-content {
+        width: 450px;
+        height: 100%;
+        padding: 0;
+        border: 1px solid rgba(0,0,0,.2);
+        border-radius: 6px;
+        position: relative;
+        margin:0 auto;
+        line-height: 1.4em;
+    }
+
+    @media only screen and (max-width: 479px){
+        .mapboxgl-popup-content { width: 95%; }
+    }
+
+
     .mapboxgl-popup-content strong {
         margin-bottom: 2rem;
         text-align: center;
     }
 
-    .mapboxgl-popup-content p,
+    .mapboxgl-popup-content div,
     .mapboxgl-popup-content label {
         margin-bottom: 0 !important;
     }
+    .mapboxgl-popup-close-button {
+        font-size: 2em;
+        padding-top: 5px;
+        color: #fff;
+    }
+    .v-popup-header {
+        background-color: #f3a433;
+        color: #fff;
+        padding: 15px;
+    }
+    .v-popup-header h5{
+        font-weight: 800;
+        padding: 0;
+        margin: 0;
+    }
+    .v-popup-header small{
+        font-weight: 800;
+    }
+    .v-popup-body {
+        padding: 15px;
+    }
+    .v-popup-body .v-fuel-info {
+        display: inline-grid;
+        justify-content: center;
+        text-align: center;
+    }
 
+    .v-popup-body .v-fuel-info h6 {
+        margin-top: 10px;
+        font-weight: 600;
+    }
+    .img-no-gas{
+        opacity: 0.3;
+        filter: alpha(opacity=30); /* msie */
+    }
     .map-overlay {
         position: absolute;
         bottom: 0;
@@ -211,7 +261,7 @@
                             icon = 'PARTIAL';
                         }
                     }
-                    let description_gasoline = "";
+                    /*let description_gasoline = "";
                     let description_diesel = "";
                     let description_lpg = "";
                     if(fuelStation.sell_gasoline) {
@@ -246,17 +296,46 @@
                     }
                     else {
                         description_lpg = "<label>Não Vende</label>";
-                    }
+                    }*/
 
                     //THIS IS THE POPUP HTML
                     let description = "";
                     if(helping) {
                         //Edition POPUP
-                        description = "<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>";
+                        //<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>
+                        description = '<div>' +
+                            '<div class="row"><div class="col-sm-12 h-10">LALALLALA</div></div>' +
+                            '<div class="row"><div class="col-sm-12 h-30">LALALLALA</div></div>' +
+                            '<div class="row"><div class="col-sm-12 h-10">LALALLALA</div></div>' +
+                            '<div class="row"><div class="col-sm-12">LALALLALA</div></div>' +
+                            '</div>';
                     }
                     else {
                         //Consulting POPUP
-                        description = "<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>";
+                        console.log(fuelStation);
+                        //<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>
+                        let gasolineIcon = fuelStation.sell_gasoline && fuelStation.has_gasoline ?
+                            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
+                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
+                        let dieselIcon = fuelStation.sell_diesel && fuelStation.has_diesel ?
+                            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
+                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
+                        let lpgIcon = fuelStation.sell_lpg && fuelStation.has_lpg ?
+                            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
+                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
+
+                        let fuelStationName = fuelStation.name ? fuelStation.name.toUpperCase() : '';
+                        description = '<div class="v-popup-content">' +
+                            '<div class="v-popup-header"><h5>' + fuelStation.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                            '<div class="v-popup-body">' +
+                            '<div class="row">' +
+                            '<div class="col-md-4 v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>' +
+                            '<div class="col-md-4 v-fuel-info">' + dieselIcon + '<h6>GASOLEO</h6></div>' +
+                            '<div class="col-md-4 v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>' +
+                            '</div></div>' +
+                            '<div class="v-popup-header"><h5>INFORMAÇÕES ADICIONAIS</h5></div>' +
+                            '<div class="v-popup-body">Certis lapidosos congeriem. Aestu caesa tellure distinxit sidera. Conversa temperiemque verba fecit divino nubes umentia titan. Orbe membra circumfuso austro aer homo semina sponte grandia. </div>' +
+                            '</div>';
                     }
                     points.push({
                         "type": "Feature",
