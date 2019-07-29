@@ -11,16 +11,16 @@
     }
 
     .mapboxgl-popup {
-        width: 25% !important;
-        max-width: 25% !important;
+        width: 20% !important;
+        max-width: 20% !important;
     }
 
     .mapboxgl-popup-content {
         width: 100%;
         height: 100%;
         padding: 0;
-        border: 1px solid rgba(0, 0, 0, .2);
-        border-radius: 6px;
+        border: none;
+        border-radius: 0;
         position: relative;
         margin: 0 auto;
         line-height: 1.4em;
@@ -43,14 +43,14 @@
     }
 
     .v-popup-header {
-        background-color: #f3a433;
+        background-color: grey;
         color: #fff;
-        padding: 2vh;
+        padding: 1.5vh;
     }
 
     .v-popup-header h5 {
         font-weight: 800;
-        font-size: 80%;
+        font-size: 1.5vh;
         padding: 0;
         margin: 0;
     }
@@ -60,8 +60,8 @@
     }
 
     .v-popup-body {
-        padding: 2vh;
-        font-size: 80%;
+        padding: 1.5vh;
+        font-size: 1.5vh
     }
 
     .v-popup-body .v-fuel-info {
@@ -79,6 +79,15 @@
     .v-popup-body .v-fuel-info img {
         width: 4vw;
         margin: 0 auto;
+    }
+    
+    .v-popup-body.directions {
+        padding: 0;
+    }
+
+    .v-popup-body.directions img {
+        width:100%;
+        height:100%
     }
 
     .v-popup-body .v-fuel-info img.no-gas {
@@ -108,12 +117,12 @@
     }
 
     #features h2 {
-        font-size: 80%;
+        font-size: 2vw;
         font-weight: 600;
     }
 
     #features #pd {
-        font-size: 60%;
+        font-size: 0.8vw;
     }
 
     #legend {
@@ -126,22 +135,22 @@
     }
 
     #legend h2 {
-        font-size: 80%;
+        font-size: 2vw;
         font-weight: 600;
     }
 
     #legend img {
-        height: 3.5vh;
+        height: 3vh;
     }
 
     #legend label {
         font-size: 2vh;
-        line-height: 3.5vh;
+        line-height: 3vh;
         vertical-align: middle;
         margin-bottom: 0 !important;
     }
     #legend div {
-        margin-top: -2vh;
+        line-height: 3vh;
     }
 </style>
 @endsection
@@ -150,20 +159,20 @@
 <div id="selector_view">
     <div class="container">
         <div class="row col d-flex align-items-center justify-content-center">
-            <img src="/img/logo.png" />
+            <img src="/img/logo.png" style="width:20vw" />
         </div>
         <div class="row text-center">
-            <div class="col-lg-3 offset-lg-3">
+            <div class="col-3 offset-3">
                 <button type="button" class="btn btn-primary btn-lg" onclick="consult()">Consultar</button>
             </div>
-            <div class="col-lg-3">
+            <div class="col-3">
                 <button type="button" class="btn btn-primary btn-lg" onclick="help()">Ajudar</button>
             </div>
         </div>
     </div>
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div style="position: fixed; bottom:10px; width:100%;" class="d-flex align-items-center justify-content-center">
-            <img src="/img/logo-vost.png" width="100px" />
+            <img src="/img/logo-vost.png"  style="width:5vw" />
         </div>
     </div>
 </div>
@@ -231,8 +240,10 @@
                     let with_diesel = (fuelStation.sell_diesel && fuelStation.has_diesel);
                     let with_lpg = (fuelStation.sell_lpg && fuelStation.has_lpg);
                     let icon = '';
+                    let popup_color = '';
                     if(fuelStation.repa == 1) {
                         icon = 'REPA';
+                        popup_color = '#2f86ca';
                     }
                     else {
                         let count = 0;
@@ -247,12 +258,15 @@
                         }
                         if(count == 3) {
                             icon = 'ALL';
+                            popup_color = '#65ac3d';
                         }
                         else if(count == 0) {
                             icon = 'NONE';
+                            popup_color = '#b32e25';
                         }
                         else {
                             icon = 'PARTIAL';
+                            popup_color = '#f3a433';
                         }
                     }
                     /*let description_gasoline = "";
@@ -306,7 +320,6 @@
                     }
                     else {
                         //Consulting POPUP
-                        console.log(fuelStation);
                         //<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>
                         let gasolineIcon = fuelStation.sell_gasoline && fuelStation.has_gasoline ?
                             '<img src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
@@ -317,18 +330,17 @@
                         let lpgIcon = fuelStation.sell_lpg && fuelStation.has_lpg ?
                             '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
                             '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
-
                         let fuelStationName = fuelStation.name ? fuelStation.name.toUpperCase() : '';
                         description = '<div class="v-popup-content">' +
-                            '<div class="v-popup-header"><h5>' + fuelStation.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                            '<div class="v-popup-header" style="background-color:'+popup_color+'"><h5>' + fuelStation.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
                             '<div class="v-popup-body">' +
                             '<div class="row">' +
                             '<div class="col-md-4 v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>' +
                             '<div class="col-md-4 v-fuel-info">' + dieselIcon + '<h6>GASOLEO</h6></div>' +
                             '<div class="col-md-4 v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>' +
                             '</div></div>' +
-                            '<div class="v-popup-header"><h5>INFORMAÇÕES ADICIONAIS</h5></div>' +
-                            '<div class="v-popup-body">Certis lapidosos congeriem. Aestu caesa tellure distinxit sidera. Conversa temperiemque verba fecit divino nubes umentia titan. Orbe membra circumfuso austro aer homo semina sponte grandia. </div>' +
+                            '<div class="v-popup-header" style="background-color:'+popup_color+'"><h5>OBTER DIREÇÕES</h5></div>' +
+                            '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll='+fuelStation.lat+'%2C'+fuelStation.long+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></div>' +
                             '</div>';
                     }
                     points.push({
@@ -350,6 +362,7 @@
                 resolve();
             });
         });
+        
     }
     function loadBrandImage(brand,url) {
         return new Promise(function(resolve,reject) {
@@ -422,13 +435,17 @@
                 });
 
             });
+            if ("geolocation" in navigator) { 
+                navigator.geolocation.getCurrentPosition(position => {
+                    map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 15});
+                });
+            }
         });
     });
     map.on('error', function(error) {
         console.log('MAP LOAD ERROR')
         console.log(error);
     });
-
 
 </script>
 @endsection
