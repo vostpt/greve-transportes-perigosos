@@ -22,7 +22,7 @@ class EntryCreated
         if (\is_nan($required_count)) {
             $required_count = 10;
         }
-        if (Entry::lastHour()->related($entry->fuel_station, $entry->has_gasoline, $entry->has_diesel, $entry->has_lpg)->count() > $required_count) {
+        if (Entry::lastHour()->related($entry->fuel_station, $entry->has_gasoline, $entry->has_diesel, $entry->has_lpg, $entry->ip)->count() > $required_count) {
             $entry->push();
         }
     }

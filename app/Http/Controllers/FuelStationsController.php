@@ -12,7 +12,7 @@ class FuelStationsController extends Controller
     //
     public function updateCache()
     {
-        $json = FuelStation::all('name', 'brand', 'usage', 'district', 'county', 'address', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg')->toJson();
+        $json = FuelStation::all('id', 'name', 'brand', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg')->toJson();
         Storage::disk('public')->put('data/cache.json', $json);
         if (env('CLOUDFLARE_API_ENABLE', false) == 'true') {
             $path_to_clear = URL::to('/storage/data/cache.json');

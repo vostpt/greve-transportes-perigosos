@@ -33,12 +33,13 @@ Route::prefix('users')->name('users.')->middleware('auth')->group(function () {
     Route::post('delete', 'UsersController@delete')->name('delete');
 });
 
-Route::prefix('entries')->name('entries.')->middleware('auth')->group(function () {
-    Route::get('list', 'EntriesController@list')->name('list');
-    Route::prefix('fetch')->name('fetch.')->group(function () {
+Route::prefix('entries')->name('entries.')->group(function () {
+    Route::get('list', 'EntriesController@list')->middleware('auth')->name('list');
+    Route::prefix('fetch')->name('fetch.')->middleware('auth')->group(function () {
         Route::get('pending', 'EntriesController@fetch_pending')->name('pending');
     });
-    Route::post('push', 'EntriesController@push')->name('push');
+    Route::post('push', 'EntriesController@push')->middleware('auth')->name('push');
+    Route::post('add', 'EntriesController@add')->name('add');
 });
 
 Route::prefix('stations')->name('stations.')->middleware('auth')->group(function () {
