@@ -10,73 +10,21 @@
         height: calc(100%-55px)
     }
 
-    .filter-group {
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight: 600;
-        position: absolute;
-        top: 65px;
-        right: 10px;
-        z-index: 1;
-        border-radius: 3px;
-        width: 120px;
-        color: #fff;
-    }
-
-    .filter-group input[type=checkbox]:first-child+label {
-        border-radius: 3px 3px 0 0;
-    }
-
-    .filter-group label:last-child {
-        border-radius: 0 0 3px 3px;
-        border: none;
-    }
-
-    .filter-group input[type=checkbox] {
-        display: none;
-    }
-
-    .filter-group input[type=checkbox]+label {
-        background-color: #3386c0;
-        display: block;
-        cursor: pointer;
-        padding: 10px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-    }
-
-    .filter-group input[type=checkbox]+label {
-        background-color: #3386c0;
-        text-transform: capitalize;
-    }
-
-    .filter-group input[type=checkbox]+label:hover,
-    .filter-group input[type=checkbox]:checked+label {
-        background-color: #4ea0da;
-    }
-
-    .filter-group input[type=checkbox]:checked+label:before {
-        content: '✔';
-        margin-right: 5px;
-    }
-
-    .filter-group label {
-        margin-bottom: 0 !important;
+    .mapboxgl-popup {
+        width: 25% !important;
+        max-width: 25% !important;
     }
 
     .mapboxgl-popup-content {
-        width: 450px;
+        width: 100%;
         height: 100%;
         padding: 0;
-        border: 1px solid rgba(0,0,0,.2);
+        border: 1px solid rgba(0, 0, 0, .2);
         border-radius: 6px;
         position: relative;
-        margin:0 auto;
+        margin: 0 auto;
         line-height: 1.4em;
     }
-
-    @media only screen and (max-width: 479px){
-        .mapboxgl-popup-content { width: 95%; }
-    }
-
 
     .mapboxgl-popup-content strong {
         margin-bottom: 2rem;
@@ -87,27 +35,35 @@
     .mapboxgl-popup-content label {
         margin-bottom: 0 !important;
     }
+
     .mapboxgl-popup-close-button {
         font-size: 2em;
         padding-top: 5px;
         color: #fff;
     }
+
     .v-popup-header {
         background-color: #f3a433;
         color: #fff;
-        padding: 15px;
+        padding: 2vh;
     }
-    .v-popup-header h5{
+
+    .v-popup-header h5 {
         font-weight: 800;
+        font-size: 80%;
         padding: 0;
         margin: 0;
     }
-    .v-popup-header small{
+
+    .v-popup-header small {
         font-weight: 800;
     }
+
     .v-popup-body {
-        padding: 15px;
+        padding: 2vh;
+        font-size: 80%;
     }
+
     .v-popup-body .v-fuel-info {
         display: inline-grid;
         justify-content: center;
@@ -117,11 +73,20 @@
     .v-popup-body .v-fuel-info h6 {
         margin-top: 10px;
         font-weight: 600;
+        font-size: 100%;
     }
-    .img-no-gas{
+
+    .v-popup-body .v-fuel-info img {
+        width: 4vw;
+        margin: 0 auto;
+    }
+
+    .v-popup-body .v-fuel-info img.no-gas {
         opacity: 0.3;
-        filter: alpha(opacity=30); /* msie */
+        filter: alpha(opacity=30);
+        /* msie */
     }
+
     .map-overlay {
         position: absolute;
         bottom: 0;
@@ -136,25 +101,47 @@
     }
 
     #features {
-        top: 65px;
-        height: 100px;
-        width: 250px;
+        top: calc(1vh + 55px);
+        width: 20vw;
+        height: 25vh;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    #features h2 {
+        font-size: 80%;
+        font-weight: 600;
+    }
+
+    #features #pd {
+        font-size: 60%;
     }
 
     #legend {
-        top: 65px;
+        top: calc(1vh + 55px);
         left: 0;
         padding: 10px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        height: 175px;
-        margin-bottom: 40px;
-        width: 250px;
+        width: 20vw;
+        height: 25vh;
+    }
+
+    #legend h2 {
+        font-size: 80%;
+        font-weight: 600;
+    }
+
+    #legend img {
+        height: 3.5vh;
     }
 
     #legend label {
-        line-height: 25px;
+        font-size: 2vh;
+        line-height: 3.5vh;
         vertical-align: middle;
         margin-bottom: 0 !important;
+    }
+    #legend div {
+        margin-top: -2vh;
     }
 </style>
 @endsection
@@ -182,17 +169,24 @@
 </div>
 <div id="map_view" style="visibility: hidden;">
     <div id="map"></div>
-    <nav id='filter-group' class='filter-group'></nav>
     <div class='map-overlay' id='features'>
         <h2>Opções</h2>
         <div id='pd'>Some text here</div>
     </div>
     <div class='map-overlay' id='legend'>
         <h2>Legenda</h2>
-        <img src="/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png" /><label>- ALL</label><br />
-        <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- PARTIAL</label><br />
-        <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- NONE</label><br />
-        <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- REPA</label><br />
+        <div>
+            <img src="/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png" /><label>- ALL</label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- PARTIAL</label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- NONE</label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- REPA</label><br />
+        </div>
     </div>
 </div>
 @endsection
@@ -315,14 +309,14 @@
                         console.log(fuelStation);
                         //<p><strong>"+fuelStation.name.toLowerCase().capitalize()+"</strong></p><p><b>Marca:</b> "+fuelStation.brand+"</p><p><b>Gasolina:</b> "+description_gasoline+"</p><p><b>Gasoleo:</b> "+description_diesel+"</p><p><b>GPL:</b> "+description_lpg+"</p><p><a href=\"#\">Modificar Dados</a></p>
                         let gasolineIcon = fuelStation.sell_gasoline && fuelStation.has_gasoline ?
-                            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
-                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
+                            '<img src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
+                            '<img class="img-no-gas"src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
                         let dieselIcon = fuelStation.sell_diesel && fuelStation.has_diesel ?
-                            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
-                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
+                            '<img src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
+                            '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
                         let lpgIcon = fuelStation.sell_lpg && fuelStation.has_lpg ?
                             '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
-                            '<img class="img-no-gas" width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
+                            '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
 
                         let fuelStationName = fuelStation.name ? fuelStation.name.toUpperCase() : '';
                         description = '<div class="v-popup-content">' +
@@ -403,20 +397,7 @@
                         "symbol-sort-key": ["get", "repa"],
                     }
                 });
-                var input = document.createElement('input');
-                input.type = 'checkbox';
-                input.id = layerID;
-                input.checked = true;
-                filterGroup.appendChild(input);
 
-                var label = document.createElement('label');
-                label.setAttribute('for', layerID);
-                label.textContent = element;
-                filterGroup.appendChild(label);
-
-                input.addEventListener('change', function(e) {
-                    map.setLayoutProperty(layerID, 'visibility', e.target.checked ? 'visible' : 'none');
-                });
                 map.on('click', layerID, function (e) {
                     var coordinates = e.features[0].geometry.coordinates.slice();
                     var description = e.features[0].properties.description;
