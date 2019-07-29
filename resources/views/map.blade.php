@@ -80,14 +80,14 @@
         width: 4vw;
         margin: 0 auto;
     }
-    
+
     .v-popup-body.directions {
         padding: 0;
     }
 
     .v-popup-body.directions img {
-        width:100%;
-        height:100%
+        width: 100%;
+        height: 100%
     }
 
     .v-popup-body .v-fuel-info img.no-gas {
@@ -112,17 +112,31 @@
     #features {
         top: calc(1vh + 55px);
         width: 20vw;
-        height: 25vh;
+        height: 35.5vh;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
     #features h2 {
-        font-size: 2vw;
+        font-size: 1.5vw;
         font-weight: 600;
     }
 
-    #features #pd {
+    #features h4 {
         font-size: 0.8vw;
+    }
+
+    #features #pd {
+        font-size: 0.6vw;
+    }
+
+    #warning {
+        position: absolute;
+        top: calc(1vh + 55px);
+        color: #2f86ca;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        text-align: center;
+        width: 100%;
     }
 
     #legend {
@@ -131,11 +145,11 @@
         padding: 10px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         width: 20vw;
-        height: 25vh;
+        height: 20vh;
     }
 
     #legend h2 {
-        font-size: 2vw;
+        font-size: 1.5vw;
         font-weight: 600;
     }
 
@@ -144,11 +158,12 @@
     }
 
     #legend label {
-        font-size: 2vh;
+        font-size: 1.3vh;
         line-height: 3vh;
         vertical-align: middle;
         margin-bottom: 0 !important;
     }
+
     #legend div {
         line-height: 3vh;
     }
@@ -172,7 +187,7 @@
     </div>
     <div class="navbar navbar-default navbar-fixed-bottom">
         <div style="position: fixed; bottom:10px; width:100%;" class="d-flex align-items-center justify-content-center">
-            <img src="/img/logo-vost.png"  style="width:5vw" />
+            <img src="/img/logo-vost.png" style="width:5vw" />
         </div>
     </div>
 </div>
@@ -180,22 +195,83 @@
     <div id="map"></div>
     <div class='map-overlay' id='features'>
         <h2>Opções</h2>
-        <div id='pd'>Some text here</div>
+        <div id='pd'>
+            <h4>Disponibilidade de Combustível</h4>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="fuel_of_stations_all" checked
+                    name="fuel_stations_type">
+                <label class="form-check-label" for="fuel_of_stations_all">
+                    Todos os Combustíveis
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="fuel_of_stations_gasoline" name="fuel_stations_type">
+                <label class="form-check-label" for="fuel_of_stations_gasoline">
+                    Gasolina
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type">
+                <label class="form-check-label" for="fuel_of_stations_diesel">
+                    Gasóleo
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type">
+                <label class="form-check-label" for="fuel_of_stations_lpg">
+                    GPL
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" id="fuel_of_stations_none" name="fuel_stations_type">
+                <label class="form-check-label" for="fuel_of_stations_none">
+                    Sem Nenhum
+                </label>
+            </div>
+            <hr />
+            <h4>Outros</h4>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="spanish_border">
+                <label class="form-check-label" for="spanish_border">
+                    Postos Espanholas na Fronteira
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="repa_only">
+                <label class="form-check-label" for="repa_only">
+                    Mostrar só Postos REPA (Veiculos Prioritários)
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="repa_only">
+                <label class="form-check-label" for="repa_only">
+                    Mostrar só Postos REPA (Todos os Veiculos)
+                </label>
+            </div>
+            <hr />
+            <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>
+        </div>
     </div>
     <div class='map-overlay' id='legend'>
         <h2>Legenda</h2>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png" /><label>- ALL</label><br />
+            <img src="/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png" /><label>- Todos os Combustíveis
+                Disponiveis</label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- PARTIAL</label><br />
+            <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- Alguns Combustíveis Não Estão
+                Disponiveis</label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- NONE</label><br />
+            <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- Nenhum Combustíveis Está
+                Disponiveis</label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- REPA</label><br />
+            <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- Posto de Combustível REPA </label><br />
         </div>
+    </div>
+    <div id='warning'>
+        <h2>Em Modo de Ajuda</h2>
     </div>
 </div>
 @endsection
@@ -204,22 +280,6 @@
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
 <script>
     let helping = false;
-    function consult() {
-        $("#selector_view").hide();
-        $("#map_view").css("visibility", "visible");
-        helping = false;
-    }
-
-    function help() {
-        $("#selector_view").hide();
-        $("#map_view").css("visibility", "visible");
-        helping = true;
-    }
-
-    function selector() {
-        $("#map_view").hide();
-        $("#selector_view").show();
-    }
     mapboxgl.accessToken = 'pk.eyJ1IjoiY290ZW1lcm8iLCJhIjoiY2p5NzQyeTdvMDc1MzNlbGNnbzh3NjVuOCJ9.cPrQc61yiHA0kOptuuZsSA';
     var map = new mapboxgl.Map({
         container: 'map', // container id,
@@ -227,6 +287,26 @@
         center: [-7.8536599, 39.557191],
         zoom: 6
     });
+    function consult() {
+        $("#selector_view").css("visibility", "hidden");
+        $("#map_view").css("visibility", "visible");
+        helping = false;
+        $("#map").css({"border": "0"});
+    }
+
+    function help() {
+        $("#selector_view").css("visibility", "hidden");
+        $("#map_view").css("visibility", "visible");
+        helping = true;
+        $("#map").css({"border-color": "#2f86ca", 
+             "border-width":"3px", 
+             "border-style":"solid"});
+    }
+
+    function selector() {
+        $("#map_view").css("visibility", "hidden");
+        $("#selector_view").css("visibility", "visible");
+    }
     let points = [];
     var promises = [];
     String.prototype.capitalize = function() {
@@ -437,7 +517,7 @@
             });
             if ("geolocation" in navigator) { 
                 navigator.geolocation.getCurrentPosition(position => {
-                    map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 15});
+                    map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 14});
                 });
             }
         });
