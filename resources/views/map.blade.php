@@ -118,7 +118,7 @@
     #features {
         top: calc(1vh + 55px);
         width: 20vw;
-        height: 35.5vh;
+        height: 37.5vh;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     }
 
@@ -208,54 +208,68 @@
         <div id='pd'>
             <h4>Disponibilidade de Combustível</h4>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="fuel_of_stations_all" checked
-                    name="fuel_stations_type">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_all" checked
+                    name="fuel_stations_type" value="all" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_all">
-                    Todos os Combustíveis
+                    Mostrar Todos os Postos de Combustível
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="fuel_of_stations_gasoline" name="fuel_stations_type">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_gasoline"
+                    name="fuel_stations_type" value="gasoline" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_gasoline">
                     Gasolina
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type"
+                    value="diesel" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_diesel">
                     Gasóleo
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type"
+                    value="lpg" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_lpg">
                     GPL
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="radio" id="fuel_of_stations_none" name="fuel_stations_type">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_none" name="fuel_stations_type"
+                    value="none" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_none">
                     Sem Nenhum
                 </label>
             </div>
             <hr />
-            <h4>Outros</h4>
+            <h4>Postos REPA</h4>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="spanish_border">
-                <label class="form-check-label" for="spanish_border">
-                    Postos Espanhóis Perto da Fronteira
+                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_all" checked
+                    name="fuel_stations_repa" value="all" autocomplete="off">
+                <label class="form-check-label" for="fuel_stations_repa_all">
+                    Mostrar Todos os Postos de Combustível
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="repa_only">
-                <label class="form-check-label" for="repa_only">
-                    Mostrar só Postos REPA (Veiculos Prioritários)
+                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_priority"
+                    name="fuel_stations_repa" value="sos" autocomplete="off">
+                <label class="form-check-label" for="fuel_stations_repa_priority">
+                    Mostrar só Postos de Combustível REPA - Veículos Prioritários
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="repa_only">
-                <label class="form-check-label" for="repa_only">
-                    Mostrar só Postos REPA (Todos os Veiculos)
+                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_normal"
+                    name="fuel_stations_repa" value="normal" autocomplete="off">
+                <label class="form-check-label" for="fuel_stations_repa_normal">
+                    Mostrar só Postos de Combustível REPA - Todos os Veículos
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_none" name="fuel_stations_repa"
+                    value="none" autocomplete="off">
+                <label class="form-check-label" for="fuel_stations_repa_none">
+                    Mostrar só Postos de Combustível que não são REPA
                 </label>
             </div>
             <hr />
@@ -290,7 +304,7 @@
 <script src="https://www.google.com/recaptcha/api.js?render=6LdeNbAUAAAAAHooW_a98lAfARf1alSBCKVVmexn"></script>
 <script>
     grecaptcha.ready(function() {
-        console.log("Recaptcha loaded");
+        console.log("RECAPTCHA LOADED");
     });
     function validateCaptcha(callback) {
         grecaptcha.execute('6LdeNbAUAAAAAHooW_a98lAfARf1alSBCKVVmexn', {action:'validate_captcha'}).then(function(token) {
@@ -304,11 +318,13 @@
     let points = [];
     let promises = [];
     let popup = null;
-    let customAttributions = [
+    const customAttributions = [
+        'Thanks to <a href="https://waze.com/pt" >Waze</a> for providing important data and permission to use their services',
         'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
     ];
     let attributionControl = null;
-    let layers = ['with_gasoline', 'with_diesel', 'with_lpg'];
+    const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none'];
+    const repa_layers = ['normal','sos','none'];
 
     mapboxgl.accessToken = 'pk.eyJ1IjoiY290ZW1lcm8iLCJhIjoiY2p5NzQyeTdvMDc1MzNlbGNnbzh3NjVuOCJ9.cPrQc61yiHA0kOptuuZsSA';
     var map = new mapboxgl.Map({
@@ -375,22 +391,26 @@
     };
     function loadPoints() {
         return new Promise(function(resolve,reject) {
+            points = [];
             $.getJSON( "/storage/data/cache.json", (data) => {
                 data.forEach(fuelStation => {
                     let with_gasoline = (fuelStation.sell_gasoline && fuelStation.has_gasoline);
                     let with_diesel = (fuelStation.sell_diesel && fuelStation.has_diesel);
                     let with_lpg = (fuelStation.sell_lpg && fuelStation.has_lpg);
+                    let with_none = (!with_gasoline) && (!with_diesel) && (!with_lpg);
                     let icon = '';
                     let popup_color = '';
                     let priority = 0;
                     let brand = fuelStation.brand;
                     if(fuelStation.repa == "SOS") {
+                        fuelStation.repa = "sos";
                         icon = 'REPA';
                         priority = 2;
                         popup_color = '#2f86ca';
                         brand = brand + " (REPA - Veículos Prioritários)";
                     }
                     else if (fuelStation.repa == "Normal") {
+                        fuelStation.repa = "normal";
                         icon = 'REPA';
                         priority = 1;
                         popup_color = '#2f86ca';
@@ -420,7 +440,6 @@
                             popup_color = '#f3a433';
                         }
                     }
-
                     points.push({
                         "type": "Feature",
                         "geometry": {
@@ -435,6 +454,7 @@
                             "with_gasoline": with_gasoline,
                             "with_diesel": with_diesel,
                             "with_lpg": with_lpg,
+                            "with_none": with_none,
                             "sell_gasoline": fuelStation.sell_gasoline,
                             "sell_diesel": fuelStation.sell_diesel,
                             "sell_lpg": fuelStation.sell_lpg,
@@ -482,9 +502,15 @@
         promises.push(loadPoints());
         Promise.all(promises).then(function() {
             promises = [];
-            layers.forEach(element => {
-                let layerID = 'poi-'+ element;
-                map.removeLayer(layerID);
+            repa_layers.forEach(repa_element => {
+                let repa_value = repa_element;
+                if(repa_value == "none") {
+                    repa_value = '';
+                }
+                fuel_layers.forEach(fuel_element => {
+                    let layerID = 'poi-' + repa_element + '-' + fuel_element;
+                    map.removeLayer(layerID);
+                });
             });
             map.removeSource("points");
             map.addSource("points", {
@@ -494,17 +520,27 @@
                     "features": points
                 }
             });
-            layers.forEach(element => {
-                let layerID = 'poi-'+ element;
-                map.addLayer({
-                    "id": layerID,
-                    "type": "symbol",
-                    "source": "points",
-                    "filter": [">", element, 0],
-                    "layout": {
-                        "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "priority"],
-                    }
+            repa_layers.forEach(repa_element => {
+                let repa_value = repa_element;
+                if(repa_value == "none") {
+                    repa_value = '';
+                }
+                fuel_layers.forEach(fuel_element => {
+                    let layerID = 'poi-' + repa_element + '-' + fuel_element;
+                    map.addLayer({
+                        "id": layerID,
+                        "type": "symbol",
+                        "source": "points",                        
+                        "layout": {
+                            "icon-image": "{icon}",
+                            "symbol-sort-key": ["get", "priority"],
+                        }
+                    });
+                    map.setFilter(layerID,[
+                        "all",
+                        [">", "with_"+fuel_element, 0], 
+                        ['==', 'repa', repa_value]
+                    ]);
                 });
             });
             map.removeControl(attributionControl);
@@ -514,6 +550,69 @@
                 customAttribution: getAttributions()
             });
             map.addControl(attributionControl);
+            updateLayersOptions();
+        });
+    }
+
+    function addLayersFunctionality(layerID) {
+        map.on('click', layerID, function (e) {
+            var coordinates = e.features[0].geometry.coordinates.slice();
+            let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
+                '<img src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
+                '<img class="no-gas"src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
+            let dieselIcon = e.features[0].properties.sell_diesel && e.features[0].properties.has_diesel ?
+                '<img src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
+                '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
+            let lpgIcon = e.features[0].properties.sell_lpg && e.features[0].properties.has_lpg ?
+                '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
+                '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
+            let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
+            let description = "";
+            if(helping) {
+                description = '<div class="v-popup-content">' +
+                    '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                    '<div class="v-popup-body" style="background-color:#ffffff">' +
+                    '<div class="row">' +
+                    '<div class="col-md-4 v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>' +
+                    '<div class="col-md-4 v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASOLEO</h6></div>' +
+                    '<div class="col-md-4 v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>' +
+                    '</div>'+
+                    '<div class="row"><div class="col-md-12">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>'+
+                    '<div class="row"><div class="col-md-12">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
+                    '</div>' +
+                    '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,'+e.features[0].properties.id+')"><h5>VALIDAR</h5></a></div>' +
+                    '</div>';
+            }
+            else {
+                description = '<div class="v-popup-content">' +
+                    '<div class="v-popup-header" style="background-color:'+e.features[0].properties.popup_color+'"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                    '<div class="v-popup-body">' +
+                    '<div class="row">' +
+                    '<div class="col-md-4 v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>' +
+                    '<div class="col-md-4 v-fuel-info">' + dieselIcon + '<h6>GASOLEO</h6></div>' +
+                    '<div class="col-md-4 v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>' +
+                    '</div></div>' + 
+                    '<div class="v-popup-header" style="background-color:'+e.features[0].properties.popup_color+'"><h5>OBTER DIREÇÕES</h5></div>' +
+                    '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll='+coordinates[1]+'%2C'+coordinates[0]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></a></div>' +
+                    '</div>';
+            }
+            while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            popup = new mapboxgl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
+        });
+
+        map.on('mouseenter', layerID, function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        // Change it back to a pointer when it leaves.
+        map.on('mouseleave', layerID, function () {
+            map.getCanvas().style.cursor = '';
         });
     }
 
@@ -525,7 +624,6 @@
         promises.push(loadPoints());
         Promise.all(promises).then(function() {
             promises = [];
-            console.log("promises done");
             map.addSource("points", {
                 "type": "geojson",
                 "data": {
@@ -533,81 +631,30 @@
                     "features": points
                 }
             });
-            layers.forEach(element => {
-                let layerID = 'poi-'+ element;
-                map.addLayer({
-                    "id": layerID,
-                    "type": "symbol",
-                    "source": "points",
-                    "filter": [">", element, 0],
-                    "layout": {
-                        "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "priority"],
-                    }
+            repa_layers.forEach(repa_element => {
+                let repa_value = repa_element;
+                if(repa_value == "none") {
+                    repa_value = '';
+                }
+                fuel_layers.forEach(fuel_element => {
+                    let layerID = 'poi-' + repa_element + '-' + fuel_element;
+                    map.addLayer({
+                        "id": layerID,
+                        "type": "symbol",
+                        "source": "points",                        
+                        "layout": {
+                            "icon-image": "{icon}",
+                            "symbol-sort-key": ["get", "priority"],
+                        }
+                    });
+                    map.setFilter(layerID,[
+                        "all",
+                        [">", "with_"+fuel_element, 0], 
+                        ['==', 'repa', repa_value]
+                    ]);
+                    addLayersFunctionality(layerID);
                 });
             });
-            layers.forEach(element => {
-                let layerID = 'poi-'+ element;
-                map.on('click', layerID, function (e) {
-                    var coordinates = e.features[0].geometry.coordinates.slice();
-                    let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
-                        '<img src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
-                        '<img class="no-gas"src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
-                    let dieselIcon = e.features[0].properties.sell_diesel && e.features[0].properties.has_diesel ?
-                        '<img src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
-                        '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
-                    let lpgIcon = e.features[0].properties.sell_lpg && e.features[0].properties.has_lpg ?
-                        '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
-                        '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
-                    let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
-                    let description = "";
-                    if(helping) {
-                        description = '<div class="v-popup-content">' +
-                            '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                            '<div class="v-popup-body" style="background-color:#ffffff">' +
-                            '<div class="row">' +
-                            '<div class="col-md-4 v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>' +
-                            '<div class="col-md-4 v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASOLEO</h6></div>' +
-                            '<div class="col-md-4 v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>' +
-                            '</div>'+
-                            '<div class="row"><div class="col-md-12">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>'+
-                            '<div class="row"><div class="col-md-12">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
-                            '</div>' +
-                            '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,'+e.features[0].properties.id+')"><h5>VALIDAR</h5></a></div>' +
-                            '</div>';
-                    }
-                    else {
-                        description = '<div class="v-popup-content">' +
-                            '<div class="v-popup-header" style="background-color:'+e.features[0].properties.popup_color+'"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                            '<div class="v-popup-body">' +
-                            '<div class="row">' +
-                            '<div class="col-md-4 v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>' +
-                            '<div class="col-md-4 v-fuel-info">' + dieselIcon + '<h6>GASOLEO</h6></div>' +
-                            '<div class="col-md-4 v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>' +
-                            '</div></div>' + 
-                            '<div class="v-popup-header" style="background-color:'+e.features[0].properties.popup_color+'"><h5>OBTER DIREÇÕES</h5></div>' +
-                            '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll='+coordinates[1]+'%2C'+coordinates[0]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></a></div>' +
-                            '</div>';
-                    }
-                    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-                        coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-                    }
-
-                    popup = new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setHTML(description)
-                    .addTo(map);
-                });
-
-                map.on('mouseenter', layerID, function () {
-                    map.getCanvas().style.cursor = 'pointer';
-                });
-
-                // Change it back to a pointer when it leaves.
-                map.on('mouseleave', layerID, function () {
-                    map.getCanvas().style.cursor = '';
-                });
-            })
             if ("geolocation" in navigator) { 
                 navigator.geolocation.getCurrentPosition(position => {
                     map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 14});
@@ -618,12 +665,35 @@
                 customAttribution: getAttributions()
             });
             map.addControl(attributionControl);
+            updateLayersOptions();
             setInterval(updatePoints, 30000);
         });
     });
     map.on('error', function(error) {
         console.log('MAP LOAD ERROR')
         console.log(error);
+    });
+
+    function updateLayersOptions() {
+        let type = $("input.type[type=radio]:checked").val();
+        let repa = $("input.repa[type=radio]:checked").val();
+        repa_layers.forEach(repa_element => {
+            fuel_layers.forEach(fuel_element => {
+                let layerID = 'poi-' + repa_element + '-' + fuel_element;
+                let repa_condition = ((repa_element == repa) || (repa == "all"));
+                let fuel_condition = ((fuel_element == type) || (type == "all"));
+                let condition = repa_condition && fuel_condition;
+                map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
+            });
+        });
+    }
+
+    $('input.type[type=radio]').change(function() {
+        updateLayersOptions();
+    });
+
+    $('input.repa[type=radio]').change(function() {
+        updateLayersOptions();
     });
 
 </script>
