@@ -17,7 +17,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand" href="{{ url('/') }}">
                 {{ config('app.name', 'VOST') }}
             </a>
@@ -29,17 +29,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
-                </ul>
-
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('map') }}">{{ __('Map') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('stats') }}">{{ __('Stats') }}</a>
                     </li>
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav ml-auto">
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -52,15 +51,15 @@
                         <a class="nav-link" href="{{ route('stations.list') }}">{{ __('Fuel Stations') }}</a>
                     </li>
                     <li class="nav-item dropdown">
-                            <a id="navbarDropdownExternalAuth" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                                v-pre>{{ __('External Auth') }}</a>
-    
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdownExternalAuth">
-                                <a class="dropdown-item" href="{{ route('externalauth.add') }}">{{ __('Add') }}</a>
-                                <a class="dropdown-item" href="{{ route('externalauth.list') }}">{{ __('List') }}</a>
-                            </div>
-                        </li>
+                        <a id="navbarDropdownExternalAuth" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            v-pre>{{ __('External Auth') }}</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownExternalAuth">
+                            <a class="dropdown-item" href="{{ route('externalauth.add') }}">{{ __('Add') }}</a>
+                            <a class="dropdown-item" href="{{ route('externalauth.list') }}">{{ __('List') }}</a>
+                        </div>
+                    </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdownUsers" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
