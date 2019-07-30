@@ -559,7 +559,7 @@
                             '<div class="col-md-4 v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASOLEO</h6></div>' +
                             '<div class="col-md-4 v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>' +
                             '</div>'+
-                            '<div class="row"><div class="col-md-12">Por favor indica que combústiveis não estão disponiveis na '+ e.features[0].properties.brand.toUpperCase() + ' - ' + fuelStationName + '.</div></div>'+
+                            '<div class="row"><div class="col-md-12">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>'+
                             '<div class="row"><div class="col-md-12">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
                             '</div>' +
                             '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,'+e.features[0].properties.id+')"><h5>VALIDAR</h5></a></div>' +
