@@ -5,7 +5,6 @@ namespace App;
 
 use App\Events\EntryCreated;
 
-use App\Http\Controllers\FuelStationsController;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -56,8 +55,8 @@ class Entry extends Model
         $entries->update(['used' => 1]);
         $fuel_station = $this->fuelStation();
         $fuel_station->update(['has_gasoline' => $this->has_gasoline,'has_diesel' => $this->has_diesel, 'has_lpg' => $this->has_lpg]);
-        $controller = new FuelStationsController();
-        $controller->updateCache();
-        $controller->updateStats();
+        $cacheController = new CacheController();
+        $cacheController->updateStations();
+        $cacheController->updateStats();
     }
 }

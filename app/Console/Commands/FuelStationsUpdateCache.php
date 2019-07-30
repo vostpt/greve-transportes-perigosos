@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\FuelStationsController;
+use App\Http\Controllers\CacheController;
 use Illuminate\Console\Command;
 
 class FuelStationsUpdateCache extends Command
@@ -39,7 +39,7 @@ class FuelStationsUpdateCache extends Command
      */
     public function handle()
     {
-        $controller = new FuelStationsController();
-        $controller->updateCache();
+        $cacheController = new CacheController();
+        $cacheController->updateStations();
     }
 }

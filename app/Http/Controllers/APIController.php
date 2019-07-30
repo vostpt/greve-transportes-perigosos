@@ -76,9 +76,9 @@ class APIController extends Controller
                                 'has_lpg'      => $has_lpg,
                             ]);
                             $fuel_station->save();
-                            $fuelStationController = new FuelStationsController();
-                            $fuelStationController->updateCache();
-                            $fuelStationController->updateStats();
+                            $cacheController = new CacheController();
+                            $cacheController->updateStations();
+                            $cacheController->updateStats();
                             $output = ['success' => 1];
                         }
                     }
