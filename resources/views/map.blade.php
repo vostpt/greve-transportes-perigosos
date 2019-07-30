@@ -174,7 +174,7 @@
         line-height: 3vh;
     }
 
-    .grecaptcha-badge { 
+    .grecaptcha-badge {
         visibility: hidden;
     }
 </style>
@@ -304,6 +304,12 @@
     let points = [];
     let promises = [];
     let popup = null;
+    let customAttributions = [
+        'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
+    ];
+    let attributionControl = null;
+    let layers = ['with_gasoline', 'with_diesel', 'with_lpg'];
+
     mapboxgl.accessToken = 'pk.eyJ1IjoiY290ZW1lcm8iLCJhIjoiY2p5NzQyeTdvMDc1MzNlbGNnbzh3NjVuOCJ9.cPrQc61yiHA0kOptuuZsSA';
     var map = new mapboxgl.Map({
         container: 'map', // container id,
@@ -451,14 +457,25 @@
         });
     }
 
-    map.on('load', function() {
-        promises.push(loadBrandImage('REPA','/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));
-        promises.push(loadBrandImage('NONE','/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
-        promises.push(loadBrandImage('PARTIAL','/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
-        promises.push(loadBrandImage('ALL','/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png'));
+    function getAttributions() {
+        var date = new Date;
+        var seconds = date.getSeconds();
+        var minutes = date.getMinutes();
+        var hour = date.getHours();
+        let attributions = customAttributions;
+        attributions.push('Ultima Atualização às: '+("0" + hour).slice(-2)+'h'+("0" + minutes).slice(-2)+'m'+("0" + seconds).slice(-2)+'s');
+        return attributions;
+    }
+
+    function updatePoints() {
         promises.push(loadPoints());
         Promise.all(promises).then(function() {
-            console.log("promises done");
+            promises = [];
+            layers.forEach(element => {
+                let layerID = 'poi-'+ element;
+                map.removeLayer(layerID);
+            });
+            map.removeSource("points");
             map.addSource("points", {
                 "type": "geojson",
                 "data": {
@@ -466,7 +483,6 @@
                     "features": points
                 }
             });
-            let layers = ['with_gasoline', 'with_diesel', 'with_lpg'];
             layers.forEach(element => {
                 let layerID = 'poi-'+ element;
                 map.addLayer({
@@ -479,7 +495,48 @@
                         "symbol-sort-key": ["get", "repa"],
                     }
                 });
+            });
+            map.removeControl(attributionControl);
+            delete attributionControl;
+            attributionControl = new mapboxgl.AttributionControl({
+                compact: false,
+                customAttribution: getAttributions()
+            });
+            map.addControl(attributionControl);
+        });
+    }
 
+    map.on('load', function() {
+        promises.push(loadBrandImage('REPA','/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));
+        promises.push(loadBrandImage('NONE','/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
+        promises.push(loadBrandImage('PARTIAL','/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
+        promises.push(loadBrandImage('ALL','/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png'));
+        promises.push(loadPoints());
+        Promise.all(promises).then(function() {
+            promises = [];
+            console.log("promises done");
+            map.addSource("points", {
+                "type": "geojson",
+                "data": {
+                    "type": "FeatureCollection",
+                    "features": points
+                }
+            });
+            layers.forEach(element => {
+                let layerID = 'poi-'+ element;
+                map.addLayer({
+                    "id": layerID,
+                    "type": "symbol",
+                    "source": "points",
+                    "filter": [">", element, 0],
+                    "layout": {
+                        "icon-image": "{icon}",
+                        "symbol-sort-key": ["get", "repa"],
+                    }
+                });
+            });
+            layers.forEach(element => {
+                let layerID = 'poi-'+ element;
                 map.on('click', layerID, function (e) {
                     var coordinates = e.features[0].geometry.coordinates.slice();
                     let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
@@ -539,19 +596,18 @@
                 map.on('mouseleave', layerID, function () {
                     map.getCanvas().style.cursor = '';
                 });
-
-            });
+            })
             if ("geolocation" in navigator) { 
                 navigator.geolocation.getCurrentPosition(position => {
                     map.flyTo({center: [position.coords.longitude,position.coords.latitude], zoom: 14});
                 });
             }
-            map.addControl(new mapboxgl.AttributionControl({
+            attributionControl = new mapboxgl.AttributionControl({
                 compact: false,
-                customAttribution: [
-                    'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
-                ]
-            }));
+                customAttribution: getAttributions()
+            });
+            map.addControl(attributionControl);
+            setInterval(updatePoints, 30000);
         });
     });
     map.on('error', function(error) {
