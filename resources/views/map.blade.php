@@ -575,7 +575,7 @@
                             '<div class="col-md-4 v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>' +
                             '</div></div>' + 
                             '<div class="v-popup-header" style="background-color:'+e.features[0].properties.popup_color+'"><h5>OBTER DIREÇÕES</h5></div>' +
-                            '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll='+coordinates[1]+'%2C'+coordinates[0]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></div>' +
+                            '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll='+coordinates[1]+'%2C'+coordinates[0]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></a></div>' +
                             '</div>';
                     }
                     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
