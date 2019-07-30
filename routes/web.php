@@ -16,6 +16,11 @@ Route::get('/', function () {
     return view('map');
 })->name('map');
 
+Route::get('/stats', function () {
+    return view('stats');
+})->name('stats');
+
+
 
 Auth::routes(['register' => false, 'verify' => true]);
 

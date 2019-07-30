@@ -38,7 +38,7 @@
                         <a class="nav-link" href="{{ route('map') }}">{{ __('Map') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('map') }}">{{ __('Stats') }}</a>
+                        <a class="nav-link" href="{{ route('stats') }}">{{ __('Stats') }}</a>
                     </li>
                     @guest
                     <li class="nav-item">

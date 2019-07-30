@@ -58,5 +58,6 @@ class Entry extends Model
         $fuel_station->update(['has_gasoline' => $this->has_gasoline,'has_diesel' => $this->has_diesel, 'has_lpg' => $this->has_lpg]);
         $controller = new FuelStationsController();
         $controller->updateCache();
+        $controller->updateStats();
     }
 }
