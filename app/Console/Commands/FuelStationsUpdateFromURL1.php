@@ -51,19 +51,19 @@ class FuelStationsUpdateFromURL1 extends Command
         $num_created = 0;
         foreach ($fetched_object as $key => $entry) {
             $repa      = $entry[0];
-            $source_id = $entry[1];
+            $source_id = $entry[2];
             $line_id   = 'line-'.$key;
             if ($source_id == '0') {
                 $source_id = $line_id;
             }
-            $brand = $entry[3];
-            $name  = $entry[4];
+            $brand = $entry[4];
+            $name  = $entry[5];
             if ($name == '') {
-                $name = $entry[8];
+                $name = $entry[9];
             }
-            $lpg  = ($entry[5] == 'Sim');
-            $long = $entry[11];
-            $lat  = $entry[12];
+            $lpg  = ($entry[6] == 'Sim');
+            $long = $entry[12];
+            $lat  = $entry[13];
             $data = [
                 'repa'          => $repa,
                 'source_id'     => $source_id,
