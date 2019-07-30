@@ -33,12 +33,12 @@
         <code>/api/v1/push</code>
         <h3>CURL</h3>
         <code>
-            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT","erse_id":12345, "has_gasoline":0, "has_diesel": 0, "has_lpg": 0}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/push
+            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT","id":12345, "has_gasoline":0, "has_diesel": 0, "has_lpg": 0}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/push
         </code>
         <h3>Parameters</h3>
         <p><b>key:</b> Access key given by VOSTPT</p>
         <p><b>secret:</b> Access secret given by VOSTPT</p>
-        <p><b>erse_id:</b> ERSE ID of Fuel Station</p>
+        <p><b>id:</b> ID of Fuel Station (found by fetching)</p>
         <p><b>has_gasoline:</b> 0 or below if station has no gasoline, 1 or above if station has gasoline</p>
         <p><b>has_diesel:</b> 0 or below if station has no diesel, 1 or above if station has diesel</p>
         <p><b>has_lpg:</b> 0 or below if station has no lpg, 1 or above if station has lpg</p>
@@ -65,7 +65,7 @@
         <code>
             [
                 {
-                    erse_id: ...,
+                    id: ...,
                     name: ...,
                     has_gasoline: ...,
                     has_diesel: ...,
@@ -86,7 +86,7 @@
         <table id="fetched_list" class="table table-striped table-bordered" style="width:100%">
             <thead>
                 <tr>
-                    <th>{{ __('ERSE ID') }}</th>
+                    <th>{{ __('ID') }}</th>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Has Gasoline') }}</th>
                     <th>{{ __('Has Diesel') }}</th>
@@ -99,7 +99,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <th>{{ __('ERSE ID') }}</th>
+                    <th>{{ __('ID') }}</th>
                     <th>{{ __('Name') }}</th>
                     <th>{{ __('Has Gasoline') }}</th>
                     <th>{{ __('Has Diesel') }}</th>
@@ -119,7 +119,7 @@
                 <div class="modal-body">
                     <p><span id="action_description">Descrição da ação</span></p>
                     @csrf
-                    <input id="station_erse_id" type="hidden" name="id" value="0" />
+                    <input id="station_id" type="hidden" name="id" value="0" />
                     <div class="form-group">
                         <label for="station_has_gasoline">Tem Gasolina</label>
                         <select class="form-control" id="station_has_gasoline" name="has_gasoline">
@@ -155,42 +155,42 @@
     <script type="text/javascript">
         let key = "";
         let secret = "";
-        function modifyFuelStation(erse_id,has_gasoline,has_diesel,has_lpg) {
-            $('#action_title').html("Modificar Estação nº"+erse_id);
-            $('#action_description').html("Esta ação irá editar o a estacão nº"+erse_id+".");
-            $("#station_erse_id").val(erse_id);
+        function modifyFuelStation(id,has_gasoline,has_diesel,has_lpg) {
+            $('#action_title').html("Modificar Estação nº"+id);
+            $('#action_description').html("Esta ação irá editar o a estacão nº"+id+".");
+            $("#station_id").val(id);
             $("#station_has_gasoline").val(has_gasoline);
             $("#station_has_diesel").val(has_diesel);
             $("#station_has_lpg").val(has_lpg);
             $('.modal').modal('show');
         }
         function updateFuelStaion() {
-            let erse_id = $("#station_erse_id").val();
+            let id = $("#station_id").val();
             let has_gasoline = $("#station_has_gasoline").val();
             let has_diesel = $("#station_has_diesel").val();
             let has_lpg = $("#station_has_lpg").val();
             $('.modal').modal('hide');
-            $.post( "/api/v1/push", { key: key, secret: secret, erse_id: erse_id, has_gasoline: has_gasoline, has_diesel: has_diesel, has_lpg: has_lpg }, function( data ) {
+            $.post( "/api/v1/push", { key: key, secret: secret, id: id, has_gasoline: has_gasoline, has_diesel: has_diesel, has_lpg: has_lpg }, function( data ) {
                 if(data["success"] == 1) {
                     if(has_gasoline == 1) {
-                        $("#station_"+erse_id+' .gasoline').html('<i class="fas fa-check"></i>');
+                        $("#station_"+id+' .gasoline').html('<i class="fas fa-check"></i>');
                     }
                     else {
-                        $("#station_"+erse_id+' .gasoline').html('<i class="fas fa-times"></i>');
+                        $("#station_"+id+' .gasoline').html('<i class="fas fa-times"></i>');
                     }
                     if(has_diesel == 1) {
-                        $("#station_"+erse_id+' .diesel').html('<i class="fas fa-check"></i>');
+                        $("#station_"+id+' .diesel').html('<i class="fas fa-check"></i>');
                     }
                     else {
-                        $("#station_"+erse_id+' .diesel').html('<i class="fas fa-times"></i>');
+                        $("#station_"+id+' .diesel').html('<i class="fas fa-times"></i>');
                     }
                     if(has_lpg == 1) {
-                        $("#station_"+erse_id+' .lpg').html('<i class="fas fa-check"></i>');
+                        $("#station_"+id+' .lpg').html('<i class="fas fa-check"></i>');
                     }
                     else {
-                        $("#station_"+erse_id+' .lpg').html('<i class="fas fa-times"></i>');
+                        $("#station_"+id+' .lpg').html('<i class="fas fa-times"></i>');
                     }
-                    $("#station_"+erse_id+' .action').html('<a href="#" onclick="modifyFuelStation('+erse_id+','+has_gasoline+','+has_diesel+','+has_lpg+')"><i class="fas fa-edit"></i></a>');
+                    $("#station_"+id+' .action').html('<a href="#" onclick="modifyFuelStation('+id+','+has_gasoline+','+has_diesel+','+has_lpg+')"><i class="fas fa-edit"></i></a>');
                     alert('Updated Fuel Station');
                 }
                 else {
@@ -205,7 +205,7 @@
                 if(data != []) {
                     $("#fetcher").hide();
                     data.forEach(station => {
-                        station["actions"] = '<a href="#" onclick="modifyFuelStation('+station["erse_id"]+','+station["has_gasoline"]+','+station["has_diesel"]+','+station["has_lpg"]+')"><i class="fas fa-edit"></i></a>';
+                        station["actions"] = '<a href="#" onclick="modifyFuelStation('+station["id"]+','+station["has_gasoline"]+','+station["has_diesel"]+','+station["has_lpg"]+')"><i class="fas fa-edit"></i></a>';
                         if(station["has_gasoline"] == 1) {
                             station["has_gasoline"] = '<i class="fas fa-check"></i>';
                         }
@@ -224,7 +224,7 @@
                         else {
                             station["has_lpg"] = '<i class="fas fa-times"></i>';
                         }
-                        $("#fetched_list tbody").append('<tr id="station_'+station["erse_id"]+'"><td>'+station["erse_id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+station["lat"]+','+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
+                        $("#fetched_list tbody").append('<tr id="station_'+station["id"]+'"><td>'+station["id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+station["lat"]+','+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
                     });
                     $('#fetched_list').DataTable();
                     $("#table").show();
@@ -234,46 +234,6 @@
                 }
             }, "json");
         }
-        //
-            /*$('#fuel_stations_list').DataTable( {
-                "ajax": { 
-                    "url": "{{ route('stations.fetch.all') }}",
-                    "dataSrc": function (json) {
-                        json.data.forEach((element,index) => {
-                            json.data[index]["actions"] = '<a href="#" onclick="modifyFuelStation('+json.data[index]["erse_id"]+',\''+json.data[index]["name"]+'\','+json.data[index]["has_gasoline"]+','+json.data[index]["has_diesel"]+','+json.data[index]["has_lpg"]+')"><i class="fas fa-edit"></i></a>';
-                            if(json.data[index]["has_gasoline"] == 1) {
-                                json.data[index]["has_gasoline"] = '<i class="fas fa-check"></i>';
-                            }
-                            else {
-                                json.data[index]["has_gasoline"] = '<i class="fas fa-times"></i>';
-                            }
-                            if(json.data[index]["has_diesel"] == 1) {
-                                json.data[index]["has_diesel"] = '<i class="fas fa-check"></i>';
-                            }
-                            else {
-                                json.data[index]["has_diesel"] = '<i class="fas fa-times"></i>';
-                            }
-                            if(json.data[index]["has_lpg"] == 1) {
-                                json.data[index]["has_lpg"] = '<i class="fas fa-check"></i>';
-                            }
-                            else {
-                                json.data[index]["has_lpg"] = '<i class="fas fa-times"></i>';
-                            }
-                            json.data[index]["map"] = '<a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+json.data[index]["lat"]+','+json.data[index]["long"]+'">Ver no Mapa</a>';
-                        });
-                        return json.data;
-                    }
-                },   
-                "columns": [
-                    { "data": "erse_id" },
-                    { "data": "name" },
-                    { "data": "has_gasoline" },
-                    { "data": "has_diesel" },
-                    { "data": "has_lpg" },
-                    { "data": "map" },
-                    { "data": "actions" }
-                ]   
-            });*/
     </script>
 </body>
 

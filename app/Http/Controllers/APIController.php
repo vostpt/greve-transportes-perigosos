@@ -24,7 +24,7 @@ class APIController extends Controller
                 $output   = [];
                 foreach ($stations as $station) {
                     $output[] = [
-                        'erse_id'      => $station->id_station,
+                        'id'           => $station->id,
                         'name'         => $station->name,
                         'has_gasoline' => $station->has_gasoline,
                         'has_diesel'   => $station->has_diesel,
@@ -43,11 +43,11 @@ class APIController extends Controller
     public function push(Request $request)
     {
         $output = ['success' => 0];
-        if ($request->has('key') && $request->has('secret') && $request->has('has_gasoline') && $request->has('has_diesel') && $request->has('has_lpg') && $request->has('erse_id')) {
+        if ($request->has('key') && $request->has('secret') && $request->has('has_gasoline') && $request->has('has_diesel') && $request->has('has_lpg') && $request->has('id')) {
             $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
             if ($ext_auth->count() > 0) {
                 $ext_auth     = $ext_auth->first();
-                $fuel_station = FuelStation::where('id_station', '=', $request->input('erse_id'));
+                $fuel_station = FuelStation::where('id', '=', $request->input('id'));
                 if ($fuel_station->count() > 0) {
                     $fuel_station = $fuel_station->first();
                     if ($fuel_station->brand == $ext_auth->brand) {
