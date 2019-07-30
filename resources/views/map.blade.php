@@ -138,7 +138,7 @@
     #warning {
         position: absolute;
         top: calc(1vh + 55px);
-        color: #2f86ca;
+        color: #6bd7fc;
         font-family: Arial, sans-serif;
         overflow: auto;
         text-align: center;
@@ -382,9 +382,19 @@
                     let with_lpg = (fuelStation.sell_lpg && fuelStation.has_lpg);
                     let icon = '';
                     let popup_color = '';
-                    if(fuelStation.repa == 1) {
+                    let priority = 0;
+                    let brand = fuelStation.brand;
+                    if(fuelStation.repa == "SOS") {
                         icon = 'REPA';
+                        priority = 2;
                         popup_color = '#2f86ca';
+                        brand = brand + " (REPA - Veículos Prioritários)";
+                    }
+                    else if (fuelStation.repa == "Normal") {
+                        icon = 'REPA';
+                        priority = 1;
+                        popup_color = '#2f86ca';
+                        brand = brand + " (REPA - Todos os Veículos)";
                     }
                     else {
                         let count = 0;
@@ -420,7 +430,7 @@
                         "properties": {
                             "id": fuelStation.id,
                             "name": fuelStation.name,
-                            "brand": fuelStation.brand,
+                            "brand": brand,
                             "repa": fuelStation.repa,
                             "with_gasoline": with_gasoline,
                             "with_diesel": with_diesel,
@@ -432,7 +442,8 @@
                             "has_diesel": fuelStation.has_diesel,
                             "has_lpg": fuelStation.has_lpg,
                             "icon": icon,
-                            "popup_color": popup_color
+                            "popup_color": popup_color,
+                            "priority": 0
                         }
                     });
                 });
@@ -492,7 +503,7 @@
                     "filter": [">", element, 0],
                     "layout": {
                         "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "repa"],
+                        "symbol-sort-key": ["get", "priority"],
                     }
                 });
             });
@@ -531,7 +542,7 @@
                     "filter": [">", element, 0],
                     "layout": {
                         "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "repa"],
+                        "symbol-sort-key": ["get", "priority"],
                     }
                 });
             });
@@ -553,7 +564,7 @@
                     if(helping) {
                         description = '<div class="v-popup-content">' +
                             '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                            '<div class="v-popup-body" style="background-color:#afe2fb">' +
+                            '<div class="v-popup-body" style="background-color:#ffffff">' +
                             '<div class="row">' +
                             '<div class="col-md-4 v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>' +
                             '<div class="col-md-4 v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASOLEO</h6></div>' +
