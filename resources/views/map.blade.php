@@ -463,7 +463,7 @@
         var minutes = date.getMinutes();
         var hour = date.getHours();
         let attributions = customAttributions;
-        attributions.push('Ultima Atualização às: '+("0" + hour).slice(-2)+'h'+("0" + minutes).slice(-2)+'m'+("0" + seconds).slice(-2)+'s');
+        attributions.push('Última Atualização às: '+("0" + hour).slice(-2)+'h'+("0" + minutes).slice(-2)+'m'+("0" + seconds).slice(-2)+'s');
         return attributions;
     }
 
