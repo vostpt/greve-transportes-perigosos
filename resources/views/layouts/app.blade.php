@@ -11,62 +11,79 @@
     <title>{{ config('app.name', 'VOST') }}</title>
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
+
+    @yield('styles')
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'VOST') }}
-                </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                {{ config('app.name', 'VOST') }}
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('map') }}">{{ __('Map') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('stats') }}">{{ __('Stats') }}</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                     </li>
                     @else
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Entries') }}</a>
+                        <a class="nav-link" href="{{ route('entries.list') }}">{{ __('Entries') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('stations.list') }}">{{ __('Fuel Stations') }}</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdownUsers" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" v-pre>{{ __('Users') }}</a>
+                        <a id="navbarDropdownExternalAuth" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            v-pre>{{ __('External Auth') }}</a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownExternalAuth">
+                            <a class="dropdown-item" href="{{ route('externalauth.add') }}">{{ __('Add') }}</a>
+                            <a class="dropdown-item" href="{{ route('externalauth.list') }}">{{ __('List') }}</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdownUsers" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            v-pre>{{ __('Users') }}</a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownUsers">
-                            <a class="dropdown-item" href="#">{{ __('Add') }}</a>
-                            <a class="dropdown-item" href="#">{{ __('List') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.add') }}">{{ __('Add') }}</a>
+                            <a class="dropdown-item" href="{{ route('users.list') }}">{{ __('List') }}</a>
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Options') }}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('Metrics') }}</a>
+                        <a class="nav-link" href="{{ route('options.list') }}">{{ __('Options') }}</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdownMyUse" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                        <a id="navbarDropdownMyUse" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }} <span class="caret"></span>
+                        </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyUse">
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+                                {{ __('Logout') }}
+                            </a>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -82,6 +99,7 @@
         @yield('content')
     </main>
     <script src="{{ mix('/js/app.js') }}" charset="utf-8"></script>
+    @yield('javascript')
 </body>
 
 </html>
