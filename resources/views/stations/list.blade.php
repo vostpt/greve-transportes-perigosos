@@ -48,14 +48,6 @@
                     @csrf
                     <input id="station_id" type="hidden" name="id" value="0" />
                     <div class="form-group">
-                        <label for="station_name">{{ __('Name') }}</label>
-                        <input type="text" class="form-control" id="station_name" name="name">
-                    </div>
-                    <div class="form-group">
-                        <label for="station_brand">{{ __('Brand') }}</label>
-                        <input type="text" class="form-control" id="station_brand" name="brand">
-                    </div>
-                    <div class="form-group">
                         <label for="station_sell_gasoline">{{ __('Sells Gasoline') }}</label>
                         <select class="form-control" id="station_sell_gasoline" name="sell_gasoline">
                             <option value="0">Não</option>
@@ -79,8 +71,9 @@
                     <div class="form-group">
                         <label for="station_repa">{{ __('REPA') }}</label>
                         <select class="form-control" id="station_repa" name="repa">
-                            <option value="0">Não</option>
-                            <option value="1">Sim</option>
+                            <option value="">Não</option>
+                            <option value="SOS">SOS</option>
+                            <option value="Normal">Normal</option>
                         </select>
                     </div>
                 </div>
@@ -98,13 +91,11 @@
 
 @section('javascript')
 <script type="text/javascript">
-    function modifyFuelStation(id,name,brand,sell_gasoline,sell_diesel,sell_lpg,repa) {
+    function modifyFuelStation(id,sell_gasoline,sell_diesel,sell_lpg,repa) {
         $('#modal_form').attr('action', '{{ route('stations.update') }}');
         $('#action_title').html("Modificar Estação nº"+id);
         $('#action_description').html("Esta ação irá editar o a estacão nº"+id+".");
         $("#station_id").val(id);
-        $("#station_name").val(name);
-        $("#station_brand").val(brand);
         $("#station_sell_gasoline").val(sell_gasoline);
         $("#station_sell_diesel").val(sell_diesel);
         $("#station_sell_lpg").val(sell_lpg);
@@ -117,7 +108,7 @@
                 "url": "{{ route('stations.fetch.all') }}",
                 "dataSrc": function (json) {
                     json.data.forEach((element,index) => {
-                        json.data[index]["actions"] = '<a href="#" onclick="modifyFuelStation('+json.data[index]["id"]+',\''+json.data[index]["name"]+'\',\''+json.data[index]["brand"]+'\','+json.data[index]["sell_gasoline"]+','+json.data[index]["sell_diesel"]+','+json.data[index]["sell_lpg"]+','+json.data[index]["repa"]+')"><i class="fas fa-edit"></i></a>';
+                        json.data[index]["actions"] = '<a href="#" onclick="modifyFuelStation('+json.data[index]["id"]+','+json.data[index]["sell_gasoline"]+','+json.data[index]["sell_diesel"]+','+json.data[index]["sell_lpg"]+','+json.data[index]["repa"]+')"><i class="fas fa-edit"></i></a>';
                         if(json.data[index]["sell_gasoline"] == 1) {
                             json.data[index]["sell_gasoline"] = '<i class="fas fa-check"></i>';
                         }
@@ -142,7 +133,7 @@
                         else {
                             json.data[index]["repa"] = '<i class="fas fa-times"></i>';
                         }
-                        json.data[index]["map"] = '<a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+json.data[index]["lat"]+','+json.data[index]["long"]+'">Ver no Mapa</a>';
+                        json.data[index]["map"] = '<a href="https://www.waze.com/ul?ll='+json.data[index]["lat"]+'%2C'+json.data[index]["long"]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">Ver no Mapa</a>';
                     });
                     return json.data;
                 }

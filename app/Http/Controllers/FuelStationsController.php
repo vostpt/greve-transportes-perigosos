@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\FuelStation;
+use App\Option;
 
 class FuelStationsController extends Controller
 {
@@ -21,9 +22,7 @@ class FuelStationsController extends Controller
     public function update(Request $request)
     {
         $validatedData = $request->validate([
-            'id'             => 'required|exists:entries',
-            'name'           => 'required',
-            'brand'          => 'required',
+            'id'             => 'required|exists:fuel_stations',
             'sells_gasoline' => 'required',
             'sells_diesel'   => 'required',
             'sells_lpg'      => 'required',
