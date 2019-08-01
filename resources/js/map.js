@@ -18,34 +18,6 @@ var map = new mapboxgl.Map({
     attributionControl: false
 });
 
-function swapIcon(obj) {
-    let img = $(obj).find('img');
-    if (img.hasClass("no-gas")) {
-        img.removeClass("no-gas");
-    } else {
-        img.addClass("no-gas");
-    }
-}
-
-function submitEntry(obj, id) {
-    let gasoline = Number(!($(obj).parent().parent().find('.gasoline img').hasClass('no-gas')));
-    let diesel = Number(!($(obj).parent().parent().find('.diesel img').hasClass('no-gas')));
-    let lpg = Number(!($(obj).parent().parent().find('.lpg img').hasClass('no-gas')));
-    validateCaptcha((token) => {
-        let data = {
-            "fuel_station": id,
-            "gasoline": gasoline,
-            "diesel": diesel,
-            "lpg": lpg,
-            "captcha": token
-        }
-        popup.remove();
-        $.post("/entries/add", data, function (reply) {
-            console.log("Entrada adicionada: " + reply.success + " (0 -> falha, 1 -> sucesso)");
-        }, "json");
-    });
-}
-
 String.prototype.capitalize = function () {
     return this.replace(/(?:^|\s)\S/g, function (a) {
         return a.toUpperCase();
@@ -205,7 +177,7 @@ function updatePoints() {
         map.removeControl(attributionControl.obj);
         delete attributionControl.obj;
         attributionControl.obj = new mapboxgl.AttributionControl({
-            compact: false,
+            compact: true,
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
@@ -322,7 +294,7 @@ map.on('load', function () {
             });
         }
         attributionControl.obj = new mapboxgl.AttributionControl({
-            compact: false,
+            compact: true,
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);

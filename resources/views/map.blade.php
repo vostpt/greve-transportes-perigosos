@@ -93,7 +93,7 @@
                 <input class="form-check-input repa" type="radio" id="fuel_stations_repa_none" name="fuel_stations_repa"
                     value="none" autocomplete="off">
                 <label class="form-check-label" for="fuel_stations_repa_none">
-                    Mostrar só Postos de Combustível que não são REPA
+                    Não Mostrar Postos REPA
                 </label>
             </div>
             <hr />
@@ -111,7 +111,7 @@
                 Disponiveis</label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- Nenhum Combustíveis Está
+            <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- Nenhum Combustível Está
                 Disponiveis</label><br />
         </div>
         <div>
