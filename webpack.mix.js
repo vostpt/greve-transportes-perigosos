@@ -13,7 +13,7 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
-   .css('resources/css/map.css', 'public/css')
+   .styles('resources/css/map.css', 'public/css')
    .js('resources/js/recaptcha.js', 'public/js')
    .js('resources/js/map.js', 'public/js')
    .js('resources/js/stats.js', 'public/js');
