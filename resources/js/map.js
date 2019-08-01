@@ -205,7 +205,7 @@ function updatePoints() {
         map.removeControl(attributionControl.obj);
         delete attributionControl.obj;
         attributionControl.obj = new mapboxgl.AttributionControl({
-            compact: false,
+            compact: true,
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
@@ -322,7 +322,7 @@ map.on('load', function () {
             });
         }
         attributionControl.obj = new mapboxgl.AttributionControl({
-            compact: false,
+            compact: true,
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
