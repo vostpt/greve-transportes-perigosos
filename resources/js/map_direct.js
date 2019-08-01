@@ -1,4 +1,5 @@
 let helping = false;
+let popup = null;
 
 grecaptcha.ready(function() {
     console.log("RECAPTCHA LOADED");
