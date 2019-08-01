@@ -128,5 +128,6 @@
 <script src="https://www.google.com/recaptcha/api.js?render=6LdeNbAUAAAAAHooW_a98lAfARf1alSBCKVVmexn"></script>
 <script src="{{ mix('/js/recaptcha.js') }}" charset="utf-8"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<script src="{{ mix('/js/map_direct.js') }}" charset="utf-8"></script>
 <script src="{{ mix('/js/map.js') }}" charset="utf-8"></script>
 @endsection

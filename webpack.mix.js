@@ -16,5 +16,9 @@ mix.js('resources/js/app.js', 'public/js')
    .styles('resources/css/map.css', 'public/css/map.css')
    .js('resources/js/recaptcha.js', 'public/js')
    .js('resources/js/map.js', 'public/js')
-   .js('resources/js/stats.js', 'public/js');
+   .js('resources/js/stats.js', 'public/js')
+   .copy('resources/js/map_direct.js', 'public/js/map_direct.js');;
    
+if (mix.inProduction()) {
+    mix.version();
+}

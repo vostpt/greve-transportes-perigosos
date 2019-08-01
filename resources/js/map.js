@@ -1,4 +1,3 @@
-let helping = false;
 let points = [];
 let promises = [];
 let popup = null;
@@ -18,33 +17,6 @@ var map = new mapboxgl.Map({
     zoom: 6,
     attributionControl: false
 });
-
-function consult() {
-    $("#map").css({
-        "border": "0"
-    });
-    helping = false;
-    $("#selector_view").css("visibility", "hidden");
-    $("#map_view").css("visibility", "visible");
-}
-
-function help() {
-    $("#warning").css("visibility", "visible");
-    $("#map").css({
-        "border-color": "#2f86ca",
-        "border-width": "3px",
-        "border-style": "solid"
-    });
-    helping = true;
-    $("#selector_view").css("visibility", "hidden");
-    $("#map_view").css("visibility", "visible");
-}
-
-function selector() {
-    $("#warning").css("visibility", "hidden");
-    $("#map_view").css("visibility", "hidden");
-    $("#selector_view").css("visibility", "visible");
-}
 
 function swapIcon(obj) {
     let img = $(obj).find('img');
@@ -255,7 +227,7 @@ function addLayersFunctionality(layerID) {
             '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
-        if (helping) {
+        if (isHelping()) {
             description = '<div class="v-popup-content">' +
                 '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body" style="background-color:#ffffff">' +
