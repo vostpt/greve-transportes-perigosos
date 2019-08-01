@@ -1,6 +1,5 @@
 let points = [];
 let promises = [];
-let popup = null;
 const customAttributions = [
     'Thanks to <a href="https://waze.com/pt" >Waze</a> for providing important data and permission to use their services',
     'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
