@@ -35,7 +35,7 @@
                 <input class="form-check-input type" type="radio" id="fuel_of_stations_all" checked
                     name="fuel_stations_type" value="all" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_all">
-                    Mostrar Todos os Postos de Combustível
+                    Todos os Postos
                 </label>
             </div>
             <div class="form-check">
@@ -68,34 +68,26 @@
             </div>
             <hr />
             <h4>Postos REPA</h4>
-            <div class="form-check">
-                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_all" checked
-                    name="fuel_stations_repa" value="all" autocomplete="off">
-                <label class="form-check-label" for="fuel_stations_repa_all">
-                    Mostrar Todos os Postos de Combustível
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_priority"
-                    name="fuel_stations_repa" value="sos" autocomplete="off">
-                <label class="form-check-label" for="fuel_stations_repa_priority">
-                    Mostrar só Postos de Combustível REPA - Veículos Prioritários
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_normal"
-                    name="fuel_stations_repa" value="normal" autocomplete="off">
-                <label class="form-check-label" for="fuel_stations_repa_normal">
-                    Mostrar só Postos de Combustível REPA - Todos os Veículos
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input repa" type="radio" id="fuel_stations_repa_none" name="fuel_stations_repa"
-                    value="none" autocomplete="off">
-                <label class="form-check-label" for="fuel_stations_repa_none">
-                    Não Mostrar Postos REPA
-                </label>
-            </div>
+            <fieldset id="fuel_stations_repa">
+                <div class="form-check">
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="none" id="fuel_stations_repa_no" checked>
+                    <label class="form-check-label" for="fuel_stations_repa_no">
+                        Postos Não REPA
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="normal" id="fuel_stations_repa_normal" checked>
+                    <label class="form-check-label" for="fuel_stations_repa_normal">
+                        Postos REPA - Geral
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="sos" id="fuel_stations_repa_sos" checked>
+                    <label class="form-check-label" for="fuel_stations_repa_sos">
+                        Postos REPA - Prioritários
+                    </label>
+                </div>
+            </fieldset>
             <hr />
             <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>
         </div>
@@ -107,7 +99,7 @@
                 Disponiveis</label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- Alguns Combustíveis Não Estão
+            <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- Alguns Combustíveis Não
                 Disponiveis</label><br />
         </div>
         <div>
@@ -119,7 +111,7 @@
         </div>
     </div>
     <div id='warning' style="visibility: hidden">
-        <h2>Em Modo de Ajuda</h2>
+        <h2 style="font-weight: 600; text-shadow: 1px 1px #000000;">EM MODO DE AJUDA</h2>
     </div>
 </div>
 @endsection
