@@ -246,7 +246,7 @@ function addLayersFunctionality(layerID) {
         if (isHelping()) {
             description = '<div class="v-popup-content">' +
                 '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                '<div class="v-popup-body" style="background-color:#ffffff">' +
+                '<div class="v-popup-body" style="background-color:#afe2fb">' +
                 '<div class="row">' +
                 fuelIcons + 
                 '</div>' +
@@ -349,11 +349,18 @@ map.on('error', function (error) {
 
 function updateLayersOptions() {
     let type = $("input.type[type=radio]:checked").val();
-    let repa = $("input.repa[type=radio]:checked").val();
+    let repa = [];
+    let repa_objects = $('input[name="fuel_stations_repa[]"]:checked');
+    Object.values(repa_objects).forEach(repa_object => {
+        let value = repa_object.value;
+        if(value) {
+            repa.push(value);
+        }
+    });
     repa_layers.forEach(repa_element => {
         fuel_layers.forEach(fuel_element => {
             let layerID = 'poi-' + repa_element + '-' + fuel_element;
-            let repa_condition = ((repa_element == repa) || (repa == "all"));
+            let repa_condition = repa.includes(repa_element);
             let fuel_condition = ((fuel_element == type) || (type == "all"));
             let condition = repa_condition && fuel_condition;
             map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
@@ -365,6 +372,6 @@ $('input.type[type=radio]').change(function () {
     updateLayersOptions();
 });
 
-$('input.repa[type=radio]').change(function () {
+$('input.repa[type=checkbox]').change(function () {
     updateLayersOptions();
 });

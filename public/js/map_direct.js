@@ -6,7 +6,7 @@ grecaptcha.ready(function() {
 });
 
 function validateCaptcha(callback) {
-    grecaptcha.execute('6LdeNbAUAAAAAHooW_a98lAfARf1alSBCKVVmexn', {action:'validate_captcha'}).then(function(token) {
+    grecaptcha.execute('6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX', {action:'validate_captcha'}).then(function(token) {
         callback(token);
     });
 }
@@ -23,7 +23,7 @@ function consult() {
 function help() {
     $("#warning").css("visibility", "visible");
     $("#map").css({
-        "border-color": "#2f86ca",
+        "border-color": "#6bd7fc",
         "border-width": "3px",
         "border-style": "solid"
     });

@@ -112,28 +112,24 @@
 }
 
 #features {
-    top: calc(1vh + 55px);
-    width: 20vw;
-    height: 37.5vh;
+    top: calc(1% + 55px);
+    width: 19em;
+    height: 26em;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 #features h2 {
-    font-size: 1.5vw;
+    font-size: 140%;
     font-weight: 600;
 }
 
 #features h4 {
-    font-size: 0.8vw;
-}
-
-#features #pd {
-    font-size: 0.6vw;
+    font-size: 110%;
 }
 
 #warning {
     position: absolute;
-    top: calc(1vh + 55px);
+    top: calc(1% + 55px);
     color: #6bd7fc;
     font-family: Arial, sans-serif;
     overflow: auto;
@@ -142,32 +138,31 @@
 }
 
 #legend {
-    top: calc(1vh + 55px);
+    top: calc(1% + 55px);
     left: 0;
     padding: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-    width: 20vw;
-    height: 20vh;
+    width: 21em;
+    height: 11em;
 }
 
 #legend h2 {
-    font-size: 1.5vw;
+    font-size: 140%;
     font-weight: 600;
 }
 
+#legend div {
+    margin: 1%;
+}
+
 #legend img {
-    height: 3vh;
+    float: left;
 }
 
 #legend label {
-    font-size: 1.3vh;
-    line-height: 3vh;
     vertical-align: middle;
     margin-bottom: 0 !important;
-}
-
-#legend div {
-    line-height: 3vh;
+    font-size: 80%;
 }
 
 .grecaptcha-badge {

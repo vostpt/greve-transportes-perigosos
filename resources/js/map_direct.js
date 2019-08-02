@@ -23,7 +23,7 @@ function consult() {
 function help() {
     $("#warning").css("visibility", "visible");
     $("#map").css({
-        "border-color": "#2f86ca",
+        "border-color": "#6bd7fc",
         "border-width": "3px",
         "border-style": "solid"
     });
