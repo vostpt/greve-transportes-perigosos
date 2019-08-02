@@ -8,7 +8,7 @@ let attributionControl = {"obj": null};
 const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none'];
 const repa_layers = ['normal', 'sos', 'none'];
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiY290ZW1lcm8iLCJhIjoiY2p5NzQyeTdvMDc1MzNlbGNnbzh3NjVuOCJ9.cPrQc61yiHA0kOptuuZsSA';
+mapboxgl.accessToken = 'pk.eyJ1Ijoidm9zdHB0IiwiYSI6ImNqeXR3aHQxdTAyYjgzY21wbDMwaHJoaDQifQ.ql-IskzjOdAtEFvbltquaw';
 var map = new mapboxgl.Map({
     container: 'map', // container id,
     style: 'mapbox://styles/mapbox/streets-v11',
@@ -198,6 +198,13 @@ function addLayersFunctionality(layerID) {
             '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
+        let fuelIcons = "";
+        if(isHelping()) {
+            fuelIcons = "";
+        }
+        else {
+            fuelIcons = "";
+        }
         if (isHelping()) {
             description = '<div class="v-popup-content">' +
                 '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
