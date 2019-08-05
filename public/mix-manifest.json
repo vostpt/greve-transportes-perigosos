@@ -1,8 +1,9 @@
 {
-    "/js/app.js": "/js/app.js?id=6edd96b6e849feec2655",
-    "/css/app.css": "/css/app.css?id=e3b7462b15e899ec9cae",
-    "/js/map.js": "/js/map.js?id=1619f1ed411848bc4341",
-    "/js/stats.js": "/js/stats.js?id=9ab5177042a18f3606b4",
-    "/css/map.css": "/css/map.css?id=4d8a0590d603fc4aef80",
-    "/js/map_direct.js": "/js/map_direct.js?id=84df98006c6d466644e2"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/map.js": "/js/map.js",
+    "/js/map_load.js": "/js/map_load.js",
+    "/js/stats.js": "/js/stats.js",
+    "/css/map.css": "/css/map.css",
+    "/js/map_direct.js": "/js/map_direct.js"
 }

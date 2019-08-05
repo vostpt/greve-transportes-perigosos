@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="iframe-remove">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="height: 50px; padding:0" alt="Já Não Dá Para Abastecer - VOST Portugal" />

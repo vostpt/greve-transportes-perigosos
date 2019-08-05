@@ -81,48 +81,59 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/stats.js":
-/*!*******************************!*\
-  !*** ./resources/js/stats.js ***!
-  \*******************************/
+/***/ "./resources/js/map_load.js":
+/*!**********************************!*\
+  !*** ./resources/js/map_load.js ***!
+  \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function updateStats() {
-  $.getJSON("/storage/data/stats.json", function (data) {
-    $("#entries_last_hour").html(data["entries_last_hour"]);
-    $("#entries_last_day").html(data["entries_last_day"]);
-    $("#entries_total").html(data["entries_total"]);
-    $("#stations_none").html(data["stations_none"]);
-    $("#stations_no_gasoline").html(data["stations_no_gasoline"]);
-    $("#stations_no_diesel").html(data["stations_no_diesel"]);
-    $("#stations_no_lpg").html(data["stations_no_lpg"]);
-    var date = new Date();
-    var seconds = date.getSeconds();
-    var minutes = date.getMinutes();
-    var hour = date.getHours();
-    $("#last_update").html(("0" + hour).slice(-2) + 'h' + ("0" + minutes).slice(-2) + 'm' + ("0" + seconds).slice(-2) + 's');
-  });
+function inIframe() {
+  try {
+    return window.self !== window.top;
+  } catch (e) {
+    return true;
+  }
 }
 
-updateStats();
-setInterval(updateStats, 30000);
+function removeElementsByClass(className) {
+  var elements = document.getElementsByClassName(className);
+
+  while (elements.length > 0) {
+    elements[0].parentNode.removeChild(elements[0]);
+  }
+}
+
+if (inIframe()) {
+  document.getElementById("map_view").style.visibility = "visible";
+  removeElementsByClass("iframe-remove");
+  document.getElementById("map").style.top = 0;
+  document.getElementById("map").style.height = "100%";
+  document.getElementById("features").style.height = "22em";
+  document.getElementById("features-icon").style.top = "1%";
+  document.getElementById("features").style.top = "1%";
+  document.getElementById("legend-icon").style.top = "1%";
+  document.getElementById("legend").style.top = "1%";
+  document.getElementById("warning").style.top = "1%";
+} else {
+  document.getElementById("selector_view").style.visibility = "visible";
+}
 
 /***/ }),
 
-/***/ 2:
-/*!*************************************!*\
-  !*** multi ./resources/js/stats.js ***!
-  \*************************************/
+/***/ 3:
+/*!****************************************!*\
+  !*** multi ./resources/js/map_load.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\Projectos\VOST\greve-transportes-perigosos\resources\js\stats.js */"./resources/js/stats.js");
+module.exports = __webpack_require__(/*! D:\Projectos\VOST\greve-transportes-perigosos\resources\js\map_load.js */"./resources/js/map_load.js");
 
 
 /***/ })
