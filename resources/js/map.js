@@ -195,7 +195,7 @@ function updatePoints() {
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
-        map.addControl(nagivationControl.obj, "bottom-left");
+        map.addControl(nagivationControl.obj, "bottom-right");
         updateLayersOptions();
     });
 }
