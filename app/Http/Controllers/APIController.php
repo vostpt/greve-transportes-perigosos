@@ -20,8 +20,13 @@ class APIController extends Controller
             $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
             if ($ext_auth->count() > 0) {
                 $ext_auth = $ext_auth->first();
-                $stations = FuelStation::where('brand', '=', $ext_auth->brand)->get();
-                $output   = [];
+                $stations = [];
+                if ($ext_auth->brand == 'READONLY' || $ext_auth->brand == 'WRITEREAD') {
+                    $stations = FuelStation::all();
+                } else {
+                    $stations = FuelStation::where('brand', '=', $ext_auth->brand)->get();
+                }
+                $output = [];
                 foreach ($stations as $station) {
                     $output[] = [
                         'id'           => $station->id,
@@ -50,7 +55,7 @@ class APIController extends Controller
                 $fuel_station = FuelStation::where('id', '=', $request->input('id'));
                 if ($fuel_station->count() > 0) {
                     $fuel_station = $fuel_station->first();
-                    if ($fuel_station->brand == $ext_auth->brand) {
+                    if (($fuel_station->brand == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD')) {
                         $has_gasoline = \intval($request->input('has_gasoline'));
                         $has_diesel   = \intval($request->input('has_diesel'));
                         $has_lpg      = \intval($request->input('has_lpg'));
