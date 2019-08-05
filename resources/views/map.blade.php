@@ -6,27 +6,23 @@
 
 @section('content')
 <div id="selector_view">
-    <div class="container">
-        <div class="row col d-flex align-items-center justify-content-center">
-            <img src="/img/logo.png" style="width:20vw" />
-        </div>
+    <div class="container text-center">
+        <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
         <div class="row text-center">
-            <div class="col-3 offset-3">
+            <div class="col-md-3 offset-md-3" style="margin-top: 0.5em;">
                 <button type="button" class="btn btn-primary btn-lg" onclick="consult()">Consultar</button>
             </div>
-            <div class="col-3">
+            <div class="col-md-3" style="margin-top: 0.5em;">
                 <button type="button" class="btn btn-primary btn-lg" onclick="help()">Ajudar</button>
             </div>
-        </div>
-    </div>
-    <div class="navbar navbar-default navbar-fixed-bottom">
-        <div style="position: fixed; bottom:10px; width:100%;" class="d-flex align-items-center justify-content-center">
-            <img src="/img/logo-vost.png" style="width:5vw" />
         </div>
     </div>
 </div>
 <div id="map_view" style="visibility: hidden;">
     <div id="map"></div>
+    <div class='map-overlay' id="features-icon">
+        <a href="#" onclick="toggleFeatures()"><i class="fas fa-cog"></i></a>
+    </div>
     <div class='map-overlay' id='features'>
         <h2>Opções</h2>
         <div id='pd'>
@@ -91,6 +87,9 @@
             <hr />
             <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>
         </div>
+    </div>
+    <div class='map-overlay' id="legend-icon">
+        <a href="#" onclick="toggleLegends()"><i class="fas fa-question"></i></a>
     </div>
     <div class='map-overlay' id='legend'>
         <h2>Legenda</h2>

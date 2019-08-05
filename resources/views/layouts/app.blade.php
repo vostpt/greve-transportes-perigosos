@@ -19,7 +19,7 @@
     <header>
         <nav class="navbar navbar-expand-md navbar-dark bg-primary">
             <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'VOST') }}
+                <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="height: 50px; padding:0" alt="Já Não Dá Para Abastecer - VOST Portugal" />
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -30,10 +30,10 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('map') }}">{{ __('Map') }}</a>
+                        <a class="nav-link" href="{{ route('map') }}">{{ __('Mapa') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('stats') }}">{{ __('Stats') }}</a>
+                        <a class="nav-link" href="{{ route('stats') }}">{{ __('Estatísticas') }}</a>
                     </li>
                 </ul>
 
@@ -41,7 +41,7 @@
                 <ul class="navbar-nav ml-auto">
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sessão') }}</a>
                     </li>
                     @else
                     <li class="nav-item">

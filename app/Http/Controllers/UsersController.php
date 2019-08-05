@@ -55,7 +55,7 @@ class UsersController extends Controller
     public function fetch_not_verified()
     {
         $users_final = [];
-        $users       = User::where('email_verified_at', '=', 'NULL')->get();
+        $users       = User::whereNull('email_verified_at')->get();
         foreach ($users as $user) {
             $users_final[] = [
                 'id'    => $user->id,
