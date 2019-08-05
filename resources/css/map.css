@@ -12,7 +12,7 @@ body {
 
 .mapboxgl-popup {
     width: 35vw !important;
-    max-width: 35vw !important;
+    max-width: 400px !important;
 }
 
 .mapboxgl-popup-content {
@@ -50,7 +50,7 @@ body {
 
 .v-popup-header h5 {
     font-weight: 600;
-    font-size: 0.8em;
+    font-size: 140%;
     padding: 0;
     margin: 0;
 }
