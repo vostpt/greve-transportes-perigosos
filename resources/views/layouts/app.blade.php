@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'VOST') }}</title>
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ mix('/css/custom.css') }}">
     @yield('styles')
 </head>
 
@@ -34,6 +34,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('stats') }}">{{ __('Estatísticas') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">{{ __('Sobre') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('media') }}">{{ __('Media') }}</a>
                     </li>
                 </ul>
 

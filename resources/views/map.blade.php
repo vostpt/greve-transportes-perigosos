@@ -9,11 +9,17 @@
     <div class="container text-center">
         <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
         <div class="row text-center">
-            <div class="col-md-3 offset-md-3" style="margin-top: 0.5em;">
+            <div class="col-md" style="margin-top: 0.5em;">
                 <button type="button" class="btn btn-primary btn-lg" onclick="consult()">Consultar</button>
             </div>
-            <div class="col-md-3" style="margin-top: 0.5em;">
+            <div class="col-md" style="margin-top: 0.5em;">
                 <button type="button" class="btn btn-primary btn-lg" onclick="help()">Ajudar</button>
+            </div>
+            <div class="col-md d-block d-lg-none" style="margin-top: 0.5em;">
+                <a href="{{ route('stats') }}" class="btn btn-primary btn-lg">Estatísticas</a>
+            </div>
+            <div class="col-md d-block d-lg-none" style="margin-top: 0.5em;">
+                <a href="{{ route('about') }}" class="btn btn-primary btn-lg">Sobre</a>
             </div>
         </div>
     </div>

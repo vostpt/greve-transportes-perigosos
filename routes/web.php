@@ -20,6 +20,14 @@ Route::get('/stats', function () {
     return view('stats');
 })->name('stats');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/media', function () {
+    return view('media');
+})->name('media');
+
 
 
 Auth::routes(['register' => false, 'verify' => true]);

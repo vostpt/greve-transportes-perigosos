@@ -23,19 +23,12 @@ function consult() {
 }
 
 function help() {
-    $("#warning").css("visibility", "visible");
-    $("#map").css({
-        "border-color": "#6bd7fc",
-        "border-width": "3px",
-        "border-style": "solid"
-    });
     helping = true;
     $("#selector_view").css("visibility", "hidden");
     $("#map_view").css("visibility", "visible");
 }
 
 function selector() {
-    $("#warning").css("visibility", "hidden");
     $("#map_view").css("visibility", "hidden");
     $("#selector_view").css("visibility", "visible");
 }

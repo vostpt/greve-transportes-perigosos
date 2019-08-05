@@ -3,10 +3,8 @@
 @endsection
 
 @section('content')
-<div class="container">
-    <div class="row col d-flex align-items-center justify-content-center">
-        <img src="/img/logo.png" style="width:20vw" />
-    </div>
+<div class="container text-center">
+    <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     <div class="row">
         <h2 style="margin: 0 auto;">Estatisticas</h2>
     </div>
