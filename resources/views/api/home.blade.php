@@ -17,6 +17,111 @@
 <body>
     <h1 class="text-center">API v1</h1>
     <div class="container" id="fetcher">
+        <h2>Instructions</h2>
+        <div class="accordion" id="API_USAGE">
+            <div class="card">
+                <div class="card-header" id="API_ACCESS">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#API_ACCESS_COLLAPSE" aria-expanded="false"
+                            aria-controls="API_ACCESS_COLLAPSE">
+                            How to use API v1
+                        </button>
+                    </h2>
+                </div>
+                <div id="API_ACCESS_COLLAPSE" class="collapse" aria-labelledby="API_ACCESS" data-parent="#API_USAGE">
+                    <div class="card-body">
+                        <h2>How to use API v1</h2>
+                        <p>First you need to contact hello@vost.pt for credentials.</p>
+                        <p>You can use the API through the endpoints or through the manual access.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="API_FETCH">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                            data-target="#API_FETCH_COLLAPSE" aria-expanded="false" aria-controls="API_FETCH_COLLAPSE">
+                            Endpoint for Data Fetching
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="API_FETCH_COLLAPSE" class="collapse" aria-labelledby="API_FETCH" data-parent="#API_USAGE">
+                    <div class="card-body">
+                        <h2>Endpoint for Data Fetching</h2>
+                        <code>/api/v1/fetch</code>
+                        <h3>CURL</h3>
+                        <code>
+                            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT"' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/fetch
+                        </code>
+                        <h3>Parameters</h3>
+                        <p><b>key:</b> Access key given by VOSTPT</p>
+                        <p><b>secret:</b> Access secret given by VOSTPT</p>
+                        <h3>Response (JSON)</h3>
+                        <h4>On Success</h4>
+                        <code>
+                            [
+                                {
+                                    id: ...,
+                                    name: ...,
+                                    has_gasoline: ...,
+                                    has_diesel: ...,
+                                    has_lpg: ...,
+                                    lat: ...,
+                                    long: ...
+                                },
+                            ...
+                            ]
+                        }
+                        </code>
+                        <h4>On Fail</h4>
+                        <code>
+                            []
+                        </code>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="API_PUSH">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                            data-target="#API_PUSH_COLLAPSE" aria-expanded="false" aria-controls="API_PUSH_COLLAPSE">
+                            Endpoint for Data Pushing
+                        </button>
+                    </h2>
+                </div>
+                <div id="API_PUSH_COLLAPSE" class="collapse" aria-labelledby="API_PUSH" data-parent="#API_USAGE">
+                    <div class="card-body">
+                        <h2>Endpoint for Data Pushing</h2>
+                        <code>/api/v1/push</code>
+                        <h3>CURL</h3>
+                        <code>
+                            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT","id":12345, "has_gasoline":0, "has_diesel": 0, "has_lpg": 0}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/push
+                        </code>
+                        <h3>Parameters</h3>
+                        <p><b>key:</b> Access key given by VOSTPT</p>
+                        <p><b>secret:</b> Access secret given by VOSTPT</p>
+                        <p><b>id:</b> ID of Fuel Station (found by fetching)</p>
+                        <p><b>has_gasoline:</b> 0 or below if station has no gasoline, 1 or above if station has
+                            gasoline</p>
+                        <p><b>has_diesel:</b> 0 or below if station has no diesel, 1 or above if station has diesel</p>
+                        <p><b>has_lpg:</b> 0 or below if station has no lpg, 1 or above if station has lpg</p>
+                        <h3>Response (JSON)</h3>
+                        <h4>On Success</h4>
+                        <code>
+                            {"success" => 1}
+                        </code>
+                        <h4>On Fail</h4>
+                        <code>
+                            {"success" => 0}
+                        </code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <h2>Manual Access</h2>
         <div class="form-group">
             <label for="inputKey">Key</label>
             <input type="text" name="key" class="form-control" id="inputKey">
@@ -26,61 +131,6 @@
             <input type="text" name="secret" class="form-control" id="inputSecret">
         </div>
         <a href="#" onclick="fetch()" class="btn btn-primary">Submit</a>
-        <hr />
-        <h1>How to use API v1</h1>
-        <p>Contact hello@vost.pt for credentials for access</p>
-        <h2>Endpoint for Data Pushing</h2>
-        <code>/api/v1/push</code>
-        <h3>CURL</h3>
-        <code>
-            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT","id":12345, "has_gasoline":0, "has_diesel": 0, "has_lpg": 0}' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/push
-        </code>
-        <h3>Parameters</h3>
-        <p><b>key:</b> Access key given by VOSTPT</p>
-        <p><b>secret:</b> Access secret given by VOSTPT</p>
-        <p><b>id:</b> ID of Fuel Station (found by fetching)</p>
-        <p><b>has_gasoline:</b> 0 or below if station has no gasoline, 1 or above if station has gasoline</p>
-        <p><b>has_diesel:</b> 0 or below if station has no diesel, 1 or above if station has diesel</p>
-        <p><b>has_lpg:</b> 0 or below if station has no lpg, 1 or above if station has lpg</p>
-        <h3>Response (JSON)</h3>
-        <h4>On Success</h4>
-        <code>
-            {"success" => 1}
-        </code>
-        <h4>On Fail</h4>
-        <code>
-            {"success" => 0}
-        </code>
-        <h2>Endpoint for Data Fetching</h2>
-        <code>/api/v1/fetch</code>
-        <h3>CURL</h3>
-        <code>
-            curl -d '{"key":"Key Given by VOSTPT","secret":"Secret Given by VOSTPT"' -H "Content-Type: application/json" -X POST http://localhost:8000/api/v1/fetch
-        </code>
-        <h3>Parameters</h3>
-        <p><b>key:</b> Access key given by VOSTPT</p>
-        <p><b>secret:</b> Access secret given by VOSTPT</p>
-        <h3>Response (JSON)</h3>
-        <h4>On Success</h4>
-        <code>
-            [
-                {
-                    id: ...,
-                    name: ...,
-                    has_gasoline: ...,
-                    has_diesel: ...,
-                    has_lpg: ...,
-                    lat: ...,
-                    long: ...
-                },
-            ...
-            ]
-        }
-        </code>
-        <h4>On Fail</h4>
-        <code>
-            []
-        </code>
     </div>
     <div class="container" id="table" style="display:none;">
         <table id="fetched_list" class="table table-striped table-bordered" style="width:100%">
