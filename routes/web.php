@@ -73,7 +73,7 @@ Route::prefix('externalauth')->name('externalauth.')->middleware('auth')->group(
     Route::post('delete', 'ExternalAuthController@delete')->name('delete');
 });
 
-Route::prefix('api/v1')->name('api.')->middleware('auth')->group(function () {
+Route::prefix('api/v1')->name('api.')->group(function () {
     Route::get('/', 'APIController@home')->name('home');
     Route::post('fetch', 'APIController@fetch')->name('fetch');
     Route::post('push', 'APIController@push')->name('push');
