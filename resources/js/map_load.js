@@ -23,7 +23,6 @@ if(inIframe()) {
     document.getElementById("features").style.top = "1%";
     document.getElementById("legend-icon").style.top = "1%";
     document.getElementById("legend").style.top = "1%";
-    document.getElementById("warning").style.top = "1%";
 }
 else {
     document.getElementById("selector_view").style.visibility = "visible"; 

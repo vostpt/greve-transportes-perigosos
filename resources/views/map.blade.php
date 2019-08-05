@@ -114,9 +114,6 @@
             <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- Posto de Combustível REPA </label><br />
         </div>
     </div>
-    <div id='warning' style="visibility: hidden">
-        <h2 style="font-weight: 600; text-shadow: 1px 1px #000000;">EM MODO DE AJUDA</h2>
-    </div>
 </div>
 @endsection
 

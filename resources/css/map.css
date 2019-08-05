@@ -148,16 +148,6 @@ body {
     font-size: 110%;
 }
 
-#warning {
-    position: absolute;
-    top: calc(1% + 76px);
-    color: #6bd7fc;
-    font-family: Arial, sans-serif;
-    overflow: auto;
-    text-align: center;
-    width: 100%;
-}
-
 #legend {
     top: calc(1% + 76px);
     left: -21em;
