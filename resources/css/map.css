@@ -1,14 +1,18 @@
+body {
+    overflow: hidden;
+}
+
 #map {
     position: absolute;
-    top: 55px;
+    top: 76px;
     bottom: 0;
     width: 100%;
-    height: calc(100%-55px)
+    height: calc(100%-76px);
 }
 
 .mapboxgl-popup {
-    width: 20% !important;
-    max-width: 20% !important;
+    width: 35vw !important;
+    max-width: 35vw !important;
 }
 
 .mapboxgl-popup-content {
@@ -45,14 +49,14 @@
 }
 
 .v-popup-header h5 {
-    font-weight: 800;
-    font-size: 1.5vh;
+    font-weight: 600;
+    font-size: 0.8em;
     padding: 0;
     margin: 0;
 }
 
 .v-popup-header small {
-    font-weight: 800;
+    font-weight: 600;
 }
 
 .v-popup-header a {
@@ -62,8 +66,8 @@
 }
 
 .v-popup-body {
-    padding: 1.5vh;
-    font-size: 1.5vh
+    padding: 0.8em;
+    font-size: 0.8em;
 }
 
 .v-popup-body .v-fuel-info {
@@ -74,13 +78,13 @@
 
 .v-popup-body .v-fuel-info h6 {
     margin-top: 10px;
-    font-weight: 600;
+    font-weight: 400;
     font-size: 100%;
 }
 
 .v-popup-body .v-fuel-info img {
-    width: 4vw;
-    margin: 0 auto;
+    width: 6em;
+    margin-left: -0.6em;
 }
 
 .v-popup-body.directions {
@@ -101,7 +105,7 @@
 .map-overlay {
     position: absolute;
     bottom: 0;
-    right: 0;
+    right: 0px;
     background: rgba(255, 255, 255, 0.8);
     margin-right: 20px;
     margin-left: 20px;
@@ -111,11 +115,28 @@
     padding: 5px 5px 5px 5px;
 }
 
+#features-icon {
+    position: absolute;
+    top: calc(1% + 76px);
+    right: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    width: 2em;
+    height: 2.5em;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 0.5em 0px 0px 0.5em;
+    z-index: 3;
+    margin: 0;
+}
+
 #features {
-    top: calc(1% + 55px);
+    top: calc(1% + 76px);
+    right: -19em;
     width: 19em;
     height: 26em;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 0;
+    margin: 0;
 }
 
 #features h2 {
@@ -129,7 +150,7 @@
 
 #warning {
     position: absolute;
-    top: calc(1% + 55px);
+    top: calc(1% + 76px);
     color: #6bd7fc;
     font-family: Arial, sans-serif;
     overflow: auto;
@@ -138,12 +159,28 @@
 }
 
 #legend {
-    top: calc(1% + 55px);
-    left: 0;
+    top: calc(1% + 76px);
+    left: -21em;
     padding: 10px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
     width: 21em;
     height: 11em;
+    border-top-right-radius: 0;
+    margin: 0;
+}
+
+#legend-icon {
+    position: absolute;
+    top: calc(1% + 76px);
+    left: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    width: 2em;
+    height: 2.5em;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    padding: 0.5em 0px 0px 0.5em;
+    z-index: 3;
+    margin: 0;
 }
 
 #legend h2 {
@@ -167,4 +204,9 @@
 
 .grecaptcha-badge {
     visibility: hidden;
+}
+
+#legend-icon a,
+#features-icon a {
+    color: #212529 !important;
 }

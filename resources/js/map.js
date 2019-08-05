@@ -1,10 +1,12 @@
 let points = [];
 let promises = [];
 const customAttributions = [
-    'Thanks to <a href="https://waze.com/pt" >Waze</a> for providing important data and permission to use their services',
+    'Thanks to <a href="https://www.facebook.com/WazePortugal/">Waze Portugal</a> for providing important data and permission to use their services',
     'This site is protected by reCAPTCHA and the Google <a href="https://policies.google.com/privacy">Privacy Policy</a> and <a href="https://policies.google.com/terms">Terms of Service</a> apply',
 ];
-let attributionControl = {"obj": null};
+let attributionControl = {
+    "obj": null
+};
 const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none'];
 const repa_layers = ['normal', 'sos', 'none'];
 
@@ -199,48 +201,27 @@ function addLayersFunctionality(layerID) {
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
         let fuelIcons = "";
-        let count = 0;
-        let columnType = "";
-        if(e.features[0].properties.sell_gasoline) {
-            count++;
-        }
-        if(e.features[0].properties.sell_diesel) {
-            count++;
-        }
-        if(e.features[0].properties.sell_lpg) {
-            count++;
-        }
-        if(count==1) {
-            columnType = "col-md-12";
-        }
-        else if(count==2) {
-            columnType = "col-md-6";
-        }
-        else {
-            columnType = "col-md-4";
-        }
-        if(isHelping()) {
+        if (isHelping()) {
             fuelIcons = "";
-            if(e.features[0].properties.sell_gasoline) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>';
+            if (e.features[0].properties.sell_gasoline) {
+                fuelIcons += '<div class="col-md v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>';
             }
-            if(e.features[0].properties.sell_diesel) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASÓLEO</h6></div>';
+            if (e.features[0].properties.sell_diesel) {
+                fuelIcons += '<div class="col-md v-fuel-info diesel"><a href="#" onclick="swapIcon(this)">' + dieselIcon + '</a><h6>GASÓLEO</h6></div>';
             }
-            if(e.features[0].properties.sell_lpg) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>';
+            if (e.features[0].properties.sell_lpg) {
+                fuelIcons += '<div class="col-md v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>';
             }
-        }
-        else {
+        } else {
             fuelIcons = "";
-            if(e.features[0].properties.sell_gasoline) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>';
+            if (e.features[0].properties.sell_gasoline) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>';
             }
-            if(e.features[0].properties.sell_diesel) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info">' + dieselIcon + '<h6>GASÓLEO</h6></div>';
+            if (e.features[0].properties.sell_diesel) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + dieselIcon + '<h6>GASÓLEO</h6></div>';
             }
-            if(e.features[0].properties.sell_lpg) {
-                fuelIcons += '<div class="'+columnType+' v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>';
+            if (e.features[0].properties.sell_lpg) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>';
             }
         }
         if (isHelping()) {
@@ -248,19 +229,19 @@ function addLayersFunctionality(layerID) {
                 '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body" style="background-color:#afe2fb">' +
                 '<div class="row">' +
-                fuelIcons + 
+                fuelIcons +
                 '</div>' +
-                '<div class="row"><div class="col-md-12">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>' +
-                '<div class="row"><div class="col-md-12">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
+                '<div class="row"><div class="col-md">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>' +
+                '<div class="row"><div class="col-md">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
                 '</div>' +
-                '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"><h5>VALIDAR</h5></a></div>' +
+                '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"><h5 class="popup_submit_text">VALIDAR</h5></a></div>' +
                 '</div>';
         } else {
             description = '<div class="v-popup-content">' +
                 '<div class="v-popup-header" style="background-color:' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body">' +
                 '<div class="row">' +
-                fuelIcons + 
+                fuelIcons +
                 '</div></div>' +
                 '<div class="v-popup-header" style="background-color:' + e.features[0].properties.popup_color + '"><h5>OBTER DIREÇÕES</h5></div>' +
                 '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></a></div>' +
@@ -338,6 +319,8 @@ map.on('load', function () {
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
+        nav_control.obj = new mapboxgl.NavigationControl(nav_control.options)
+        map.addControl(nav_control.obj, nav_control.position);
         updateLayersOptions();
         setInterval(updatePoints, 30000);
     });
@@ -353,7 +336,7 @@ function updateLayersOptions() {
     let repa_objects = $('input[name="fuel_stations_repa[]"]:checked');
     Object.values(repa_objects).forEach(repa_object => {
         let value = repa_object.value;
-        if(value) {
+        if (value) {
             repa.push(value);
         }
     });
