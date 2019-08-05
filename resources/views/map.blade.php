@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="selector_view">
+<div id="selector_view" style="visibility: hidden;">
     <div class="container text-center">
         <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
         <div class="row text-center">
@@ -66,26 +66,31 @@
             <h4>Postos REPA</h4>
             <fieldset id="fuel_stations_repa">
                 <div class="form-check">
-                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="none" id="fuel_stations_repa_no" checked>
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="none"
+                        id="fuel_stations_repa_no" checked>
                     <label class="form-check-label" for="fuel_stations_repa_no">
                         Postos Não REPA
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="normal" id="fuel_stations_repa_normal" checked>
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="normal"
+                        id="fuel_stations_repa_normal" checked>
                     <label class="form-check-label" for="fuel_stations_repa_normal">
                         Postos REPA - Geral
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="sos" id="fuel_stations_repa_sos" checked>
+                    <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="sos"
+                        id="fuel_stations_repa_sos" checked>
                     <label class="form-check-label" for="fuel_stations_repa_sos">
                         Postos REPA - Prioritários
                     </label>
                 </div>
             </fieldset>
-            <hr />
-            <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>
+            <div class="iframe-remove">
+                <hr />
+                <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>
+            </div>
         </div>
     </div>
     <div class='map-overlay' id="legend-icon">
@@ -116,6 +121,7 @@
 @endsection
 
 @section('javascript')
+<script src="{{ mix('/js/map_load.js') }}" charset="utf-8"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=6LdeNbAUAAAAAHooW_a98lAfARf1alSBCKVVmexn"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
 <script src="{{ mix('/js/map_direct.js') }}" charset="utf-8"></script>

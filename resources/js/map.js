@@ -7,6 +7,9 @@ const customAttributions = [
 let attributionControl = {
     "obj": null
 };
+let nagivationControl = {
+    "obj": null
+};
 const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none'];
 const repa_layers = ['normal', 'sos', 'none'];
 
@@ -175,6 +178,7 @@ function updatePoints() {
                 ]);
             });
         });
+        map.removeControl(NavigationControl.obj);
         map.removeControl(attributionControl.obj);
         delete attributionControl.obj;
         attributionControl.obj = new mapboxgl.AttributionControl({
@@ -182,6 +186,7 @@ function updatePoints() {
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
+        map.addControl(nagivationControl.obj, "bottom-left");
         updateLayersOptions();
     });
 }
@@ -268,6 +273,8 @@ function addLayersFunctionality(layerID) {
 }
 
 map.on('load', function () {
+    $(".mapboxgl-ctrl-logo").css("float", "left");
+    $(".mapboxgl-ctrl-bottom-left .mapboxgl-ctrl").append("<a style=\"cursor: pointer;\" target=\"_blank\" rel=\"noopener nofollow\"  href=\"https://twitter.com/vostpt\"><img src=\"/img/VOSTPT_LETTERING_COLOR.png\" style=\"height: 42px; margin-top: -15px; margin-left: 10px;\"/></a>");
     promises.push(loadBrandImage('REPA', '/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));
     promises.push(loadBrandImage('NONE', '/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
     promises.push(loadBrandImage('PARTIAL', '/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
@@ -319,14 +326,18 @@ map.on('load', function () {
             customAttribution: getAttributions()
         });
         map.addControl(attributionControl.obj);
-        nav_control.obj = new mapboxgl.NavigationControl(nav_control.options)
-        map.addControl(nav_control.obj, nav_control.position);
+        nagivationControl.obj = new mapboxgl.NavigationControl({
+            visualizePitch: true,
+            showZoom: true,
+            showCompass: true
+        });
+        map.addControl(nagivationControl.obj, 'bottom-right');
         updateLayersOptions();
         setInterval(updatePoints, 30000);
     });
 });
 map.on('error', function (error) {
-    console.log('MAP LOAD ERROR')
+    console.log('MAP LOAD ERROR');
     console.log(error);
 });
 

@@ -1,14 +1,5 @@
 let helping = false;
 let popup = null;
-let nav_control = {
-    obj: null,
-    position: 'bottom-right',
-    options: {
-        visualizePitch: true,
-        showZoom: true,
-        showCompass: true
-    }
-};
 
 grecaptcha.ready(function () {
     console.log("RECAPTCHA LOADED");
@@ -108,10 +99,6 @@ function toggleLegends(force_hide = false) {
 function toggleFeatures(force_hide = false) {
     let isFeaturesShowing = $("#features").css("right") == "0px";
     if (isFeaturesShowing || force_hide) {
-        if(map) {
-            nav_control.obj = new mapboxgl.NavigationControl(nav_control.options);
-            map.addControl(nav_control.obj, nav_control.position);
-        }
         $("#features").animate({
             right: "-19em",
         }, 500);
@@ -120,11 +107,6 @@ function toggleFeatures(force_hide = false) {
         }, 500);
     } else {
         toggleLegends(true);
-        if(map) {
-            map.removeControl(nav_control.obj);
-            delete nav_control.obj;
-            nav_control.obj = null;
-        }
         $("#features").animate({
             right: "0px",
         }, 500);
