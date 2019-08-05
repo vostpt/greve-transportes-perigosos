@@ -39,20 +39,25 @@ function loadPoints() {
                 let with_none = (!with_gasoline) && (!with_diesel) && (!with_lpg);
                 let icon = '';
                 let popup_color = '';
+                let background_color = '';
                 let priority = 0;
                 let brand = fuelStation.brand;
                 if (fuelStation.repa == "SOS") {
                     fuelStation.repa = "sos";
                     icon = 'REPA';
                     priority = 2;
-                    popup_color = '#2f86ca';
+                    popup_color = '0070bb';
+                    background_color = "a9aeff";
                     brand = brand + " (REPA - Veículos Prioritários)";
+                    priority = 2;
                 } else if (fuelStation.repa == "Normal") {
                     fuelStation.repa = "normal";
                     icon = 'REPA';
                     priority = 1;
-                    popup_color = '#2f86ca';
+                    popup_color = '0070bb';
+                    background_color = "a9aeff";
                     brand = brand + " (REPA - Todos os Veículos)";
+                    priority = 1;
                 } else {
                     let count = 0;
                     if (with_gasoline || (!fuelStation.sell_gasoline)) {
@@ -66,13 +71,16 @@ function loadPoints() {
                     }
                     if (count == 3) {
                         icon = 'ALL';
-                        popup_color = '#65ac3d';
+                        popup_color = '006837';
+                        background_color = "53ea9f";
                     } else if (count == 0) {
                         icon = 'NONE';
-                        popup_color = '#b32e25';
+                        popup_color = 'c1272c';
+                        background_color = "ff838b";
                     } else {
                         icon = 'PARTIAL';
-                        popup_color = '#f3a433';
+                        popup_color = 'f7921e';
+                        background_color = "f1b87d";
                     }
                 }
                 points.push({
@@ -98,7 +106,8 @@ function loadPoints() {
                         "has_lpg": fuelStation.has_lpg,
                         "icon": icon,
                         "popup_color": popup_color,
-                        "priority": 0
+                        "background_color": background_color,
+                        "priority": priority
                     }
                 });
             });
@@ -178,7 +187,7 @@ function updatePoints() {
                 ]);
             });
         });
-        map.removeControl(NavigationControl.obj);
+        map.removeControl(nagivationControl.obj);
         map.removeControl(attributionControl.obj);
         delete attributionControl.obj;
         attributionControl.obj = new mapboxgl.AttributionControl({
@@ -231,25 +240,30 @@ function addLayersFunctionality(layerID) {
         }
         if (isHelping()) {
             description = '<div class="v-popup-content">' +
-                '<div class="v-popup-header" style="background-color:#6bd7fc"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                '<div class="v-popup-body" style="background-color:#afe2fb">' +
+                '<div class="v-popup-header" style="background-color:#85d5f8; text-align: center;"><h5>ADICIONAR INFORMAÇÃO</h5></div>' +
+                '<div class="v-popup-body" style="background-color:#b8e1f8">' +
                 '<div class="row">' +
                 fuelIcons +
                 '</div>' +
-                '<div class="row"><div class="col-md">Por favor indica que combústiveis não estão disponiveis na ' + fuelStationName + '.</div></div>' +
-                '<div class="row"><div class="col-md">Carrega nas imagens deixando as disponiveis mais nitidas.</div></div>' +
+                '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />' +
+                '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>'+
+                '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
+                '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>' +
                 '</div>' +
-                '<div class="v-popup-header" style="background-color:#6bd7fc"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"><h5 class="popup_submit_text">VALIDAR</h5></a></div>' +
+                '<div class="v-popup-header" style="background-color:#85d5f8"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"><h5 class="popup_submit_text">VALIDAR</h5></a></div>' +
                 '</div>';
         } else {
             description = '<div class="v-popup-content">' +
-                '<div class="v-popup-header" style="background-color:' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
-                '<div class="v-popup-body">' +
+                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                '<div class="v-popup-body" style="background-color: #' + e.features[0].properties.background_color + '">' +
                 '<div class="row">' +
                 fuelIcons +
-                '</div></div>' +
-                '<div class="v-popup-header" style="background-color:' + e.features[0].properties.popup_color + '"><h5>OBTER DIREÇÕES</h5></div>' +
-                '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer"><img src="/img/map/map_blur.png"></a></div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">'+
+                '<img src="/img/map/map_separation_'+e.features[0].properties.background_color+'.png" style="width: 100%;" />'+
+                '</a></div>' +
+                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"><h5>OBTER DIREÇÕES</h5></a></div>' +
                 '</div>';
         }
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
