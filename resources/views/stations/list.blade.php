@@ -127,12 +127,6 @@
                         else {
                             json.data[index]["sell_lpg"] = '<i class="fas fa-times"></i>';
                         }
-                        if(json.data[index]["repa"] == 1) {
-                            json.data[index]["repa"] = '<i class="fas fa-check"></i>';
-                        }
-                        else {
-                            json.data[index]["repa"] = '<i class="fas fa-times"></i>';
-                        }
                         json.data[index]["map"] = '<a href="https://www.waze.com/ul?ll='+json.data[index]["lat"]+'%2C'+json.data[index]["long"]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">Ver no Mapa</a>';
                     });
                     return json.data;
