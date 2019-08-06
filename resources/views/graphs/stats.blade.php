@@ -11,16 +11,29 @@
             -webkit-user-select: none;
             -ms-user-select: none;
         }
+
+        .flex-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .graph {
+            width: 50%;
+            height: 400px;
+            min-width: 400px;
+        }
     </style>
 
 </head>
 
 <body>
-    <div style="width:50%;float:left">
-        <canvas id="stations-chart-area"></canvas>
-    </div>
-    <div style="width:50%;float:right">
-        <canvas id="types-chart-area"></canvas>
+    <div class="flex-container">
+        <div class="graph">
+            <canvas id="stations-chart-area"></canvas>
+        </div>
+        <div class="graph">
+            <canvas id="types-chart-area"></canvas>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels" charset="utf-8"></script>
