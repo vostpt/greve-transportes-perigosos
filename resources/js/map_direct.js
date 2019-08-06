@@ -17,18 +17,27 @@ function consult() {
     $("#map").css({
         "border": "0"
     });
+    $("html,body").css({
+        "overflow-y": "hidden"
+    });
     helping = false;
     $("#selector_view").css("visibility", "hidden");
     $("#map_view").css("visibility", "visible");
 }
 
 function help() {
+    $("html,body").css({
+        "overflow-y": "hidden"
+    });
     helping = true;
     $("#selector_view").css("visibility", "hidden");
     $("#map_view").css("visibility", "visible");
 }
 
 function selector() {
+    $("html,body").css({
+        "overflow-y": "auto"
+    });
     $("#map_view").css("visibility", "hidden");
     $("#selector_view").css("visibility", "visible");
 }

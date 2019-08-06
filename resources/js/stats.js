@@ -1,5 +1,5 @@
 function updateStats() {
-    document.getElementById('global_stats').contentWindow.location.reload();
+    document.getElementById('global_stats').src = "/graphs/stats";
     $.getJSON( "/storage/data/stats.json", (data) => {
         $("#entries_last_hour").html(data["entries_last_hour"]);
         $("#entries_last_day").html(data["entries_last_day"]);

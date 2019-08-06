@@ -31,12 +31,12 @@ class Entry extends Model
 
     public function scopeLastHour($query)
     {
-        return $query->whereTime('created_at', '<=', \Carbon\Carbon::now()->subHour());
+        return $query->where('created_at', '>=', \Carbon\Carbon::now()->subHour());
     }
 
     public function scopeLastDay($query)
     {
-        return $query->whereTime('created_at', '<=', \Carbon\Carbon::now()->subDay());
+        return $query->where('created_at', '>=', \Carbon\Carbon::now()->subDay());
     }
 
     public function scopeNotUsed($query)
