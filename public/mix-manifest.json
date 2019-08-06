@@ -1,10 +1,11 @@
 {
     "/js/app.js": "/js/app.js?id=6edd96b6e849feec2655",
     "/css/app.css": "/css/app.css?id=58a42294d6f77b119aaa",
+    "/js/graph_stats.js": "/js/graph_stats.js?id=f11bef3860a38161682e",
     "/js/map.js": "/js/map.js?id=37eaeb00c74631fc03fb",
-    "/js/map_load.js": "/js/map_load.js?id=4f3e29bf5a48f7a9f51b",
-    "/js/stats.js": "/js/stats.js?id=9ab5177042a18f3606b4",
-    "/css/map.css": "/css/map.css?id=75d8b3b924bd954ba54e",
+    "/js/map_load.js": "/js/map_load.js?id=67a6f3b0d1eb15051183",
+    "/js/stats.js": "/js/stats.js?id=b1ed453fc13dfcbbf396",
+    "/css/map.css": "/css/map.css?id=8e3090c0c541a7b6e3fc",
     "/css/custom.css": "/css/custom.css?id=570fecf2335d3da09d0f",
     "/js/map_direct.js": "/js/map_direct.js?id=b0cf694e410d51efe94a"
 }
