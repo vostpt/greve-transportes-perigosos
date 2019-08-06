@@ -6,39 +6,16 @@
 <div class="container text-center">
     <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     <div class="row">
-        <h2 style="margin: 0 auto;">Estatisticas</h2>
+        <iframe id="global_stats" style="width:100%;min-height:30vh;border: 0;" src="/graphs/stats"></iframe>
     </div>
-    <div class="row">
-        <p><b>Número de Entradas (Última Hora):</b> <span id="entries_last_hour">A carregar</span></p><br/>
+    <div class="col-md" style="margin-top: 0.5em;">
+        <p class="btn btn-primary btn-lg">Número de Submissões (Última Hora): <span id="entries_last_hour">Loading...</span></p>
     </div>
-    <div class="row">
-        <p><b>Número de Entradas (Último Dia):</b> <span id="entries_last_day">A carregar</span></p><br/>
+    <div class="col-md" style="margin-top: 0.5em;">
+        <p class="btn btn-primary btn-lg">Número de Submissões (Último Dia): <span id="entries_last_day">Loading...</span></p>
     </div>
-    <div class="row">
-        <p><b>Número de Entradas (Totais):</b> <span id="entries_total">A carregar</span></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Número de Postos de Combústivel Sem Nenhum Combustível Disponivel:</b> <span id="stations_none">A carregar</span></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Número de Postos de Combústivel Sem Gasolina Combustível Disponivel:</b> <span id="stations_no_gasoline">A carregar</span></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Número de Postos de Combústivel Sem Gasóleo Combustível Disponivel:</b> <span id="stations_no_diesel">A carregar</span></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Número de Postos de Combústivel Sem GPL Combustível Disponivel:</b> <span id="stations_no_lpg">A carregar</span></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Atenção, Postos de Combústivel sem Gasolina, sem Gasóleo e sem GPL, são contabilizados para cada uma das ultimas 3 categorias exatamente acima.</b></p><br/>
-    </div>
-    <div class="row">
-        <p><b>Última atualização às: </b> <span id="last_update">A carregar</span></p>
-    </div>
-</div>
-<div class="navbar navbar-default navbar-fixed-bottom">
-    <div style="position: fixed; bottom:10px; width:100%;" class="d-flex align-items-center justify-content-center">
-        <img src="/img/logo-vost.png" style="width:5vw" />
+    <div class="col-md" style="margin-top: 0.5em;">
+        <p class="btn btn-primary btn-lg">Número de Submissões (Total): <span id="entries_total">Loading...</span></p>
     </div>
 </div>
 @endsection

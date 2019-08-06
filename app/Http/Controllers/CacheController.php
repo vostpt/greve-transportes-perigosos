@@ -40,6 +40,7 @@ class CacheController extends Controller
     private function updateCounty($district, $county)
     {
         $county_data = [
+            'stations_total'       => 0,
             'stations_none'        => 0,
             'stations_partial'     => 0,
             'stations_all'         => 0,
@@ -48,6 +49,7 @@ class CacheController extends Controller
             'stations_no_lpg'      => 0,
         ];
         $county_stations                     = FuelStation::where([['district','=',$district], ['county','=',$county]]);
+        $county_data['stations_total']       = $county_stations->count();
         $county_data['stations_none']        = $county_stations->empty()->count();
         $county_data['stations_partial']     = $county_stations->partial()->count();
         $county_data['stations_all']         = $county_stations->withAll()->count();
@@ -65,6 +67,7 @@ class CacheController extends Controller
             $this->updateCounty($district, $county);
         }
         $district_data = [
+            'stations_total'       => 0,
             'stations_none'        => 0,
             'stations_partial'     => 0,
             'stations_all'         => 0,
@@ -73,6 +76,7 @@ class CacheController extends Controller
             'stations_no_lpg'      => 0,
         ];
         $district_stations                     = FuelStation::where([['district','=',$district]]);
+        $district_data['stations_total']       = $district_stations->count();
         $district_data['stations_none']        = $district_stations->empty()->count();
         $district_data['stations_partial']     = $district_stations->partial()->count();
         $district_data['stations_all']         = $district_stations->withAll()->count();
@@ -91,6 +95,7 @@ class CacheController extends Controller
             'entries_total'     => 0,
         ];
         $global = [
+            'stations_total'       => 0,
             'stations_none'        => 0,
             'stations_partial'     => 0,
             'stations_all'         => 0,
@@ -102,6 +107,7 @@ class CacheController extends Controller
         $entries['entries_last_hour']   = Entry::lastHour()->count();
         $entries['entries_last_day']    = Entry::lastDay()->count();
         $entries['entries_total']       = Entry::all()->count();
+        $global['stations_total']       = FuelStation::all()->count();
         $global['stations_none']        = FuelStation::empty()->count();
         $global['stations_partial']     = FuelStation::partial()->count();
         $global['stations_all']         = FuelStation::withAll()->count();
