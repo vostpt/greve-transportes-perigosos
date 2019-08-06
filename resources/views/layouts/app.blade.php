@@ -47,7 +47,7 @@
                 <ul class="navbar-nav ml-auto">
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sessão') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso Reservado') }}</a>
                     </li>
                     @else
                     <li class="nav-item">
@@ -86,6 +86,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyUse">
+                            <a class="dropdown-item" href="{{ route('users.password') }}">{{ __('Change Password') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

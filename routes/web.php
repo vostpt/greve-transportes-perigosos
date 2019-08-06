@@ -42,8 +42,10 @@ Route::prefix('users')->name('users.')->middleware('auth')->group(function () {
         Route::get('verified', 'UsersController@fetch_verified')->name('verified');
         Route::get('not_verified', 'UsersController@fetch_not_verified')->name('not_verified');
     });
+    Route::get('password', 'UsersController@password')->name('password');
     Route::post('verify', 'UsersController@verify')->name('verify');
     Route::post('delete', 'UsersController@delete')->name('delete');
+    Route::post('updatePassword', 'UsersController@updatePassword')->name('updatePassword');
 });
 
 Route::prefix('entries')->name('entries.')->group(function () {
@@ -85,4 +87,9 @@ Route::prefix('api/v1')->name('api.')->group(function () {
     Route::get('/', 'APIController@home')->name('home');
     Route::post('fetch', 'APIController@fetch')->name('fetch');
     Route::post('push', 'APIController@push')->name('push');
+});
+
+
+Route::prefix('graphs')->name('graphs.')->group(function () {
+    Route::get('/stats', 'GraphsController@stats')->name('stats');
 });
