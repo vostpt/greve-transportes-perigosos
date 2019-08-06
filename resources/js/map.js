@@ -271,7 +271,7 @@ function addLayersFunctionality(layerID) {
         }
 
         map.flyTo({
-            center: coordinates,
+            center: [coordinates[0], coordinates[1] + 0.0080],
             zoom: 14
         });
 
