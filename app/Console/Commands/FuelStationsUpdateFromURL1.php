@@ -61,10 +61,11 @@ class FuelStationsUpdateFromURL1 extends Command
             if ($name == '') {
                 $name = $entry[9];
             }
-            $lpg  = ($entry[6] == 'Sim');
-            $long = $entry[12];
-            $lat  = $entry[13];
-            $data = [
+            $lpg    = ($entry[6] == 'Sim');
+            $long   = $entry[12];
+            $lat    = $entry[13];
+            $county = $entry[3];
+            $data   = [
                 'repa'          => $repa,
                 'source_id'     => $source_id,
                 'brand'         => $brand,
@@ -77,6 +78,7 @@ class FuelStationsUpdateFromURL1 extends Command
                 'has_lpg'       => $lpg,
                 'long'          => $long,
                 'lat'           => $lat,
+                'county'        => $county,
             ];
             $fuel_station = FuelStation::where('source_id', [$source_id])->get()->first();
             if (! $fuel_station) {

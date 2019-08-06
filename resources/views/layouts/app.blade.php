@@ -11,7 +11,7 @@
     <title>{{ config('app.name', 'VOST') }}</title>
 
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
-
+    <link rel="stylesheet" href="{{ mix('/css/custom.css') }}">
     @yield('styles')
 </head>
 
@@ -35,13 +35,19 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('stats') }}">{{ __('Estatísticas') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('about') }}">{{ __('Sobre') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('media') }}">{{ __('Media') }}</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sessão') }}</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso Reservado') }}</a>
                     </li>
                     @else
                     <li class="nav-item">
@@ -80,6 +86,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyUse">
+                            <a class="dropdown-item" href="{{ route('users.password') }}">{{ __('Change Password') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

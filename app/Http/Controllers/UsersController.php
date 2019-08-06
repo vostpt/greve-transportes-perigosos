@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\User;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -12,6 +13,11 @@ class UsersController extends Controller
     public function add()
     {
         return response()->view('users/add');
+    }
+
+    public function password()
+    {
+        return response()->view('users/password');
     }
 
     public function create(Request $request)
@@ -91,6 +97,35 @@ class UsersController extends Controller
             return redirect('users/list')->with('status', 'Utilizador eliminado!');
         } catch (Exception $e) {
             return redirect('users/list')->with('status', 'Erro ao eliminar Utilizador!');
+        }
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'                    => 'required|exists:users',
+            'current-password'      => 'required',
+            'password'              => 'required|same:password|min:6',
+            'password_confirmation' => 'required|same:password|min:6',
+        ]);
+        try {
+            echo('here');
+            if (Auth::Check()) {
+                $current_password = Auth::User()->password;
+                if (Hash::check($validatedData['current-password'], $current_password)) {
+                    $user           = User::findOrFail($validatedData['id']);
+                    $user->password = Hash::make($validatedData['password']);
+                    $user->save();
+                    return back()->with('status', 'Password Atualizada!');
+                } else {
+                    return back()->with('status', 'Password Atual Errada!');
+                }
+            } else {
+                return back()->with('status', 'Erro ao atualizar password!');
+            }
+            return back()->with('status', 'Password Atualizada!');
+        } catch (Exception $e) {
+            return back()->with('status', 'Erro ao atualizar password!');
         }
     }
 }
