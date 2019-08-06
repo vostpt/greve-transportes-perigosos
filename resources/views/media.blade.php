@@ -100,7 +100,7 @@
             <div id="global_stats_example_collapse" class="collapse" aria-labelledby="global_stats_example" data-parent="#global_stats">
                 <div class="card-body">
                     <h2>Exemplo</h2>
-                    <iframe style="width:100%;min-height:35vh;border: 0;"
+                    <iframe style="width:100%;min-height:50vh;border: 0;"
                         src="https://janaodaparaabastecer.vost.pt/graphs/stats"></iframe>
                 </div>
             </div>
@@ -119,7 +119,7 @@
                 <div class="card-body">
                     <h2>HTML</h2>
                     <code>                        
-                        &lt;iframe style=&quot;width:100%;min-height:35vh;border: 0;&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
+                        &lt;iframe style=&quot;width:100%;min-height:50vh;border: 0;&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
                     </code>
                 </div>
             </div>
