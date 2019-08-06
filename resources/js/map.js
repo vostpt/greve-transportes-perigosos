@@ -270,6 +270,11 @@ function addLayersFunctionality(layerID) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
+        map.flyTo({
+            center: coordinates,
+            zoom: 14
+        });
+
         popup = new mapboxgl.Popup()
             .setLngLat(coordinates)
             .setHTML(description)
