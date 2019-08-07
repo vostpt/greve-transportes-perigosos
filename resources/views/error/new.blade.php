@@ -12,41 +12,48 @@
         <input id="station_id" type="hidden" name="id" value="" />
         <input id="recaptchaResponse" type="hidden" name="captcha" value="0" />
         <div class="form-group">
-            <label for="station_brand">Marca</label>
-            <input type="text" class="form-control" id="station_brand" placeholder="Marca" name="brand">
+            <label for="email">O Seu Endereço de Email</label>
+            <input type="email" class="form-control" id="email" placeholder="O Seu Endereço de Email" name="email"
+                required>
         </div>
         <div class="form-group">
-            <label for="station_vostie">VOSTie?</label>
-            <input type="text" class="form-control" id="station_vostie" placeholder="VOSTie?" name="vostie">
+            <label for="station_brand">Marca</label>
+            <input type="text" class="form-control" id="station_brand" placeholder="Marca" name="brand" required>
+        </div>
+        <div class="form-group">
+            <label for="station_vostie">VOSTie <small>(Código de controlo interno da VOST Portugal. Se não és voluntário
+                    VOST deixa o campo em branco)</small></label>
+            <input type="text" class="form-control" id="station_vostie" placeholder="" name="vostie" required>
         </div>
         <h5>Localização Exata</h5>
         <div class="row">
             <div class="form-group col-6">
                 <label for="station_long">Longitude</label>
-                <input type="number" step="0.00001" class="form-control" id="station_long" name="long" value="0">
+                <input type="number" step="0.00001" class="form-control" id="station_long" name="long" value="0"
+                    required>
             </div>
             <div class="form-group col-6">
                 <label for="station_lat">Latitude</label>
-                <input type="number" step="0.00001" class="form-control" id="station_lat" name="lat" value="0">
+                <input type="number" step="0.00001" class="form-control" id="station_lat" name="lat" value="0" required>
             </div>
         </div>
         <div class="form-group">
             <label for="station_sell_gasoline">{{ __('Vende Gasolina?') }}</label>
-            <select class="form-control" id="station_sell_gasoline" name="sell_gasoline">
+            <select class="form-control" id="station_sell_gasoline" name="sell_gasoline" required>
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
         </div>
         <div class="form-group">
             <label for="station_sell_diesel">{{ __('Vende Gasóleo?') }}</label>
-            <select class="form-control" id="station_sell_diesel" name="sell_diesel">
+            <select class="form-control" id="station_sell_diesel" name="sell_diesel" required>
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
         </div>
         <div class="form-group">
             <label for="station_sell_lpg">{{ __('Vende GPL?') }}</label>
-            <select class="form-control" id="station_sell_lpg" name="sell_lpg">
+            <select class="form-control" id="station_sell_lpg" name="sell_lpg" required>
                 <option value="0">Não</option>
                 <option value="1">Sim</option>
             </select>
