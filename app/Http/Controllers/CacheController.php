@@ -14,13 +14,11 @@ class CacheController extends Controller
     {
         if (env('CLOUDFLARE_API_ENABLE', false) == 'true') {
             $path_to_clear = $url_to_clear;
-            $auth_email    = env('CLOUDFLARE_API_EMAIL');
-            $auth_key      = env('CLOUDFLARE_API_KEY');
+            $auth_key      = 'Bearer '.env('CLOUDFLARE_API_KEY');
             $api_endpoint  = 'https://api.cloudflare.com/client/v4/zones/'.env('CLOUDFLARE_API_IDENTIFIER').'/purge_cache';
             $headers       = [
-            'X-Auth-Email' => $auth_email,
-            'X-Auth-Key'   => $auth_key,
-            'content-type' => 'application/json',
+            'Authorization' => $auth_key,
+            'content-type'  => 'application/json',
             ];
             $data = [
                 'files' => [$path_to_clear],
