@@ -272,7 +272,7 @@ function addLayersFunctionality(layerID) {
 
         map.flyTo({
             center: [coordinates[0], coordinates[1] + 0.0080],
-            zoom: 14
+            zoom: 13
         });
 
         popup = new mapboxgl.Popup()
@@ -336,7 +336,7 @@ map.on('load', function () {
             navigator.geolocation.getCurrentPosition(position => {
                 map.flyTo({
                     center: [position.coords.longitude, position.coords.latitude],
-                    zoom: 14
+                    zoom: 13
                 });
             });
         }
