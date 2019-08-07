@@ -30,7 +30,7 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('map') }}">{{ __('Inicio') }}</a>
+                        <a class="nav-link" href="{{ route('map') }}">{{ __('Início') }}</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('stats') }}">{{ __('Estatísticas') }}</a>
