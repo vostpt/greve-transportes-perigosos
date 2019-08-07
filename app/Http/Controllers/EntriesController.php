@@ -67,9 +67,9 @@ class EntriesController extends Controller
         try {
             $entry = Entry::findOrFail($validatedData['id']);
             $entry->push();
-            return redirect('entries/list')->with('status', 'Entrada Validada Manualmente!');
+            return redirect('/panel/entries/list')->with('status', 'Entrada Validada Manualmente!');
         } catch (Exception $e) {
-            return redirect('entries/list')->with('status', 'Erro ao validar entrada!');
+            return redirect('/panel/entries/list')->with('status', 'Erro ao validar entrada!');
         }
     }
 
