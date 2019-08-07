@@ -3,8 +3,10 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Entry;
 use App\FuelStation;
+use App\Http\Controllers\CacheController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,17 +45,33 @@ class EntriesController extends Controller
             if ($result->success != true) {
                 return response()->json(['success' => 0]);
             }
-            $entry = new Entry();
-            $data  = [
-                'has_gasoline' => $validatedData['gasoline'],
-                'has_diesel'   => $validatedData['diesel'],
-                'has_lpg'      => $validatedData['lpg'],
-                'fuel_station' => $validatedData['fuel_station'],
-                'ip'           => \Request::ip(),
-            ];
-            $entry->fill($data);
-            $entry->save();
-            return response()->json(['success' => 1]);
+            if($user = Auth::user())
+            {
+                $station = FuelStation::findOrFail($validatedData['fuel_station']);
+                $data  = [
+                    'has_gasoline' => $validatedData['gasoline'],
+                    'has_diesel'   => $validatedData['diesel'],
+                    'has_lpg'      => $validatedData['lpg']
+                ];
+                $station->fill($data);
+                $station->save();
+                $cacheController = new CacheController;
+                $cacheController->updateStations();
+                return response()->json(['success' => 1]);
+            }
+            else {
+                $entry = new Entry();
+                $data  = [
+                    'has_gasoline' => $validatedData['gasoline'],
+                    'has_diesel'   => $validatedData['diesel'],
+                    'has_lpg'      => $validatedData['lpg'],
+                    'fuel_station' => $validatedData['fuel_station'],
+                    'ip'           => \Request::ip(),
+                ];
+                $entry->fill($data);
+                $entry->save();
+                return response()->json(['success' => 1]);
+            }
         } catch (Exception $e) {
             return response()->json(['success' => 0]);
         }
