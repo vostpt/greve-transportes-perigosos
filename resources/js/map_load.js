@@ -19,8 +19,8 @@ if(inIframe()) {
     document.getElementById("map").style.top = 0;
     document.getElementById("map").style.height = "100%";
     document.getElementById("features").style.height = "22em";
-    document.getElementById("features-icon").style.top = "1%";
-    document.getElementById("features").style.top = "1%";
+    document.getElementById("features-icon").style.top = "calc(1% + 60px)";
+    document.getElementById("features").style.top = "calc(1% + 60px)";
     document.getElementById("legend-icon").style.top = "1%";
     document.getElementById("legend").style.top = "1%";
 }
