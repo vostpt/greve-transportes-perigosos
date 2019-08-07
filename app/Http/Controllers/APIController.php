@@ -83,7 +83,6 @@ class APIController extends Controller
                             $fuel_station->save();
                             $cacheController = new CacheController();
                             $cacheController->updateStations();
-                            $cacheController->updateStats();
                             $output = ['success' => 1];
                         }
                     }
