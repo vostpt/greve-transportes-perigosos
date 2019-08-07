@@ -24,9 +24,9 @@ class OptionsController extends Controller
             unset($validatedData['name']);
             $option->timestamps = false;
             $option->update($validatedData);
-            return redirect('options/list')->with('status', 'Opção Atualizada!');
+            return redirect('panel/options/list')->with('status', 'Opção Atualizada!');
         } catch (Exception $e) {
-            return redirect('stations/list')->with('status', 'Erro ao atualizar opção!');
+            return redirect('panel/options/list')->with('status', 'Erro ao atualizar opção!');
         }
     }
 
