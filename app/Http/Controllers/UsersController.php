@@ -33,9 +33,9 @@ class UsersController extends Controller
             $user->password = Hash::make($validatedData['password']);
             $user->email    = $validatedData['email'];
             $user->save();
-            return redirect('users/list')->with('status', 'User Created!');
+            return redirect('panel/users/list')->with('status', 'User Created!');
         } catch (Exception $e) {
-            return redirect('users/list')->with('status', 'Error Creating User!');
+            return redirect('panel/users/list')->with('status', 'Error Creating User!');
         }
     }
 
@@ -80,9 +80,9 @@ class UsersController extends Controller
         try {
             $user = User::findOrFail($validatedData['id']);
             $user->markEmailAsVerified();
-            return redirect('users/list')->with('status', 'Email de Utilizador validado!');
+            return redirect('panel/users/list')->with('status', 'Email de Utilizador validado!');
         } catch (Exception $e) {
-            return redirect('users/list')->with('status', 'Erro ao validar Email de Utilizador!');
+            return redirect('panel/users/list')->with('status', 'Erro ao validar Email de Utilizador!');
         }
     }
 
