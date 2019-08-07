@@ -106,6 +106,14 @@
         @yield('content')
     </main>
     <script src="{{ mix('/js/app.js') }}" charset="utf-8"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128563766-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128563766-2');
+    </script>
     @yield('javascript')
 </body>
 
