@@ -1,4 +1,9 @@
 @extends('layouts.app')
+
+@section('viewport')
+<meta name="viewport" content= "width=device-width, initial-scale=1.0"> 
+@endsection
+
 @section('styles')
 <script type="text/javascript">
     function resizeIframe(obj) {
