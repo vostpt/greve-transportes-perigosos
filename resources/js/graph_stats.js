@@ -88,7 +88,7 @@ window.onload = function () {
                     if (value == 0) {
                         return "";
                     }
-                    return value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
+                    return "\n"+value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
                 },
                 "font": {
                     "size": "13"
@@ -173,10 +173,10 @@ window.onload = function () {
                     if (value == 0) {
                         return "";
                     }
-                    return value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
+                    return "\n"+value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
                 },
                 "font": {
-                    "size": "100%"
+                    "size": "13"
                 }
             }
         },

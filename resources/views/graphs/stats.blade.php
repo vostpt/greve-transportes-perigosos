@@ -17,9 +17,19 @@
             flex-wrap: wrap;
         }
 
+        @media screen and (min-width: 768px) {
+            .graph {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .graph {
+                width: 100%;
+            }
+        }
+
         .graph {
-            width: 50%;
-            height: 400px;
             min-width: 400px;
         }
     </style>
