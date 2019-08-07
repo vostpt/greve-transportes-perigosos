@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('styles')
+<script type="text/javascript">
+    function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+</script>
 @endsection
 
 @section('content')
@@ -25,9 +30,4 @@
 
 @section('javascript')
 <script src="{{ mix('/js/stats.js') }}" charset="utf-8"></script>
-<script>
-function resizeIframe(obj) {
-    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
-}
-</script>
 @endsection
