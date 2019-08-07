@@ -40,6 +40,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('media') }}">{{ __('Media') }}</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('error.new') }}">{{ __('Adicionar Info') }}</a>
+                    </li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

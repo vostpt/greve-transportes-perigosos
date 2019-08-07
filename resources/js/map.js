@@ -250,7 +250,12 @@ function addLayersFunctionality(layerID) {
                 '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                 '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>' +
                 '</div>' +
-                '<div class="v-popup-header" style="background-color:#85d5f8"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"><h5 class="popup_submit_text">VALIDAR</h5></a></div>' +
+                '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">'+
+                '<div class="row" style="margin:0;">'+
+                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'/"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
+                '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>'+
+                '</div>' +
+                '</div>' +
                 '</div>';
         } else {
             description = '<div class="v-popup-content">' +
@@ -263,7 +268,12 @@ function addLayersFunctionality(layerID) {
                 '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">' +
                 '<img src="/img/map/map_separation_' + e.features[0].properties.background_color + '.png" style="width: 100%;" />' +
                 '</a></div>' +
-                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"><h5>OBTER DIREÇÕES</h5></a></div>' +
+                '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">'+
+                '<div class="row" style="margin:0;">'+
+                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'/"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
+                '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>'+
+                '</div>' +
+                '</div>' +
                 '</div>';
         }
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
