@@ -47,7 +47,7 @@ function loadPoints() {
                     icon = 'REPA';
                     priority = 2;
                     popup_color = '0070bb';
-                    background_color = "a9aeff";
+                    background_color = "e6e6e6";
                     brand = brand + " (REPA - Veículos Prioritários)";
                     priority = 2;
                 } else if (fuelStation.repa == "Normal") {
@@ -55,7 +55,7 @@ function loadPoints() {
                     icon = 'REPA';
                     priority = 1;
                     popup_color = '0070bb';
-                    background_color = "a9aeff";
+                    background_color = "e6e6e6";
                     brand = brand + " (REPA - Todos os Veículos)";
                     priority = 1;
                 } else {
@@ -72,15 +72,15 @@ function loadPoints() {
                     if (count == 3) {
                         icon = 'ALL';
                         popup_color = '006837';
-                        background_color = "53ea9f";
+                        background_color = "e6e6e6";
                     } else if (count == 0) {
                         icon = 'NONE';
                         popup_color = 'c1272c';
-                        background_color = "ff838b";
+                        background_color = "e6e6e6";
                     } else {
                         icon = 'PARTIAL';
                         popup_color = 'f7921e';
-                        background_color = "f1b87d";
+                        background_color = "e6e6e6";
                     }
                 }
                 points.push({
@@ -204,14 +204,14 @@ function addLayersFunctionality(layerID) {
     map.on('click', layerID, function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
-            '<img src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>' :
-            '<img class="no-gas"src="img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png"/>';
+            '<img src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>' :
+            '<img class="no-gas"src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>';
         let dieselIcon = e.features[0].properties.sell_diesel && e.features[0].properties.has_diesel ?
-            '<img src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>' :
-            '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png"/>';
+            '<img src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>' :
+            '<img class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>';
         let lpgIcon = e.features[0].properties.sell_lpg && e.features[0].properties.has_lpg ?
-            '<img width="75px" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>' :
-            '<img class="no-gas" src="img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png"/>';
+            '<img width="75px" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>' :
+            '<img class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>';
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
         let fuelIcons = "";
@@ -252,7 +252,7 @@ function addLayersFunctionality(layerID) {
                 '</div>' +
                 '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">'+
                 '<div class="row" style="margin:0;">'+
-                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'/"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
+                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
                 '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>'+
                 '</div>' +
                 '</div>' +
@@ -270,7 +270,7 @@ function addLayersFunctionality(layerID) {
                 '</a></div>' +
                 '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">'+
                 '<div class="row" style="margin:0;">'+
-                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'/"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
+                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
                 '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>'+
                 '</div>' +
                 '</div>' +
