@@ -28,6 +28,11 @@ class Entry extends Model
     {
         return $query->where([['fuel_station','=',$fuel_station],['has_gasoline','=',$has_gasoline],['has_diesel','=',$has_diesel],['has_lpg','=',$has_lpg],['ip','!=',$ip]]);
     }
+    
+    public function scopeRelatedNoIP($query, $fuel_station, $has_gasoline, $has_diesel, $has_lpg)
+    {
+        return $query->where([['fuel_station','=',$fuel_station],['has_gasoline','=',$has_gasoline],['has_diesel','=',$has_diesel],['has_lpg','=',$has_lpg]]);
+    }
 
     public function scopeLastHour($query)
     {
@@ -51,7 +56,7 @@ class Entry extends Model
 
     public function push()
     {
-        $entries = Entry::lastHour()->related($this->fuel_station, $this->has_gasoline, $this->has_diesel, $this->has_lpg, $this->ip);
+        $entries = Entry::lastHour()->relatedNoIP($this->fuel_station, $this->has_gasoline, $this->has_diesel, $this->has_lpg);
         $entries->update(['used' => 1]);
         $fuel_station = $this->fuelStation();
         $fuel_station->update(['has_gasoline' => $this->has_gasoline,'has_diesel' => $this->has_diesel, 'has_lpg' => $this->has_lpg]);
