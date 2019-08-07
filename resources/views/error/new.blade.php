@@ -23,7 +23,7 @@
         <div class="form-group">
             <label for="station_vostie">VOSTie <small>(Código de controlo interno da VOST Portugal. Se não és voluntário
                     VOST deixa o campo em branco)</small></label>
-            <input type="text" class="form-control" id="station_vostie" placeholder="" name="vostie" required>
+            <input type="text" class="form-control" id="station_vostie" placeholder="" name="vostie">
         </div>
         <h5>Localização Exata</h5>
         <div class="row">
