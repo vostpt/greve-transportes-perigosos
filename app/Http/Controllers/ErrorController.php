@@ -56,7 +56,7 @@ class ErrorController extends Controller
             if (! $validatedData['vostie']) {
                 $validatedData['vostie'] = 'No';
             }
-            $url = env('ERRORS_SPREADSHEET_LINK').'?id='.\urlencode($validatedData['id']).'&lat='.\urlencode($validatedData['lat']).'&long='.\urlencode($validatedData['long']).'&brand='.\urlencode($validatedData['brand']).'&gasoline='.\urlencode($validatedData['sell_gasoline']).'&diesel='.\urlencode($validatedData['sell_diesel']).'&lpg='.\urlencode($validatedData['sell_lpg']).'&vostie='.\urlencode($validatedData['vostie']).'&email='.\urlencode($validatedData['email']);
+            $url = env('ERRORS_SPREADSHEET_LINK').'?id='.$validatedData['id'].'&lat='.$validatedData['lat'].'&long='.$validatedData['long'].'&brand='.\urlencode($validatedData['brand']).'&gasoline='.$validatedData['sell_gasoline'].'&diesel='.$validatedData['sell_diesel'].'&lpg='.$validatedData['sell_lpg'].'&vostie='.\urlencode($validatedData['vostie']).'&email='.\urlencode($validatedData['email']);
             \file_get_contents($url);
             return redirect('/error')->with('status', 'Informação Enviada!');
         } catch (Exception $e) {
