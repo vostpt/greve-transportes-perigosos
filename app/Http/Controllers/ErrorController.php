@@ -29,6 +29,7 @@ class ErrorController extends Controller
             'sell_lpg'      => 'required',
             'captcha'       => 'required|string',
             'vostie'        => 'string',
+            'email'         => 'required|email',
         ]);
         try {
             $url  = 'https://www.google.com/recaptcha/api/siteverify';
@@ -47,7 +48,7 @@ class ErrorController extends Controller
             $resultJSON = \file_get_contents($url, false, $context);
             $result     = \json_decode($resultJSON);
             if ($result->success != true) {
-                return redirect('/')->with('status', 'Erro ao atualizar estação!');
+                return redirect('/')->with('status', 'Erro ao enviar informação!');
             }
             if (! $validatedData['id']) {
                 $validatedData['id'] = 0;
@@ -55,11 +56,11 @@ class ErrorController extends Controller
             if (! $validatedData['vostie']) {
                 $validatedData['vostie'] = 'No';
             }
-            $url = env('ERRORS_SPREADSHEET_LINK').'?id='.\urlencode($validatedData['id']).'&lat='.\urlencode($validatedData['lat']).'&long='.\urlencode($validatedData['long']).'&brand='.\urlencode($validatedData['brand']).'&gasoline='.\urlencode($validatedData['sell_gasoline']).'&diesel='.\urlencode($validatedData['sell_diesel']).'&lpg='.\urlencode($validatedData['sell_lpg']).'&vostie='.\urlencode($validatedData['vostie']);
+            $url = env('ERRORS_SPREADSHEET_LINK').'?id='.\urlencode($validatedData['id']).'&lat='.\urlencode($validatedData['lat']).'&long='.\urlencode($validatedData['long']).'&brand='.\urlencode($validatedData['brand']).'&gasoline='.\urlencode($validatedData['sell_gasoline']).'&diesel='.\urlencode($validatedData['sell_diesel']).'&lpg='.\urlencode($validatedData['sell_lpg']).'&vostie='.\urlencode($validatedData['vostie']).'&email='.\urlencode($validatedData['email']);
             \file_get_contents($url);
-            return redirect('/')->with('status', 'Estação Atualizada!');
+            return redirect('/error')->with('status', 'Informação Enviada!');
         } catch (Exception $e) {
-            return redirect('/')->with('status', 'Erro ao atualizar estação!');
+            return redirect('/error')->with('status', 'Erro ao enviar informação!');
         }
     }
 }
