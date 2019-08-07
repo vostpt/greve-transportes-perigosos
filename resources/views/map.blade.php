@@ -107,18 +107,30 @@
         <h2>Legenda</h2>
         <div>
             <img src="/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png" /><label>- Todos os Combustíveis
-                Disponiveis</label><br />
+                Disponíveis</label><br />
         </div>
         <div>
             <img src="/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png" /><label>- Alguns Combustíveis Não
-                Disponiveis</label><br />
+                Disponíveis</label><br />
         </div>
         <div>
             <img src="/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png" /><label>- Nenhum Combustível Está
-                Disponiveis</label><br />
+                Disponível</label><br />
         </div>
         <div>
             <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- Posto de Combustível REPA </label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasolina </label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasóleo </label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png" style="width:25px;height:25px" /><label>- GPL </label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="width:25px;height:25px" /><label>- Reportar Erro </label><br />
         </div>
     </div>
 </div>

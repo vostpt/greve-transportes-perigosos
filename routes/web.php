@@ -102,3 +102,10 @@ Route::prefix('api/v1')->name('api.')->group(function () {
 Route::prefix('graphs')->name('graphs.')->group(function () {
     Route::get('/stats', 'GraphsController@stats')->name('stats');
 });
+
+
+Route::prefix('error')->name('error.')->group(function () {
+    Route::get('/', 'ErrorController@new')->name('new');
+    Route::get('edit', 'ErrorController@edit')->name('edit');
+    Route::post('push', 'ErrorController@push')->name('push');
+});
