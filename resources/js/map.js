@@ -246,7 +246,7 @@ function addLayersFunctionality(layerID) {
                 fuelIcons +
                 '</div>' +
                 '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />' +
-                '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>'+
+                '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' +
                 '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                 '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>' +
                 '</div>' +
@@ -260,8 +260,8 @@ function addLayersFunctionality(layerID) {
                 fuelIcons +
                 '</div>' +
                 '</div>' +
-                '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">'+
-                '<img src="/img/map/map_separation_'+e.features[0].properties.background_color+'.png" style="width: 100%;" />'+
+                '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">' +
+                '<img src="/img/map/map_separation_' + e.features[0].properties.background_color + '.png" style="width: 100%;" />' +
                 '</a></div>' +
                 '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"><h5>OBTER DIREÇÕES</h5></a></div>' +
                 '</div>';
@@ -294,6 +294,24 @@ function addLayersFunctionality(layerID) {
 map.on('load', function () {
     $(".mapboxgl-ctrl-logo").css("float", "left");
     $(".mapboxgl-ctrl-bottom-left .mapboxgl-ctrl").append("<a style=\"cursor: pointer;\" target=\"_blank\" rel=\"noopener nofollow\"  href=\"https://twitter.com/vostpt\"><img src=\"/img/VOSTPT_LETTERING_COLOR.png\" style=\"height: 42px; margin-top: -15px; margin-left: 10px;\"/></a>");
+    map.addControl(new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        language: 'pt-PT',
+        mapboxgl: mapboxgl,
+        marker: false,
+        filter: function (item) {
+            // returns true if item contains New South Wales region
+            return item.context.map(function (i) {
+                let something = i.id.split('.').shift();
+                if(something === 'country') {
+                    console.log(i.text);
+                }
+                return (something === 'country' && i.text === 'Portugal');
+            }).reduce(function (acc, cur) {
+                return acc || cur;
+            });
+        },
+    }));
     promises.push(loadBrandImage('REPA', '/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png'));
     promises.push(loadBrandImage('NONE', '/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
     promises.push(loadBrandImage('PARTIAL', '/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));

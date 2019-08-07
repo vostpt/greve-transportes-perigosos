@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('styles')
 <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.css' rel='stylesheet' />
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.css' type='text/css' />
 <link rel="stylesheet" href="{{ mix('/css/map.css') }}">
 @endsection
 
@@ -127,6 +128,7 @@
 <script src="{{ mix('/js/map_load.js') }}" charset="utf-8"></script>
 <script src="https://www.google.com/recaptcha/api.js?render=6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.1.1/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.4.1/mapbox-gl-geocoder.min.js'></script>
 <script src="{{ mix('/js/map_direct.js') }}" charset="utf-8"></script>
 <script src="{{ mix('/js/map.js') }}" charset="utf-8"></script>
 @endsection
