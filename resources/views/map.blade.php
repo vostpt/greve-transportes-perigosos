@@ -121,13 +121,13 @@
             <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- Posto de Combustível REPA </label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_GASPUMP_GASOLINA_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasolina </label><br />
+            <img src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasolina </label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_GASPUMP_GASOLEO_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasóleo </label><br />
+            <img src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasóleo </label><br />
         </div>
         <div>
-            <img src="/img/map/VOSTPT_GASPUMP_GPL_500pxX500px.png" style="width:25px;height:25px" /><label>- GPL </label><br />
+            <img src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png" style="width:25px;height:25px" /><label>- GPL </label><br />
         </div>
         <div>
             <img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="width:25px;height:25px" /><label>- Reportar Erro </label><br />
