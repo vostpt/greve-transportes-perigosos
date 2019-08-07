@@ -3,7 +3,12 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1,user-scalable=no">
+
+    @if (!empty($__env->yieldContent('viewport')))
+        @yield('viewport')
+    @else
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1,user-scalable=no">
+    @endif
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
