@@ -22,6 +22,7 @@ class OptionsController extends Controller
         try {
             $option = Option::findOrFail($validatedData['name']);
             unset($validatedData['name']);
+            $option->timestamps = false;
             $option->update($validatedData);
             return redirect('options/list')->with('status', 'Opção Atualizada!');
         } catch (Exception $e) {
