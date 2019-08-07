@@ -26,9 +26,9 @@ class ExternalAuthController extends Controller
             $ext_auth->brand  = $validatedData['brand'];
             $ext_auth->secret = Str::random(64);
             $ext_auth->save();
-            return redirect('externalauth/list')->with('status', 'External Auth Created!');
+            return redirect('panel/externalauth/list')->with('status', 'External Auth Created!');
         } catch (Exception $e) {
-            return redirect('externalauth/list')->with('status', 'Error Creating External Auth!');
+            return redirect('panel/externalauth/list')->with('status', 'Error Creating External Auth!');
         }
     }
 
@@ -51,9 +51,9 @@ class ExternalAuthController extends Controller
         try {
             $ext_auth = ExternalAuth::findOrFail($validatedData['id']);
             $ext_auth->delete();
-            return redirect('externalauth/list')->with('status', 'Autênticação externa eliminada!');
+            return redirect('panel/externalauth/list')->with('status', 'Autênticação externa eliminada!');
         } catch (Exception $e) {
-            return redirect('externalauth/list')->with('status', 'Erro ao eliminar autenticação externa!');
+            return redirect('panel/externalauth/list')->with('status', 'Erro ao eliminar autenticação externa!');
         }
     }
 }
