@@ -56,16 +56,12 @@ class CacheController extends Controller
         $county_data['stations_no_gasoline'] = $county_stations->noGasoline()->count();
         $county_data['stations_no_diesel']   = $county_stations->noDiesel()->count();
         $county_data['stations_no_lpg']      = $county_stations->noLPG()->count();
-        Storage::disk('public')->put('data/stats_'.$district.'_'.$county.'.json', \json_encode($county_data));
-        $this->clearCloudflare(URL::to('/storage/data/stats_'.$district.'_'.$county.'.json'));
+        Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json', \json_encode($county_data));
+        $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json'));
     }
 
     private function updateDistrict($district)
     {
-        $counties = FuelStation::counties($district);
-        foreach ($counties as $county) {
-            $this->updateCounty($district, $county);
-        }
         $district_data = [
             'stations_total'       => 0,
             'stations_none'        => 0,
@@ -83,12 +79,15 @@ class CacheController extends Controller
         $district_data['stations_no_gasoline'] = $district_stations->noGasoline()->count();
         $district_data['stations_no_diesel']   = $district_stations->noDiesel()->count();
         $district_data['stations_no_lpg']      = $district_stations->noLPG()->count();
-        Storage::disk('public')->put('data/stats_'.$district.'.json', \json_encode($district_data));
-        $this->clearCloudflare(URL::to('/storage/data/stats_'.$district.'.json'));
+        Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'.json', \json_encode($district_data));
+        $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'.json'));
     }
 
     public function updateStats()
     {
+        $places = [
+
+        ];
         $entries = [
             'entries_last_hour' => 0,
             'entries_last_day'  => 0,
@@ -121,9 +120,20 @@ class CacheController extends Controller
         $districts = FuelStation::districts();
         foreach ($districts as $district) {
             if ($district != '') {
+                $formated_district = \ucfirst(\mb_strtolower($district));
                 $this->updateDistrict($district);
+                $counties = FuelStation::counties($district);
+                foreach ($counties as $county) {
+                    if (! \array_key_exists($formated_district, $places)) {
+                        $places[$formated_district] = [];
+                    }
+                    \array_push($places[$formated_district], $county);
+                    $this->updateCounty($district, $county);
+                }
             }
         }
+        Storage::disk('public')->put('data/places.json', \json_encode($places));
+        $this->clearCloudflare(URL::to('/storage/data/places.json'));
     }
 
     public function updateStations()
