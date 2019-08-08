@@ -33,7 +33,7 @@
     <div class='map-overlay' id='features'>
         <h2>Opções</h2>
         <div id='pd'>
-            <h4>Disponibilidade de Combustível</h4>
+            <h4>Filtros de visualização</h4>
             <div class="form-check">
                 <input class="form-check-input type" type="radio" id="fuel_of_stations_all" checked
                     name="fuel_stations_type" value="all" autocomplete="off">
@@ -45,21 +45,42 @@
                 <input class="form-check-input type" type="radio" id="fuel_of_stations_gasoline"
                     name="fuel_stations_type" value="gasoline" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_gasoline">
-                    Gasolina
+                    Com Gasolina
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input type" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type"
                     value="diesel" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_diesel">
-                    Gasóleo
+                    Com Gasóleo
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input type" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type"
                     value="lpg" autocomplete="off">
                 <label class="form-check-label" for="fuel_of_stations_lpg">
-                    GPL
+                    Com GPL
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_gasoline"
+                    name="fuel_stations_type" value="without_gasoline" autocomplete="off">
+                <label class="form-check-label" for="fuel_of_stations_gasoline">
+                    Sem Gasolina
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type"
+                    value="without_diesel" autocomplete="off">
+                <label class="form-check-label" for="fuel_of_stations_diesel">
+                    Sem Gasóleo
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type"
+                    value="without_lpg" autocomplete="off">
+                <label class="form-check-label" for="fuel_of_stations_lpg">
+                    Sem GPL
                 </label>
             </div>
             <div class="form-check">
