@@ -34,6 +34,7 @@ class CacheController extends Controller
                 'json'    => $data,
             ]
             );
+            \usleep(300 * 1000); // Prevent hitting Cloudflare Max Requests Limit
         }
     }
 
