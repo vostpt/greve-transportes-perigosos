@@ -18,12 +18,12 @@ class FuelStation extends Model
 
     public function scopeEmpty($query)
     {
-        return $query->noGasoline()->noDiesel()->noLPG();
+        return $query->whereRaw('((sell_gasoline = TRUE and has_gasoline = false) || sell_gasoline = false) AND ((sell_diesel = TRUE and has_diesel = false) || sell_diesel = false) AND ((sell_lpg = TRUE and has_lpg = false) || sell_lpg = false)');
     }
 
     public function scopePartial($query)
     {
-        return $query->where([['sell_gasoline', '=', true], ['has_gasoline','=',false]])->orWhere([['sell_diesel', '=', true], ['has_diesel','=',false]])->orWhere([['sell_lpg', '=', true], ['has_lpg','=',false]]);
+        return $query->whereRaw('(!(((sell_gasoline = TRUE and has_gasoline = false) || sell_gasoline = false) AND ((sell_diesel = TRUE and has_diesel = false) || sell_diesel = false) AND ((sell_lpg = TRUE and has_lpg = false) || sell_lpg = false)) AND (((sell_gasoline = TRUE AND has_gasoline = TRUE) || has_gasoline = false) || ((sell_diesel = TRUE AND has_diesel = TRUE) || has_diesel = false) || ((sell_lpg = TRUE AND has_lpg = TRUE) || has_lpg = false)))');
     }
 
     public function scopeWithAll($query)
@@ -69,5 +69,20 @@ class FuelStation extends Model
     public function scopeCounties($query, $district)
     {
         return $query->selectRaw('county')->where('district', '=', $district)->groupBy('county')->get()->pluck('county');
+    }
+
+    public function scopeSellGasoline($query)
+    {
+        return $query->where([['sell_gasoline', '=', true]]);
+    }
+
+    public function scopeSellDiesel($query)
+    {
+        return $query->where([['sell_diesel', '=', true],]);
+    }
+
+    public function scopeSellLPG($query)
+    {
+        return $query->where([['sell_lpg', '=', true]]);
     }
 }

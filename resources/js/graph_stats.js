@@ -170,8 +170,18 @@ window.onload = function () {
             datalabels: {
                 color: '#ffffff',
                 formatter: function (value, context) {
+                    let label_text  = context["dataset"]["label"][context["dataIndex"]];
                     if (value == 0) {
                         return "";
+                    }
+                    if(label_text == "Sem Gasolina") {
+                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_gasoline"]).toFixed(2) + "%\n";
+                    }
+                    if(label_text == "Sem Gasóleo") {
+                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_diesel"]).toFixed(2) + "%\n";
+                    }
+                    if(label_text == "Sem GPL") {
+                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_lpg"]).toFixed(2) + "%\n";
                     }
                     return "\n"+value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
                 },
