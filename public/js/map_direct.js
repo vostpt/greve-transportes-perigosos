@@ -68,10 +68,10 @@ function submitEntry(obj, id) {
             "captcha": token
         }
         $(obj).parent().parent().find('.popup_submit_text').html("VALIDADO");
-        setTimeout(function(obj) {
+        setTimeout(function() {
             popup.remove();
-        },1250, obj);
-        $.post("/entries/add", data, function (reply) {
+        },1250);
+        $.post("/panel/entries/add", data, function (reply) {
             console.log("Entrada adicionada: " + reply.success + " (0 -> falha, 1 -> sucesso)");
         }, "json");
     });
