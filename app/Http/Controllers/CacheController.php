@@ -41,22 +41,28 @@ class CacheController extends Controller
     private function updateCounty($district, $county)
     {
         $county_data = [
-            'stations_total'       => 0,
-            'stations_none'        => 0,
-            'stations_partial'     => 0,
-            'stations_all'         => 0,
-            'stations_no_gasoline' => 0,
-            'stations_no_diesel'   => 0,
-            'stations_no_lpg'      => 0,
+            'stations_total'         => 0,
+            'stations_none'          => 0,
+            'stations_partial'       => 0,
+            'stations_all'           => 0,
+            'stations_no_gasoline'   => 0,
+            'stations_no_diesel'     => 0,
+            'stations_no_lpg'        => 0,
+            'stations_sell_gasoline' => 0,
+            'stations_sell_diesel'   => 0,
+            'stations_sell_lpg'      => 0,
         ];
-        $county_stations                     = FuelStation::where([['district','=',$district], ['county','=',$county]]);
-        $county_data['stations_total']       = $county_stations->count();
-        $county_data['stations_none']        = $county_stations->empty()->count();
-        $county_data['stations_partial']     = $county_stations->partial()->count();
-        $county_data['stations_all']         = $county_stations->withAll()->count();
-        $county_data['stations_no_gasoline'] = $county_stations->noGasoline()->count();
-        $county_data['stations_no_diesel']   = $county_stations->noDiesel()->count();
-        $county_data['stations_no_lpg']      = $county_stations->noLPG()->count();
+        $county_stations                       = FuelStation::where([['district','=',$district], ['county','=',$county]]);
+        $county_data['stations_total']         = $county_stations->count();
+        $county_data['stations_none']          = $county_stations->empty()->count();
+        $county_data['stations_partial']       = $county_stations->partial()->count();
+        $county_data['stations_all']           = $county_stations->withAll()->count();
+        $county_data['stations_no_gasoline']   = $county_stations->noGasoline()->count();
+        $county_data['stations_no_diesel']     = $county_stations->noDiesel()->count();
+        $county_data['stations_no_lpg']        = $county_stations->noLPG()->count();
+        $county_data['stations_sell_gasoline'] = $county_stations->sellGasoline()->count();
+        $county_data['stations_sell_diesel']   = $county_stations->sellDiesel()->count();
+        $county_data['stations_sell_lpg']      = $county_stations->sellLPG()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json', \json_encode($county_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json'));
     }
@@ -64,22 +70,28 @@ class CacheController extends Controller
     private function updateDistrict($district)
     {
         $district_data = [
-            'stations_total'       => 0,
-            'stations_none'        => 0,
-            'stations_partial'     => 0,
-            'stations_all'         => 0,
-            'stations_no_gasoline' => 0,
-            'stations_no_diesel'   => 0,
-            'stations_no_lpg'      => 0,
+            'stations_total'         => 0,
+            'stations_none'          => 0,
+            'stations_partial'       => 0,
+            'stations_all'           => 0,
+            'stations_no_gasoline'   => 0,
+            'stations_no_diesel'     => 0,
+            'stations_no_lpg'        => 0,
+            'stations_sell_gasoline' => 0,
+            'stations_sell_diesel'   => 0,
+            'stations_sell_lpg'      => 0,
         ];
-        $district_stations                     = FuelStation::where([['district','=',$district]]);
-        $district_data['stations_total']       = $district_stations->count();
-        $district_data['stations_none']        = $district_stations->empty()->count();
-        $district_data['stations_partial']     = $district_stations->partial()->count();
-        $district_data['stations_all']         = $district_stations->withAll()->count();
-        $district_data['stations_no_gasoline'] = $district_stations->noGasoline()->count();
-        $district_data['stations_no_diesel']   = $district_stations->noDiesel()->count();
-        $district_data['stations_no_lpg']      = $district_stations->noLPG()->count();
+        $district_stations                       = FuelStation::where([['district','=',$district]]);
+        $district_data['stations_total']         = $district_stations->count();
+        $district_data['stations_none']          = $district_stations->empty()->count();
+        $district_data['stations_partial']       = $district_stations->partial()->count();
+        $district_data['stations_all']           = $district_stations->withAll()->count();
+        $district_data['stations_no_gasoline']   = $district_stations->noGasoline()->count();
+        $district_data['stations_no_diesel']     = $district_stations->noDiesel()->count();
+        $district_data['stations_no_lpg']        = $district_stations->noLPG()->count();
+        $district_data['stations_sell_gasoline'] = $district_stations->sellGasoline()->count();
+        $district_data['stations_sell_diesel']   = $district_stations->sellDiesel()->count();
+        $district_data['stations_sell_lpg']      = $district_stations->sellLPG()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'.json', \json_encode($district_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'.json'));
     }
@@ -95,25 +107,31 @@ class CacheController extends Controller
             'entries_total'     => 0,
         ];
         $global = [
-            'stations_total'       => 0,
-            'stations_none'        => 0,
-            'stations_partial'     => 0,
-            'stations_all'         => 0,
-            'stations_no_gasoline' => 0,
-            'stations_no_diesel'   => 0,
-            'stations_no_lpg'      => 0,
+            'stations_total'         => 0,
+            'stations_none'          => 0,
+            'stations_partial'       => 0,
+            'stations_all'           => 0,
+            'stations_no_gasoline'   => 0,
+            'stations_no_diesel'     => 0,
+            'stations_no_lpg'        => 0,
+            'stations_sell_gasoline' => 0,
+            'stations_sell_diesel'   => 0,
+            'stations_sell_lpg'      => 0,
 
         ];
-        $entries['entries_last_hour']   = Entry::lastHour()->count();
-        $entries['entries_last_day']    = Entry::lastDay()->count();
-        $entries['entries_total']       = Entry::all()->count();
-        $global['stations_total']       = FuelStation::all()->count();
-        $global['stations_none']        = FuelStation::empty()->count();
-        $global['stations_partial']     = FuelStation::partial()->count();
-        $global['stations_all']         = FuelStation::withAll()->count();
-        $global['stations_no_gasoline'] = FuelStation::noGasoline()->count();
-        $global['stations_no_diesel']   = FuelStation::noDiesel()->count();
-        $global['stations_no_lpg']      = FuelStation::noLPG()->count();
+        $entries['entries_last_hour']     = Entry::lastHour()->count();
+        $entries['entries_last_day']      = Entry::lastDay()->count();
+        $entries['entries_total']         = Entry::all()->count();
+        $global['stations_total']         = FuelStation::all()->count();
+        $global['stations_none']          = FuelStation::empty()->count();
+        $global['stations_partial']       = FuelStation::partial()->count();
+        $global['stations_all']           = FuelStation::withAll()->count();
+        $global['stations_no_gasoline']   = FuelStation::noGasoline()->count();
+        $global['stations_no_diesel']     = FuelStation::noDiesel()->count();
+        $global['stations_no_lpg']        = FuelStation::noLPG()->count();
+        $global['stations_sell_gasoline'] = FuelStation::sellGasoline()->count();
+        $global['stations_sell_diesel']   = FuelStation::sellDiesel()->count();
+        $global['stations_sell_lpg']      = FuelStation::sellLPG()->count();
         Storage::disk('public')->put('data/stats_entries.json', \json_encode($entries));
         Storage::disk('public')->put('data/stats_global.json', \json_encode($global));
         $this->clearCloudflare(URL::to('/storage/data/stats_entries.json'));
