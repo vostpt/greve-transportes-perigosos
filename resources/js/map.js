@@ -10,7 +10,7 @@ let attributionControl = {
 let nagivationControl = {
     "obj": null
 };
-const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none'];
+const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none', 'without_gasoline', 'without_diesel', 'without_lpg'];
 const repa_layers = ['normal', 'sos', 'none'];
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoidm9zdHB0IiwiYSI6ImNqeXR3aHQxdTAyYjgzY21wbDMwaHJoaDQifQ.ql-IskzjOdAtEFvbltquaw';
@@ -33,10 +33,13 @@ function loadPoints() {
         points = [];
         $.getJSON("/storage/data/cache.json", (data) => {
             data.forEach(fuelStation => {
-                let with_gasoline = (fuelStation.sell_gasoline && fuelStation.has_gasoline);
-                let with_diesel = (fuelStation.sell_diesel && fuelStation.has_diesel);
-                let with_lpg = (fuelStation.sell_lpg && fuelStation.has_lpg);
-                let with_none = (!with_gasoline) && (!with_diesel) && (!with_lpg);
+                let with_gasoline = 0;
+                let with_diesel = 0;
+                let with_lpg = 0;
+                let with_none = 0;
+                let without_gasoline = 0;
+                let without_diesel = 0;
+                let without_lpg = 0;
                 let icon = '';
                 let popup_color = '';
                 let background_color = '';
@@ -44,14 +47,36 @@ function loadPoints() {
                 let brand = fuelStation.brand;
                 let tooltip = '';
                 let count = 0;
-                if (with_gasoline || (!fuelStation.sell_gasoline)) {
-                    count++;
+                let max_count = 0;
+                if (fuelStation.sell_gasoline) {
+                    max_count++;
+                    if(fuelStation.has_gasoline){
+                        with_gasoline = 1;
+                        count++;
+                    }
+                    else {
+                        without_gasoline = 1;
+                    }
                 }
-                if (with_diesel || (!fuelStation.sell_diesel)) {
-                    count++;
+                if (fuelStation.sell_diesel) {
+                    max_count++;
+                    if(fuelStation.has_diesel){
+                        with_diesel = 1;
+                        count++;
+                    }
+                    else {
+                        without_diesel = 1;
+                    }
                 }
-                if (with_lpg || (!fuelStation.sell_lpg)) {
-                    count++;
+                if (fuelStation.sell_lpg) {
+                    max_count++;
+                    if(fuelStation.has_lpg){
+                        with_lpg = 1;
+                        count++;
+                    }
+                    else {
+                        without_lpg = 1;
+                    }
                 }
                 if (fuelStation.repa == "SOS") {
                     fuelStation.repa = "sos";
@@ -73,7 +98,7 @@ function loadPoints() {
                     tooltip = '<strong>Posto REPA - Geral</strong>';
                 } else {
                     tooltip = '<strong>Posto Não REPA</strong>';
-                    if (count == 3) {
+                    if (count == max_count) {
                         icon = 'ALL';
                         popup_color = '006837';
                         background_color = "e6e6e6";
@@ -81,19 +106,17 @@ function loadPoints() {
                         icon = 'NONE';
                         popup_color = 'c1272c';
                         background_color = "e6e6e6";
-                        tooltip = '<strong>Parcialmente Disponível</strong>';
-
                     } else {
                         icon = 'PARTIAL';
                         popup_color = 'f7921e';
                         background_color = "e6e6e6";
-                        tooltip = '<strong>Parcialmente Disponível</strong>';
                     }
                 }
-                if (count == 3) {
+                if (count == max_count) {
                     tooltip += '<p>Disponível</p>'
                 } else if (count == 0) {
                     tooltip += '<p>Não Disponível</p>';
+                    with_none = 1;
                 } else {
                     tooltip += '<p>Parcialmente Disponível</p>';
                 }
@@ -111,6 +134,9 @@ function loadPoints() {
                         "with_gasoline": with_gasoline,
                         "with_diesel": with_diesel,
                         "with_lpg": with_lpg,
+                        "without_gasoline": without_gasoline,
+                        "without_diesel": without_diesel,
+                        "without_lpg": without_lpg,
                         "with_none": with_none,
                         "sell_gasoline": fuelStation.sell_gasoline,
                         "sell_diesel": fuelStation.sell_diesel,
@@ -157,21 +183,23 @@ function getAttributions() {
     return attributions;
 }
 
-function updatePoints() {
+function updatePoints(initial = false) {
     promises.push(loadPoints());
     Promise.all(promises).then(function () {
         promises = [];
-        repa_layers.forEach(repa_element => {
-            let repa_value = repa_element;
-            if (repa_value == "none") {
-                repa_value = '';
-            }
-            fuel_layers.forEach(fuel_element => {
-                let layerID = 'poi-' + repa_element + '-' + fuel_element;
-                map.removeLayer(layerID);
+        if(!initial) {
+            repa_layers.forEach(repa_element => {
+                let repa_value = repa_element;
+                if (repa_value == "none") {
+                    repa_value = '';
+                }
+                fuel_layers.forEach(fuel_element => {
+                    let layerID = 'poi-' + repa_element + '-' + fuel_element;
+                    map.removeLayer(layerID);
+                });
             });
-        });
-        map.removeSource("points");
+            map.removeSource("points");
+        }
         map.addSource("points", {
             "type": "geojson",
             "data": {
@@ -195,11 +223,23 @@ function updatePoints() {
                         "symbol-sort-key": ["get", "priority"],
                     }
                 });
-                map.setFilter(layerID, [
-                    "all",
-                    [">", "with_" + fuel_element, 0],
-                    ['==', 'repa', repa_value]
-                ]);
+                if(fuel_element.indexOf("without") == -1) {
+                    map.setFilter(layerID, [
+                        "all",
+                        ["==", "with_" + fuel_element, 1],
+                        ['==', 'repa', repa_value]
+                    ]);
+                }
+                else {
+                    map.setFilter(layerID, [
+                        "all",
+                        ["==", fuel_element, 1],
+                        ['==', 'repa', repa_value]
+                    ]);
+                }
+                if(initial) {
+                    addLayersFunctionality(layerID);
+                }
             });
         });
         map.removeControl(nagivationControl.obj);
@@ -359,40 +399,9 @@ map.on('load', function () {
     promises.push(loadBrandImage('NONE', '/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
     promises.push(loadBrandImage('PARTIAL', '/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
     promises.push(loadBrandImage('ALL', '/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png'));
-    promises.push(loadPoints());
     Promise.all(promises).then(function () {
         promises = [];
-        map.addSource("points", {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": points
-            }
-        });
-        repa_layers.forEach(repa_element => {
-            let repa_value = repa_element;
-            if (repa_value == "none") {
-                repa_value = '';
-            }
-            fuel_layers.forEach(fuel_element => {
-                let layerID = 'poi-' + repa_element + '-' + fuel_element;
-                map.addLayer({
-                    "id": layerID,
-                    "type": "symbol",
-                    "source": "points",
-                    "layout": {
-                        "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "priority"],
-                    }
-                });
-                map.setFilter(layerID, [
-                    "all",
-                    [">", "with_" + fuel_element, 0],
-                    ['==', 'repa', repa_value]
-                ]);
-                addLayersFunctionality(layerID);
-            });
-        });
+        updatePoints(true);
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(position => {
                 map.flyTo({
@@ -412,7 +421,6 @@ map.on('load', function () {
             showCompass: true
         });
         map.addControl(nagivationControl.obj, 'bottom-right');
-        updateLayersOptions();
         setInterval(updatePoints, 30000);
     });
 });
