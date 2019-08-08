@@ -28,7 +28,7 @@ class Entry extends Model
     {
         return $query->where([['fuel_station','=',$fuel_station],['has_gasoline','=',$has_gasoline],['has_diesel','=',$has_diesel],['has_lpg','=',$has_lpg],['ip','!=',$ip]]);
     }
-    
+
     public function scopeRelatedNoIP($query, $fuel_station, $has_gasoline, $has_diesel, $has_lpg)
     {
         return $query->where([['fuel_station','=',$fuel_station],['has_gasoline','=',$has_gasoline],['has_diesel','=',$has_diesel],['has_lpg','=',$has_lpg]]);
