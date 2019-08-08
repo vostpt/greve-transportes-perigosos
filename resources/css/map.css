@@ -13,7 +13,7 @@ html,body {
     overflow: hidden !important;
 }
 
-.mapboxgl-popup {
+.mapboxgl-popup-info {
     width: 35vw !important;
     max-width: 400px !important;
 }
@@ -202,4 +202,8 @@ html,body {
 #legend-icon a,
 #features-icon a {
     color: #212529 !important;
+}
+
+.mapboxgl-popup-tooltip {
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }

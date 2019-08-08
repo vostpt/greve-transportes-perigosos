@@ -42,6 +42,17 @@ function loadPoints() {
                 let background_color = '';
                 let priority = 0;
                 let brand = fuelStation.brand;
+                let tooltip = '';
+                let count = 0;
+                if (with_gasoline || (!fuelStation.sell_gasoline)) {
+                    count++;
+                }
+                if (with_diesel || (!fuelStation.sell_diesel)) {
+                    count++;
+                }
+                if (with_lpg || (!fuelStation.sell_lpg)) {
+                    count++;
+                }
                 if (fuelStation.repa == "SOS") {
                     fuelStation.repa = "sos";
                     icon = 'REPA';
@@ -50,6 +61,7 @@ function loadPoints() {
                     background_color = "e6e6e6";
                     brand = brand + " (REPA - Veículos Prioritários)";
                     priority = 2;
+                    tooltip = '<strong>Posto REPA - Prioritários</strong>';
                 } else if (fuelStation.repa == "Normal") {
                     fuelStation.repa = "normal";
                     icon = 'REPA';
@@ -58,17 +70,9 @@ function loadPoints() {
                     background_color = "e6e6e6";
                     brand = brand + " (REPA - Todos os Veículos)";
                     priority = 1;
+                    tooltip = '<strong>Posto REPA - Geral</strong>';
                 } else {
-                    let count = 0;
-                    if (with_gasoline || (!fuelStation.sell_gasoline)) {
-                        count++;
-                    }
-                    if (with_diesel || (!fuelStation.sell_diesel)) {
-                        count++;
-                    }
-                    if (with_lpg || (!fuelStation.sell_lpg)) {
-                        count++;
-                    }
+                    tooltip = '<strong>Posto Não REPA</strong>';
                     if (count == 3) {
                         icon = 'ALL';
                         popup_color = '006837';
@@ -77,11 +81,21 @@ function loadPoints() {
                         icon = 'NONE';
                         popup_color = 'c1272c';
                         background_color = "e6e6e6";
+                        tooltip = '<strong>Parcialmente Disponível</strong>';
+
                     } else {
                         icon = 'PARTIAL';
                         popup_color = 'f7921e';
                         background_color = "e6e6e6";
+                        tooltip = '<strong>Parcialmente Disponível</strong>';
                     }
+                }
+                if (count == 3) {
+                    tooltip += '<p>Disponível</p>'
+                } else if (count == 0) {
+                    tooltip += '<p>Não Disponível</p>';
+                } else {
+                    tooltip += '<p>Parcialmente Disponível</p>';
                 }
                 points.push({
                     "type": "Feature",
@@ -107,7 +121,8 @@ function loadPoints() {
                         "icon": icon,
                         "popup_color": popup_color,
                         "background_color": background_color,
-                        "priority": priority
+                        "priority": priority,
+                        "tooltip": tooltip
                     }
                 });
             });
@@ -250,10 +265,10 @@ function addLayersFunctionality(layerID) {
                 '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                 '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>' +
                 '</div>' +
-                '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">'+
-                '<div class="row" style="margin:0;">'+
-                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
-                '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>'+
+                '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">' +
+                '<div class="row" style="margin:0;">' +
+                '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>' +
+                '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -268,10 +283,10 @@ function addLayersFunctionality(layerID) {
                 '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">' +
                 '<img src="/img/map/map_separation_' + e.features[0].properties.background_color + '.png" style="width: 100%;" />' +
                 '</a></div>' +
-                '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">'+
-                '<div class="row" style="margin:0;">'+
-                '<div class="col-3"><a href="/error/edit?id='+e.features[0].properties.id+'"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>'+
-                '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>'+
+                '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">' +
+                '<div class="row" style="margin:0;">' +
+                '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>' +
+                '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
@@ -285,19 +300,43 @@ function addLayersFunctionality(layerID) {
             zoom: 13
         });
 
-        popup = new mapboxgl.Popup()
+        popup = new mapboxgl.Popup({className: 'mapboxgl-popup-info'})
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
     });
-
-    map.on('mouseenter', layerID, function () {
-        map.getCanvas().style.cursor = 'pointer';
+    var tooltip_popup = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        className: 'mapboxgl-popup-tooltip'
     });
 
-    // Change it back to a pointer when it leaves.
+    map.on('mouseenter', layerID, function (e) {
+        // Change the cursor style as a UI indicator.
+        map.getCanvas().style.cursor = 'pointer';
+    
+        var coordinates = e.features[0].geometry.coordinates.slice();
+        var tooltip = e.features[0].properties.tooltip;
+    
+        console.log(tooltip);
+    
+        // Ensure that if the map is zoomed out such that multiple
+        // copies of the feature are visible, the popup appears
+        // over the copy being pointed to.
+        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+        }
+    
+        // Populate the popup and set its coordinates
+        // based on the feature found.
+        tooltip_popup.setLngLat(coordinates)
+            .setHTML(tooltip)
+            .addTo(map);
+    });
+    
     map.on('mouseleave', layerID, function () {
         map.getCanvas().style.cursor = '';
+        tooltip_popup.remove();
     });
 }
 
@@ -313,7 +352,7 @@ map.on('load', function () {
             // returns true if item contains New South Wales region
             return item.context.map(function (i) {
                 let something = i.id.split('.').shift();
-                if(something === 'country') {
+                if (something === 'country') {
                     console.log(i.text);
                 }
                 return (something === 'country' && i.text === 'Portugal');
