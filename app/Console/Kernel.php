@@ -14,7 +14,11 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\CreateUser',
+        'App\Console\Commands\FuelStationsGetDistrictFromCounties',
+        'App\Console\Commands\FuelStationsUpdateCache',
+        'App\Console\Commands\FuelStationsUpdateFromURL1',
+        'App\Console\Commands\FuelStationsUpdateStats',
     ];
 
     /**
@@ -25,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('stations:stats')->everyFiveMinutes();
+        $schedule->command('stations:stats')->everyMinute();
     }
 
     /**
