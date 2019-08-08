@@ -318,8 +318,6 @@ function addLayersFunctionality(layerID) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         var tooltip = e.features[0].properties.tooltip;
     
-        console.log(tooltip);
-    
         // Ensure that if the map is zoomed out such that multiple
         // copies of the feature are visible, the popup appears
         // over the copy being pointed to.
@@ -351,11 +349,7 @@ map.on('load', function () {
         filter: function (item) {
             // returns true if item contains New South Wales region
             return item.context.map(function (i) {
-                let something = i.id.split('.').shift();
-                if (something === 'country') {
-                    console.log(i.text);
-                }
-                return (something === 'country' && i.text === 'Portugal');
+                return (i.id.split('.').shift() === 'country' && i.text === 'Portugal');
             }).reduce(function (acc, cur) {
                 return acc || cur;
             });
