@@ -106,13 +106,13 @@
                         }
                         @media (min-width: 768px) {
                             .vost-media-iframe {
-                                height: 350px;
+                                height: 400px;
                             }
                         }
 
                         @media  (max-width: 768px) {
                             .vost-media-iframe {
-                                height: 650px;
+                                height: 700px;
                             }
                         }
                     </style>
@@ -134,7 +134,7 @@
                 <div class="card-body">
                     <h2>HTML</h2>
                     <code>                        
-                        &lt;style&gt; .vost-media-iframe { width: 100%; } @media (min-width: 768px) { .vost-media-iframe { height: 350px; } } @media (max-width: 768px) { .vost-media-iframe { height: 650px; } } &lt;/style&gt; &lt;iframe frameborder=&quot;0&quot; scrolling=&quot;no&quot; class=&quot;vost-media-iframe&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
+                        &lt;style&gt; .vost-media-iframe { width: 100%; } @media (min-width: 768px) { .vost-media-iframe { height: 400px; } } @media (max-width: 768px) { .vost-media-iframe { height: 700px; } } &lt;/style&gt; &lt;iframe frameborder=&quot;0&quot; scrolling=&quot;no&quot; class=&quot;vost-media-iframe&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
                     </code>
                 </div>
             </div>

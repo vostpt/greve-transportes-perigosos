@@ -8,13 +8,13 @@
 <style>
     @media (min-width: 768px) {
         iframe {
-            height: 350px;
+            height: 400px;
         }
     }
 
     @media  (max-width: 768px) {
         iframe {
-            height: 650px;
+            height: 700px;
         }
     }
 </style>
