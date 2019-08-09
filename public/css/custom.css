@@ -1,1 +1,21 @@
-.navbar-dark .navbar-nav .nav-link{color:rgba(255,255,255,.9);z-index:1000}.btn-lg{color:#fff;width:80%;text-transform:uppercase;font-size:1.5em;font-weight:600}.btn-lg:hover{color:#fff}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255, 255, 255, .9);
+    z-index: 1000
+}
+
+.btn-lg {
+    color: #fff;
+    width: 80%;
+    text-transform: uppercase;
+    font-size: 1.5
+    em;
+    font-weight: 600
+}
+
+.btn-lg:hover {
+    color: #fff
+}
+
+main .container {
+  margin-bottom: 40px;
+}
