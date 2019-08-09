@@ -29,7 +29,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('stations:stats')->everyFiveMinutes();
+        $schedule->command('stations:stats')->everyMinute()->withoutOverlapping(10);
     }
 
     /**
