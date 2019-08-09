@@ -101,6 +101,9 @@
                 <div class="card-body">
                     <h2>Exemplo</h2>
                     <style>
+                        .vost-media-iframe {
+                            width: 100%;
+                        }
                         @media (min-width: 768px) {
                             .vost-media-iframe {
                                 height: 350px;
@@ -130,8 +133,8 @@
             <div id="global_stats_usage_collapse" class="collapse" aria-labelledby="global_stats_usage" data-parent="#global_stats">
                 <div class="card-body">
                     <h2>HTML</h2>
-                    <code>                     
-                        &lt;style&gt; @media (min-width: 768px) { .vost-media-iframe { height: 350px; } } @media (max-width: 768px) { .vost-media-iframe { height: 650px; } } &lt;/style&gt; &lt;iframe frameborder=&quot;0&quot; scrolling=&quot;no&quot; class=&quot;vost-media-iframe&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
+                    <code>                        
+                        &lt;style&gt; .vost-media-iframe { width: 100%; } @media (min-width: 768px) { .vost-media-iframe { height: 350px; } } @media (max-width: 768px) { .vost-media-iframe { height: 650px; } } &lt;/style&gt; &lt;iframe frameborder=&quot;0&quot; scrolling=&quot;no&quot; class=&quot;vost-media-iframe&quot; src=&quot;https://janaodaparaabastecer.vost.pt/graphs/stats&quot;&gt;&lt;/iframe&gt;
                     </code>
                 </div>
             </div>
