@@ -56,9 +56,9 @@ function swapIcon(obj) {
 }
 
 function submitEntry(obj, id) {
-    let gasoline = Number(!($(obj).parent().parent().find('.gasoline img').hasClass('no-gas')));
-    let diesel = Number(!($(obj).parent().parent().find('.diesel img').hasClass('no-gas')));
-    let lpg = Number(!($(obj).parent().parent().find('.lpg img').hasClass('no-gas')));
+    let gasoline = Number(!($(".mapboxgl-popup-content").find('.gasoline img').hasClass('no-gas')));
+    let diesel = Number(!($(".mapboxgl-popup-content").find('.diesel img').hasClass('no-gas')));
+    let lpg = Number(!($(".mapboxgl-popup-content").find('.lpg img').hasClass('no-gas')));
     validateCaptcha((token) => {
         let data = {
             "fuel_station": id,
