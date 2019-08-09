@@ -17,6 +17,7 @@ function Get(yourUrl) {
     Httpreq.send(null);
     return Httpreq.responseText;
 }
+
 window.onload = function () {
     let district = findGetParameter("distrito");
     let county = findGetParameter("concelho");
@@ -33,199 +34,78 @@ window.onload = function () {
         county = null;
         url = "/storage/data/stats_global.json";
     }
-    let data = JSON.parse(Get(url));
-    let stations_options = {
-        circumference: Math.PI,
-        rotation: -Math.PI,
-        responsive: true,
-        legend: {
-            position: 'bottom',
-            fullWidth: true,
-            labels: {
-                fontStyle: "bold",
-                fontColor: "#000",
-                boxWidth: 40,
-                fontSize: 14,
-                generateLabels: function (chart) {
-                    var data = chart.data;
-                    if (data.labels.length && data.datasets.length) {
-                        let obj = data.labels.map(function (label, i) {
-                            var meta = chart.getDatasetMeta(0);
-                            return {
-                                text: label.toUpperCase(),
-                                fillStyle: data.datasets[0].backgroundColor[i],
-                                strokeStyle: "solid",
-                                lineWidth: "0",
-                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-
-                                // Extra data used for toggling the correct item
-                                index: i
-                            };
-                        });
-                        return obj;
-                    }
-                    return [];
-                }
-            }
-        },
-        title: {
-            display: true,
-            position: 'top',
-            text: ['VISÃO GERAL AGREGADA', '(Universo Total: ' + data["stations_total"] + ' postos)'],
-            fontSize: 20,
-            fontColor: '#46ace3'
-        },
-        animation: {
-            animateScale: false,
-            animateRotate: false
-        },
-        plugins: {
-            datalabels: {
-                anchor: 'center',
-                align: 'center',
-                color: '#ffffff',
-                formatter: function (value, context) {
-                    if (value == 0) {
-                        return "";
-                    }
-                    return "\n"+value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
-                },
-                "font": {
-                    "size": "13"
-                }
-            }
-        },
-        tooltips: {
-            enabled: true,
-            mode: 'single',
-            callbacks: {
-                label: function (tooltipItems, data) {
-                    return data['datasets'][0]['label'][tooltipItems['index']];
-                }
-            }
-        }
-    };
-    let stations_data = {
-        labels: ["Sem Nenhum Combustível", "Com Algum Tipo de Combustível", "Com Todos os Combustíveis"],
-        datasets: [{
-            data: [data.stations_none, data.stations_partial, data.stations_all],
-            backgroundColor: [
-                "#c1272c",
-                "#f7921e",
-                "#006837"
-            ],
-            label: [
-                "Sem Nenhum Combustível",
-                "Com Algum Tipo de Combustível",
-                "Com Todos os Combustíveis"
-            ]
-        }]
-    };
-    let types_options = {
-        circumference: Math.PI,
-        rotation: -Math.PI,
-        responsive: true,
-        legend: {
-            position: 'bottom',
-            fullWidth: true,
-            labels: {
-                fontStyle: "bold",
-                fontColor: "#000",
-                boxWidth: 40,
-                fontSize: 14,
-                generateLabels: function (chart) {
-                    var data = chart.data;
-                    if (data.labels.length && data.datasets.length) {
-                        let obj = data.labels.map(function (label, i) {
-                            var meta = chart.getDatasetMeta(0);
-                            return {
-                                text: label.toUpperCase(),
-                                fillStyle: data.datasets[0].backgroundColor[i],
-                                strokeStyle: "solid",
-                                lineWidth: "0",
-                                hidden: isNaN(data.datasets[0].data[i]) || meta.data[i].hidden,
-
-                                // Extra data used for toggling the correct item
-                                index: i
-                            };
-                        });
-                        return obj;
-                    }
-                    return [];
-                }
-            }
-        },
-        title: {
-            display: true,
-            position: 'top',
-            text: ['FALTAS POR TIPO DE COMBUSTÍVEL', '(Universo Total: ' + data["stations_total"] + ' postos)'],
-            fontSize: 20,
-            fontColor: '#b13d3a'
-        },
-        animation: {
-            animateScale: false,
-            animateRotate: false
-        },
-        plugins: {
-            datalabels: {
-                color: '#ffffff',
-                formatter: function (value, context) {
-                    let label_text  = context["dataset"]["label"][context["dataIndex"]];
-                    if (value == 0) {
-                        return "";
-                    }
-                    if(label_text == "Sem Gasolina") {
-                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_gasoline"]).toFixed(2) + "%\n";
-                    }
-                    if(label_text == "Sem Gasóleo") {
-                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_diesel"]).toFixed(2) + "%\n";
-                    }
-                    if(label_text == "Sem GPL") {
-                        return "\n"+value + "\n" + (value * 100 / data["stations_sell_lpg"]).toFixed(2) + "%\n";
-                    }
-                    return "\n"+value + "\n" + (value * 100 / data["stations_total"]).toFixed(2) + "%\n";
-                },
-                "font": {
-                    "size": "13"
-                }
-            }
-        },
-        tooltips: {
-            enabled: true,
-            mode: 'single',
-            callbacks: {
-                label: function (tooltipItems, data) {
-                    return data['datasets'][0]['label'][tooltipItems['index']];
-                }
-            }
-        },
-    }
-    let types_data = {
-        labels: ["Sem Gasolina", "Sem Gasóleo", "Sem GPL"],
-        datasets: [{
-            data: [data.stations_no_gasoline, data.stations_no_diesel, data.stations_no_lpg],
-            backgroundColor: [
-                "#b38614",
-                "#a16608",
-                "#703200"
-            ],
-            label: [
-                "Sem Gasolina",
-                "Sem Gasóleo",
-                "Sem GPL"
-            ]
-        }]
-    };
-    var stations_ctx = document.getElementById('stations-chart-area').getContext('2d');
-    var stations_chart = new Chart(stations_ctx, {
-        type: 'doughnut',
-        data: stations_data,
-        options: stations_options
-    });
-    var types_ctx = document.getElementById('types-chart-area').getContext('2d');
-    var types_chart = new Chart(types_ctx, {
-        type: 'doughnut',
-        data: types_data,
-        options: types_options
-    });
+    charts(url);
 };
+
+
+function charts(dataSourceUri) {
+    let data = JSON.parse(Get(dataSourceUri));
+
+    google.charts.load("current", {
+        packages: ["corechart"]
+    });
+    google.charts.setOnLoadCallback(() => {
+        let dataTable1 = new google.visualization.DataTable();
+
+        dataTable1.addColumn('string', 'Combustivel');
+        dataTable1.addColumn('number', 'Postos');
+        dataTable1.addRows([
+            ['Todos', data.stations_all],
+            ['Parte', data.stations_partial],
+            ['Nenhum', data.stations_none]
+        ]);
+
+        let options = {
+            pieHole: 0.2,
+            chartArea: {
+                top: 50,
+                height: "300px"
+            },
+            height: 300,
+            legend: {
+                position: "top",
+                alignment: "center",
+            },
+            pieSliceText: 'value-and-percentage',
+            tooltip: {
+                ignoreBounds: true
+            },
+            sliceVisibilityThreshold: 0
+        };
+
+        let optionsChart1 = Object.assign(options, {
+            colors: ['#8BC34A', '#f6bd00', '#f62317'],
+            backgroundColor: { fill:'transparent' }
+        });
+        let chart1 = new google.visualization.PieChart(document.getElementById('stations-chart-area'));
+        chart1.draw(dataTable1, optionsChart1);
+        document.getElementById('stations_total_number').innerHTML = data["stations_total"];
+        
+
+        var dataTable2 = google.visualization.arrayToDataTable([
+            ['Combustivel', 'Esgotado', {
+                role: 'annotation'
+            }, 'Vende', {
+                role: 'annotation'
+            }],
+            ['Gasolina', data.stations_no_gasoline, data.stations_no_gasoline, data.stations_sell_gasoline, data.stations_sell_gasoline],
+            ['Gasoleo', data.stations_no_diesel, data.stations_no_diesel, data.stations_sell_diesel, data.stations_sell_diesel],
+            ['GPL', data.stations_no_lpg, data.stations_no_lpg, data.stations_sell_lpg, data.stations_sell_lpg]
+        ]);
+
+        let optionsChart2 = Object.assign(options, {
+            legend: {
+                position: 'top',
+                maxLines: 3
+            },
+            bar: {
+                groupWidth: '75%'
+            },
+            isStacked: true,
+            colors: ['#f62317', '#8BC34A'],
+            backgroundColor: { fill:'transparent' }
+        });
+        let chart2 = new google.visualization.BarChart(document.getElementById('types-chart-area'));
+        chart2.draw(dataTable2, optionsChart2);
+    });
+}

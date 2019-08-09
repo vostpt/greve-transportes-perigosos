@@ -5,19 +5,26 @@
 @endsection
 
 @section('styles')
-<script type="text/javascript">
-    function resizeIframe(obj) {
-        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+<style>
+    @media (min-width: 768px) {
+        iframe {
+            height: 350px;
+        }
     }
-</script>
+
+    @media  (max-width: 768px) {
+        iframe {
+            height: 650px;
+        }
+    }
+</style>
 @endsection
 
 @section('content')
 <div class="container text-center">
     <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     <div class="row">
-        <iframe frameborder="0" scrolling="no" onload="resizeIframe(this)" id="global_stats" style="width:100%;"
-            src="/graphs/stats"></iframe>
+        <iframe frameborder="0" scrolling="no"id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
     <div class="row" style="text-align: left">
         <div class="col-md-9" style="margin-top: 0.5em;">
@@ -52,7 +59,7 @@
                 </select>
             </div>
         </div>
-        <iframe frameborder="0" scrolling="no" onload="resizeIframe(this)" id="selected_stats" style="width:100%;"
+        <iframe frameborder="0" scrolling="no" id="selected_stats" style="width:100%;"
             src="/graphs/stats"></iframe>
     </div>
     @endsection
