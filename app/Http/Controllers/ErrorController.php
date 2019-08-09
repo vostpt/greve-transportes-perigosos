@@ -58,9 +58,9 @@ class ErrorController extends Controller
             }
             $url = env('ERRORS_SPREADSHEET_LINK').'?id='.$validatedData['id'].'&lat='.$validatedData['lat'].'&long='.$validatedData['long'].'&brand='.\urlencode($validatedData['brand']).'&gasoline='.$validatedData['sell_gasoline'].'&diesel='.$validatedData['sell_diesel'].'&lpg='.$validatedData['sell_lpg'].'&vostie='.\urlencode($validatedData['vostie']).'&email='.\urlencode($validatedData['email']);
             \file_get_contents($url);
-            return redirect('/error')->with('status', 'Informação Enviada!');
+            return redirect('/error/push')->with('status', 'Informação Enviada!');
         } catch (Exception $e) {
-            return redirect('/error')->with('status', 'Erro ao enviar informação!');
+            return redirect('/error/push')->with('status', 'Erro ao enviar informação!');
         }
     }
 }
