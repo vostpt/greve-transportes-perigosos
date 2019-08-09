@@ -107,6 +107,6 @@ Route::prefix('graphs')->name('graphs.')->group(function () {
 Route::prefix('error')->name('error.')->group(function () {
     Route::get('/', 'ErrorController@new')->name('new');
     Route::get('edit', 'ErrorController@edit')->name('edit');
-    Route::get('push', 'ErrorController@push')
+    Route::get('push', 'ErrorController@push');
     Route::post('push', 'ErrorController@push')->name('push');
 });
