@@ -29,12 +29,12 @@
         <div class="row">
             <div class="form-group col-6">
                 <label for="station_long">Longitude</label>
-                <input type="number" step="0.00001" class="form-control" id="station_long" name="long" value="0"
+                <input type="number" step="0.0000000001" class="form-control" id="station_long" name="long" value="0"
                     required>
             </div>
             <div class="form-group col-6">
                 <label for="station_lat">Latitude</label>
-                <input type="number" step="0.00001" class="form-control" id="station_lat" name="lat" value="0" required>
+                <input type="number" step="0.0000000001" class="form-control" id="station_lat" name="lat" value="0" required>
             </div>
         </div>
         <div class="form-group">
