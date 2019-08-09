@@ -116,6 +116,14 @@
         let dataSourceGlobalUri = "/storage/data/stats_global.json";
         let $countyEl = $("#county_selection");
         let $districtEl = $("#district_selection");
+        let places = [];
+
+        $.getJSON( "/storage/data/places.json", (data) => {
+            places = data;
+            Object.keys(places).forEach(district => {
+                $districtEl.append("<option value=\""+district+"\">"+district+"</option>")
+            });
+        });
 
         window.onload = function(){
             let district = sessionStorage.getItem('district');
@@ -141,13 +149,6 @@
             let ds = sessionStorage.getItem('data_source_uri');
             charts(ds);
         }, 30000);
-
-        $.getJSON( "/storage/data/places.json", (data) => {
-            places = data;
-            Object.keys(data).forEach(district => {
-                $districtEl.append("<option value=\""+district+"\">"+district+"</option>")
-            });
-        });
 
         $districtEl.on('change', function (e) {
             let valueSelected = this.value;
