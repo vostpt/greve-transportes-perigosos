@@ -57,7 +57,11 @@ class FuelStationsUpdateFromURL1 extends Command
                 $source_id = $line_id;
             }
             $brand = $entry[4];
-            $name  = $entry[5];
+            if ($brand == '') {
+                // ignore if there's no brand.
+                continue;
+            }
+            $name = $entry[5];
             if ($name == '') {
                 $name = $entry[9];
             }
@@ -79,6 +83,7 @@ class FuelStationsUpdateFromURL1 extends Command
                 'long'          => $long,
                 'lat'           => $lat,
                 'county'        => $county,
+                'district'      => '',
             ];
             $fuel_station = FuelStation::where('source_id', [$source_id])->get()->first();
             if (! $fuel_station) {
