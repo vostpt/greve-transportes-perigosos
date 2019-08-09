@@ -30,6 +30,22 @@
             </div>
         </div>
         <div class="card">
+            <div class="card-header" id="GDPR ">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#GDPR_collapse"
+                        aria-expanded="false" aria-controls="GDPR_collapse" style="font-weight: bold; color:black;">
+                        Regulamento Geral sobre a Proteção de Dados
+                    </button>
+                </h2>
+            </div>
+            <div id="GDPR_collapse" class="collapse" aria-labelledby="GDPR " data-parent="#about">
+                <div class="card-body">
+                    <h2>Regulamento Geral sobre a Proteção de Dados</h2>
+                    <embed src="/pdf/VOST PT Política de Privacidade.pdf" style="width: 100%; height: 1000px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+                </div>
+            </div>
+        </div>
+        <div class="card">
             <div class="card-header" id="credits">
                 <h2 class="mb-0">
                     <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#credits_collapse"
