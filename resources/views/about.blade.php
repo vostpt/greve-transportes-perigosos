@@ -41,7 +41,7 @@
             <div id="GDPR_collapse" class="collapse" aria-labelledby="GDPR " data-parent="#about">
                 <div class="card-body">
                     <h2>Regulamento Geral sobre a Proteção de Dados</h2>
-                    <embed src="/pdf/VOST PT Política de Privacidade.pdf" style="width: 100%; height: 1000px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+                    <embed src="/pdf/VOST_PT_Política_de_Privacidade.pdf" style="width: 100%; height: 1000px" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
                 </div>
             </div>
         </div>
