@@ -26,7 +26,7 @@
     <div class="row">
         <iframe frameborder="0" scrolling="no"id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
-    <div class="row">
+    <div class="row" style="display:none">
         <div class="col-md-12">
             <h2>Estatisticas Por Localização</h2>
         </div>
