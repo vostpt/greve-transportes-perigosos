@@ -62,7 +62,7 @@ class FuelStationsUpdateFromURL1 extends Command
                 $name = $entry[9];
             }
             $lpg    = ($entry[6] == 'Sim');
-            $long   = $entry[12];
+            $long   = $entry[14];
             $lat    = $entry[13];
             $county = $entry[3];
             $data   = [
