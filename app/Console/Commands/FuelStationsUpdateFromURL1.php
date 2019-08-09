@@ -57,11 +57,11 @@ class FuelStationsUpdateFromURL1 extends Command
                 $source_id = $line_id;
             }
             $brand = $entry[4];
-            if($brand == '') {
+            if ($brand == '') {
                 // ignore if there's no brand.
                 continue;
             }
-            $name  = $entry[5];
+            $name = $entry[5];
             if ($name == '') {
                 $name = $entry[9];
             }
