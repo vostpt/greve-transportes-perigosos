@@ -4,26 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Já Não Dá Para Abastecer - Estastísticas</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
     <style>
-        canvas {
-            -moz-user-select: none;
-            -webkit-user-select: none;
-            -ms-user-select: none;
-        }
 
         .flex-container {
             display: flex;
             flex-wrap: wrap;
+            font-family: sans-serif;
         }
 
-        @media screen and (min-width: 768px) {
+        @media (min-width: 768px) {
             .graph {
                 width: 50%;
             }
         }
 
-        @media screen and (max-width: 768px) {
+        @media  (max-width: 768px) {
             .graph {
                 width: 100%;
             }
@@ -38,15 +33,17 @@
 
 <body>
     <div class="flex-container">
-        <div class="graph">
-            <canvas id="stations-chart-area"></canvas>
+        <div class="graph" style="text-align: center;color: #46ace3">
+            <h2>VISÃO GERAL AGREGADA</h2>
+            <h4 style="margin-top: -1em">(Universo Total: <span id="stations_total_number">0</span> Postos)</h4>
+            <div id="stations-chart-area"></div>
         </div>
-        <div class="graph">
-            <canvas id="types-chart-area"></canvas>
+        <div class="graph" style="text-align: center;color: #b9524e"> 
+            <h2>TOTAIS AGREGADOS POR COMBUSTÍVEL</h2>
+        <div id="types-chart-area"></div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" charset="utf-8"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels" charset="utf-8"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="{{ mix('/js/graph_stats.js') }}" charset="utf-8"></script>
 </body>
 
