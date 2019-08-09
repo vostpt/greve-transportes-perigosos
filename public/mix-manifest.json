@@ -1,11 +1,11 @@
 {
-    "/js/app.js": "/js/app.js?id=6edd96b6e849feec2655",
-    "/css/app.css": "/css/app.css?id=e4962a01bb05eaa5f778",
-    "/js/graph_stats.js": "/js/graph_stats.js?id=3b95a3e9e3652aac0ed0",
-    "/js/map.js": "/js/map.js?id=39bee43dd1555743e8a7",
-    "/js/map_load.js": "/js/map_load.js?id=15830f2e2570987f0352",
-    "/js/stats.js": "/js/stats.js?id=e17eeed39f12b2958980",
-    "/css/map.css": "/css/map.css?id=7ec79e1e5b1f0f5aab94",
-    "/css/custom.css": "/css/custom.css?id=3001e7b0fcea8ffbe095",
-    "/js/map_direct.js": "/js/map_direct.js?id=1a81c8b0b39b6650b294"
+    "/js/app.js": "/js/app.js",
+    "/css/app.css": "/css/app.css",
+    "/js/graph_stats.js": "/js/graph_stats.js",
+    "/js/map.js": "/js/map.js",
+    "/js/map_load.js": "/js/map_load.js",
+    "/js/stats.js": "/js/stats.js",
+    "/css/map.css": "/css/map.css",
+    "/css/custom.css": "/css/custom.css",
+    "/js/map_direct.js": "/js/map_direct.js"
 }

@@ -88,7 +88,7 @@
                 <div class="card-header">
                     Disponibilidade combustível por postos
                 </div>
-                <div class="card-body" style="overflow: hidden; max-height: 300px">
+                <div class="card-body" style="overflow: hidden;">
                     <div id="chart_container_1"></div>
                 </div>
             </div>
@@ -98,8 +98,10 @@
                 <div class="card-header">
                     Faltas por tipo combustível
                 </div>
-                <div class="card-body" style="overflow: hidden; max-height: 300px;">
-                    <div id="chart_container_2" ></div>
+                <div class="card-body" style="overflow: hidden;">
+                    <div id="chart_container_2_gasoline" ></div>
+                    <div id="chart_container_3_diesel" ></div>
+                    <div id="chart_container_4_lpg" ></div>
                 </div>
             </div>
         </div>
@@ -119,16 +121,19 @@
             let district = sessionStorage.getItem('district');
             let county = sessionStorage.getItem('county');
             let dataSourceUri = sessionStorage.getItem('data_source_uri');
-            if(dataSourceUri === null && district === null && county === null){
+            if(dataSourceUri === null){
                 $districtEl.val('none').trigger('change');
                 dataSourceUri = dataSourceGlobalUri;
+                sessionStorage.setItem('data_source_uri', dataSourceUri);
             }else{
-                $districtEl.val(district).trigger('change');
-                $countyEl.val(county).trigger('change');
+                if(district !== null && county !== null){
+                    $districtEl.val(district).trigger('change');
+                    $countyEl.val(county).trigger('change');
+                }else{
+                    $districtEl.val('none').trigger('change');
+                }
             }
-            sessionStorage.setItem('data_source_uri', dataSourceUri);
             getEntries();
-            charts(dataSourceUri);
         };
 
         setInterval(function () {
@@ -149,6 +154,8 @@
             if(valueSelected === "none") {
                 $countyEl.prop('disabled', true);
                 $countyEl.html("<option value=\"none\">Todos</option>");
+                sessionStorage.setItem('district', valueSelected);
+                sessionStorage.setItem('county', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceGlobalUri);
                 charts(dataSourceGlobalUri);
             }else {
@@ -166,14 +173,16 @@
 
         $('#county_selection').on('change', function (e) {
             let valueSelected = this.value;
-            let district = $districtEl.val();
-            let dataSourceUri = "/storage/data/stats_" + encodeURI(district) + ".json";
-            if(valueSelected !== "none") {
-                dataSourceUri = "/storage/data/stats_" + encodeURI(district) + "_" + encodeURI(valueSelected) + ".json"
+            if(valueSelected !== 'none'){
+                let district = $districtEl.val();
+                let dataSourceUri = "/storage/data/stats_" + encodeURI(district) + ".json";
+                if(valueSelected !== "none") {
+                    dataSourceUri = "/storage/data/stats_" + encodeURI(district) + "_" + encodeURI(valueSelected) + ".json"
+                }
+                sessionStorage.setItem('county', valueSelected);
+                sessionStorage.setItem('data_source_uri', dataSourceUri);
+                charts(dataSourceUri);
             }
-            sessionStorage.setItem('county', valueSelected);
-            sessionStorage.setItem('data_source_uri', dataSourceUri);
-            charts(dataSourceUri);
         });
 
         function getEntries(){
@@ -201,11 +210,7 @@
 
                     let options = {
                         pieHole: 0.2,
-                        chartArea: {
-                            top: 50,
-                            height: "300px"
-                        },
-                        height: 300,
+                        height: 390,
                         legend : {
                             position: "top",
                             alignment: "center",
@@ -225,18 +230,46 @@
                     let hasDiesel = data.stations_sell_diesel - data.stations_no_diesel;
                     let hasLpg = data.stations_sell_lpg - data.stations_no_lpg;
 
+                    //
+                    // GASOLINE
+                    //
+                    let barOptions = {
+                        legend : {position: "top", alignment: "left"},
+                        tooltip: { ignoreBounds:true},
+                        sliceVisibilityThreshold: 0,
+                        bar: { groupWidth: '50%' },
+                        isStacked: true,
+                        top:0,
+                        height: 130,
+                        hAxis: {textPosition: 'none'}
+                    };
                     let dataTable2 = google.visualization.arrayToDataTable([
-                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'}],
-                        ['Gasolina', data.stations_no_gasoline,data.stations_no_gasoline,hasGasoline,hasGasoline],
-                        ['Gasoleo', data.stations_no_diesel,data.stations_no_diesel,hasDiesel,hasDiesel],
-                        ['GPL', data.stations_no_lpg,data.stations_no_lpg,hasLpg,hasLpg]
+                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+                        ['Gasolina', data.stations_no_gasoline,data.stations_no_gasoline,hasGasoline,hasGasoline,'#AAAE43']
                     ]);
-
-                    let optionsChart2 = Object.assign(options,{legend: { position: 'top', maxLines: 3 },
-                        bar: { groupWidth: '75%' },
-                        isStacked: true,colors: ['#f62317','#8BC34A']});
-                    let chart2 = new google.visualization.BarChart(document.getElementById('chart_container_2'));
+                    let optionsChart2 = Object.assign(barOptions,{colors: ['#f62317','#AAAE43']});
+                    let chart2 = new google.visualization.BarChart(document.getElementById('chart_container_2_gasoline'));
                     chart2.draw(dataTable2, optionsChart2);
+                    //
+                    // DIESEL
+                    //
+                    let dataTable3Diesel = google.visualization.arrayToDataTable([
+                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+                        ['Gasoleo', data.stations_no_diesel,data.stations_no_diesel,hasDiesel,hasDiesel,'#DB6E3E'],
+                    ]);
+                    let optionsChart3 = Object.assign(barOptions,{colors: ['#f62317','#DB6E3E']});
+                    let chart3lpg = new google.visualization.BarChart(document.getElementById('chart_container_3_diesel'));
+                    chart3lpg.draw(dataTable3Diesel, optionsChart3);
+                    //
+                    // LPG
+                    //
+                    let dataTable4 = google.visualization.arrayToDataTable([
+                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+                        ['GPL', data.stations_no_lpg,data.stations_no_lpg,hasLpg,hasLpg,'3D8CB1']
+                    ]);
+                    let optionsChart4 = Object.assign(barOptions,{colors: ['#f62317','#3D8CB1']});
+                    let chart4lpg = new google.visualization.BarChart(document.getElementById('chart_container_4_lpg'));
+                    chart4lpg.draw(dataTable4, optionsChart4);
                 });
             });
         }

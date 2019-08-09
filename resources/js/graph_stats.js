@@ -86,30 +86,45 @@ function charts(dataSourceUri) {
         let hasDiesel = data.stations_sell_diesel - data.stations_no_diesel;
         let hasLpg = data.stations_sell_lpg - data.stations_no_lpg;
 
-        var dataTable2 = google.visualization.arrayToDataTable([
-            ['Combustivel', 'Esgotado', {
-                role: 'annotation'
-            }, 'Vende', {
-                role: 'annotation'
-            }],
-            ['Gasolina', data.stations_no_gasoline, data.stations_no_gasoline, hasGasoline, hasGasoline],
-            ['Gasoleo', data.stations_no_diesel, data.stations_no_diesel, hasDiesel, hasDiesel],
-            ['GPL', data.stations_no_lpg, data.stations_no_lpg, hasLpg, hasLpg]
-        ]);
-
-        let optionsChart2 = Object.assign(options, {
-            legend: {
-                position: 'top',
-                maxLines: 3
-            },
-            bar: {
-                groupWidth: '75%'
-            },
+        //
+        // GASOLINE
+        //
+        let barOptions = {
+            legend : {position: "top", alignment: "left"},
+            tooltip: { ignoreBounds:true},
+            sliceVisibilityThreshold: 0,
+            bar: { groupWidth: '50%' },
             isStacked: true,
-            colors: ['#f62317', '#8BC34A'],
-            backgroundColor: { fill:'transparent' }
-        });
-        let chart2 = new google.visualization.BarChart(document.getElementById('types-chart-area'));
+            top:0,
+            height: 130,
+            hAxis: {textPosition: 'none'}
+        };
+        let dataTable2 = google.visualization.arrayToDataTable([
+            ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+            ['Gasolina', data.stations_no_gasoline,data.stations_no_gasoline,hasGasoline,hasGasoline,'#AAAE43']
+        ]);
+        let optionsChart2 = Object.assign(barOptions,{colors: ['#f62317','#AAAE43']});
+        let chart2 = new google.visualization.BarChart(document.getElementById('gasoline-chart-area'));
         chart2.draw(dataTable2, optionsChart2);
+        //
+        // DIESEL
+        //
+        let dataTable3Diesel = google.visualization.arrayToDataTable([
+            ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+            ['Gasoleo', data.stations_no_diesel,data.stations_no_diesel,hasDiesel,hasDiesel,'#DB6E3E'],
+        ]);
+        let optionsChart3 = Object.assign(barOptions,{colors: ['#f62317','#DB6E3E']});
+        let chart3lpg = new google.visualization.BarChart(document.getElementById('diesel-chart-area'));
+        chart3lpg.draw(dataTable3Diesel, optionsChart3);
+        //
+        // LPG
+        //
+        let dataTable4 = google.visualization.arrayToDataTable([
+            ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
+            ['GPL', data.stations_no_lpg,data.stations_no_lpg,hasLpg,hasLpg,'3D8CB1']
+        ]);
+        let optionsChart4 = Object.assign(barOptions,{colors: ['#f62317','#3D8CB1']});
+        let chart4lpg = new google.visualization.BarChart(document.getElementById('lpg-chart-area'));
+        chart4lpg.draw(dataTable4, optionsChart4);
     });
 }
