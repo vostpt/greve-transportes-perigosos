@@ -41,28 +41,17 @@ class CacheController extends Controller
     private function updateCounty($district, $county)
     {
         $county_data = [
-            'stations_total'         => 0,
-            'stations_none'          => 0,
-            'stations_partial'       => 0,
-            'stations_all'           => 0,
-            'stations_no_gasoline'   => 0,
-            'stations_no_diesel'     => 0,
-            'stations_no_lpg'        => 0,
-            'stations_sell_gasoline' => 0,
-            'stations_sell_diesel'   => 0,
-            'stations_sell_lpg'      => 0,
+            'stations_total'         => FuelStation::where([['district','=',$district], ['county','=',$county]])->count(),
+            'stations_none'          => FuelStation::where([['district','=',$district], ['county','=',$county]])->empty()->count(),
+            'stations_partial'       => FuelStation::where([['district','=',$district], ['county','=',$county]])->partial()->count(),
+            'stations_all'           => FuelStation::where([['district','=',$district], ['county','=',$county]])->withAll()->count(),
+            'stations_no_gasoline'   => FuelStation::where([['district','=',$district], ['county','=',$county]])->noGasoline()->count(),
+            'stations_no_diesel'     => FuelStation::where([['district','=',$district], ['county','=',$county]])->noDiesel()->count(),
+            'stations_no_lpg'        => FuelStation::where([['district','=',$district], ['county','=',$county]])->noLPG()->count(),
+            'stations_sell_gasoline' => FuelStation::where([['district','=',$district], ['county','=',$county]])->sellGasoline()->count(),
+            'stations_sell_diesel'   => FuelStation::where([['district','=',$district], ['county','=',$county]])->sellDiesel()->count(),
+            'stations_sell_lpg'      => FuelStation::where([['district','=',$district], ['county','=',$county]])->sellLPG()->count(),
         ];
-        $county_stations                       = FuelStation::where([['district','=',$district], ['county','=',$county]]);
-        $county_data['stations_total']         = $county_stations->count();
-        $county_data['stations_none']          = $county_stations->empty()->count();
-        $county_data['stations_partial']       = $county_stations->partial()->count();
-        $county_data['stations_all']           = $county_stations->withAll()->count();
-        $county_data['stations_no_gasoline']   = $county_stations->noGasoline()->count();
-        $county_data['stations_no_diesel']     = $county_stations->noDiesel()->count();
-        $county_data['stations_no_lpg']        = $county_stations->noLPG()->count();
-        $county_data['stations_sell_gasoline'] = $county_stations->sellGasoline()->count();
-        $county_data['stations_sell_diesel']   = $county_stations->sellDiesel()->count();
-        $county_data['stations_sell_lpg']      = $county_stations->sellLPG()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json', \json_encode($county_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json'));
     }
@@ -70,28 +59,17 @@ class CacheController extends Controller
     private function updateDistrict($district)
     {
         $district_data = [
-            'stations_total'         => 0,
-            'stations_none'          => 0,
-            'stations_partial'       => 0,
-            'stations_all'           => 0,
-            'stations_no_gasoline'   => 0,
-            'stations_no_diesel'     => 0,
-            'stations_no_lpg'        => 0,
-            'stations_sell_gasoline' => 0,
-            'stations_sell_diesel'   => 0,
-            'stations_sell_lpg'      => 0,
+            'stations_total'         => FuelStation::where([['district','=',$district]])->count(),
+            'stations_none'          => FuelStation::where([['district','=',$district]])->empty()->count(),
+            'stations_partial'       => FuelStation::where([['district','=',$district]])->partial()->count(),
+            'stations_all'           => FuelStation::where([['district','=',$district]])->withAll()->count(),
+            'stations_no_gasoline'   => FuelStation::where([['district','=',$district]])->noGasoline()->count(),
+            'stations_no_diesel'     => FuelStation::where([['district','=',$district]])->noDiesel()->count(),
+            'stations_no_lpg'        => FuelStation::where([['district','=',$district]])->noLPG()->count(),
+            'stations_sell_gasoline' => FuelStation::where([['district','=',$district]])->sellGasoline()->count(),
+            'stations_sell_diesel'   => FuelStation::where([['district','=',$district]])->sellDiesel()->count(),
+            'stations_sell_lpg'      => FuelStation::where([['district','=',$district]])->sellLPG()->count(),
         ];
-        $district_stations                       = FuelStation::where([['district','=',$district]]);
-        $district_data['stations_total']         = $district_stations->count();
-        $district_data['stations_none']          = $district_stations->empty()->count();
-        $district_data['stations_partial']       = $district_stations->partial()->count();
-        $district_data['stations_all']           = $district_stations->withAll()->count();
-        $district_data['stations_no_gasoline']   = $district_stations->noGasoline()->count();
-        $district_data['stations_no_diesel']     = $district_stations->noDiesel()->count();
-        $district_data['stations_no_lpg']        = $district_stations->noLPG()->count();
-        $district_data['stations_sell_gasoline'] = $district_stations->sellGasoline()->count();
-        $district_data['stations_sell_diesel']   = $district_stations->sellDiesel()->count();
-        $district_data['stations_sell_lpg']      = $district_stations->sellLPG()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'.json', \json_encode($district_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'.json'));
     }

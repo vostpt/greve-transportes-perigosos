@@ -8,13 +8,13 @@
 <style>
     @media (min-width: 768px) {
         iframe {
-            height: 350px;
+            height: 400px;
         }
     }
 
     @media  (max-width: 768px) {
         iframe {
-            height: 650px;
+            height: 700px;
         }
     }
 </style>
@@ -25,19 +25,6 @@
     <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     <div class="row">
         <iframe frameborder="0" scrolling="no"id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
-    </div>
-    <div class="row" style="text-align: left">
-        <div class="col-md-9" style="margin-top: 0.5em;">
-            <p class="btn btn-primary">Número de Submissões (Última Hora): <span
-                    id="entries_last_hour">Loading...</span></p>
-        </div>
-        <div class="col-md-9" style="margin-top: 0.5em;">
-            <p class="btn btn-primary">Número de Submissões (Último Dia): <span id="entries_last_day">Loading...</span>
-            </p>
-        </div>
-        <div class="col-md-9" style="margin-top: 0.5em;">
-            <p class="btn btn-primary">Número de Submissões (Total): <span id="entries_total">Loading...</span></p>
-        </div>
     </div>
     <div class="row">
         <div class="col-md-12">
