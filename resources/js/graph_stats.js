@@ -80,7 +80,11 @@ function charts(dataSourceUri) {
         let chart1 = new google.visualization.PieChart(document.getElementById('stations-chart-area'));
         chart1.draw(dataTable1, optionsChart1);
         document.getElementById('stations_total_number').innerHTML = data["stations_total"];
-        
+
+
+        let hasGasoline = data.stations_sell_gasoline - data.stations_no_gasoline;
+        let hasDiesel = data.stations_sell_diesel - data.stations_no_diesel;
+        let hasLpg = data.stations_sell_lpg - data.stations_no_lpg;
 
         var dataTable2 = google.visualization.arrayToDataTable([
             ['Combustivel', 'Esgotado', {
@@ -88,9 +92,9 @@ function charts(dataSourceUri) {
             }, 'Vende', {
                 role: 'annotation'
             }],
-            ['Gasolina', data.stations_no_gasoline, data.stations_no_gasoline, data.stations_sell_gasoline, data.stations_sell_gasoline],
-            ['Gasoleo', data.stations_no_diesel, data.stations_no_diesel, data.stations_sell_diesel, data.stations_sell_diesel],
-            ['GPL', data.stations_no_lpg, data.stations_no_lpg, data.stations_sell_lpg, data.stations_sell_lpg]
+            ['Gasolina', data.stations_no_gasoline, data.stations_no_gasoline, hasGasoline, hasGasoline],
+            ['Gasoleo', data.stations_no_diesel, data.stations_no_diesel, hasDiesel, hasDiesel],
+            ['GPL', data.stations_no_lpg, data.stations_no_lpg, hasLpg, hasLpg]
         ]);
 
         let optionsChart2 = Object.assign(options, {
