@@ -53,16 +53,16 @@ class CacheController extends Controller
             'stations_sell_lpg'      => 0,
         ];
         $county_stations                       = FuelStation::where([['district','=',$district], ['county','=',$county]]);
-        $county_data['stations_total']         = $county_stations->count();
-        $county_data['stations_none']          = $county_stations->empty()->count();
-        $county_data['stations_partial']       = $county_stations->partial()->count();
-        $county_data['stations_all']           = $county_stations->withAll()->count();
-        $county_data['stations_no_gasoline']   = $county_stations->noGasoline()->count();
-        $county_data['stations_no_diesel']     = $county_stations->noDiesel()->count();
-        $county_data['stations_no_lpg']        = $county_stations->noLPG()->count();
-        $county_data['stations_sell_gasoline'] = $county_stations->sellGasoline()->count();
-        $county_data['stations_sell_diesel']   = $county_stations->sellDiesel()->count();
-        $county_data['stations_sell_lpg']      = $county_stations->sellLPG()->count();
+        $county_data['stations_total']         = $county_stations->get()->count();
+        $county_data['stations_none']          = $county_stations->empty()->get()->count();
+        $county_data['stations_partial']       = $county_stations->partial()->get()->count();
+        $county_data['stations_all']           = $county_stations->withAll()->get()->count();
+        $county_data['stations_no_gasoline']   = $county_stations->noGasoline()->get()->count();
+        $county_data['stations_no_diesel']     = $county_stations->noDiesel()->get()->count();
+        $county_data['stations_no_lpg']        = $county_stations->noLPG()->get()->count();
+        $county_data['stations_sell_gasoline'] = $county_stations->sellGasoline()->get()->count();
+        $county_data['stations_sell_diesel']   = $county_stations->sellDiesel()->get()->count();
+        $county_data['stations_sell_lpg']      = $county_stations->sellLPG()->get()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json', \json_encode($county_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'_'.$county.'.json'));
     }
@@ -83,15 +83,15 @@ class CacheController extends Controller
         ];
         $district_stations                       = FuelStation::where([['district','=',$district]]);
         $district_data['stations_total']         = $district_stations->count();
-        $district_data['stations_none']          = $district_stations->empty()->count();
-        $district_data['stations_partial']       = $district_stations->partial()->count();
-        $district_data['stations_all']           = $district_stations->withAll()->count();
-        $district_data['stations_no_gasoline']   = $district_stations->noGasoline()->count();
-        $district_data['stations_no_diesel']     = $district_stations->noDiesel()->count();
-        $district_data['stations_no_lpg']        = $district_stations->noLPG()->count();
-        $district_data['stations_sell_gasoline'] = $district_stations->sellGasoline()->count();
-        $district_data['stations_sell_diesel']   = $district_stations->sellDiesel()->count();
-        $district_data['stations_sell_lpg']      = $district_stations->sellLPG()->count();
+        $district_data['stations_none']          = $district_stations->empty()->get()->count();
+        $district_data['stations_partial']       = $district_stations->partial()->get()->count();
+        $district_data['stations_all']           = $district_stations->withAll()->get()->count();
+        $district_data['stations_no_gasoline']   = $district_stations->noGasoline()->get()->count();
+        $district_data['stations_no_diesel']     = $district_stations->noDiesel()->get()->count();
+        $district_data['stations_no_lpg']        = $district_stations->noLPG()->get()->count();
+        $district_data['stations_sell_gasoline'] = $district_stations->sellGasoline()->get()->count();
+        $district_data['stations_sell_diesel']   = $district_stations->sellDiesel()->get()->count();
+        $district_data['stations_sell_lpg']      = $district_stations->sellLPG()->get()->count();
         Storage::disk('public')->put('data/stats_'.\ucfirst(\mb_strtolower($district)).'.json', \json_encode($district_data));
         $this->clearCloudflare(URL::to('/storage/data/stats_'.\ucfirst(\mb_strtolower($district)).'.json'));
     }

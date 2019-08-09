@@ -1,11 +1,6 @@
 let places = {};
 function updateStats() {
     document.getElementById('global_stats').src = "/graphs/stats";
-    $.getJSON( "/storage/data/stats_entries.json", (data) => {
-        $("#entries_last_hour").html(data["entries_last_hour"]);
-        $("#entries_last_day").html(data["entries_last_day"]);
-        $("#entries_total").html(data["entries_total"]);
-    });
     $.getJSON( "/storage/data/places.json", (data) => {
         places = data;
         Object.keys(data).forEach(district => {
