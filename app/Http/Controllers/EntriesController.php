@@ -91,7 +91,7 @@ class EntriesController extends Controller
     public function fetch_pending()
     {
         $entries_final = [];
-        $entries       = DB::table('entries')->select(DB::raw('MAX(id) as id,COUNT(DISTINCT(ip)) as total, fuel_station, has_gasoline, has_diesel, has_lpg'))->where('used', '=', 0)->groupBy('fuel_station', 'has_gasoline', 'has_diesel', 'has_lpg')->get();
+        $entries       = DB::table('entries')->select(DB::raw('MAX(id) as id,COUNT(DISTINCT(ip)) as total, fuel_station, has_gasoline, has_diesel, has_lpg'))->where('used', '=', 0)->where('created_at', '>=', \Carbon\Carbon::now()->subHour())->groupBy('fuel_station', 'has_gasoline', 'has_diesel', 'has_lpg')->get();
         foreach ($entries as $entry) {
             $fuel_station_string = FuelStation::find($entry->fuel_station)->string;
             $entries_final[]     = [
