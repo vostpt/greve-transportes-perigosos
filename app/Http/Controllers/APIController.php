@@ -91,4 +91,46 @@ class APIController extends Controller
         }
         return response()->json($output);
     }
+
+    public function fetch_csv()
+    {
+        $headers = [
+            'Content-type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=file.csv',
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+        ];
+
+        $columns = [
+            'name',
+            'brand',
+            'lat',
+            'long',
+            'repa',
+            'sell_gasoline',
+            'sell_diesel',
+            'sell_lpg',
+            'has_gasoline',
+            'has_diesel',
+            'has_lpg',
+            'district',
+            'county',
+        ];
+
+        $fuel_stations = FuelStation::all($columns);
+
+        $cb = function () use ($fuel_stations, $columns) {
+            $file = \fopen('php://output', 'w');
+            \fprintf($file, \chr(0xEF).\chr(0xBB).\chr(0xBF));
+            \fputcsv($file, $columns);
+
+            foreach ($fuel_stations as $fuel_station) {
+                \fputcsv($file, $fuel_station->toArray());
+            }
+            \fclose($file);
+        };
+
+        return response()->stream($cb, 200, $headers);
+    }
 }
