@@ -50,10 +50,10 @@ class ErrorController extends Controller
             if ($result->success != true) {
                 return redirect('/')->with('status', 'Erro ao enviar informação!');
             }
-            if (! $validatedData['id']) {
+            if (\array_key_exists('id', $validatedData)) {
                 $validatedData['id'] = 0;
             }
-            if (! $validatedData['vostie']) {
+            if (\array_key_exists('vostie', $validatedData)) {
                 $validatedData['vostie'] = 'No';
             }
             $url = env('ERRORS_SPREADSHEET_LINK').'?id='.$validatedData['id'].'&lat='.$validatedData['lat'].'&long='.$validatedData['long'].'&brand='.\urlencode($validatedData['brand']).'&gasoline='.$validatedData['sell_gasoline'].'&diesel='.$validatedData['sell_diesel'].'&lpg='.$validatedData['sell_lpg'].'&vostie='.\urlencode($validatedData['vostie']).'&email='.\urlencode($validatedData['email']);
