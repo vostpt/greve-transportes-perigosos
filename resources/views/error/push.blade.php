@@ -7,17 +7,13 @@
     <div class="text-center">
         <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     </div>
-    <h2>Reporte adicionado ou editado!</h2>
+    @if (session('status'))
+    <div class="alert alert-primary" role="alert">
+        {{ session('status') }}
+    </div>
+    @endif
+    <p>Muito obrigado pelo teu contributo!</p>
 @endsection
 
 @section('javascript')
-<script src="https://www.google.com/recaptcha/api.js?render=6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX"></script>
-<script>
-    grecaptcha.ready(function () {
-    grecaptcha.execute('6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX', { action: 'contact' }).then(function (token) {
-        var recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
-    });
-});
-</script>
 @endsection
