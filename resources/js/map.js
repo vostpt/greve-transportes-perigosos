@@ -221,6 +221,7 @@ function updatePoints(initial = false) {
                     "layout": {
                         "icon-image": "{icon}",
                         "symbol-sort-key": ["get", "priority"],
+                        "icon-allow-overlap": true
                     }
                 });
                 if(fuel_element.indexOf("without") == -1) {
@@ -251,7 +252,7 @@ function updatePoints(initial = false) {
         });
         map.addControl(attributionControl.obj);
         map.addControl(nagivationControl.obj, "bottom-right");
-        //updateLayersOptions();
+        updateLayersOptions();
     });
 }
 
@@ -445,7 +446,7 @@ function updateLayersOptions() {
             let repa_condition = repa.includes(repa_element);
             let fuel_condition = ((fuel_element == type) || (type == "all"));
             let condition = repa_condition && fuel_condition;
-            map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'visible');
+            map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
         });
     });
 }
@@ -454,6 +455,6 @@ $('input.type[type=radio]').change(function () {
     updateLayersOptions();
 });
 
-$('input.repa[type=checkbox]').change(function () {
+$('input[name="fuel_stations_repa[]"]').change(function () {
     updateLayersOptions();
 });

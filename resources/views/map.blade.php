@@ -95,21 +95,21 @@
             <fieldset id="fuel_stations_repa">
                 <div class="form-check">
                     <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="none"
-                        id="fuel_stations_repa_no" checked>
+                        id="fuel_stations_repa_no" checked autocomplete="off">
                     <label class="form-check-label" for="fuel_stations_repa_no">
                         Postos Não REPA
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="normal"
-                        id="fuel_stations_repa_normal" checked>
+                        id="fuel_stations_repa_normal" checked autocomplete="off">
                     <label class="form-check-label" for="fuel_stations_repa_normal">
                         Postos REPA - Geral
                     </label>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input repa" name="fuel_stations_repa[]" type="checkbox" value="sos"
-                        id="fuel_stations_repa_sos" checked>
+                        id="fuel_stations_repa_sos" checked autocomplete="off">
                     <label class="form-check-label" for="fuel_stations_repa_sos">
                         Postos REPA - Prioritários
                     </label>
