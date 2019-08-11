@@ -38,9 +38,11 @@
             <h4 style="margin-top: -1em">(Universo Total: <span id="stations_total_number">0</span> Postos)</h4>
             <div id="stations-chart-area"></div>
         </div>
-        <div class="graph" style="text-align: center;color: #b9524e"> 
+        <div class="graph" style="text-align: center;color: #b9524e">
             <h2>TOTAIS AGREGADOS POR COMBUSTÍVEL</h2>
-        <div id="types-chart-area"></div>
+            <div id="gasoline-chart-area"></div>
+            <div id="diesel-chart-area"></div>
+            <div id="lpg-chart-area"></div>
         </div>
     </div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
