@@ -341,10 +341,12 @@ function addLayersFunctionality(layerID) {
             zoom: 13
         });
 
-        popup = new mapboxgl.Popup({className: 'mapboxgl-popup-info'})
-            .setLngLat(coordinates)
-            .setHTML(description)
-            .addTo(map);
+        if(popup == null) {
+            popup = new mapboxgl.Popup({className: 'mapboxgl-popup-info'})
+                .setLngLat(coordinates)
+                .setHTML(description)
+                .addTo(map);
+        }
     });
     var tooltip_popup = new mapboxgl.Popup({
         closeButton: false,
