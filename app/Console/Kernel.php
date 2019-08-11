@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         'App\Console\Commands\FuelStationsGetDistrictFromCounties',
         'App\Console\Commands\FuelStationsUpdateCache',
         'App\Console\Commands\FuelStationsUpdateFromURL1',
+        'App\Console\Commands\FuelStationsUpdateFromURL2',
         'App\Console\Commands\FuelStationsUpdateStats',
     ];
 
