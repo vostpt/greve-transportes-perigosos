@@ -14,10 +14,6 @@ class Entry extends Model
 
     protected $guarded = ['id'];
 
-    protected $dispatchesEvents = [
-        'created' => EntryCreated::class,
-    ];
-
     public function fuelStation()
     {
         return $this->hasOne('App\FuelStation', 'id', 'fuel_station');

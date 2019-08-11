@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace App\Observers;
 
 use App\Entry;
+use App\Option;
 
 class EntryObserver
 {
