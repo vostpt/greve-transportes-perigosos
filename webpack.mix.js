@@ -18,6 +18,7 @@ mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/map.js', 'public/js')
    .js('resources/js/stats.js', 'public/js')
    .js('resources/js/graph_stats.js', 'public/js')
+   .js('resources/js/graph_brands.js', 'public/js')
    .copy('resources/js/map_direct.js', 'public/js/map_direct.js')
    .js('resources/js/map_load.js', 'public/js');
    
