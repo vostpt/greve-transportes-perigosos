@@ -105,8 +105,8 @@ class APIController extends Controller
         $columns = [
             'name',
             'brand',
-            'lat',
             'long',
+            'lat',
             'repa',
             'sell_gasoline',
             'sell_diesel',

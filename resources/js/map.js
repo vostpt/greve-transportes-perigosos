@@ -124,7 +124,7 @@ function loadPoints() {
                     "type": "Feature",
                     "geometry": {
                         "type": "Point",
-                        "coordinates": [fuelStation.long, fuelStation.lat]
+                        "coordinates": [fuelStation.lat, fuelStation.long]
                     },
                     "properties": {
                         "id": fuelStation.id,
@@ -251,7 +251,7 @@ function updatePoints(initial = false) {
         });
         map.addControl(attributionControl.obj);
         map.addControl(nagivationControl.obj, "bottom-right");
-        updateLayersOptions();
+        //updateLayersOptions();
     });
 }
 
@@ -445,7 +445,7 @@ function updateLayersOptions() {
             let repa_condition = repa.includes(repa_element);
             let fuel_condition = ((fuel_element == type) || (type == "all"));
             let condition = repa_condition && fuel_condition;
-            map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
+            map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'visible');
         });
     });
 }

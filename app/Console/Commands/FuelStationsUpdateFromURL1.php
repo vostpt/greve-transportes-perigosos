@@ -77,11 +77,8 @@ class FuelStationsUpdateFromURL1 extends Command
                 'sell_gasoline' => true,
                 'sell_diesel'   => true,
                 'sell_lpg'      => $lpg,
-                'has_gasoline'  => true,
-                'has_diesel'    => true,
-                'has_lpg'       => $lpg,
-                'long'          => $long,
-                'lat'           => $lat,
+                'long'          => \floatval($long),
+                'lat'           => \floatval($lat),
                 'county'        => $county,
                 'district'      => '',
             ];
@@ -93,7 +90,10 @@ class FuelStationsUpdateFromURL1 extends Command
                 $fuel_station->update($data);
                 $num_updated++;
             } else {
-                $fuel_station = new FuelStation();
+                $data['has_gasoline'] = true;
+                $data['has_diesel']   = true;
+                $data['has_lpg']      = $lpg;
+                $fuel_station         = new FuelStation();
                 $fuel_station->fill($data);
                 $fuel_station->save();
                 $num_created++;
