@@ -340,13 +340,13 @@ function addLayersFunctionality(layerID) {
             center: [coordinates[0], coordinates[1] + 0.0080],
             zoom: 13
         });
-
-        if(popup == null) {
-            popup = new mapboxgl.Popup({className: 'mapboxgl-popup-info'})
-                .setLngLat(coordinates)
-                .setHTML(description)
-                .addTo(map);
+        if(popup != null && popup.isOpen()) {
+            popup.remove();
         }
+        popup = new mapboxgl.Popup({className: 'mapboxgl-popup-info'})
+            .setLngLat(coordinates)
+            .setHTML(description)
+            .addTo(map);
     });
     var tooltip_popup = new mapboxgl.Popup({
         closeButton: false,
