@@ -85,4 +85,9 @@ class FuelStation extends Model
     {
         return $query->where([['sell_lpg', '=', true]]);
     }
+
+    public function scopeBrands($query)
+    {
+        return $query->selectRaw('brand')->groupBy('brand')->get()->pluck('brand');
+    }
 }

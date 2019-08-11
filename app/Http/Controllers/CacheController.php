@@ -38,6 +38,28 @@ class CacheController extends Controller
         }
     }
 
+    private function updateBrandsStats()
+    {
+        $brands       = FuelStation::brands();
+        $brands_stats = [];
+        foreach ($brands as $brand) {
+            $brands_stats[$brand] = [
+                'stations_total'         => FuelStation::where([['brand','=',$brand]])->count(),
+                'stations_none'          => FuelStation::where([['brand','=',$brand]])->empty()->count(),
+                'stations_partial'       => FuelStation::where([['brand','=',$brand]])->partial()->count(),
+                'stations_all'           => FuelStation::where([['brand','=',$brand]])->withAll()->count(),
+                'stations_no_gasoline'   => FuelStation::where([['brand','=',$brand]])->noGasoline()->count(),
+                'stations_no_diesel'     => FuelStation::where([['brand','=',$brand]])->noDiesel()->count(),
+                'stations_no_lpg'        => FuelStation::where([['brand','=',$brand]])->noLPG()->count(),
+                'stations_sell_gasoline' => FuelStation::where([['brand','=',$brand]])->sellGasoline()->count(),
+                'stations_sell_diesel'   => FuelStation::where([['brand','=',$brand]])->sellDiesel()->count(),
+                'stations_sell_lpg'      => FuelStation::where([['brand','=',$brand]])->sellLPG()->count(),
+            ];
+        }
+        Storage::disk('public')->put('data/stats_brands.json', \json_encode($brands_stats));
+        $this->clearCloudflare(URL::to('/storage/data/stats_brands.json'));
+    }
+
     private function updateCounty($district, $county)
     {
         $county_data = [
@@ -131,6 +153,7 @@ class CacheController extends Controller
         }
         Storage::disk('public')->put('data/places.json', \json_encode($places));
         $this->clearCloudflare(URL::to('/storage/data/places.json'));
+        $this->updateBrandsStats();
     }
 
     public function updateStations()
