@@ -18,17 +18,17 @@ class FuelStation extends Model
 
     public function scopeEmpty($query)
     {
-        return $query->whereRaw('((sell_gasoline = TRUE and has_gasoline = false) || sell_gasoline = false) AND ((sell_diesel = TRUE and has_diesel = false) || sell_diesel = false) AND ((sell_lpg = TRUE and has_lpg = false) || sell_lpg = false)');
+        return $query->whereRaw('(((sell_gasoline = false) || (sell_gasoline = true && has_gasoline = false)) AND ((sell_diesel = false) || (sell_diesel = true && has_diesel = false)) AND((sell_lpg = false) || (sell_lpg = true && has_lpg = false)))');
     }
 
     public function scopePartial($query)
     {
-        return $query->whereRaw('(!(((sell_gasoline = TRUE and has_gasoline = false) || sell_gasoline = false) AND ((sell_diesel = TRUE and has_diesel = false) || sell_diesel = false) AND ((sell_lpg = TRUE and has_lpg = false) || sell_lpg = false)) AND (((sell_gasoline = TRUE AND has_gasoline = TRUE) || sell_gasoline = false) || ((sell_diesel = TRUE AND has_diesel = TRUE) || sell_diesel = false) || ((sell_lpg = TRUE AND has_lpg = TRUE) || sell_lpg = false)) AND (!((sell_gasoline = TRUE AND has_gasoline = TRUE) || sell_gasoline = false) AND ((sell_diesel = TRUE AND has_diesel = TRUE) || sell_diesel = false) AND ((sell_lpg = TRUE AND has_lpg = TRUE) || sell_lpg = false)))');
+        return $query->whereRaw('(!(((sell_gasoline = false) || (sell_gasoline = true && has_gasoline = true)) AND ((sell_diesel = false) || (sell_diesel = true && has_diesel = true)) AND ((sell_lpg = false) || (sell_lpg = true && has_lpg = true))) AND !(((sell_gasoline = false) || (sell_gasoline = true && has_gasoline = false)) AND ((sell_diesel = false) || (sell_diesel = true && has_diesel = false)) AND((sell_lpg = false) || (sell_lpg = true && has_lpg = false))))');
     }
 
     public function scopeWithAll($query)
     {
-        return $query->gasoline()->diesel()->LPG();
+        return $query->whereRaw('(((sell_gasoline = false) || (sell_gasoline = true && has_gasoline = true)) AND((sell_diesel = false) || (sell_diesel = true && has_diesel = true)) AND ((sell_lpg = false) || (sell_lpg = true && has_lpg = true)))');
     }
 
     public function scopeGasoline($query)
