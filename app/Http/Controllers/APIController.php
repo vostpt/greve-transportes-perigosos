@@ -105,8 +105,8 @@ class APIController extends Controller
         $columns = [
             'name',
             'brand',
-            'long',
             'lat',
+            'long',
             'repa',
             'sell_gasoline',
             'sell_diesel',
@@ -126,6 +126,9 @@ class APIController extends Controller
             \fputcsv($file, $columns);
 
             foreach ($fuel_stations as $fuel_station) {
+                $long_save            = $fuel_station['long'];
+                $fuel_station['long'] = $fuel_station['lat'];
+                $fuel_station['lat']  = $long_save;
                 \fputcsv($file, $fuel_station->toArray());
             }
             \fclose($file);
