@@ -23,6 +23,17 @@
                 <a href="{{ route('about') }}" class="btn btn-primary btn-lg">Sobre</a>
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                <br />
+                <br />
+                    <p>Os dados constantes na plataforma “Já Não Dá Para Abastecer” da VOST Portugal são compilados através de informação recebida através dos utilizadores da mesma.</p>
+                    <p>Tratando-se de uma plataforma de crowdsourcing os dados são meramente indicativos e sofrem alterações constantemente.</p>
+                    <p>Os dados constantes das bombas PRIO são fornecidos à VOST Portugal pela própria PRIO <a href="https://www.prio.pt/pt/">PRIO</a> usando a <a href="/api/v1/">API</a> disponibilizada pela VOSTPT a todos os operadores</p>
+                    <p>A VOST Portugal efectuará todos os esforços para validar toda a informação que nos vai chegando.</p>
+                    <p>Se é o responsável por uma ou mais bombas de gasolina e os dados que encontrar não estiverem corretos, a VOST Portugal disponibiliza o e-mail <a href="hello@vost.pt">hello@vost.pt</a> para proceder de imediato à rectificação da informação constante na nossa plataforma.</p>
+            </div>
+        </div>
     </div>
 </div>
 <div id="map_view" style="visibility: hidden;">
