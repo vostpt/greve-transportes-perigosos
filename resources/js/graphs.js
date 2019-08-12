@@ -86,7 +86,8 @@ window.renderChartsGlobalStats = function (dataSourceUri) {
 
 window.renderChartsBrand = function (data) {
     if(data){
-        //document.getElementById('brand_stations_total_number').textContent(data.stations_total);
+        document.getElementById('brand_stations_total_number').textContent = data.stations_total;
+
         drawChartsFuelTypes(
             data,
             'gasoline-chart-area-brand',
