@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('stations:stats')->everyMinute()->withoutOverlapping(10);
+        $schedule->command('entries:hourly')->everyTenMinutes()->withoutOverlapping(10);
     }
 
     /**
