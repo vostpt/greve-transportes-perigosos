@@ -34,7 +34,7 @@
     <div class="flex-container">
         <div class="graph" style="text-align: center;color: #b9524e"></div>
         <div class="graph" style="text-align: center;color: #b9524e">
-            <h2>TOTAIS AGREGADOS POR MARCA - <span id="brand_name">PRIO</span></h2>
+            <h2>TOTAIS AGREGADOS POR MARCA - <span id="brand_name">PRIO (Dados Oficiais)</span></h2>
             <h4 style="margin-top: -1em">(Universo Total: <span id="brand_stations_total_number">0</span> Postos)</h4>
             <div id="gasoline-chart-area-brand"></div>
             <div id="diesel-chart-area-brand"></div>
