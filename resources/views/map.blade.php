@@ -142,6 +142,12 @@
             <img src="/img/map/VOSTPT_JNDPA_REPA_ICON_25x25.png" /><label>- Posto de Combustível REPA </label><br />
         </div>
         <div>
+            <img src="/img/map/VOSTPT_JNDPA_REPA_NORMAL_PARCIAL.png" /><label>- Posto de Combustível REPA Parcial</label><br />
+        </div>
+        <div>
+            <img src="/img/map/VOSTPT_JNDPA_REPA_NORMAL_SEM.png" /><label>- Posto de Combustível REPA Indisponível </label><br />
+        </div>
+        <div>
             <img src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png" style="width:25px;height:25px" /><label>- Gasolina </label><br />
         </div>
         <div>
