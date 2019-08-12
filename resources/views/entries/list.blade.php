@@ -4,6 +4,9 @@
     <h1 class="text-center">{{ __('Entries List') }}</h1>
     <div class="row justify-content-center">
         <div class="col-md-12">
+            <p><a href="#" onclick="selectAll()"><i class="fas fa-check"></i> Check all</a></p>
+            <p><a href="#" onclick="deSelectAll()"><i class="fas fa-check"></i> Uncheck all</a></p>
+            <p><a href="#" onclick="pushEntries()"><i class="fas fa-check"></i> Aprovar Seleccionados</a></p>
             <table id="entry_list" class="table table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
@@ -14,6 +17,7 @@
                         <th>{{ __('Has LPG') }}</th>
                         <th>{{ __('Count') }}</th>
                         <th>{{ __('Actions') }}</th>
+                        <th>{{ __('Select') }}</th>
                     </tr>
                 </thead>
                 <tfoot>
@@ -25,6 +29,7 @@
                         <th>{{ __('Has LPG') }}</th>
                         <th>{{ __('Count') }}</th>
                         <th>{{ __('Actions') }}</th>
+                        <th>{{ __('Select') }}</th>
                     </tr>
                 </tfoot>
             </table>
@@ -43,7 +48,7 @@
             <div class="modal-footer">
                 <form method="POST" id="modal_form" class="ui form" action="{{ route('entries.push') }}">
                     @csrf
-                    <input id="entry_id" type="hidden" name="id" value="0" />
+                    <input class="entry_id" type="hidden" name="id[]" value="0" />
                     <button type="submit" class="btn btn-primary">Confirmar</button>
                 </form>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -59,9 +64,39 @@
         $('#modal_form').attr('action', '{{ route('entries.push') }}');
         $('#action_title').html("Validar Entrada nº"+id);
         $('#action_description').html("Esta ação irá validar o a entrada nº"+id+".");
-        $("#entry_id").val(id);
+        $(".entry_id").val(id);
         $('.modal').modal('show');
     }
+
+    function pushEntries() {
+        $selected = $('.select-entry-checkbox:checkbox:checked');
+        $(".entry_id").remove();
+
+        let ids = [];
+        $selected.each(function(){
+            $el = $(this);
+            ids.push($el.data('id'))
+
+            $('#modal_form').append('<input class="entry_id" type="hidden" name="id[]" value="'+$el.data('id')+'" />');
+        });
+
+        $('#modal_form').attr('action', '{{ route('entries.push') }}');
+        $('#action_title').html("Validar Entradas nsº"+ ids.join());
+        $('#action_description').html("Esta ação irá validar as entradas nº "+ids.join()+".");
+
+        $('.modal').modal('show');
+    }
+
+    function selectAll()
+    {
+        $('.select-entry-checkbox').prop('checked', true);
+    }
+
+    function deSelectAll()
+    {
+        $('.select-entry-checkbox').prop('checked', false);
+    }
+
     $(document).ready(function() {
         $('#entry_list').DataTable( {
             "ajax": { 
@@ -87,6 +122,7 @@
                             json.data[index]["has_lpg"] = '<i class="fas fa-times"></i>';
                         }
                         json.data[index]["actions"] = '<a href="#" onclick="pushEntry('+json.data[index]["id"]+')"><i class="fas fa-check"></i></a>';
+                        json.data[index]["select"] = '<input type="checkbox" class="select-entry-checkbox" name="checked" data-id="'+json.data[index]["id"]+'"/>';
                     });
                     return json.data;
                 }
@@ -98,8 +134,9 @@
                 { "data": "has_diesel" },
                 { "data": "has_lpg" },
                 { "data": "count" },
-                { "data": "actions" }
-            ]   
+                { "data": "actions" },
+                { "data": "select" }
+            ]
         });
     });
 
