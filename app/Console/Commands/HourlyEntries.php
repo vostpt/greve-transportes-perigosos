@@ -20,7 +20,7 @@ class HourlyEntries extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Generate hourly entry stats file';
 
     /**
      * Create a new command instance.
