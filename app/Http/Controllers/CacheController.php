@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Entry;
 use App\FuelStation;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 
@@ -161,5 +162,28 @@ class CacheController extends Controller
         $json = FuelStation::all('id', 'name', 'brand', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg')->toJson();
         Storage::disk('public')->put('data/cache.json', $json);
         $this->clearCloudflare(URL::to('/storage/data/cache.json'));
+    }
+
+    public function updateStatsBeginnig()
+    {
+        $firstDate = Entry::get()->first()->created_at;
+
+        $firstDate = $firstDate->toImmutable();
+        $nextDate  = $firstDate;
+        $nextDate  = $nextDate->addHour();
+
+        $entries = [];
+
+        while ($firstDate <= Carbon::now()) {
+            $entries[$firstDate->toDateTimeString()] = Entry::where([['created_at', '>',  $firstDate],
+                                ['created_at', '<', $nextDate], ])
+                                ->count();
+
+            $nextDate  = $nextDate->addHour();
+            $firstDate = $firstDate->addHour();
+        }
+
+        Storage::disk('public')->put('data/stats_entries_hourly.json', \json_encode($entries));
+        $this->clearCloudflare(URL::to('/storage/data/stats_entries_hourly.json'));
     }
 }
