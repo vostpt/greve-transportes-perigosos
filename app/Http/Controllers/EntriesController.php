@@ -44,9 +44,12 @@ class EntriesController extends Controller
             if ($result->success != true) {
                 return response()->json(['success' => 0]);
             }
+            $station = FuelStation::findOrFail($validatedData['fuel_station']);
+            if ($station->brand == 'Prio') {
+                return response()->json(['success' => 0]);
+            }
             if ($user = Auth::user()) {
-                $station = FuelStation::findOrFail($validatedData['fuel_station']);
-                $data    = [
+                $data = [
                     'has_gasoline' => $validatedData['gasoline'],
                     'has_diesel'   => $validatedData['diesel'],
                     'has_lpg'      => $validatedData['lpg'],

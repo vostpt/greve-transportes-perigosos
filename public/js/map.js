@@ -174,24 +174,32 @@ function loadPoints() {
           }
         }
 
-        if (fuelStation.repa == "SOS") {
-          fuelStation.repa = "sos";
-          icon = 'REPA';
-          priority = 2;
-          popup_color = '0070bb';
-          background_color = "e6e6e6";
-          brand = brand + " (REPA - Veículos Prioritários)";
-          priority = 2;
-          tooltip = '<strong>Posto REPA - Prioritários</strong>';
-        } else if (fuelStation.repa == "Normal") {
-          fuelStation.repa = "normal";
-          icon = 'REPA';
-          priority = 1;
-          popup_color = '0070bb';
-          background_color = "e6e6e6";
-          brand = brand + " (REPA - Todos os Veículos)";
-          priority = 1;
-          tooltip = '<strong>Posto REPA - Geral</strong>';
+        if (fuelStation.repa == "SOS" || fuelStation.repa == "Normal") {
+          if (fuelStation.repa == "SOS") {
+            fuelStation.repa = "sos";
+            priority = 2;
+            popup_color = '0070bb';
+            background_color = "e6e6e6";
+            brand = brand + " (REPA - Veículos Prioritários)";
+            priority = 2;
+            tooltip = '<strong>Posto REPA - Prioritários</strong>';
+          } else if (fuelStation.repa == "Normal") {
+            fuelStation.repa = "normal";
+            priority = 1;
+            popup_color = '0070bb';
+            background_color = "e6e6e6";
+            brand = brand + " (REPA - Todos os Veículos)";
+            priority = 1;
+            tooltip = '<strong>Posto REPA - Geral</strong>';
+          }
+
+          if (count == max_count) {
+            icon = 'REPA';
+          } else if (count == 0) {
+            icon = 'REPA_NONE';
+          } else {
+            icon = 'REPA_PARTIAL';
+          }
         } else {
           tooltip = '<strong>Posto Não REPA</strong>';
 
@@ -217,6 +225,11 @@ function loadPoints() {
           with_none = 1;
         } else {
           tooltip += '<p>Parcialmente Disponível</p>';
+        }
+
+        if (fuelStation.brand == "POSTO ES") {
+          icon = 'SPAIN';
+          tooltip = '<strong>Posto Espanhol</strong>';
         }
 
         points.push({
@@ -395,7 +408,23 @@ function addLayersFunctionality(layerID) {
     }
 
     if (isHelping()) {
-      description = '<div class="v-popup-content">' + '<div class="v-popup-header" style="background-color:#85d5f8; text-align: center;"><h5>ADICIONAR INFORMAÇÃO</h5></div>' + '<div class="v-popup-body" style="background-color:#b8e1f8">' + '<div class="row">' + fuelIcons + '</div>' + '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />' + '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' + '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' + '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>' + '</div>' + '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">' + '<div class="row" style="margin:0;">' + '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>' + '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>' + '</div>' + '</div>' + '</div>';
+      description = '<div class="v-popup-content">' + '<div class="v-popup-header" style="background-color:#85d5f8; text-align: center;"><h5>ADICIONAR INFORMAÇÃO</h5></div>' + '<div class="v-popup-body" style="background-color:#b8e1f8">' + '<div class="row">' + fuelIcons + '</div>' + '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />';
+
+      if (e.features[0].properties.brand == "Prio") {
+        description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA PRIO</b></div></div>' + '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' + '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/">PELA PRÓPRIA PRIO</a></b></div></div>';
+      } else {
+        description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' + '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' + '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>';
+      }
+
+      description += '</div>' + '<div class="v-popup-header" style="padding:0;background-color:#85d5f8">' + '<div class="row" style="margin:0;">' + '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>';
+
+      if (e.features[0].properties.brand == "Prio") {
+        description += '<div class="col-9"><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/" style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">PRIO</h5></a></div>';
+      } else {
+        description += '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>';
+      }
+
+      description += '</div>' + '</div>' + '</div>';
     } else {
       description = '<div class="v-popup-content">' + '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' + '<div class="v-popup-body" style="background-color: #' + e.features[0].properties.background_color + '">' + '<div class="row">' + fuelIcons + '</div>' + '</div>' + '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">' + '<img src="/img/map/map_separation_' + e.features[0].properties.background_color + '.png" style="width: 100%;" />' + '</a></div>' + '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">' + '<div class="row" style="margin:0;">' + '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>' + '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>' + '</div>' + '</div>' + '</div>';
     }
@@ -408,6 +437,11 @@ function addLayersFunctionality(layerID) {
       center: [coordinates[0], coordinates[1] + 0.0080],
       zoom: 13
     });
+
+    if (popup != null && popup.isOpen()) {
+      popup.remove();
+    }
+
     popup = new mapboxgl.Popup({
       className: 'mapboxgl-popup-info'
     }).setLngLat(coordinates).setHTML(description).addTo(map);
@@ -460,6 +494,9 @@ map.on('load', function () {
   promises.push(loadBrandImage('NONE', '/img/map/VOSTPT_JNDPA_NONE_ICON_25x25.png'));
   promises.push(loadBrandImage('PARTIAL', '/img/map/VOSTPT_JNDPA_PARTIAL_ICON_25x25.png'));
   promises.push(loadBrandImage('ALL', '/img/map/VOSTPT_JNDPA_ALL_ICON_25x25.png'));
+  promises.push(loadBrandImage('REPA_PARTIAL', '/img/map/VOSTPT_JNDPA_REPA_NORMAL_PARCIAL.png'));
+  promises.push(loadBrandImage('REPA_NONE', '/img/map/VOSTPT_JNDPA_REPA_NORMAL_SEM.png'));
+  promises.push(loadBrandImage('SPAIN', '/img/map/VOSTPT_JNDPA_ESPANHA_25px.png'));
   Promise.all(promises).then(function () {
     promises = [];
     updatePoints(true);

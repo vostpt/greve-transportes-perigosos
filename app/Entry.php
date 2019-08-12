@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Events\EntryCreated;
 use App\Http\Controllers\CacheController;
 
 use Illuminate\Database\Eloquent\Model;
@@ -14,10 +13,6 @@ class Entry extends Model
     protected $table = 'entries';
 
     protected $guarded = ['id'];
-
-    protected $dispatchesEvents = [
-        'created' => EntryCreated::class,
-    ];
 
     public function fuelStation()
     {

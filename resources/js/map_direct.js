@@ -1,5 +1,5 @@
 let helping = false;
-let popup = null;
+var popup = null;
 
 grecaptcha.ready(function () {
     console.log("RECAPTCHA LOADED");
@@ -70,6 +70,7 @@ function submitEntry(obj, id) {
         $(obj).parent().parent().find('.popup_submit_text').html("VALIDADO");
         setTimeout(function() {
             popup.remove();
+            popup = null;
         },1250);
         $.post("/panel/entries/add", data, function (reply) {
             console.log("Entrada adicionada: " + reply.success + " (0 -> falha, 1 -> sucesso)");
