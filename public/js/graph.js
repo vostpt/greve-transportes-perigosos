@@ -81,58 +81,19 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/map_load.js":
-/*!**********************************!*\
-  !*** ./resources/js/map_load.js ***!
-  \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function inIframe() {
-  try {
-    return window.self !== window.top;
-  } catch (e) {
-    return true;
-  }
-}
-
-function removeElementsByClass(className) {
-  var elements = document.getElementsByClassName(className);
-
-  while (elements.length > 0) {
-    elements[0].parentNode.removeChild(elements[0]);
-  }
-}
-
-if (inIframe()) {
-  document.getElementById("map_view").style.visibility = "visible";
-  removeElementsByClass("iframe-remove");
-  document.getElementById("map").style.top = 0;
-  document.getElementById("map").style.height = "100%";
-  document.getElementById("features").style.height = "22em";
-  document.getElementById("features-icon").style.top = "calc(1% + 60px)";
-  document.getElementById("features").style.top = "calc(1% + 60px)";
-  document.getElementById("legend-icon").style.top = "1%";
-  document.getElementById("legend").style.top = "1%";
-} else {
-  document.getElementById("selector_view").style.visibility = "visible";
-}
-
-/***/ }),
-
-/***/ 6:
-/*!****************************************!*\
-  !*** multi ./resources/js/map_load.js ***!
-  \****************************************/
+/***/ 3:
+/*!*************************************!*\
+  !*** multi ./resources/js/graph.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/cvarandas/Projects/vostpt/greve-transportes-perigosos/resources/js/map_load.js */"./resources/js/map_load.js");
+!(function webpackMissingModule() { var e = new Error("Cannot find module '/home/cvarandas/Projects/vostpt/greve-transportes-perigosos/resources/js/graph.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 
 
 /***/ })

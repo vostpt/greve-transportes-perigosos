@@ -1,6 +1,8 @@
 let places = {};
 function updateStats() {
     document.getElementById('global_stats').src = "/graphs/stats";
+    document.getElementById('brand_stats').src = "/graphs/brands";
+
     $.getJSON( "/storage/data/places.json", (data) => {
         places = data;
         Object.keys(data).forEach(district => {
@@ -8,8 +10,6 @@ function updateStats() {
         });
     });
 }
-
-
 
 $('#district_selection').on('change', function (e) {
     let valueSelected = this.value;
@@ -30,7 +30,7 @@ $('#district_selection').on('change', function (e) {
 $('#county_selection').on('change', function (e) {
     let valueSelected = this.value;
     let district = $("#district_selection").val();
-    if(valueSelected == "none") {        
+    if(valueSelected == "none") {
         document.getElementById('selected_stats').src = "/graphs/stats?distrito="+encodeURI();
     }
     else {

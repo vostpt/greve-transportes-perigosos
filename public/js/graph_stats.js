@@ -1,1 +1,131 @@
-!function(t){var o={};function e(n){if(o[n])return o[n].exports;var a=o[n]={i:n,l:!1,exports:{}};return t[n].call(a.exports,a,a.exports,e),a.l=!0,a.exports}e.m=t,e.c=o,e.d=function(t,o,n){e.o(t,o)||Object.defineProperty(t,o,{enumerable:!0,get:n})},e.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},e.t=function(t,o){if(1&o&&(t=e(t)),8&o)return t;if(4&o&&"object"==typeof t&&t&&t.__esModule)return t;var n=Object.create(null);if(e.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:t}),2&o&&"string"!=typeof t)for(var a in t)e.d(n,a,function(o){return t[o]}.bind(null,a));return n},e.n=function(t){var o=t&&t.__esModule?function(){return t.default}:function(){return t};return e.d(o,"a",o),o},e.o=function(t,o){return Object.prototype.hasOwnProperty.call(t,o)},e.p="/",e(e.s=3)}({3:function(t,o,e){t.exports=e("Xczc")},Xczc:function(t,o){function e(t){var o=null,e=[];return location.search.substr(1).split("&").forEach(function(n){(e=n.split("="))[0]===t&&(o=decodeURIComponent(e[1]))}),o}window.onload=function(){var t,o,n,a,i=e("distrito"),l=e("concelho"),s="";i?l?s="/storage/data/stats_"+encodeURI(i)+"_"+encodeURI(l)+".json":(l=null,s="/storage/data/stats_"+encodeURI(i)+".json"):(i="Portugal",l=null,s="/storage/data/stats_global.json"),t=s,o=JSON.parse((n=t,(a=new XMLHttpRequest).open("GET",n,!1),a.send(null),a.responseText)),google.charts.load("current",{packages:["corechart"]}),google.charts.setOnLoadCallback(function(){var t=new google.visualization.DataTable;t.addColumn("string","Combustivel"),t.addColumn("number","Postos"),t.addRows([["Todos",o.stations_all],["Parte",o.stations_partial],["Nenhum",o.stations_none]]);var e=Object.assign({pieHole:.2,chartArea:{top:50,height:"300px"},height:300,legend:{position:"top",alignment:"center"},pieSliceText:"value-and-percentage",tooltip:{ignoreBounds:!0},sliceVisibilityThreshold:0},{colors:["#8BC34A","#f6bd00","#f62317"],backgroundColor:{fill:"transparent"}}),n=new google.visualization.PieChart(document.getElementById("stations-chart-area"));n.draw(t,e),document.getElementById("stations_total_number").innerHTML=o.stations_total;var a=o.stations_sell_gasoline-o.stations_no_gasoline,i=o.stations_sell_diesel-o.stations_no_diesel,l=o.stations_sell_lpg-o.stations_no_lpg,s={legend:{position:"top",alignment:"left"},tooltip:{ignoreBounds:!0},sliceVisibilityThreshold:0,bar:{groupWidth:"50%"},isStacked:!0,top:0,height:130,hAxis:{textPosition:"none"}},r=google.visualization.arrayToDataTable([["Combustivel","Esgotado",{role:"annotation"},"Vende",{role:"annotation"},{role:"style"}],["Gasolina",o.stations_no_gasoline,o.stations_no_gasoline,a,a,"#AAAE43"]]),u=Object.assign(s,{colors:["#f62317","#AAAE43"]}),d=new google.visualization.BarChart(document.getElementById("gasoline-chart-area"));d.draw(r,u);var c=google.visualization.arrayToDataTable([["Combustivel","Esgotado",{role:"annotation"},"Vende",{role:"annotation"},{role:"style"}],["Gasoleo",o.stations_no_diesel,o.stations_no_diesel,i,i,"#DB6E3E"]]),g=Object.assign(s,{colors:["#f62317","#DB6E3E"]}),p=new google.visualization.BarChart(document.getElementById("diesel-chart-area"));p.draw(c,g);var _=google.visualization.arrayToDataTable([["Combustivel","Esgotado",{role:"annotation"},"Vende",{role:"annotation"},{role:"style"}],["GPL",o.stations_no_lpg,o.stations_no_lpg,l,l,"3D8CB1"]]),f=Object.assign(s,{colors:["#f62317","#3D8CB1"]}),b=new google.visualization.BarChart(document.getElementById("lpg-chart-area"));b.draw(_,f)})}}});
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "/";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./resources/js/graph_stats.js":
+/*!*************************************!*\
+  !*** ./resources/js/graph_stats.js ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+window.onload = function () {
+  var district = findGetParameter("distrito");
+  var county = findGetParameter("concelho");
+  var url = "";
+
+  if (district) {
+    if (county) {
+      url = "/storage/data/stats_" + encodeURI(district) + "_" + encodeURI(county) + ".json";
+    } else {
+      county = null;
+      url = "/storage/data/stats_" + encodeURI(district) + ".json";
+    }
+  } else {
+    district = "Portugal";
+    county = null;
+    url = "/storage/data/stats_global.json";
+  }
+
+  renderChartsGlobalStats(url);
+};
+
+/***/ }),
+
+/***/ 4:
+/*!*******************************************!*\
+  !*** multi ./resources/js/graph_stats.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! /home/cvarandas/Projects/vostpt/greve-transportes-perigosos/resources/js/graph_stats.js */"./resources/js/graph_stats.js");
+
+
+/***/ })
+
+/******/ });

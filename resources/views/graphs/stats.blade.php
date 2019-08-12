@@ -46,6 +46,7 @@
         </div>
     </div>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{{ mix('/js/graphs.js') }}" charset="utf-8"></script>
     <script src="{{ mix('/js/graph_stats.js') }}" charset="utf-8"></script>
 </body>
 

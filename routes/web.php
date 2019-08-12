@@ -102,6 +102,7 @@ Route::prefix('api/v1')->name('api.')->group(function () {
 
 Route::prefix('graphs')->name('graphs.')->group(function () {
     Route::get('/stats', 'GraphsController@stats')->name('stats');
+    Route::get('/brands', 'GraphsController@brands')->name('brands');
 });
 
 
