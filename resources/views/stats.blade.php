@@ -24,7 +24,10 @@
 <div class="container text-center">
     <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     <div class="row">
-        <iframe frameborder="0" scrolling="no"id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
+        <iframe frameborder="0" scrolling="no" id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
+    </div>
+    <div class="row">
+        <iframe frameborder="0" scrolling="no" id="brand_stats" style="width:100%;" src="/graphs/brands"></iframe>
     </div>
     <div class="row" style="display:none">
         <div class="col-md-12">
@@ -46,8 +49,7 @@
                 </select>
             </div>
         </div>
-        <iframe frameborder="0" scrolling="no" id="selected_stats" style="width:100%;"
-            src="/graphs/stats"></iframe>
+        <iframe frameborder="0" scrolling="no" id="selected_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
     @endsection
 

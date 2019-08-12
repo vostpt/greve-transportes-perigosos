@@ -9,4 +9,9 @@ class GraphsController extends Controller
     {
         return response()->view('graphs/stats');
     }
+
+    public function brands()
+    {
+        return response()->view('graphs/brands');
+    }
 }

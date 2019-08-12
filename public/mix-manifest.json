@@ -1,12 +1,13 @@
 {
     "/js/app.js": "/js/app.js?id=6edd96b6e849feec2655",
     "/css/app.css": "/css/app.css?id=e4962a01bb05eaa5f778",
-    "/js/graph_brands.js": "/js/graph_brands.js?id=d3785a082ed23053e0ec",
-    "/js/graph_stats.js": "/js/graph_stats.js?id=9633882a2edd01808ddb",
+    "/js/graph_brands.js": "/js/graph_brands.js?id=04c6d9f16d1f704dc160",
+    "/js/graph_stats.js": "/js/graph_stats.js?id=b8be298716c7af953c49",
+    "/js/graphs.js": "/js/graphs.js?id=a4d547b6038fb3c27856",
     "/js/map.js": "/js/map.js?id=d90b6069cb442457487b",
-    "/js/map_load.js": "/js/map_load.js?id=daa5dd6eb0c4a073a287",
-    "/js/stats.js": "/js/stats.js?id=e17eeed39f12b2958980",
-    "/css/map.css": "/css/map.css?id=14ae44c004b66f1f4395",
-    "/css/custom.css": "/css/custom.css?id=3001e7b0fcea8ffbe095",
-    "/js/map_direct.js": "/js/map_direct.js?id=3b4f50736f81d4c9d683"
+    "/js/map_load.js": "/js/map_load.js?id=2352e6f97792fe292879",
+    "/js/stats.js": "/js/stats.js?id=644833e630da69d99149",
+    "/css/map.css": "/css/map.css?id=faa434fb4a1650883cb0",
+    "/css/custom.css": "/css/custom.css?id=5ed775c5e9268524131c",
+    "/js/map_direct.js": "/js/map_direct.js?id=fa4fd7d3e6cd0d902c74"
 }

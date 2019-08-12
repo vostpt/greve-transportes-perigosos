@@ -86,10 +86,10 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    Disponibilidade combustível por postos
+                    Disponibilidade combustível por postos ( <span id="stations_total_number">0</span> )
                 </div>
                 <div class="card-body" style="overflow: hidden;">
-                    <div id="chart_container_1"></div>
+                    <div id="stations-chart-area"></div>
                 </div>
             </div>
         </div>
@@ -99,9 +99,36 @@
                     Faltas por tipo combustível
                 </div>
                 <div class="card-body" style="overflow: hidden;">
-                    <div id="chart_container_2_gasoline" ></div>
-                    <div id="chart_container_3_diesel" ></div>
-                    <div id="chart_container_4_lpg" ></div>
+                    <div id="gasoline-chart-area" ></div>
+                    <div id="diesel-chart-area" ></div>
+                    <div id="lpg-chart-area" ></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="mt-5">
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="brand_selection">Marca:</label>
+                <select class="form-control" id="brand_selection">
+                    <option value="none">Todas</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Total de Postos Registados no JNDPA ( <span id="brand_stations_total_number">0</span> )
+                </div>
+                <div class="card-body" style="overflow: hidden;">
+                    <div id="gasoline-chart-area-brand" ></div>
+                    <div id="diesel-chart-area-brand" ></div>
+                    <div id="lpg-chart-area-brand" ></div>
                 </div>
             </div>
         </div>
@@ -111,11 +138,14 @@
 
 @section('javascript')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{{ mix('/js/graphs.js') }}" charset="utf-8"></script>
     <script type="text/javascript">
 
         let dataSourceGlobalUri = "/storage/data/stats_global.json";
+        let brandsDataSourceUri = "/storage/data/stats_brands.json";
         let $countyEl = $("#county_selection");
         let $districtEl = $("#district_selection");
+        let $brandEl = $('#brand_selection');
         let places = [];
 
         $.getJSON( "/storage/data/places.json", (data) => {
@@ -142,12 +172,27 @@
                 }
             }
             getEntries();
+            let defaultBrand = 'Prio';
+            let data = JSON.parse(Get(brandsDataSourceUri));
+            // Populate the dropdown list for brands
+            Object.keys(data).forEach((brand) => {
+                if(brand === defaultBrand){
+                    $brandEl.append("<option value=\""+brand+"\" selected>"+brand+" - Dados Oficiais</option>");
+                }else{
+                    $brandEl.append("<option value=\""+brand+"\">"+brand+"</option>");
+                }
+            });
+            renderChartsBrand(data[defaultBrand]);
         };
 
         setInterval(function () {
             getEntries();
             let ds = sessionStorage.getItem('data_source_uri');
-            charts(ds);
+            renderChartsGlobalStats(ds);
+
+            let data = JSON.parse(Get(brandsDataSourceUri));
+            let valueSelected = sessionStorage.getItem('brand');
+            renderChartsBrand(data[valueSelected]);
         }, 30000);
 
         $districtEl.on('change', function (e) {
@@ -158,7 +203,7 @@
                 sessionStorage.setItem('district', valueSelected);
                 sessionStorage.setItem('county', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceGlobalUri);
-                charts(dataSourceGlobalUri);
+                renderChartsGlobalStats(dataSourceGlobalUri);
             }else {
                 let dataSourceUri = "/storage/data/stats_" + encodeURI(valueSelected) + ".json";
                 $countyEl.prop('disabled', false);
@@ -168,7 +213,7 @@
                 });
                 sessionStorage.setItem('district', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceUri);
-                charts(dataSourceUri);
+                renderChartsGlobalStats(dataSourceUri);
             }
         });
 
@@ -182,8 +227,15 @@
                 }
                 sessionStorage.setItem('county', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceUri);
-                charts(dataSourceUri);
+                renderChartsGlobalStats(dataSourceUri);
             }
+        });
+
+        $brandEl.on('change', function (e) {
+            let valueSelected = this.value;
+            let data = JSON.parse(Get(brandsDataSourceUri));
+            sessionStorage.setItem('brand', valueSelected);
+            renderChartsBrand(data[valueSelected]);
         });
 
         function getEntries(){
@@ -191,87 +243,6 @@
                 $('#entries-card-total').text(data.entries_total);
                 $('#entries-card-day').text(data.entries_last_day);
                 $('#entries-card-hour').text(data.entries_last_hour);
-            });
-        }
-
-        function charts(dataSourceUri){
-            $.getJSON(dataSourceUri).then((data) => {
-
-                google.charts.load("current", {packages:["corechart"]});
-                google.charts.setOnLoadCallback(() => {
-                    let dataTable1 = new google.visualization.DataTable();
-
-                    dataTable1.addColumn('string', 'Combustivel');
-                    dataTable1.addColumn('number', 'Postos');
-                    dataTable1.addRows([
-                        ['Todos', data.stations_all ],
-                        ['Parte', data.stations_partial ],
-                        ['Nenhum', data.stations_none ]
-                    ]);
-
-                    let options = {
-                        pieHole: 0.2,
-                        height: 390,
-                        legend : {
-                            position: "top",
-                            alignment: "center",
-                        },
-                        pieSliceText: 'value-and-percentage',
-                        tooltip: {
-                            ignoreBounds:true
-                        },
-                        sliceVisibilityThreshold: 0
-                    };
-
-                    let optionsChart1 = Object.assign(options,{colors:['#8BC34A', '#f6bd00', '#f62317']});
-                    let chart1 = new google.visualization.PieChart(document.getElementById('chart_container_1'));
-                    chart1.draw(dataTable1, optionsChart1);
-
-                    let hasGasoline = data.stations_sell_gasoline - data.stations_no_gasoline;
-                    let hasDiesel = data.stations_sell_diesel - data.stations_no_diesel;
-                    let hasLpg = data.stations_sell_lpg - data.stations_no_lpg;
-
-                    //
-                    // GASOLINE
-                    //
-                    let barOptions = {
-                        legend : {position: "top", alignment: "left"},
-                        tooltip: { ignoreBounds:true},
-                        sliceVisibilityThreshold: 0,
-                        bar: { groupWidth: '50%' },
-                        isStacked: true,
-                        top:0,
-                        height: 130,
-                        hAxis: {textPosition: 'none'}
-                    };
-                    let dataTable2 = google.visualization.arrayToDataTable([
-                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
-                        ['Gasolina', data.stations_no_gasoline,data.stations_no_gasoline,hasGasoline,hasGasoline,'#AAAE43']
-                    ]);
-                    let optionsChart2 = Object.assign(barOptions,{colors: ['#f62317','#AAAE43']});
-                    let chart2 = new google.visualization.BarChart(document.getElementById('chart_container_2_gasoline'));
-                    chart2.draw(dataTable2, optionsChart2);
-                    //
-                    // DIESEL
-                    //
-                    let dataTable3Diesel = google.visualization.arrayToDataTable([
-                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
-                        ['Gasoleo', data.stations_no_diesel,data.stations_no_diesel,hasDiesel,hasDiesel,'#DB6E3E'],
-                    ]);
-                    let optionsChart3 = Object.assign(barOptions,{colors: ['#f62317','#DB6E3E']});
-                    let chart3lpg = new google.visualization.BarChart(document.getElementById('chart_container_3_diesel'));
-                    chart3lpg.draw(dataTable3Diesel, optionsChart3);
-                    //
-                    // LPG
-                    //
-                    let dataTable4 = google.visualization.arrayToDataTable([
-                        ['Combustivel','Esgotado',{ role: 'annotation'},'Vende',{ role: 'annotation'},{role: 'style'}],
-                        ['GPL', data.stations_no_lpg,data.stations_no_lpg,hasLpg,hasLpg,'3D8CB1']
-                    ]);
-                    let optionsChart4 = Object.assign(barOptions,{colors: ['#f62317','#3D8CB1']});
-                    let chart4lpg = new google.visualization.BarChart(document.getElementById('chart_container_4_lpg'));
-                    chart4lpg.draw(dataTable4, optionsChart4);
-                });
             });
         }
     </script>
