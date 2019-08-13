@@ -55,9 +55,9 @@ class FuelStationsController extends Controller
             $fuel_station->update($validatedData);
             $cacheController = new CacheController();
             $cacheController->updateStations();
-            return redirect('panel/stations/list')->with('status', 'Estação Atualizada!');
+            return response()->json(['sucess' => true]);
         } catch (Exception $e) {
-            return redirect('panel/stations/list')->with('status', 'Erro ao atualizar estação!');
+            return response()->json(['sucess' => false]);
         }
     }
 
