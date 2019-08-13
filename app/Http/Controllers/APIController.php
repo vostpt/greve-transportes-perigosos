@@ -14,6 +14,20 @@ class APIController extends Controller
         return response()->view('api/home');
     }
 
+    public function info(Request $request)
+    {
+        if ($request->has('key') && $request->has('secret')) {
+            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
+            if ($ext_auth->count() > 0) {
+                $ext_auth = $ext_auth->first();
+
+                $info = ['brand' => $ext_auth->brand];
+                return response()->json($info);
+            }
+        }
+        return response()->json([]);
+    }
+
     public function fetch(Request $request)
     {
         if ($request->has('key') && $request->has('secret')) {

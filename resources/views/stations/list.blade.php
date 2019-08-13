@@ -113,7 +113,7 @@
        $('.cb-available').on('change', function(e){
           console.log('lala');
        });
-        
+
         $('#fuel_stations_list').DataTable( {
             "ajax": { 
                 "url": "{{ route('stations.fetch.all') }}",

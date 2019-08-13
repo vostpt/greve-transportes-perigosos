@@ -97,6 +97,7 @@ Route::prefix('api/v1')->name('api.')->group(function () {
     Route::get('/', 'APIController@home')->name('home');
     Route::post('fetch', 'APIController@fetch')->name('fetch');
     Route::post('push', 'APIController@push')->name('push');
+    Route::post('info', 'APIController@info')->name('info');
     Route::get('/fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
 });
 

@@ -313,6 +313,16 @@ function addLayersFunctionality(layerID) {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA PRIO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/">PELA PRÓPRIA PRIO</a></b></div></div>';
+            }
+            else if (e.features[0].properties.brand == "OZ Energia") {
+                description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA OZ ENERGIA</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.ozenergia.pt/">PELA PRÓPRIA OZ ENERGIA</a></b></div></div>';
+            }
+            else if (e.features[0].properties.brand == "Ecobrent") {
+                description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA ECOBRENT</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.ecobrent.pt/">PELA PRÓPRIA ECOBRENT</a></b></div></div>';
             } else {
                 description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
@@ -324,8 +334,7 @@ function addLayersFunctionality(layerID) {
                 '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>';
             if (e.features[0].properties.brand == "Prio") {
                 description += '<div class="col-9"><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/" style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">PRIO</h5></a></div>';
-            }
-            else {
+            } else {
                 description += '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>';
             }
             description += '</div>' +
@@ -428,7 +437,15 @@ map.on('load', function () {
     Promise.all(promises).then(function () {
         promises = [];
         updatePoints(true);
-        if ("geolocation" in navigator) {
+        let lat = findGetParameter("lat");
+        let long = findGetParameter("long");
+        if (lat != null && long != null) {
+            map.flyTo({
+                center: [lat, long],
+                zoom: 13
+            });
+
+        } else if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(position => {
                 map.flyTo({
                     center: [position.coords.longitude, position.coords.latitude],

@@ -45,29 +45,24 @@ class EntriesController extends Controller
                 return response()->json(['success' => 0]);
             }
             $station = FuelStation::findOrFail($validatedData['fuel_station']);
-            if ($station->brand == 'Prio') {
+            if ($station->brand == 'Prio' || $station->brand == 'OZ Energia' || $station->brand == 'Ecobrent') {
                 return response()->json(['success' => 0]);
             }
+            $data = [
+                'has_gasoline' => $validatedData['gasoline'],
+                'has_diesel'   => $validatedData['diesel'],
+                'has_lpg'      => $validatedData['lpg'],
+            ];
             if ($user = Auth::user()) {
-                $data = [
-                    'has_gasoline' => $validatedData['gasoline'],
-                    'has_diesel'   => $validatedData['diesel'],
-                    'has_lpg'      => $validatedData['lpg'],
-                ];
                 $station->fill($data);
                 $station->save();
                 $cacheController = new CacheController;
                 $cacheController->updateStations();
                 return response()->json(['success' => 1]);
             } else {
-                $entry = new Entry();
-                $data  = [
-                    'has_gasoline' => $validatedData['gasoline'],
-                    'has_diesel'   => $validatedData['diesel'],
-                    'has_lpg'      => $validatedData['lpg'],
-                    'fuel_station' => $validatedData['fuel_station'],
-                    'ip'           => \Request::ip(),
-                ];
+                $entry                = new Entry();
+                $data['ip']           = \Request::ip();
+                $data['fuel_station'] = $validatedData['fuel_station'];
                 $entry->fill($data);
                 $entry->save();
                 return response()->json(['success' => 1]);

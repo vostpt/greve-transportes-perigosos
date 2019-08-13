@@ -22,6 +22,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'api/v1/fetch',
         'api/v1/push',
+        'api/v1/info',
         'panel/entries/add',
         'error/push',
     ];
