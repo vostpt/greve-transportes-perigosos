@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <h1 class="text-center" id="header_text">API v1</h1>
+    <h1 class="text-center" id="header_text"><img src="/img/VOSTPT_ROUND_FULL-COLOR.png" style="width: 1em;margin-top: -10px;" />VOSTPT - Já Não Dá Para Abastecer  - API v1</h1>
     <div class="container" id="fetcher">
         <h2>Instructions</h2>
         <div class="accordion" id="API_USAGE">
@@ -283,7 +283,7 @@
                             else {
                                 station["has_lpg"] = '<i class="fas fa-times"></i>';
                             }
-                            $("#fetched_list tbody").append('<tr id="station_'+station["id"]+'"><td>'+station["id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+station["lat"]+','+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
+                            $("#fetched_list tbody").append('<tr id="station_'+station["id"]+'"><td>'+station["id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="/?lat='+station["lat"]+'&long='+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
                         });
                         $('#fetched_list').DataTable();
                         $("#table").show();
