@@ -16,10 +16,12 @@ mix.js('resources/js/app.js', 'public/js')
    .styles('resources/css/map.css', 'public/css/map.css')
    .styles('resources/css/custom.css', 'public/css/custom.css')
    .js('resources/js/map.js', 'public/js')
+   .js('resources/js/helpers.js', 'public/js')
    .js('resources/js/stats.js', 'public/js')
    .js('resources/js/graphs.js', 'public/js')
    .js('resources/js/graph_stats.js', 'public/js')
    .js('resources/js/graph_brands.js', 'public/js')
+   .js('resources/js/graph_entries.js', 'public/js')
    .copy('resources/js/map_direct.js', 'public/js/map_direct.js')
    .js('resources/js/map_load.js', 'public/js');
 

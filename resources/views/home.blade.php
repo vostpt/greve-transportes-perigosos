@@ -107,25 +107,29 @@
         </div>
     </div>
     <hr class="mt-5">
-    <div class="row">
-        <div class="col-md-6"></div>
+    <div class="row mt-5">
         <div class="col-md-6">
-            <div class="form-group">
-                <label for="brand_selection">Marca:</label>
-                <select class="form-control" id="brand_selection">
-                    <option value="none">Todas</option>
-                </select>
+            <div class="card">
+                <div class="card-header">
+                    Registo de submissões no JNDPA ( Ultimas 12 horas )
+                </div>
+                <div class="card-body" style="overflow: hidden;">
+                    <div id="entries-last12-hours" ></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6"></div>
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
                     Total de Postos Registados no JNDPA ( <span id="brand_stations_total_number">0</span> )
                 </div>
                 <div class="card-body" style="overflow: hidden;">
+                    <div class="form-group">
+                        <label for="brand_selection">Marca:</label>
+                        <select class="form-control" id="brand_selection">
+                            <option value="none">Todas</option>
+                        </select>
+                    </div>
                     <div id="gasoline-chart-area-brand" ></div>
                     <div id="diesel-chart-area-brand" ></div>
                     <div id="lpg-chart-area-brand" ></div>
@@ -138,11 +142,13 @@
 
 @section('javascript')
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="{{ mix('/js/helpers.js') }}" charset="utf-8"></script>
     <script src="{{ mix('/js/graphs.js') }}" charset="utf-8"></script>
     <script type="text/javascript">
 
         let dataSourceGlobalUri = "/storage/data/stats_global.json";
         let brandsDataSourceUri = "/storage/data/stats_brands.json";
+        let entriesLast12HoursUri = "/storage/data/stats_entries_last12.json";
         let $countyEl = $("#county_selection");
         let $districtEl = $("#district_selection");
         let $brandEl = $('#brand_selection');
@@ -164,13 +170,20 @@
                 dataSourceUri = dataSourceGlobalUri;
                 sessionStorage.setItem('data_source_uri', dataSourceUri);
             }else{
-                if(district !== null && county !== null){
+                if(
+                    (district !== null || district !== 'none')
+                    &&
+                    (county !== null || county !== 'none')
+                ){
                     $districtEl.val(district).trigger('change');
                     $countyEl.val(county).trigger('change');
                 }else{
                     $districtEl.val('none').trigger('change');
                 }
             }
+            let ds = sessionStorage.getItem('data_source_uri');
+            renderChartsGlobalStats(ds);
+
             getEntries();
             let defaultBrand = 'Prio';
             let data = JSON.parse(Get(brandsDataSourceUri));
@@ -183,6 +196,7 @@
                 }
             });
             renderChartsBrand(data[defaultBrand]);
+            renderEntriesLast12Hours(entriesLast12HoursUri)
         };
 
         setInterval(function () {
@@ -193,6 +207,7 @@
             let data = JSON.parse(Get(brandsDataSourceUri));
             let valueSelected = sessionStorage.getItem('brand');
             renderChartsBrand(data[valueSelected]);
+            renderEntriesLast12Hours(entriesLast12HoursUri);
         }, 30000);
 
         $districtEl.on('change', function (e) {
@@ -203,7 +218,6 @@
                 sessionStorage.setItem('district', valueSelected);
                 sessionStorage.setItem('county', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceGlobalUri);
-                renderChartsGlobalStats(dataSourceGlobalUri);
             }else {
                 let dataSourceUri = "/storage/data/stats_" + encodeURI(valueSelected) + ".json";
                 $countyEl.prop('disabled', false);
@@ -213,7 +227,6 @@
                 });
                 sessionStorage.setItem('district', valueSelected);
                 sessionStorage.setItem('data_source_uri', dataSourceUri);
-                renderChartsGlobalStats(dataSourceUri);
             }
         });
 
