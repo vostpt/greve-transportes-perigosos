@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <h1 class="text-center">API v1</h1>
+    <h1 class="text-center" id="header_text">API v1</h1>
     <div class="container" id="fetcher">
         <h2>Instructions</h2>
         <div class="accordion" id="API_USAGE">
@@ -251,37 +251,47 @@
         function fetch() {
             key = $("#inputKey").val();
             secret = $("#inputSecret").val();
-            $.post( "/api/v1/fetch", { key: key, secret: secret }, function( data ) {
-                if(data != []) {
-                    $("#fetcher").hide();
-                    data.forEach(station => {
-                        station["actions"] = '<a href="#" onclick="modifyFuelStation('+station["id"]+','+station["has_gasoline"]+','+station["has_diesel"]+','+station["has_lpg"]+')"><i class="fas fa-edit"></i></a>';
-                        if(station["has_gasoline"] == 1) {
-                            station["has_gasoline"] = '<i class="fas fa-check"></i>';
-                        }
-                        else {
-                            station["has_gasoline"] = '<i class="fas fa-times"></i>';
-                        }
-                        if(station["has_diesel"] == 1) {
-                            station["has_diesel"] = '<i class="fas fa-check"></i>';
-                        }
-                        else {
-                            station["has_diesel"] = '<i class="fas fa-times"></i>';
-                        }
-                        if(station["has_lpg"] == 1) {
-                            station["has_lpg"] = '<i class="fas fa-check"></i>';
-                        }
-                        else {
-                            station["has_lpg"] = '<i class="fas fa-times"></i>';
-                        }
-                        $("#fetched_list tbody").append('<tr id="station_'+station["id"]+'"><td>'+station["id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+station["lat"]+','+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
-                    });
-                    $('#fetched_list').DataTable();
-                    $("#table").show();
+            let text = "<img src=\"/img/VOSTPT_ROUND_FULL-COLOR.png\" style=\"width: 1em;margin-top: -10px;\" />VOSTPT - Já Não Dá Para Abastecer - Área Reservada a ";
+            $.post( "/api/v1/info", { key: key, secret: secret }, function( info ) {
+                if(info.brand == "WRITEREAD" || info.brand == "READONLY") {
+                    text += key;
                 }
                 else {
-                    alert('Wrong Credentials');
+                    text += info.brand;
                 }
+                $("#header_text").html(text);
+                $.post( "/api/v1/fetch", { key: key, secret: secret }, function( data ) {
+                    if(data != []) {
+                        $("#fetcher").hide();
+                        data.forEach(station => {
+                            station["actions"] = '<a href="#" onclick="modifyFuelStation('+station["id"]+','+station["has_gasoline"]+','+station["has_diesel"]+','+station["has_lpg"]+')"><i class="fas fa-edit"></i></a>';
+                            if(station["has_gasoline"] == 1) {
+                                station["has_gasoline"] = '<i class="fas fa-check"></i>';
+                            }
+                            else {
+                                station["has_gasoline"] = '<i class="fas fa-times"></i>';
+                            }
+                            if(station["has_diesel"] == 1) {
+                                station["has_diesel"] = '<i class="fas fa-check"></i>';
+                            }
+                            else {
+                                station["has_diesel"] = '<i class="fas fa-times"></i>';
+                            }
+                            if(station["has_lpg"] == 1) {
+                                station["has_lpg"] = '<i class="fas fa-check"></i>';
+                            }
+                            else {
+                                station["has_lpg"] = '<i class="fas fa-times"></i>';
+                            }
+                            $("#fetched_list tbody").append('<tr id="station_'+station["id"]+'"><td>'+station["id"]+'</td><td>'+station["name"]+'</td><td class="gasoline">'+station["has_gasoline"]+'</td><td class="diesel">'+station["has_diesel"]+'</td><td class="lpg">'+station["has_lpg"]+'</td><td><a target="_blank" rel="noopener noreferrer" href="http://www.google.com/maps/place/'+station["lat"]+','+station["long"]+'">Ver no Mapa</a></td><td class="action">'+station["actions"]+'</td></tr>');
+                        });
+                        $('#fetched_list').DataTable();
+                        $("#table").show();
+                    }
+                    else {
+                        alert('Wrong Credentials');
+                    }
+                }, "json");
             }, "json");
         }
     </script>
