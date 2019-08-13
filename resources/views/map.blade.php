@@ -29,7 +29,7 @@
                 <br />
                     <p>Os dados constantes na plataforma “Já Não Dá Para Abastecer” da VOST Portugal são compilados através de informação recebida através dos utilizadores da mesma.</p>
                     <p>Tratando-se de uma plataforma de crowdsourcing os dados são meramente indicativos e sofrem alterações constantemente.</p>
-                    <p>Os dados constantes das bombas <a href="https://www.prio.pt/pt/">PRIO</a>, <a href="https://www.ozenergia.pt/">OZ Energia</a> e <a href="https://www.ecobrent.pt/">Ecobrent</a> são fornecidos à VOST Portugal pelas próprias entidades usando a <a href="/api/v1/">API</a> disponibilizada pela VOSTPT a todos os operadores</p>
+                    <p>Os dados constantes das bombas <a href="https://www.prio.pt/pt/">PRIO</a>, <a href="https://www.ozenergia.pt/">OZ Energia</a>, <a href="https://www.ecobrent.pt/">Ecobrent</a> e <a href="https://www.bongasenergias.pt/">Bxpress</a> são fornecidos à VOST Portugal pelas próprias entidades usando a <a href="/api/v1/">API</a> disponibilizada pela VOSTPT a todos os operadores</p>
                     <p>A VOST Portugal efectuará todos os esforços para validar toda a informação que nos vai chegando.</p>
                     <p>Se é o responsável por uma ou mais bombas de gasolina e os dados que encontrar não estiverem corretos, a VOST Portugal disponibiliza o e-mail <a href="hello@vost.pt">hello@vost.pt</a> para proceder de imediato à rectificação da informação constante na nossa plataforma.</p>
             </div>
