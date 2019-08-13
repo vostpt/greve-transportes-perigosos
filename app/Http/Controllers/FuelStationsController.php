@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\FuelStation;
 use App\Option;
+use Illuminate\Http\Request;
 
 class FuelStationsController extends Controller
 {

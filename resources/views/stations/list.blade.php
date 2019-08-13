@@ -108,12 +108,38 @@
         $("#station_repa").val(repa);
         $('.modal').modal('show');
     }
+
+    function updateAvailable(id, type){
+        $el = $('#cb-' + id + '-' + type);
+
+        let data = {};
+
+        data.id = id;
+
+        switch(type){
+            case 'gasoline':
+                data.has_gasoline = Number($el.is(':checked'));
+                break;
+            case 'diesel':
+                data.has_diesel = Number($el.is(':checked'));
+                break;
+            case 'lpg':
+                data.has_lpg = Number($el.is(':checked'));
+                break;
+        }
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('stations.update_available') }}",
+            dataType : 'json',
+            type: 'POST',
+            data: data,
+        });
+    }
+    
     $(document).ready(function() {
-
-       $('.cb-available').on('change', function(e){
-          console.log('lala');
-       });
-
         $('#fuel_stations_list').DataTable( {
             "ajax": { 
                 "url": "{{ route('stations.fetch.all') }}",
@@ -140,24 +166,24 @@
                         }
 
                         if(json.data[index]["has_gasoline"] == 1) {
-                            json.data[index]["has_gasoline"] = '<input type="checkbox" checked class="cb-available">';
+                            json.data[index]["has_gasoline"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-gasoline" data-type="gasoline" checked onchange="updateAvailable('+json.data[index]["id"]+', \'gasoline\')">';
                         }
                         else {
-                            json.data[index]["has_gasoline"] = '<input type="checkbox" class="cb-available">';
+                            json.data[index]["has_gasoline"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-gasoline" data-type="gasoline" onchange="updateAvailable('+json.data[index]["id"]+', \'gasoline\')">';
                         }
 
                         if(json.data[index]["has_diesel"] == 1) {
-                            json.data[index]["has_diesel"] = '<input type="checkbox" checked class="cb-available">';
+                            json.data[index]["has_diesel"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-diesel" data-type="diesel" checked onchange="updateAvailable('+json.data[index]["id"]+', \'diesel\')">';
                         }
                         else {
-                            json.data[index]["has_diesel"] = '<input type="checkbox" class="cb-available">';
+                            json.data[index]["has_diesel"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-diesel" data-type="diesel" onchange="updateAvailable('+json.data[index]["id"]+', \'diesel\')">';
                         }
 
                         if(json.data[index]["has_lpg"] == 1) {
-                            json.data[index]["has_lpg"] = '<input type="checkbox" checked class="cb-available">';
+                            json.data[index]["has_lpg"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-lpg" data-type="lpg" checked onchange="updateAvailable('+json.data[index]["id"]+', \'lpg\')">';
                         }
                         else {
-                            json.data[index]["has_lpg"] = '<input type="checkbox" class="cb-available">';
+                            json.data[index]["has_lpg"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-lpg" data-type="lpg" onchange="updateAvailable('+json.data[index]["id"]+', \'lpg\')">';
                         }
 
 
@@ -183,7 +209,6 @@
 
 
         });
-
 
     });
 
