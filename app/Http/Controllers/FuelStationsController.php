@@ -40,6 +40,26 @@ class FuelStationsController extends Controller
         }
     }
 
+    public function updateAvailable(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id'             => 'required|exists:fuel_stations',
+            'has_gasoline' => 'boolean',
+            'has_diesel'   => 'boolean',
+            'has_lpg'      => 'boolean',
+        ]);
+        try {
+            $fuel_station = FuelStation::findOrFail($validatedData['id']);
+            unset($validatedData['id']);
+            $fuel_station->update($validatedData);
+            $cacheController = new CacheController();
+            $cacheController->updateStations();
+            return redirect('panel/stations/list')->with('status', 'Estação Atualizada!');
+        } catch (Exception $e) {
+            return redirect('panel/stations/list')->with('status', 'Erro ao atualizar estação!');
+        }
+    }
+
     public function fetch_all()
     {
         $stations_final = [];
@@ -55,6 +75,9 @@ class FuelStationsController extends Controller
                 'repa'          => $station->repa,
                 'lat'           => $station->lat,
                 'long'          => $station->long,
+                'has_gasoline'  => $station->has_gasoline,
+                'has_diesel'    => $station->has_diesel,
+                'has_lpg'       => $station->has_lpg
             ];
         }
         return response()->json(['data' => $stations_final]);
