@@ -71,7 +71,7 @@ Route::prefix('panel')->group(function () {
             Route::get('pending', 'FuelStationsController@fetch_all')->name('all');
         });
         Route::post('update', 'FuelStationsController@update')->name('update');
-        Route::post('update-available', 'FuelStationsController@updateAvailable')->middleware('csrf')->name('update_available');
+        Route::post('update-available', 'FuelStationsController@updateAvailable')->name('update_available');
     });
 
     Route::prefix('options')->name('options.')->middleware('auth')->group(function () {
