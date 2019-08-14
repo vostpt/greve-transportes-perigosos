@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
@@ -38,12 +39,10 @@ class MapEnseIds extends Command
      */
     public function handle()
     {
-        $json = \file_get_contents('https://pastebin.com/raw/ekJtSrA6');
+        $json = \file_get_contents('https://pastebin.com/raw/UgtUMMB2');
         $obj  = \json_decode($json, true);
         foreach ($obj['result'] as $point) {
-
-            $fuel_station = FuelStation::where('name', $point['closest_vost']['name'])->get()->first();
-
+            $fuel_station = FuelStation::where('id', '=', $point['vost_id'])->get()->first();
             if ($fuel_station) {
                 $data = [
                     'ense_id' => $point['ense_id'],
