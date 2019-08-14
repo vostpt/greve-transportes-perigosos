@@ -45,7 +45,7 @@ class EntriesController extends Controller
                 return response()->json(['success' => 0]);
             }
             $station = FuelStation::findOrFail($validatedData['fuel_station']);
-            if ($station->brand == 'Prio' || $station->brand == 'OZ Energia' || $station->brand == 'Ecobrent' || $station->brand == 'Bxpress') {
+            if ($station->brand == 'Prio' || $station->brand == 'OZ Energia' || $station->brand == 'Ecobrent' || $station->brand == 'Bxpress' || $station->brand == 'Tfuel') {
                 return response()->json(['success' => 0]);
             }
             $data = [
