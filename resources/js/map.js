@@ -160,6 +160,7 @@ function loadPoints() {
                         "id": fuelStation.id,
                         "name": fuelStation.name,
                         "brand": brand,
+                        "brand_management": fuelStation["brand_management"],
                         "repa": fuelStation.repa,
                         "with_gasoline": with_gasoline,
                         "with_diesel": with_diesel,
@@ -373,7 +374,7 @@ function addLayersFunctionality(layerID) {
                 '</div>';
         } else {
             description = '<div class="v-popup-content">' +
-                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + ' Entidade Gestora: '+e.features[0].properties.brand_management.toUpperCase() +'<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body" style="background-color: #' + e.features[0].properties.background_color + '">' +
                 '<div class="row">' +
                 fuelIcons +
