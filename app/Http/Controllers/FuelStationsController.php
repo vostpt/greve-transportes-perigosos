@@ -44,7 +44,7 @@ class FuelStationsController extends Controller
     public function updateAvailable(Request $request)
     {
         $validatedData = $request->validate([
-            'id'             => 'required|exists:fuel_stations',
+            'id'           => 'required|exists:fuel_stations',
             'has_gasoline' => 'boolean',
             'has_diesel'   => 'boolean',
             'has_lpg'      => 'boolean',
@@ -78,7 +78,7 @@ class FuelStationsController extends Controller
                 'long'          => $station->long,
                 'has_gasoline'  => $station->has_gasoline,
                 'has_diesel'    => $station->has_diesel,
-                'has_lpg'       => $station->has_lpg
+                'has_lpg'       => $station->has_lpg,
             ];
         }
         return response()->json(['data' => $stations_final]);
