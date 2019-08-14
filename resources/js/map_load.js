@@ -1,4 +1,4 @@
-function inIframe () {
+function inIframe() {
     try {
         return window.self !== window.top;
     } catch (e) {
@@ -6,15 +6,27 @@ function inIframe () {
     }
 }
 
-function removeElementsByClass(className){
+window.findGetParameter = function (parameterName) {
+    let result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+            tmp = item.split("=");
+            if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+
+function removeElementsByClass(className) {
     var elements = document.getElementsByClassName(className);
-    while(elements.length > 0){
+    while (elements.length > 0) {
         elements[0].parentNode.removeChild(elements[0]);
     }
 }
-
-if(inIframe()) {
-    document.getElementById("map_view").style.visibility = "visible"; 
+if (inIframe()) {
+    document.getElementById("map_view").style.visibility = "visible";
     removeElementsByClass("iframe-remove");
     document.getElementById("map").style.top = 0;
     document.getElementById("map").style.height = "100%";
@@ -23,7 +35,12 @@ if(inIframe()) {
     document.getElementById("features").style.top = "calc(1% + 60px)";
     document.getElementById("legend-icon").style.top = "1%";
     document.getElementById("legend").style.top = "1%";
-}
-else {
-    document.getElementById("selector_view").style.visibility = "visible"; 
+} else {
+    let lat = findGetParameter("lat");
+    let long = findGetParameter("long");
+    if (lat != null && long != null) {
+        document.getElementById("map_view").style.visibility = "visible";
+    } else {
+        document.getElementById("selector_view").style.visibility = "visible";
+    }
 }

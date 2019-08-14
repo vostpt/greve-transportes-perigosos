@@ -71,6 +71,7 @@ Route::prefix('panel')->group(function () {
             Route::get('pending', 'FuelStationsController@fetch_all')->name('all');
         });
         Route::post('update', 'FuelStationsController@update')->name('update');
+        Route::post('update-available', 'FuelStationsController@updateAvailable')->name('update_available');
     });
 
     Route::prefix('options')->name('options.')->middleware('auth')->group(function () {
@@ -96,7 +97,11 @@ Route::prefix('api/v1')->name('api.')->group(function () {
     Route::get('/', 'APIController@home')->name('home');
     Route::post('fetch', 'APIController@fetch')->name('fetch');
     Route::post('push', 'APIController@push')->name('push');
-    Route::get('/fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
+    Route::post('info', 'APIController@info')->name('info');
+    Route::post('add', 'APIController@add')->name('add');
+    Route::post('change', 'APIController@change')->name('change');
+    Route::get('fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
+    Route::get('fetchapicsv', 'APIController@fetch_api_csv')->name('fetch_api_csv');
 });
 
 

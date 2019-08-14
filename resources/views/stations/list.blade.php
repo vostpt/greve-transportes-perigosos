@@ -13,6 +13,9 @@
                         <th>{{ __('Sells Gasoline') }}</th>
                         <th>{{ __('Sells Diesel') }}</th>
                         <th>{{ __('Sells LPG') }}</th>
+                        <th>{{ __('Has Gasoline') }}</th>
+                        <th>{{ __('Has Diesel') }}</th>
+                        <th>{{ __('Has LPG') }}</th>
                         <th>{{ __('REPA') }}</th>
                         <th>{{ __('Map') }}</th>
                         <th>{{ __('Actions') }}</th>
@@ -26,6 +29,9 @@
                         <th>{{ __('Sells Gasoline') }}</th>
                         <th>{{ __('Sells Diesel') }}</th>
                         <th>{{ __('Sells LPG') }}</th>
+                        <th>{{ __('Has Gasoline') }}</th>
+                        <th>{{ __('Has Diesel') }}</th>
+                        <th>{{ __('Has LPG') }}</th>
                         <th>{{ __('REPA') }}</th>
                         <th>{{ __('Map') }}</th>
                         <th>{{ __('Actions') }}</th>
@@ -102,6 +108,46 @@
         $("#station_repa").val(repa);
         $('.modal').modal('show');
     }
+
+    function updateAvailable(id, type){
+        $el = $('#cb-' + id + '-' + type);
+
+        let data = {};
+
+        data.id = id;
+
+        switch(type){
+            case 'gasoline':
+                data.has_gasoline = Number($el.is(':checked'));
+                break;
+            case 'diesel':
+                data.has_diesel = Number($el.is(':checked'));
+                break;
+            case 'lpg':
+                data.has_lpg = Number($el.is(':checked'));
+                break;
+        }
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ route('stations.update_available') }}",
+            dataType : 'json',
+            type: 'POST',
+            data: data,
+            done: function(data){
+                data = JSON.parse(data);
+
+                if(!data.success){
+                    alert('error. refresh and try again');
+                } else {
+                    alert('done');
+                }
+            }
+        });
+    }
+    
     $(document).ready(function() {
         $('#fuel_stations_list').DataTable( {
             "ajax": { 
@@ -127,6 +173,29 @@
                         else {
                             json.data[index]["sell_lpg"] = '<i class="fas fa-times"></i>';
                         }
+
+                        if(json.data[index]["has_gasoline"] == 1) {
+                            json.data[index]["has_gasoline"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-gasoline" data-type="gasoline" checked onchange="updateAvailable('+json.data[index]["id"]+', \'gasoline\')">';
+                        }
+                        else {
+                            json.data[index]["has_gasoline"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-gasoline" data-type="gasoline" onchange="updateAvailable('+json.data[index]["id"]+', \'gasoline\')">';
+                        }
+
+                        if(json.data[index]["has_diesel"] == 1) {
+                            json.data[index]["has_diesel"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-diesel" data-type="diesel" checked onchange="updateAvailable('+json.data[index]["id"]+', \'diesel\')">';
+                        }
+                        else {
+                            json.data[index]["has_diesel"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-diesel" data-type="diesel" onchange="updateAvailable('+json.data[index]["id"]+', \'diesel\')">';
+                        }
+
+                        if(json.data[index]["has_lpg"] == 1) {
+                            json.data[index]["has_lpg"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-lpg" data-type="lpg" checked onchange="updateAvailable('+json.data[index]["id"]+', \'lpg\')">';
+                        }
+                        else {
+                            json.data[index]["has_lpg"] = '<input type="checkbox" id="cb-'+json.data[index]["id"]+'-lpg" data-type="lpg" onchange="updateAvailable('+json.data[index]["id"]+', \'lpg\')">';
+                        }
+
+
                         json.data[index]["map"] = '<a href="https://www.waze.com/ul?ll='+json.data[index]["lat"]+'%2C'+json.data[index]["long"]+'&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">Ver no Mapa</a>';
                     });
                     return json.data;
@@ -139,11 +208,17 @@
                 { "data": "sell_gasoline" },
                 { "data": "sell_diesel" },
                 { "data": "sell_lpg" },
+                { "data": "has_gasoline" },
+                { "data": "has_diesel" },
+                { "data": "has_lpg" },
                 { "data": "repa" },
                 { "data": "map" },
                 { "data": "actions" }
-            ]   
+            ]
+
+
         });
+
     });
 
 </script>
