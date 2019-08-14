@@ -162,8 +162,20 @@ class APIController extends Controller
                         } elseif ($sell_lpg < 0) {
                             $sell_lpg = 0;
                         }
+                        $county = $request->input('county');
+                        if ($county == null) {
+                            $county = '';
+                        }
+                        $district = $request->input('district');
+                        if ($district == null) {
+                            $district = '';
+                        }
+                        $repa = $request->input('repa');
+                        if ($repa == null) {
+                            $repa = '';
+                        }
                         $data = [
-                                'repa'          => $request->input('repa'),
+                                'repa'          => $repa,
                                 'source_id'     => 'api',
                                 'brand'         => $request->input('brand'),
                                 'name'          => $request->input('name'),
@@ -175,8 +187,8 @@ class APIController extends Controller
                                 'has_lpg'       => $sell_lpg,
                                 'long'          => \floatval($request->input('lat')),
                                 'lat'           => \floatval($request->input('long')),
-                                'county'        => $request->input('county'),
-                                'district'      => $request->input('district'),
+                                'county'        => $county,
+                                'district'      => $district,
                             ];
                         $fuel_station = new FuelStation();
                         $fuel_station->fill($data);
@@ -221,8 +233,20 @@ class APIController extends Controller
                             } elseif ($sell_lpg < 0) {
                                 $sell_lpg = 0;
                             }
+                            $county = $request->input('county');
+                            if ($county == null) {
+                                $county = '';
+                            }
+                            $district = $request->input('district');
+                            if ($district == null) {
+                                $district = '';
+                            }
+                            $repa = $request->input('repa');
+                            if ($repa == null) {
+                                $repa = '';
+                            }
                             $data = [
-                                'repa'          => $request->input('repa'),
+                                'repa'          => $repa,
                                 'source_id'     => 'api',
                                 'brand'         => $request->input('brand'),
                                 'name'          => $request->input('name'),
@@ -234,8 +258,8 @@ class APIController extends Controller
                                 'has_lpg'       => $sell_lpg,
                                 'long'          => \floatval($request->input('lat')),
                                 'lat'           => \floatval($request->input('long')),
-                                'county'        => $request->input('county'),
-                                'district'      => $request->input('district'),
+                                'county'        => $county,
+                                'district'      => $district,
                             ];
                             $fuel_station->fill($data);
                             $fuel_station->save();
