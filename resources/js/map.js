@@ -373,8 +373,12 @@ function addLayersFunctionality(layerID) {
                 '</div>' +
                 '</div>';
         } else {
+            let brand_management_info = '';
+            if(e.features[0].properties.brand_management != '') {
+                brand_management_info = ' Entidade Gestora: '+e.features[0].properties.brand_management.toUpperCase();
+            }
             description = '<div class="v-popup-content">' +
-                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + ' Entidade Gestora: '+e.features[0].properties.brand_management.toUpperCase() +'<br><small>' + fuelStationName + '</small></h5></div>' +
+                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + brand_management_info + '<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body" style="background-color: #' + e.features[0].properties.background_color + '">' +
                 '<div class="row">' +
                 fuelIcons +
