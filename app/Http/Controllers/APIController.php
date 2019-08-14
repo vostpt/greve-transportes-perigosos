@@ -60,28 +60,6 @@ class APIController extends Controller
                         'district'      => $station->district,
                     ];
                 }
-                if ($ext_auth->brand == 'Tfuel') {
-                    $stations = FuelStation::where('id', '=', 972)->orWhere('id', '=', 1549)->get();
-                    foreach ($stations as $station) {
-                        $output[] = [
-                            'id'            => $station->id,
-                            'name'          => $station->name,
-                            'brand'         => $station->brand,
-                            'sell_gasoline' => $station->sell_gasoline,
-                            'sell_diesel'   => $station->sell_diesel,
-                            'sell_lpg'      => $station->sell_lpg,
-                            'has_gasoline'  => $station->has_gasoline,
-                            'has_diesel'    => $station->has_diesel,
-                            'has_lpg'       => $station->has_lpg,
-                            'lat'           => $station->long,
-                            'long'          => $station->lat,
-                            'repa'          => $station->repa,
-                            'county'        => $station->county,
-                            'district'      => $station->district,
-                        ];
-                    }
-                }
-
                 return response()->json($output);
             }
         }
@@ -98,7 +76,7 @@ class APIController extends Controller
                 $fuel_station = FuelStation::where('id', '=', $request->input('id'));
                 if ($fuel_station->count() > 0) {
                     $fuel_station = $fuel_station->first();
-                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD') || ($fuel_station->id == 972 && $ext_auth->brand == 'Tfuel') || ($fuel_station->id == 1549 && $ext_auth->brand == 'Tfuel')) {
+                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD')) {
                         $has_gasoline = \intval($request->input('has_gasoline'));
                         $has_diesel   = \intval($request->input('has_diesel'));
                         $has_lpg      = \intval($request->input('has_lpg'));
@@ -217,7 +195,7 @@ class APIController extends Controller
                 $fuel_station = FuelStation::where('id', '=', $request->input('id'));
                 if ($fuel_station->count() > 0) {
                     $fuel_station = $fuel_station->first();
-                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD') || ($fuel_station->id == 972 && $ext_auth->brand == 'Tfuel') || ($fuel_station->id == 1549 && $ext_auth->brand == 'Tfuel')) {
+                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD')) {
                         $brand            = $request->input('brand');
                         $management_brand = '';
                         if ($brand != $ext_auth->brand && $ext_auth->brand != 'WRITEREAD') {
