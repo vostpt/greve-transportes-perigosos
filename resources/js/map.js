@@ -148,7 +148,7 @@ function loadPoints() {
                 let dateDiff = timediff(date);
                 let dateString = date.toLocaleString();
                 tooltip += '<p style="margin-bottom:0">ID: '+fuelStation.id+'</p>';
-                tooltip += '<p style="margin-bottom:0">Atualizado há '+dateString+'</p>';
+                tooltip += '<p style="margin-bottom:0">Atualizado há '+dateDiff+'</p>';
                 tooltip += '<p style="margin-bottom:0">Atualizado em '+dateString+'</p>';
                 points.push({
                     "type": "Feature",
