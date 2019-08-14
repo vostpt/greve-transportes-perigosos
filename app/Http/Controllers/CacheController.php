@@ -189,19 +189,19 @@ class CacheController extends Controller
 
     public function updateEntriesLast12Hours()
     {
-        $total = Entry::count('id');
+        $total     = Entry::count('id');
         $startDate = now()->subHours(12);
-        $records = Entry::query()
-            ->where('created_at','>=',$startDate->toDateTimeString())
+        $records   = Entry::query()
+            ->where('created_at', '>=', $startDate->toDateTimeString())
             ->get()
-            ->groupBy(function($item) {
+            ->groupBy(function ($item) {
                 return Carbon::parse($item->created_at)->format('h');
             })
         ;
 
         $data = ['total' => $total, 'records' => []];
 
-        foreach ($records as $record){
+        foreach ($records as $record) {
             $data['records'][] = [$record->first()->created_at->format('H') ,$record->count()];
         }
 
