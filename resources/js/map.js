@@ -28,6 +28,19 @@ String.prototype.capitalize = function () {
     });
 };
 
+function timediff(date) {
+    let diffSeconds = Math.floor((new Date() - date) / 1000);
+    let days = Math.floor(diffSeconds / 86400);
+    let hours = Math.floor((diffSeconds % 86400) / 3600);
+    // ceil because we don't care about seconds
+    let minutes = Math.min(59, Math.ceil((diffSeconds % 3600) / 60));
+    var res = ""
+    if (res || days > 0) { res += " " + days + "d"; }
+    if (res || hours > 0) { res += " " + hours + "h"; }
+    if (res || minutes > 0) { res += " " + minutes + "m"; }
+    return res.trim();
+}
+
 function loadPoints() {
     return new Promise(function (resolve, reject) {
         points = [];
@@ -131,9 +144,12 @@ function loadPoints() {
                 else {
                     tooltip += '<p style="margin-bottom:0">Marca: '+ fuelStation.brand +'</p>';
                 }
-                var date = new Date(fuelStation.updated_at.replace(/ /, 'T') + '+01:00');
+                let date = new Date(fuelStation.updated_at.replace(/ /, 'T') + '+00:00');
+                let dateDiff = timediff(date);
+                let dateString = date.toLocaleString();
                 tooltip += '<p style="margin-bottom:0">ID: '+fuelStation.id+'</p>';
-                tooltip += '<p style="margin-bottom:0">Última atualização em: '+date.toLocaleString()+'</p>';
+                tooltip += '<p style="margin-bottom:0">Atualizado há '+dateString+'</p>';
+                tooltip += '<p style="margin-bottom:0">Atualizado em '+dateString+'</p>';
                 points.push({
                     "type": "Feature",
                     "geometry": {
