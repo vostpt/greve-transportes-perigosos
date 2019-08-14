@@ -273,6 +273,7 @@ class APIController extends Controller
         ];
 
         $columns = [
+            'id',
             'name',
             'brand',
             'lat',
@@ -327,6 +328,7 @@ class APIController extends Controller
         ];
 
         $columns = [
+            'id',
             'name',
             'brand',
             'lat',
