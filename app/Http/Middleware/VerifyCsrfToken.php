@@ -23,6 +23,8 @@ class VerifyCsrfToken extends Middleware
         'api/v1/fetch',
         'api/v1/push',
         'api/v1/info',
+        'api/v1/add',
+        'api/v1/change',
         'panel/entries/add',
         'error/push',
     ];

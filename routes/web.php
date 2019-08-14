@@ -98,7 +98,10 @@ Route::prefix('api/v1')->name('api.')->group(function () {
     Route::post('fetch', 'APIController@fetch')->name('fetch');
     Route::post('push', 'APIController@push')->name('push');
     Route::post('info', 'APIController@info')->name('info');
-    Route::get('/fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
+    Route::post('add', 'APIController@add')->name('add');
+    Route::post('change', 'APIController@change')->name('change');
+    Route::get('fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
+    Route::get('fetchapicsv', 'APIController@fetch_api_csv')->name('fetch_api_csv');
 });
 
 
