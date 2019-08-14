@@ -20,6 +20,11 @@ Route::get('/stats', function () {
     return view('stats');
 })->name('stats');
 
+Route::get('/arcgis', function () {
+    return view('arcgis');
+})->name('arcgis');
+
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');

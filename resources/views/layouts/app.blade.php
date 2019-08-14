@@ -40,6 +40,9 @@
                         <a class="nav-link" href="{{ route('stats') }}">{{ __('Estatísticas') }}</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="{{ route('arcgis') }}">{{ __('Mais Estatísticas') }}</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('about') }}">{{ __('Sobre') }}</a>
                     </li>
                     <li class="nav-item">
