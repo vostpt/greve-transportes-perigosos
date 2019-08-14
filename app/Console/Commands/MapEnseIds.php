@@ -41,7 +41,7 @@ class MapEnseIds extends Command
     {
         $json = \file_get_contents('https://pastebin.com/raw/UgtUMMB2');
         $obj  = \json_decode($json, true);
-        foreach ($obj['result'] as $point) {
+        foreach ($obj['ense'] as $point) {
             $fuel_station = FuelStation::where('id', '=', $point['vost_id'])->get()->first();
             if ($fuel_station) {
                 $data = [
