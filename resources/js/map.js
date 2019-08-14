@@ -117,17 +117,23 @@ function loadPoints() {
                     }
                 }
                 if (count == max_count) {
-                    tooltip += '<p>Disponível</p>'
+                    tooltip += '<p style="margin-bottom:0">Disponível</p>'
                 } else if (count == 0) {
-                    tooltip += '<p>Não Disponível</p>';
+                    tooltip += '<p style="margin-bottom:0">Não Disponível</p>';
                     with_none = 1;
                 } else {
-                    tooltip += '<p>Parcialmente Disponível</p>';
+                    tooltip += '<p style="margin-bottom:0">Parcialmente Disponível</p>';
                 }
                 if (fuelStation.brand == "POSTO ES") {
                     icon = 'SPAIN';
                     tooltip = '<strong>Posto Espanhol</strong>';
                 }
+                else {
+                    tooltip += '<p style="margin-bottom:0">Marca: '+ fuelStation.brand +'</p>';
+                }
+                var date = new Date(fuelStation.updated_at);
+                tooltip += '<p style="margin-bottom:0">ID: '+fuelStation.id+'</p>';
+                tooltip += '<p style="margin-bottom:0">Última Atualização em: '+date.toLocaleString()+'</p>';
                 points.push({
                     "type": "Feature",
                     "geometry": {
@@ -267,14 +273,14 @@ function addLayersFunctionality(layerID) {
     map.on('click', layerID, function (e) {
         var coordinates = e.features[0].geometry.coordinates.slice();
         let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
-            '<img src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>' :
-            '<img class="no-gas"src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>';
+            '<img data-toggle="tooltip" title="Com Gasolina" src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>' :
+            '<img data-toggle="tooltip" title="Sem Gasolina" class="no-gas"src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>';
         let dieselIcon = e.features[0].properties.sell_diesel && e.features[0].properties.has_diesel ?
-            '<img src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>' :
-            '<img class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>';
+            '<img data-toggle="tooltip" title="Com Gasóleo" src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>' :
+            '<img data-toggle="tooltip" title="Sem Gasóleo" class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GASOLEO_500pxX500px.png"/>';
         let lpgIcon = e.features[0].properties.sell_lpg && e.features[0].properties.has_lpg ?
-            '<img width="75px" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>' :
-            '<img class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>';
+            '<img data-toggle="tooltip" title="Com GPL" width="75px" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>' :
+            '<img data-toggle="tooltip" title="Sem GPL" class="no-gas" src="/img/map/VOSTPT_FUELCRISIS_GPL_500pxX500px.png"/>';
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
         let fuelIcons = "";
@@ -385,6 +391,7 @@ function addLayersFunctionality(layerID) {
             .setLngLat(coordinates)
             .setHTML(description)
             .addTo(map);
+        $('[data-toggle="tooltip"]').tooltip();
     });
     var tooltip_popup = new mapboxgl.Popup({
         closeButton: false,
