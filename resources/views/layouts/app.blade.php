@@ -5,9 +5,10 @@
     <meta charset="utf-8">
 
     @if (!empty($__env->yieldContent('viewport')))
-        @yield('viewport')
+    @yield('viewport')
     @else
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1,user-scalable=no">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, shrink-to-fit=no,maximum-scale=1,user-scalable=no">
     @endif
 
     <!-- CSRF Token -->
@@ -24,11 +25,13 @@
     <header class="iframe-remove">
         <nav class="navbar navbar-expand-md navbar-dark bg-primary" role="navigation">
             <a class="navbar-brand" href="{{ route('map') }}">
-                <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="height: 50px; padding:0" alt="Já Não Dá Para Abastecer - VOST Portugal" />
+                <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png"
+                    style="height: 50px; padding:0" alt="Já Não Dá Para Abastecer - VOST Portugal" />
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
-              </button>
+            </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <!-- Left Side Of Navbar -->
@@ -55,6 +58,18 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://twitter.com/vostpt"><img style="width: 25px;"
+                                src="/img/twitter.png" /></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://facebook.com/vostpt"><img style="width: 25px;"
+                                src="/img/facebook.png" /></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://instagram.com/vostpt"><img style="width: 25px;"
+                                src="/img/instagram.png" /></a>
+                    </li>
                     @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">{{ __('Acesso Reservado') }}</a>
@@ -96,7 +111,8 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMyUse">
-                            <a class="dropdown-item" href="{{ route('users.password') }}">{{ __('Change Password') }}</a>
+                            <a class="dropdown-item"
+                                href="{{ route('users.password') }}">{{ __('Change Password') }}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
