@@ -14,4 +14,9 @@ class GraphsController extends Controller
     {
         return response()->view('graphs/brands');
     }
+
+    public function entries()
+    {
+        return response()->view('graphs/entries');
+    }
 }

@@ -1,4 +1,5 @@
 window.onload = function () {
+
     let district = findGetParameter("distrito");
     let county = findGetParameter("concelho");
     let url = "";

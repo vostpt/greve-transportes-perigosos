@@ -27,7 +27,8 @@
         <iframe frameborder="0" scrolling="no" id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
     <div class="row">
-        <iframe frameborder="0" scrolling="no" id="brand_stats" style="width:100%;" src="/graphs/brands"></iframe>
+        <iframe frameborder="0" scrolling="no" id="entries_stats" style="width:50%;" src="/graphs/entries"></iframe>
+        <iframe frameborder="0" scrolling="no" id="brand_stats" style="width:50%;" src="/graphs/brands"></iframe>
     </div>
     <div class="row" style="display:none">
         <div class="col-md-12">
@@ -51,8 +52,10 @@
         </div>
         <iframe frameborder="0" scrolling="no" id="selected_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
-    @endsection
+</div>
+@endsection
 
-    @section('javascript')
+@section('javascript')
+    <script src="{{ mix('/js/helpers.js') }}" charset="utf-8"></script>
     <script src="{{ mix('/js/stats.js') }}" charset="utf-8"></script>
-    @endsection
+@endsection

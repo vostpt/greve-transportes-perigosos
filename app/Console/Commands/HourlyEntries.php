@@ -41,5 +41,6 @@ class HourlyEntries extends Command
     {
         $cacheController = new CacheController();
         $cacheController->updateStatsBeginnig();
+        $cacheController->updateEntriesLast12Hours();
     }
 }

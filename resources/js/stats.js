@@ -1,7 +1,10 @@
 let places = {};
 function updateStats() {
+    let selectedBrand = findGetParameter('marca');
+
     document.getElementById('global_stats').src = "/graphs/stats";
-    document.getElementById('brand_stats').src = "/graphs/brands";
+    document.getElementById('brand_stats').src = "/graphs/brands?marca="+encodeURI(selectedBrand);
+    document.getElementById('entries_stats').src = "/graphs/entries";
 
     $.getJSON( "/storage/data/places.json", (data) => {
         places = data;
