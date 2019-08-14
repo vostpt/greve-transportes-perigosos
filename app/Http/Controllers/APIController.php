@@ -298,6 +298,9 @@ class APIController extends Controller
             'has_lpg',
             'district',
             'county',
+            'ense_id',
+            'ense_gasoline',
+            'ense_diesel',
         ];
 
         $fuel_stations = FuelStation::all($columns);
