@@ -356,7 +356,7 @@ function addLayersFunctionality(layerID) {
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA TFUEL</a></b></div></div>';
             } else {
-                description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' +
+                description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS ESTÃO OU NÃO ESTÃO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>';
             }
