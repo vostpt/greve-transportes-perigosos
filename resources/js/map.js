@@ -327,6 +327,11 @@ function addLayersFunctionality(layerID) {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA BXPRESS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA BXPRESS</a></b></div></div>';
+            } 
+            else if (e.features[0].properties.brand == "TFuel" || e.features[0].properties.id == 972 || e.features[0].properties.id == 1549) {
+                description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA TFUEL</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
+                    '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA TFUEL</a></b></div></div>';
             } else {
                 description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
