@@ -131,9 +131,9 @@ function loadPoints() {
                 else {
                     tooltip += '<p style="margin-bottom:0">Marca: '+ fuelStation.brand +'</p>';
                 }
-                var date = new Date(fuelStation.updated_at);
+                var date = new Date(fuelStation.updated_at.replace(/ /, 'T') + '+01:00');
                 tooltip += '<p style="margin-bottom:0">ID: '+fuelStation.id+'</p>';
-                tooltip += '<p style="margin-bottom:0">Última Atualização em: '+date.toLocaleString()+'</p>';
+                tooltip += '<p style="margin-bottom:0">Última atualização em: '+date.toLocaleString()+'</p>';
                 points.push({
                     "type": "Feature",
                     "geometry": {
@@ -193,7 +193,7 @@ function getAttributions() {
     var minutes = date.getMinutes();
     var hour = date.getHours();
     let attributions = [...customAttributions];
-    attributions.push('Última Atualização às: ' + ("0" + hour).slice(-2) + 'h' + ("0" + minutes).slice(-2) + 'm' + ("0" + seconds).slice(-2) + 's');
+    attributions.push('Última atualização às: ' + ("0" + hour).slice(-2) + 'h' + ("0" + minutes).slice(-2) + 'm' + ("0" + seconds).slice(-2) + 's');
     return attributions;
 }
 
