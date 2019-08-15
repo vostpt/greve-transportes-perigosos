@@ -17,10 +17,15 @@ php artisan key:generate
 ```
 
 ### Database
-Execute the migration and seeders:
+
+You'll need a MySQL database. The easiest way to get this up and running is using [Homestead installation per project](https://laravel.com/docs/5.8/homestead#per-project-installation).
+
+After setting up the database, adapt the `.env` file accordingly and execute the migration and seeders:
 ```sh
 php artisan migrate:refresh --seed
 ```
+
+You can then run the file located in `example_data/homestead_fuel_stations.sql` to add fuel stations and have some test data.
 
 ## Testing
 To run the tests, execute:
