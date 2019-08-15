@@ -159,7 +159,7 @@ class CacheController extends Controller
 
     public function updateStations()
     {
-        $json = FuelStation::all('id', 'name', 'brand', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg', 'updated_at')->toJson();
+        $json = FuelStation::all('id', 'name', 'brand', 'brand_management', 'long', 'lat', 'repa', 'sell_gasoline', 'sell_diesel', 'sell_lpg', 'has_gasoline', 'has_diesel', 'has_lpg', 'updated_at')->toJson();
         Storage::disk('public')->put('data/cache.json', $json);
         $this->clearCloudflare(URL::to('/storage/data/cache.json'));
     }

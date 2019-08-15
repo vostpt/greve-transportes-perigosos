@@ -162,6 +162,7 @@ function loadPoints() {
                         "id": fuelStation.id,
                         "name": fuelStation.name,
                         "brand": brand,
+                        "brand_management": fuelStation["brand_management"],
                         "repa": fuelStation.repa,
                         "with_gasoline": with_gasoline,
                         "with_diesel": with_diesel,
@@ -345,31 +346,31 @@ function addLayersFunctionality(layerID) {
                 fuelIcons +
                 '</div>' +
                 '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />';
-            if (e.features[0].properties.brand == "Prio") {
+            if (e.features[0].properties.brand == "Prio" || e.features[0].properties.brand_management == "Prio") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA PRIO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/">PELA PRÓPRIA PRIO</a></b></div></div>';
             }
-            else if (e.features[0].properties.brand == "OZ Energia") {
+            else if (e.features[0].properties.brand == "OZ Energia" || e.features[0].properties.brand_management == "OZ Energia") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA OZ ENERGIA</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.ozenergia.pt/">PELA PRÓPRIA OZ ENERGIA</a></b></div></div>';
             }
-            else if (e.features[0].properties.brand == "Ecobrent") {
+            else if (e.features[0].properties.brand == "Ecobrent" || e.features[0].properties.brand_management == "Ecobrent") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA ECOBRENT</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.ecobrent.pt/">PELA PRÓPRIA ECOBRENT</a></b></div></div>';
-            } else if (e.features[0].properties.brand == "Bxpress") {
+            } else if (e.features[0].properties.brand == "Bxpress" || e.features[0].properties.brand_management == "Bxpress") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA BXPRESS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA BXPRESS</a></b></div></div>';
-            }
-            else if (e.features[0].properties.brand == "TFuel" || e.features[0].properties.id == 972 || e.features[0].properties.id == 1549) {
+            } 
+            else if (e.features[0].properties.brand == "Tfuel" || e.features[0].properties.brand_management == "Tfuel") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA TFUEL</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA TFUEL</a></b></div></div>';
             } else {
-                description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS NÃO ESTÃO</b></div></div>' +
+                description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS ESTÃO OU NÃO ESTÃO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>';
             }
@@ -386,8 +387,12 @@ function addLayersFunctionality(layerID) {
                 '</div>' +
                 '</div>';
         } else {
+            let brand_management_info = '';
+            if(e.features[0].properties.brand_management != '') {
+                brand_management_info = ' Entidade Gestora: '+e.features[0].properties.brand_management.toUpperCase();
+            }
             description = '<div class="v-popup-content">' +
-                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + '<br><small>' + fuelStationName + '</small></h5></div>' +
+                '<div class="v-popup-header" style="background-color: #' + e.features[0].properties.popup_color + '"><h5>' + e.features[0].properties.brand.toUpperCase() + brand_management_info + '<br><small>' + fuelStationName + '</small></h5></div>' +
                 '<div class="v-popup-body" style="background-color: #' + e.features[0].properties.background_color + '">' +
                 '<div class="row">' +
                 fuelIcons +
