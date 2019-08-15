@@ -165,7 +165,7 @@
                     </label>
                 </div>
                 <div>
-                    <label><a href="#" onclick="resetBrands()">Mostrar todas</a> </label>
+                    <label><a id="a_reset_brand_filter" href="#"">Mostrar todas</a> </label>
                 </div>
             </fieldset>
             <div class="iframe-remove">

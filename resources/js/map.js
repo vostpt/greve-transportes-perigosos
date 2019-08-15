@@ -364,7 +364,7 @@ function addLayersFunctionality(layerID) {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA BXPRESS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA BXPRESS</a></b></div></div>';
-            } 
+            }
             else if (e.features[0].properties.brand == "Tfuel" || e.features[0].properties.brand_management == "Tfuel") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA TFUEL</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
@@ -573,10 +573,8 @@ $('input[name="fuel_stations_brand[]"]').change(function() {
     updateLayersOptions();
 });
 
-function resetBrands() {
+$('#a_reset_brand_filter').click(() => {
     show_all_brands = true;
-    $('input[name="fuel_stations_brand[]"]').prop( "checked", false );
+    $('input[name="fuel_stations_brand[]"]').prop("checked", false);
     updateLayersOptions();
-}
-
-
+});
