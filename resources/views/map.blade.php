@@ -126,6 +126,48 @@
                     </label>
                 </div>
             </fieldset>
+            <hr />
+            <h4>100% certeza</h4>
+            <fieldset id="fuel_stations_brands">
+                <div class="form-check">
+                    <input class="form-check-input brand" name="fuel_stations_brand[]" type="checkbox" value="Bxpress"
+                           id="fuel_stations_brand_bxpress" autocomplete="off">
+                    <label class="form-check-label" for="fuel_stations_brand_bxpress">
+                        Bxpress
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input brand" name="fuel_stations_brand[]" type="checkbox" value="Ecobrent"
+                           id="fuel_stations_brand_ecobrent" autocomplete="off">
+                    <label class="form-check-label" for="fuel_stations_brand_ecobrent">
+                        Ecobrent
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input brand" name="fuel_stations_brand[]" type="checkbox" value="OZ Energia"
+                           id="fuel_stations_brand_oz" autocomplete="off">
+                    <label class="form-check-label" for="fuel_stations_brand_oz">
+                        OZ Energia
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input brand" name="fuel_stations_brand[]" type="checkbox" value="Prio"
+                           id="fuel_stations_brand_prio" autocomplete="off">
+                    <label class="form-check-label" for="fuel_stations_brand_prio">
+                        Prio
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input brand" name="fuel_stations_brand[]" type="checkbox" value="Tfuel"
+                           id="fuel_stations_brand_tfuel" autocomplete="off">
+                    <label class="form-check-label" for="fuel_stations_brand_tfuel">
+                        Tfuel
+                    </label>
+                </div>
+                <div>
+                    <label><a id="a_reset_brand_filter" href="#"">Mostrar todas</a> </label>
+                </div>
+            </fieldset>
             <div class="iframe-remove">
                 <hr />
                 <label><a href="#" onclick="selector()">Voltar ao Menu</a></label>

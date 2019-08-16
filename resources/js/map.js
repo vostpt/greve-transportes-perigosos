@@ -12,6 +12,8 @@ let nagivationControl = {
 };
 const fuel_layers = ['gasoline', 'diesel', 'lpg', 'none', 'without_gasoline', 'without_diesel', 'without_lpg'];
 const repa_layers = ['normal', 'sos', 'none'];
+const brand_layers = ['Bxpress', 'Ecobrent', 'OZ Energia', 'Prio', 'Tfuel', 'Outros'];
+var show_all_brands = true;
 
 mapboxgl.accessToken = 'pk.eyJ1Ijoidm9zdHB0IiwiYSI6ImNqeXR3aHQxdTAyYjgzY21wbDMwaHJoaDQifQ.ql-IskzjOdAtEFvbltquaw';
 var map = new mapboxgl.Map({
@@ -179,7 +181,8 @@ function loadPoints() {
                         "popup_color": popup_color,
                         "background_color": background_color,
                         "priority": priority,
-                        "tooltip": tooltip
+                        "tooltip": tooltip,
+                        "brand_layer": brand_layers.includes(fuelStation.brand) ? fuelStation.brand : "Outros"
                     }
                 });
             });
@@ -225,8 +228,12 @@ function updatePoints(initial = false) {
                     repa_value = '';
                 }
                 fuel_layers.forEach(fuel_element => {
-                    let layerID = 'poi-' + repa_element + '-' + fuel_element;
-                    map.removeLayer(layerID);
+
+                    brand_layers.forEach(brand_element => {
+                        let layerID = 'poi-' + repa_element + '-' + fuel_element + '-' + brand_element;
+                        map.removeLayer(layerID);
+                    })
+
                 });
             });
             map.removeSource("points");
@@ -244,33 +251,40 @@ function updatePoints(initial = false) {
                 repa_value = '';
             }
             fuel_layers.forEach(fuel_element => {
-                let layerID = 'poi-' + repa_element + '-' + fuel_element;
-                map.addLayer({
-                    "id": layerID,
-                    "type": "symbol",
-                    "source": "points",
-                    "layout": {
-                        "icon-image": "{icon}",
-                        "symbol-sort-key": ["get", "priority"],
-                        "icon-allow-overlap": true
+
+                brand_layers.forEach(brand_element => {
+
+                    let layerID = 'poi-' + repa_element + '-' + fuel_element + '-' + brand_element;
+                    map.addLayer({
+                        "id": layerID,
+                        "type": "symbol",
+                        "source": "points",
+                        "layout": {
+                            "icon-image": "{icon}",
+                            "symbol-sort-key": ["get", "priority"],
+                            "icon-allow-overlap": true
+                        }
+                    });
+                    if (fuel_element.indexOf("without") == -1) {
+                        map.setFilter(layerID, [
+                            "all",
+                            ["==", "with_" + fuel_element, 1],
+                            ['==', 'repa', repa_value],
+                            ['==', 'brand_layer', brand_element]
+                        ]);
+                    } else {
+                        map.setFilter(layerID, [
+                            "all",
+                            ["==", fuel_element, 1],
+                            ['==', 'repa', repa_value],
+                            ['==', 'brand_layer', brand_element]
+                        ]);
                     }
+                    if (initial) {
+                        addLayersFunctionality(layerID);
+                    }
+
                 });
-                if (fuel_element.indexOf("without") == -1) {
-                    map.setFilter(layerID, [
-                        "all",
-                        ["==", "with_" + fuel_element, 1],
-                        ['==', 'repa', repa_value]
-                    ]);
-                } else {
-                    map.setFilter(layerID, [
-                        "all",
-                        ["==", fuel_element, 1],
-                        ['==', 'repa', repa_value]
-                    ]);
-                }
-                if (initial) {
-                    addLayersFunctionality(layerID);
-                }
             });
         });
         map.removeControl(nagivationControl.obj);
@@ -350,7 +364,7 @@ function addLayersFunctionality(layerID) {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA BXPRESS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA BXPRESS</a></b></div></div>';
-            } 
+            }
             else if (e.features[0].properties.brand == "Tfuel" || e.features[0].properties.brand_management == "Tfuel") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA TFUEL</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
@@ -512,6 +526,7 @@ map.on('error', function (error) {
 function updateLayersOptions() {
     let type = $("input.type[type=radio]:checked").val();
     let repa = [];
+    let brand = [];
     let repa_objects = $('input[name="fuel_stations_repa[]"]:checked');
     Object.values(repa_objects).forEach(repa_object => {
         let value = repa_object.value;
@@ -519,13 +534,28 @@ function updateLayersOptions() {
             repa.push(value);
         }
     });
+    let brand_objects = $('input[name="fuel_stations_brand[]"]:checked');
+    if (brand_objects.length == 0) {
+        show_all_brands = true;
+    } else {
+        Object.values(brand_objects).forEach(brand_object => {
+            let value = brand_object.value;
+            if (value) {
+                brand.push(value);
+            }
+        });
+    }
+
     repa_layers.forEach(repa_element => {
         fuel_layers.forEach(fuel_element => {
-            let layerID = 'poi-' + repa_element + '-' + fuel_element;
-            let repa_condition = repa.includes(repa_element);
-            let fuel_condition = ((fuel_element == type) || (type == "all"));
-            let condition = repa_condition && fuel_condition;
-            map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
+            brand_layers.forEach(brand_element => {
+                let layerID = 'poi-' + repa_element + '-' + fuel_element + '-' + brand_element;
+                let repa_condition = repa.includes(repa_element);
+                let brand_condition = brand.includes(brand_element) || show_all_brands;
+                let fuel_condition = ((fuel_element == type) || (type == "all"));
+                let condition = repa_condition && fuel_condition && brand_condition ;
+                map.setLayoutProperty(layerID, 'visibility', (condition) ? 'visible' : 'none');
+            });
         });
     });
 }
@@ -535,5 +565,16 @@ $('input.type[type=radio]').change(function () {
 });
 
 $('input[name="fuel_stations_repa[]"]').change(function () {
+    updateLayersOptions();
+});
+
+$('input[name="fuel_stations_brand[]"]').change(function() {
+    show_all_brands = false;
+    updateLayersOptions();
+});
+
+$('#a_reset_brand_filter').click(() => {
+    show_all_brands = true;
+    $('input[name="fuel_stations_brand[]"]').prop("checked", false);
     updateLayersOptions();
 });
