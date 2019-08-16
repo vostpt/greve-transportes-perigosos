@@ -74,23 +74,23 @@
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input type" type="radio" id="fuel_of_stations_gasoline"
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_without_gasoline"
                     name="fuel_stations_type" value="without_gasoline" autocomplete="off">
-                <label class="form-check-label" for="fuel_of_stations_gasoline">
+                <label class="form-check-label" for="fuel_of_stations_without_gasoline">
                     Sem Gasolina
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input type" type="radio" id="fuel_of_stations_diesel" name="fuel_stations_type"
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_without_diesel" name="fuel_stations_type"
                     value="without_diesel" autocomplete="off">
-                <label class="form-check-label" for="fuel_of_stations_diesel">
+                <label class="form-check-label" for="fuel_of_stations_without_diesel">
                     Sem Gasóleo
                 </label>
             </div>
             <div class="form-check">
-                <input class="form-check-input type" type="radio" id="fuel_of_stations_lpg" name="fuel_stations_type"
+                <input class="form-check-input type" type="radio" id="fuel_of_stations_without_lpg" name="fuel_stations_type"
                     value="without_lpg" autocomplete="off">
-                <label class="form-check-label" for="fuel_of_stations_lpg">
+                <label class="form-check-label" for="fuel_of_stations_without_lpg">
                     Sem GPL
                 </label>
             </div>
@@ -165,7 +165,7 @@
                     </label>
                 </div>
                 <div>
-                    <label><a id="a_reset_brand_filter" href="#"">Mostrar todas</a> </label>
+                    <label><a id="a_reset_brand_filter" href="#">Mostrar todas</a> </label>
                 </div>
             </fieldset>
             <div class="iframe-remove">
