@@ -18,6 +18,7 @@ class EntriesController extends Controller
 
     public function add(Request $request)
     {
+        return response()->json(['success' => 0]);
         $validatedData = $request->validate([
             'fuel_station' => 'required|exists:fuel_stations,id',
             'gasoline'     => 'required|boolean',
