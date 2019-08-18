@@ -26,12 +26,12 @@ function consult() {
 }
 
 function help() {
-    $("html,body").css({
+    /*$("html,body").css({
         "overflow-y": "hidden"
     });
     helping = true;
     $("#selector_view").css("visibility", "hidden");
-    $("#map_view").css("visibility", "visible");
+    $("#map_view").css("visibility", "visible");*/
 }
 
 function selector() {
