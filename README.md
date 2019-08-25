@@ -37,4 +37,4 @@ Contributions are always welcome, but before anything else, make sure you get ac
 - [VOST Portugal](https://github.com/vostpt)
 
 ## License
-This project is open source software licensed under the [MIT LICENSE](LICENSE.md).
+This project is open source software licensed under the [MIT LICENSE](LICENSE).
