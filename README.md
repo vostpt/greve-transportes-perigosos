@@ -1,4 +1,4 @@
-## VOST Portugal - Já Não Dá Para Abastecer
+## VOST Portugal - Já Não Dá Para Abastecer - Version 2.0
 
 ## Project setup
 Install dependencies:
