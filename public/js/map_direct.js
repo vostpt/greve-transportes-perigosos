@@ -59,13 +59,13 @@ function submitEntry(obj, id) {
     let gasoline = Number(!($(".mapboxgl-popup-content").find('.gasoline img').hasClass('no-gas')));
     let diesel = Number(!($(".mapboxgl-popup-content").find('.diesel img').hasClass('no-gas')));
     let lpg = Number(!($(".mapboxgl-popup-content").find('.lpg img').hasClass('no-gas')));
-    validateCaptcha((token) => {
+    // validateCaptcha((token) => {
         let data = {
             "fuel_station": id,
             "gasoline": gasoline,
             "diesel": diesel,
             "lpg": lpg,
-            "captcha": token
+            // "captcha": token
         }
         $(obj).parent().parent().find('.popup_submit_text').html("VALIDADO");
         setTimeout(function() {
@@ -75,7 +75,7 @@ function submitEntry(obj, id) {
         $.post("/panel/entries/add", data, function (reply) {
             console.log("Entrada adicionada: " + reply.success + " (0 -> falha, 1 -> sucesso)");
         }, "json");
-    });
+    // });
 }
 
 

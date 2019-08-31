@@ -75,16 +75,50 @@ class EntriesController extends Controller
 
     public function push(Request $request)
     {
+
         $validatedData = $request->validate([
-            'id' => 'required|exists:entries',
+            'id' => 'required|array',
         ]);
-        try {
-            $entry = Entry::findOrFail($validatedData['id']);
-            $entry->push();
-            return redirect('/panel/entries/list')->with('status', 'Entrada Validada Manualmente!');
-        } catch (Exception $e) {
-            return redirect('/panel/entries/list')->with('status', 'Erro ao validar entrada!');
+
+        foreach(request()->get('id') as $id){
+            try {
+                $entry = Entry::findOrFail($id);
+                $entry->update(['used' => 1]);
+
+                $fuel_station = $entry->fuelStation();
+                $fuel_station->update(['has_gasoline' => $entry->has_gasoline,'has_diesel' => $entry->has_diesel, 'has_lpg' => $entry->has_lpg]);
+            } catch (Exception $e) {
+                return redirect('/panel/entries/list')->with('status', 'Erro ao validar entrada!');
+            }
         }
+
+        $cacheController = new CacheController();
+        $cacheController->updateStations();
+
+        return redirect('/panel/entries/list')->with('status', 'Entrada Validada Manualmente!');
+    }
+
+    public function delete(Request $request)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required|array',
+        ]);
+        
+        foreach(request()->get('id') as $id){
+            try {
+                \Log::info("deleting ".json_encode($id));
+                $entry = Entry::findOrFail($id);
+                $entry->update(['used' => 1]);
+
+            } catch (Exception $e) {
+                return redirect('/panel/entries/list')->with('status', 'Erro ao validar entrada!');
+            }
+        }
+
+        $cacheController = new CacheController();
+        $cacheController->updateStations();
+
+        return redirect('/panel/entries/list')->with('status', 'Entrada Validada Manualmente!');
     }
 
     public function fetch_pending()

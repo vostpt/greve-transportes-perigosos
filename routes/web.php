@@ -67,6 +67,7 @@ Route::prefix('panel')->group(function () {
             Route::get('pending', 'EntriesController@fetch_pending')->name('pending');
         });
         Route::post('push', 'EntriesController@push')->middleware('auth')->name('push');
+        Route::post('delete', 'EntriesController@delete')->middleware('auth')->name('delete');
         Route::post('add', 'EntriesController@add')->name('add');
     });
 
