@@ -52,6 +52,7 @@ function loadPoints() {
         points = [];
         $.getJSON("/storage/data/cache.json", (data) => {
             data.forEach(fuelStation => {
+                fuelStation.repa = '';
                 let with_gasoline = 0;
                 let with_diesel = 0;
                 let with_lpg = 0;
@@ -120,7 +121,7 @@ function loadPoints() {
                         icon = 'REPA_PARTIAL';
                     }
                 } else {
-                    tooltip = '<strong>Posto Não REPA</strong>';
+                    tooltip = '';
                     if (count == max_count) {
                         icon = 'ALL';
                         popup_color = '006837';
@@ -558,15 +559,8 @@ map.on('error', function (error) {
 
 function updateLayersOptions() {
     let type = $("input.type[type=radio]:checked").val();
-    let repa = [];
+    let repa = ['normal', 'sos', 'none'];
     let brand = [];
-    let repa_objects = $('input[name="fuel_stations_repa[]"]:checked');
-    Object.values(repa_objects).forEach(repa_object => {
-        let value = repa_object.value;
-        if (value) {
-            repa.push(value);
-        }
-    });
     let brand_objects = $('input[name="fuel_stations_brand[]"]:checked');
     if (brand_objects.length == 0) {
         show_all_brands = true;
@@ -594,10 +588,6 @@ function updateLayersOptions() {
 }
 
 $('input.type[type=radio]').change(function () {
-    updateLayersOptions();
-});
-
-$('input[name="fuel_stations_repa[]"]').change(function () {
     updateLayersOptions();
 });
 
