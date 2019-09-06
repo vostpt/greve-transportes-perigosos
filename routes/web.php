@@ -33,6 +33,9 @@ Route::get('/media', function () {
     return view('media');
 })->name('media');
 
+Route::get('/help', function () {
+    return view('help');
+})->name('help');
 
 
 Auth::routes(['register' => false, 'verify' => true]);

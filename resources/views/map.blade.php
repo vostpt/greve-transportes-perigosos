@@ -8,13 +8,14 @@
 @section('content')
 <div id="selector_view" style="visibility: hidden;">
     <div class="container text-center">
+        @include('_includes.location_warning')
         <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
         <div class="row text-center">
             <div class="col-md" style="margin-top: 0.5em;">
                 <button type="button" class="btn btn-primary btn-lg" onclick="consult()">Consultar</button>
             </div>
             <div class="col-md" style="margin-top: 0.5em;">
-                <button type="button" class="btn btn-primary btn-lg" disabled>Greve Desconvocada</button>
+                <button type="button" class="btn btn-primary btn-lg" onclick="help()">Ajudar</button>
             </div>
             <div class="col-md d-block d-lg-none" style="margin-top: 0.5em;">
                 <a href="{{ route('stats') }}" class="btn btn-primary btn-lg">Estatísticas</a>
