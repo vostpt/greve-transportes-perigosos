@@ -30,6 +30,10 @@ String.prototype.capitalize = function () {
     });
 };
 
+var currentLat = null;
+var currentLong = null;
+var isLocationBlocked = false;
+
 function timediff(date) {
     let diffSeconds = Math.floor((new Date() - date) / 1000);
     let days = Math.floor(diffSeconds / 86400);
@@ -300,8 +304,11 @@ function updatePoints(initial = false) {
     });
 }
 
+
 function addLayersFunctionality(layerID) {
+
     map.on('click', layerID, function (e) {
+
         var coordinates = e.features[0].geometry.coordinates.slice();
         let gasolineIcon = e.features[0].properties.sell_gasoline && e.features[0].properties.has_gasoline ?
             '<img data-toggle="tooltip" title="Com Gasolina" src="/img/map/VOSTPT_FUELCRISIS_GASOLINA_500pxX500px.png"/>' :
@@ -315,7 +322,9 @@ function addLayersFunctionality(layerID) {
         let fuelStationName = e.features[0].properties.name ? e.features[0].properties.name.toUpperCase() : '';
         let description = "";
         let fuelIcons = "";
+
         if (isHelping()) {
+
             fuelIcons = "";
             if (e.features[0].properties.sell_gasoline) {
                 fuelIcons += '<div class="col-md v-fuel-info gasoline"><a href="#" onclick="swapIcon(this)">' + gasolineIcon + '</a><h6>GASOLINA</h6></div>';
@@ -326,19 +335,7 @@ function addLayersFunctionality(layerID) {
             if (e.features[0].properties.sell_lpg) {
                 fuelIcons += '<div class="col-md v-fuel-info lpg"><a href="#" onclick="swapIcon(this)">' + lpgIcon + '</a><h6>GPL</h6></div>';
             }
-        } else {
-            fuelIcons = "";
-            if (e.features[0].properties.sell_gasoline) {
-                fuelIcons += '<div class="col-md v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>';
-            }
-            if (e.features[0].properties.sell_diesel) {
-                fuelIcons += '<div class="col-md v-fuel-info">' + dieselIcon + '<h6>GASÓLEO</h6></div>';
-            }
-            if (e.features[0].properties.sell_lpg) {
-                fuelIcons += '<div class="col-md v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>';
-            }
-        }
-        if (isHelping()) {
+
             description = '<div class="v-popup-content">' +
                 '<div class="v-popup-header" style="background-color:#85d5f8; text-align: center;"><h5>ADICIONAR INFORMAÇÃO</h5></div>' +
                 '<div class="v-popup-body" style="background-color:#b8e1f8">' +
@@ -346,6 +343,7 @@ function addLayersFunctionality(layerID) {
                 fuelIcons +
                 '</div>' +
                 '<img src="/img/map/separation.png" style="width: calc(100% + 1.6em); margin-left:-0.8em;" />';
+
             if (e.features[0].properties.brand == "Prio" || e.features[0].properties.brand_management == "Prio") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA PRIO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
@@ -364,12 +362,16 @@ function addLayersFunctionality(layerID) {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA BXPRESS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA BXPRESS</a></b></div></div>';
-            }
-            else if (e.features[0].properties.brand == "Tfuel" || e.features[0].properties.brand_management == "Tfuel") {
+            } else if (e.features[0].properties.brand == "Tfuel" || e.features[0].properties.brand_management == "Tfuel") {
                 description += '<div class="row"><div class="col-md"><b>AS DISPONIBILIDADES DAS BOMBAS DA TFUEL</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>LISTADAS NESTE SITE ESTÃO A SER GERIDAS</b></div></div>' +
                     '<div class="row"><div class="col-md"><b><a target="_blank" rel="noopener noreferrer" href="https://www.bongasenergias.pt/">PELA PRÓPRIA TFUEL</a></b></div></div>';
-            } else {
+            }else if(isLocationBlocked){
+                description += '<div class="row"><div class="col-md"><b>Localização Bloqueada</b></div></div>' +
+                    '<div class="row">' +
+                    '<div class="col-md"><b>Por favor verifique as definições de privacidade do seu browser.</b></div>' +
+                    '</div>';
+            }else {
                 description += '<div class="row"><div class="col-md"><b>POR FAVOR INDICA QUE COMBUSTÍVEIS ESTÃO OU NÃO ESTÃO</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>DISPONÍVEIS NA ' + fuelStationName + '.</b></div></div>' +
                     '<div class="row"><div class="col-md"><b>CARREGA NAS IMAGENS.</b></div></div>';
@@ -380,13 +382,29 @@ function addLayersFunctionality(layerID) {
                 '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>';
             if (e.features[0].properties.brand == "Prio") {
                 description += '<div class="col-9"><a target="_blank" rel="noopener noreferrer" href="https://www.prio.pt/pt/" style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">PRIO</h5></a></div>';
-            } else {
+            } else if(isLocationBlocked) {
+                description += '<div class="col-9" style="margin:1.5vh"></div>';
+            }else{
                 description += '<div class="col-9"><a href="#" onclick="submitEntry(this,' + e.features[0].properties.id + ')"  style="margin:1.5vh"><h5  style="margin-right: 1.5vh;" class="popup_submit_text">VALIDAR</h5></a></div>';
             }
+
             description += '</div>' +
                 '</div>' +
                 '</div>';
+
         } else {
+
+            fuelIcons = "";
+            if (e.features[0].properties.sell_gasoline) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + gasolineIcon + '<h6>GASOLINA</h6></div>';
+            }
+            if (e.features[0].properties.sell_diesel) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + dieselIcon + '<h6>GASÓLEO</h6></div>';
+            }
+            if (e.features[0].properties.sell_lpg) {
+                fuelIcons += '<div class="col-md v-fuel-info">' + lpgIcon + '<h6>GPL</h6></div>';
+            }
+
             let brand_management_info = '';
             if(e.features[0].properties.brand_management != '') {
                 brand_management_info = ' Entidade Gestora: '+e.features[0].properties.brand_management.toUpperCase();
@@ -401,7 +419,7 @@ function addLayersFunctionality(layerID) {
                 '<div class="v-popup-body directions"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false"  target="_blank" rel="noopener noreferrer">' +
                 '<img src="/img/map/map_separation_' + e.features[0].properties.background_color + '.png" style="width: 100%;" />' +
                 '</a></div>' +
-                '<div class="v-popup-header" style="padding:0;background-color: #' + e.features[0].properties.popup_color + '">' +
+                '<div class="v-popup-header" style="padding:0;' + e.features[0].properties.popup_color + '">' +
                 '<div class="row" style="margin:0;">' +
                 '<div class="col-3"><a href="/error/edit?id=' + e.features[0].properties.id + '"><img src="/img/map/VOSTPT_FUELCRISIS_REPORT_500pxX500px.png" style="height:2.5em;margin-top: 1.5vh;" /></a></div>' +
                 '<div class="col-9"><a href="https://www.waze.com/ul?ll=' + coordinates[1] + '%2C' + coordinates[0] + '&navigate=yes&zoom=16&download_prompt=false" style="margin:1.5vh"><h5 style="margin-right: 1.5vh;">OBTER DIREÇÕES</h5></a></div>' +
@@ -495,15 +513,30 @@ map.on('load', function () {
                 center: [lat, long],
                 zoom: 13
             });
+        }else {
+            if (navigator.geolocation) {
+                console.log('Geolocation is supported!');
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    currentLat = position.coords.latitude;
+                    currentLong = position.coords.longitude;
+                    map.flyTo({
+                        center: [currentLong,currentLat],
+                        zoom: 13
+                    });
 
-        } else if ("geolocation" in navigator) {
-            navigator.geolocation.getCurrentPosition(position => {
-                map.flyTo({
-                    center: [position.coords.longitude, position.coords.latitude],
-                    zoom: 13
+                },function (error) {
+                    console.log(error.message);
+                    isLocationBlocked = true;
+                    $('.alert-location-blocked').css('display','block').addClass('fade show');
                 });
-            });
+
+            }else {
+                console.log('Geolocation is not supported for this Browser/OS.');
+                isLocationBlocked = true;
+                $('.alert-location-blocked').css('display','block').addClass('fade show');
+            }
         }
+
         attributionControl.obj = new mapboxgl.AttributionControl({
             compact: true,
             customAttribution: getAttributions()

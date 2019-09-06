@@ -207,3 +207,8 @@ html,body {
 .mapboxgl-popup-tooltip {
     font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
 }
+
+.alert-location-blocked {
+    display: none;
+}
+

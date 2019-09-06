@@ -26,12 +26,12 @@ function consult() {
 }
 
 function help() {
-    /*$("html,body").css({
+    $("html,body").css({
         "overflow-y": "hidden"
     });
     helping = true;
     $("#selector_view").css("visibility", "hidden");
-    $("#map_view").css("visibility", "visible");*/
+    $("#map_view").css("visibility", "visible");
 }
 
 function selector() {
@@ -56,9 +56,12 @@ function swapIcon(obj) {
 }
 
 function submitEntry(obj, id) {
-    let gasoline = Number(!($(".mapboxgl-popup-content").find('.gasoline img').hasClass('no-gas')));
-    let diesel = Number(!($(".mapboxgl-popup-content").find('.diesel img').hasClass('no-gas')));
-    let lpg = Number(!($(".mapboxgl-popup-content").find('.lpg img').hasClass('no-gas')));
+
+    let $mapboxglPopupContentEl = $(".mapboxgl-popup-content");
+
+    let gasoline = Number(!($mapboxglPopupContentEl.find('.gasoline img').hasClass('no-gas')));
+    let diesel = Number(!($mapboxglPopupContentEl.find('.diesel img').hasClass('no-gas')));
+    let lpg = Number(!($mapboxglPopupContentEl.find('.lpg img').hasClass('no-gas')));
     validateCaptcha((token) => {
         let data = {
             "fuel_station": id,

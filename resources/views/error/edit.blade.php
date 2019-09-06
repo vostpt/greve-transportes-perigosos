@@ -4,6 +4,7 @@
 
 @section('content')
 <div class="container">
+    @include('_includes.location_warning')
     <div class="text-center">
         <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
     </div>
@@ -71,11 +72,29 @@
 <script src="https://www.google.com/recaptcha/api.js?render=6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX"></script>
 <script>
     grecaptcha.ready(function () {
-    grecaptcha.execute('6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX', { action: 'contact' }).then(function (token) {
-        var recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
+        grecaptcha.execute('6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX', { action: 'contact' }).then(function (token) {
+            var recaptchaResponse = document.getElementById('recaptchaResponse');
+            recaptchaResponse.value = token;
+        });
     });
-});
+
+    window.onload = function(){
+        if (navigator.geolocation) {
+            console.log('Geolocation is supported!');
+            navigator.geolocation.getCurrentPosition(function(position) {
+
+            },function (error) {
+                console.log(error.message);
+                isLocationBlocked = true;
+                $('.alert-location-blocked').css('display','block').addClass('fade show');
+            });
+
+        }else {
+            console.log('Geolocation is not supported for this Browser/OS.');
+            isLocationBlocked = true;
+            $('.alert-location-blocked').css('display','block').addClass('fade show');
+        }
+    };
 
 function findGetParameter(parameterName) {
     var result = null,
