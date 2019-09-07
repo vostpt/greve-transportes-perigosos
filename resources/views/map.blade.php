@@ -15,7 +15,7 @@
                 <button type="button" class="btn btn-primary btn-lg" onclick="consult()">Consultar</button>
             </div>
             <div class="col-md" style="margin-top: 0.5em;">
-                <button type="button" class="btn btn-primary btn-lg" onclick="help()">Ajudar</button>
+                <button type="button" class="btn btn-primary btn-lg" disabled>Greve Desconvocada</button>
             </div>
             <div class="col-md d-block d-lg-none" style="margin-top: 0.5em;">
                 <a href="{{ route('stats') }}" class="btn btn-primary btn-lg">Estatísticas</a>
