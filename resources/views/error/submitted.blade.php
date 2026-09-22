@@ -1,19 +1,10 @@
 @extends('layouts.app')
-@section('styles')
-@endsection
+@section('title', 'Obrigado · ' . config('app.name'))
 
 @section('content')
-<div class="container">
-    <div class="text-center">
-        <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
+    <div class="container my-5 text-center">
+        <h1>Obrigado</h1>
+        <p>Informação enviada com sucesso. A equipa VOST Portugal vai analisar o teu reporte.</p>
+        <a href="{{ route('map') }}" class="btn btn-danger mt-3">Voltar ao mapa</a>
     </div>
-    @if (session('status'))
-    <div class="alert alert-primary" role="alert">
-        {{ session('status') }}
-    </div>
-    @endif
-    <p>Muito obrigado pelo teu contributo!</p>
-@endsection
-
-@section('javascript')
 @endsection

@@ -1,86 +1,71 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\FuelStation;
-use App\Option;
+use App\Jobs\UpdateStationsCacheJob;
+use App\Models\FuelStation;
+use App\Models\Option;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class FuelStationsController extends Controller
 {
-    //
-
-    public function list()
+    public function list(): Response
     {
-        if (Option::find('stress_lockdown')->value == 0) {
-            return response()->view('stations/list');
-        } else {
-            return response('Feature Disabled due to Stress Lockdown (Disable at Options)', 200)->header('Content-Type', 'text/plain');
+        if ((int) (Option::get('stress_lockdown') ?? '0') !== 0) {
+            return response('Feature disabled while stress lockdown is active.', 503)
+                ->header('Content-Type', 'text/plain');
         }
+
+        return response()->view('stations.list');
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'id'             => 'required|exists:fuel_stations',
-            'sells_gasoline' => 'required',
-            'sells_diesel'   => 'required',
-            'sells_lpg'      => 'required',
-            'repa'           => 'required',
+        $data = $request->validate([
+            'id' => 'required|exists:fuel_stations,id',
+            'sell_gasoline' => 'required|boolean',
+            'sell_diesel' => 'required|boolean',
+            'sell_lpg' => 'required|boolean',
+            'repa' => 'required|boolean',
         ]);
-        try {
-            $fuel_station = FuelStation::findOrFail($validatedData['id']);
-            unset($validatedData['id']);
-            $fuel_station->update($validatedData);
-            $cacheController = new CacheController();
-            $cacheController->updateStations();
-            return redirect('panel/stations/list')->with('status', 'Estação Atualizada!');
-        } catch (Exception $e) {
-            return redirect('panel/stations/list')->with('status', 'Erro ao atualizar estação!');
-        }
+
+        $station = FuelStation::findOrFail($data['id']);
+        unset($data['id']);
+        $station->update($data);
+        UpdateStationsCacheJob::dispatch();
+
+        return redirect('panel/stations/list')->with('status', 'Estação atualizada!');
     }
 
-    public function updateAvailable(Request $request)
+    public function updateAvailable(Request $request): JsonResponse
     {
-        $validatedData = $request->validate([
-            'id'           => 'required|exists:fuel_stations',
-            'has_gasoline' => 'boolean',
-            'has_diesel'   => 'boolean',
-            'has_lpg'      => 'boolean',
+        $data = $request->validate([
+            'id' => 'required|exists:fuel_stations,id',
+            'has_gasoline' => 'required|boolean',
+            'has_diesel' => 'required|boolean',
+            'has_lpg' => 'required|boolean',
         ]);
-        try {
-            $fuel_station = FuelStation::findOrFail($validatedData['id']);
-            unset($validatedData['id']);
-            $fuel_station->update($validatedData);
-            $cacheController = new CacheController();
-            $cacheController->updateStations();
-            return response()->json(['sucess' => true]);
-        } catch (Exception $e) {
-            return response()->json(['sucess' => false]);
-        }
+
+        $station = FuelStation::findOrFail($data['id']);
+        unset($data['id']);
+        $station->update($data);
+        UpdateStationsCacheJob::dispatch();
+
+        return response()->json(['success' => true]);
     }
 
-    public function fetch_all()
+    public function fetchAll(): JsonResponse
     {
-        $stations_final = [];
-        $stations       = FuelStation::all();
-        foreach ($stations as $station) {
-            $stations_final[] = [
-                'id'            => $station->id,
-                'name'          => $station->name,
-                'brand'         => $station->brand,
-                'sell_gasoline' => $station->sell_gasoline,
-                'sell_diesel'   => $station->sell_diesel,
-                'sell_lpg'      => $station->sell_lpg,
-                'repa'          => $station->repa,
-                'lat'           => $station->lat,
-                'long'          => $station->long,
-                'has_gasoline'  => $station->has_gasoline,
-                'has_diesel'    => $station->has_diesel,
-                'has_lpg'       => $station->has_lpg,
-            ];
-        }
-        return response()->json(['data' => $stations_final]);
+        return response()->json([
+            'data' => FuelStation::query()
+                ->select(['id', 'name', 'brand', 'sell_gasoline', 'sell_diesel', 'sell_lpg',
+                    'repa', 'lat', 'long', 'has_gasoline', 'has_diesel', 'has_lpg'])
+                ->get(),
+        ]);
     }
 }

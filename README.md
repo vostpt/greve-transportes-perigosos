@@ -1,40 +1,36 @@
-## VOST Portugal - Já Não Dá Para Abastecer - Version 2.0
+# VOST Portugal — Já Não Dá Para Abastecer (v3)
 
-## Project setup
-Install dependencies:
-```sh
-composer install
-```
+Crowd-sourced map of fuel-station availability in Portugal during hazardous-materials driver strikes. Users report gasoline/diesel/LPG availability at each station; consensus among distinct IPs auto-promotes the report to public state. Third parties can consume the same data through a key/secret API.
 
-Copy the `.env` file:
-```sh
-cp .env.example .env
-```
+**Stack:** Laravel 12 · PHP 8.4 · MariaDB 10.11 LTS · Redis 7 · Vite + Bootstrap 5 · Mapbox GL 3.
 
-Generate an encryption key:
-```sh
-php artisan key:generate
-```
+**Legacy:** the 2019 Laravel 5.8 codebase lives on branch `master`. This branch (`v3`) is the ground-up rewrite, tracked in `/Users/tomahock/.claude/plans/isto-um-projeto-rippling-shell.md`.
 
-### Database
-Execute the migration and seeders:
-```sh
-php artisan migrate:refresh --seed
-```
-
-## Testing
-To run the tests, execute:
+## Running with Docker
 
 ```sh
-vendor/bin/phpunit --dump-xdebug-filter xdebug-filter.php
-vendor/bin/phpunit --prepend xdebug-filter.php
+docker compose up -d
+docker compose exec app cp .env.docker .env
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate
+docker compose exec app php artisan storage:link
 ```
+
+App at http://localhost:8080.
+
+Host ports:
+
+| Service | Port |
+|---------|------|
+| nginx | 8080 |
+| MariaDB | 3308 (creds `greve` / `greve`) |
+| Redis | 6380 |
+| Vite dev server | 5173 (`docker compose --profile dev up node`) |
 
 ## Contributing
-Contributions are always welcome, but before anything else, make sure you get acquainted with the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-## Credits
-- [VOST Portugal](https://github.com/vostpt)
+See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## License
-This project is open source software licensed under the [MIT LICENSE](LICENSE).
+
+MIT — see [LICENSE](LICENSE).

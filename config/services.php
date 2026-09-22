@@ -1,48 +1,52 @@
 <?php
+
 declare(strict_types=1);
 
 return [
 
-    /*
-    |--------------------------------------------------------------------------
-    | Third Party Services
-    |--------------------------------------------------------------------------
-    |
-    | This file is for storing the credentials for third party services such
-    | as Stripe, Mailgun, SparkPost and others. This file provides a sane
-    | default location for this type of information, allowing packages
-    | to have a conventional place to find your various credentials.
-    |
-    */
-
-    'mailgun' => [
-        'domain'   => env('MAILGUN_DOMAIN'),
-        'secret'   => env('MAILGUN_SECRET'),
-        'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+    'postmark' => [
+        'key' => env('POSTMARK_API_KEY'),
     ],
 
-    'postmark' => [
-        'token' => env('POSTMARK_TOKEN'),
+    'resend' => [
+        'key' => env('RESEND_API_KEY'),
     ],
 
     'ses' => [
-        'key'    => env('AWS_ACCESS_KEY_ID'),
+        'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
+    'slack' => [
+        'notifications' => [
+            'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
+            'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+        ],
     ],
 
-    'stripe' => [
-        'model'   => App\User::class,
-        'key'     => env('STRIPE_KEY'),
-        'secret'  => env('STRIPE_SECRET'),
-        'webhook' => [
-            'secret'    => env('STRIPE_WEBHOOK_SECRET'),
-            'tolerance' => env('STRIPE_WEBHOOK_TOLERANCE', 300),
-        ],
+    'api_v1' => [
+        'csv_password' => env('API_V1_DOWNLOAD_API_CSV'),
+    ],
+
+    'recaptcha' => [
+        'secret' => env('GOOGLE_RECAPTCHA_V3_SECRET'),
+        'site_key' => env('GOOGLE_RECAPTCHA_V3_SITE_KEY'),
+        'verify_url' => 'https://www.google.com/recaptcha/api/siteverify',
+    ],
+
+    'errors_webhook' => [
+        'url' => env('ERRORS_SPREADSHEET_LINK'),
+    ],
+
+    'cloudflare' => [
+        'token' => env('CLOUDFLARE_API_TOKEN'),
+        'zone' => env('CLOUDFLARE_ZONE_ID'),
+    ],
+
+    'mapbox' => [
+        'token' => env('MAPBOX_TOKEN'),
+        'style' => env('MAPBOX_STYLE', 'mapbox://styles/mapbox/streets-v12'),
     ],
 
 ];

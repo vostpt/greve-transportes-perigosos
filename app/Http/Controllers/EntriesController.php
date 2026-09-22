@@ -1,107 +1,93 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Entry;
-use App\FuelStation;
-use Auth;
+use App\Http\Requests\SubmitEntryRequest;
+use App\Jobs\UpdateStationsCacheJob;
+use App\Models\Entry;
+use App\Models\FuelStation;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class EntriesController extends Controller
 {
-    public function list()
+    public function list(): Response
     {
-        return response()->view('entries/list');
+        return response()->view('entries.list');
     }
 
-    public function add(Request $request)
+    public function add(SubmitEntryRequest $request): JsonResponse
     {
-        return response()->json(['success' => 0]);
-        $validatedData = $request->validate([
-            'fuel_station' => 'required|exists:fuel_stations,id',
-            'gasoline'     => 'required|boolean',
-            'diesel'       => 'required|boolean',
-            'lpg'          => 'required|boolean',
-            'captcha'      => 'required|string',
+        $data = $request->validated();
+
+        $station = FuelStation::findOrFail($data['fuel_station']);
+
+        if (in_array($station->brand, config('fuel_stations.submission_blacklist'), true)) {
+            return response()->json(['success' => 0, 'reason' => 'brand_opted_out']);
+        }
+
+        $payload = [
+            'has_gasoline' => (bool) $data['gasoline'],
+            'has_diesel' => (bool) $data['diesel'],
+            'has_lpg' => (bool) $data['lpg'],
+        ];
+
+        if (Auth::check()) {
+            $station->update($payload);
+            UpdateStationsCacheJob::dispatch();
+
+            return response()->json(['success' => 1]);
+        }
+
+        Entry::create($payload + [
+            'fuel_station' => $station->id,
+            'ip' => $request->ip(),
         ]);
-        try {
-            $url  = 'https://www.google.com/recaptcha/api/siteverify';
-            $data = [
-                'secret'   => env('GOOGLE_RECAPTCHA_V3_SECRET'),
-                'response' => $validatedData['captcha'],
-            ];
-            $options = [
-                'http' => [
-                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
-                    'method'  => 'POST',
-                    'content' => \http_build_query($data),
-                ],
-            ];
-            $context    = \stream_context_create($options);
-            $resultJSON = \file_get_contents($url, false, $context);
-            $result     = \json_decode($resultJSON);
-            if ($result->success != true) {
-                return response()->json(['success' => 0]);
-            }
-            $station = FuelStation::findOrFail($validatedData['fuel_station']);
-            if ($station->brand == 'Prio' || $station->brand == 'OZ Energia' || $station->brand == 'Ecobrent' || $station->brand == 'Bxpress' || $station->brand == 'Tfuel') {
-                return response()->json(['success' => 0]);
-            }
-            $data = [
-                'has_gasoline' => $validatedData['gasoline'],
-                'has_diesel'   => $validatedData['diesel'],
-                'has_lpg'      => $validatedData['lpg'],
-            ];
-            if ($user = Auth::user()) {
-                $station->fill($data);
-                $station->save();
-                $cacheController = new CacheController;
-                $cacheController->updateStations();
-                return response()->json(['success' => 1]);
-            } else {
-                $entry                = new Entry();
-                $data['ip']           = \Request::ip();
-                $data['fuel_station'] = $validatedData['fuel_station'];
-                $entry->fill($data);
-                $entry->save();
-                return response()->json(['success' => 1]);
-            }
-        } catch (Exception $e) {
-            return response()->json(['success' => 0]);
-        }
+
+        return response()->json(['success' => 1]);
     }
 
-    public function push(Request $request)
+    public function push(Request $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'id' => 'required|exists:entries',
+        $validated = $request->validate([
+            'id' => 'required|exists:entries,id',
         ]);
-        try {
-            $entry = Entry::findOrFail($validatedData['id']);
-            $entry->push();
-            return redirect('/panel/entries/list')->with('status', 'Entrada Validada Manualmente!');
-        } catch (Exception $e) {
-            return redirect('/panel/entries/list')->with('status', 'Erro ao validar entrada!');
-        }
+
+        Entry::findOrFail($validated['id'])->promote();
+        UpdateStationsCacheJob::dispatch();
+
+        return redirect('/panel/entries/list')->with('status', 'Entrada validada manualmente.');
     }
 
-    public function fetch_pending()
+    public function fetchPending(): JsonResponse
     {
-        $entries_final = [];
-        $entries       = DB::table('entries')->select(DB::raw('MAX(id) as id,COUNT(DISTINCT(ip)) as total, fuel_station, has_gasoline, has_diesel, has_lpg'))->where('used', '=', 0)->where('created_at', '>=', \Carbon\Carbon::now()->subHour())->groupBy('fuel_station', 'has_gasoline', 'has_diesel', 'has_lpg')->get();
-        foreach ($entries as $entry) {
-            $fuel_station_string = FuelStation::find($entry->fuel_station)->string;
-            $entries_final[]     = [
-                'id'           => $entry->id,
-                'fuel_station' => $fuel_station_string,
-                'has_gasoline' => $entry->has_gasoline,
-                'has_diesel'   => $entry->has_diesel,
-                'has_lpg'      => $entry->has_lpg,
-                'count'        => $entry->total,
-            ];
-        }
-        return response()->json(['data' => $entries_final]);
+        $rows = DB::table('entries')
+            ->selectRaw('MAX(id) as id, COUNT(DISTINCT(ip)) as total, fuel_station, has_gasoline, has_diesel, has_lpg')
+            ->where('used', false)
+            ->where('created_at', '>=', now()->subHour())
+            ->groupBy('fuel_station', 'has_gasoline', 'has_diesel', 'has_lpg')
+            ->get();
+
+        $stations = FuelStation::query()
+            ->whereIn('id', $rows->pluck('fuel_station'))
+            ->get()
+            ->keyBy('id');
+
+        return response()->json([
+            'data' => $rows->map(fn ($row) => [
+                'id' => $row->id,
+                'fuel_station' => $stations[$row->fuel_station]->string ?? "#{$row->fuel_station}",
+                'has_gasoline' => (bool) $row->has_gasoline,
+                'has_diesel' => (bool) $row->has_diesel,
+                'has_lpg' => (bool) $row->has_lpg,
+                'count' => $row->total,
+            ]),
+        ]);
     }
 }

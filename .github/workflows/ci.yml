@@ -1,0 +1,117 @@
+name: CI
+
+on:
+  push:
+    branches: [master, v3]
+  pull_request:
+    branches: [master, v3]
+
+jobs:
+  pint:
+    name: Pint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          tools: composer:v2
+          coverage: none
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('composer.lock') }}
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: ./vendor/bin/pint --test
+
+  phpstan:
+    name: PHPStan (level 5)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.4"
+          extensions: pdo_mysql, mbstring, bcmath, intl, redis
+          tools: composer:v2
+          coverage: none
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ hashFiles('composer.lock') }}
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - run: ./vendor/bin/phpstan analyse --memory-limit=1G --no-progress
+
+  tests:
+    name: PHPUnit (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ["8.3", "8.4"]
+    services:
+      mariadb:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: greve_test
+          MARIADB_USER: greve
+          MARIADB_PASSWORD: greve
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mariadb-admin ping -h 127.0.0.1 -u greve -pgreve --silent"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: pdo_mysql, mbstring, bcmath, intl, redis, gd, zip
+          tools: composer:v2
+          coverage: none
+      - name: Cache Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+      - run: composer install --prefer-dist --no-progress --no-interaction
+      - name: Prepare env
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+        env:
+          DB_CONNECTION: mariadb
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: greve_test
+          DB_USERNAME: greve
+          DB_PASSWORD: greve
+          REDIS_HOST: 127.0.0.1
+      - run: php artisan test
+        env:
+          DB_CONNECTION: mariadb
+          DB_HOST: 127.0.0.1
+          DB_DATABASE: greve_test
+          DB_USERNAME: greve
+          DB_PASSWORD: greve
+          REDIS_HOST: 127.0.0.1
+          CACHE_STORE: array
+          SESSION_DRIVER: array
+          QUEUE_CONNECTION: sync
+
+  npm:
+    name: Vite build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run build

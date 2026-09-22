@@ -1,34 +1,23 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('title', 'Nova credencial · ' . config('app.name'))
+
 @section('content')
-<div class="container">
-    <h1 class="text-center">{{ __('Add External Auth') }}</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-12">            
-            <form method="post" action=" {{ route('externalauth.create') }}">
-                @csrf
-                <div class="form-group">
-                    <label for="keyInput">{{ __('Key') }}</label>
-                    <input name="key" id="keyInput" type="text" class="form-control{{ $errors->has('key') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Key') }}" value="{{ old('key') }}">
-                    @if ($errors->has('key'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('key') }}</strong>
-                    </span> 
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="brandInput">{{ __('Brand') }}</label>
-                    <input name="brand" id="brandInput" type="text" class="form-control{{ $errors->has('brand') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Brand') }}" value="{{ old('brand') }}">
-                    @if ($errors->has('brand'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('brand') }}</strong>
-                    </span> 
-                    @endif
-                </div>
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-            </form>
-        </div>
+    <div class="container my-4" style="max-width: 520px;">
+        <h1 class="mb-4">Nova credencial externa</h1>
+        <form method="POST" action="{{ route('panel.externalauth.create') }}" class="card card-body shadow-sm">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label" for="key">Key</label>
+                <input type="text" name="key" id="key" required class="form-control @error('key') is-invalid @enderror" value="{{ old('key') }}">
+                @error('key')<div class="invalid-feedback">{{ $message }}</div>@enderror
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="brand">Brand</label>
+                <input type="text" name="brand" id="brand" required class="form-control @error('brand') is-invalid @enderror" value="{{ old('brand') }}" placeholder="READONLY, WRITEREAD, ou nome da marca">
+                @error('brand')<div class="invalid-feedback">{{ $message }}</div>@enderror
+                <div class="form-text">Use <code>READONLY</code> para acesso só de leitura a todos os postos. <code>WRITEREAD</code> concede escrita total.</div>
+            </div>
+            <button class="btn btn-danger">Criar</button>
+        </form>
     </div>
-</div>
 @endsection
