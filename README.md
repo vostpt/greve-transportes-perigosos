@@ -1,6 +1,24 @@
 ## VOST Portugal - Já Não Dá Para Abastecer - Version 2.0
 
-## Project setup
+> **Legacy baseline.** This branch is Laravel 5.8 / PHP 7.4. The modern rewrite lives on the `v3` branch (Laravel 11 / PHP 8.3). See `/Users/tomahock/.claude/plans/isto-um-projeto-rippling-shell.md` for the migration roadmap.
+
+## Running with Docker (recommended)
+
+Three services: `app` (PHP 7.4-fpm-alpine), `nginx` (:8080), `db` (MariaDB 10.3). Uses **Composer 1** inside the image because Laravel 5.8.12 predates the Composer 2 `installed.json` format.
+
+```sh
+docker compose up -d
+docker compose exec app composer install
+docker compose exec app cp .env.docker .env
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
+docker compose exec app php artisan storage:link
+```
+
+App at http://localhost:8080. MariaDB exposed on host port `3307` (creds `greve` / `greve`).
+
+## Running without Docker
+
 Install dependencies:
 ```sh
 composer install
