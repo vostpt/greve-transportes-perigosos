@@ -1,33 +1,35 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Entry;
-use App\Observers\EntryObserver;
-
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Sentinel\Drivers\Driver;
+use Laravel\Sentinel\Sentinel;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
+    public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
-        //
-        Entry::observe(EntryObserver::class);
+        Sentinel::extend('horizon', fn () => new class(fn () => $this->app) extends Driver
+        {
+            public function authorize(Request $request): bool
+            {
+                if ($this->app()->environment('local')) {
+                    return true;
+                }
+
+                $user = $request->user();
+
+                return $user !== null && $user->email_verified_at !== null;
+            }
+        });
     }
 }

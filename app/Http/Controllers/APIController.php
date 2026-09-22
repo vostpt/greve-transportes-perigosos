@@ -1,367 +1,249 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\ExternalAuth;
-use App\FuelStation;
+use App\Jobs\UpdateStationsCacheJob;
+use App\Models\ExternalAuth;
+use App\Models\FuelStation;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class APIController extends Controller
 {
-    public function home()
+    public function home(): Response
     {
         return response()->view('api/home');
     }
 
-    public function info(Request $request)
+    public function info(Request $request): JsonResponse
     {
-        if ($request->has('key') && $request->has('secret')) {
-            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
-            if ($ext_auth->count() > 0) {
-                $ext_auth = $ext_auth->first();
-
-                $info = ['brand' => $ext_auth->brand];
-                return response()->json($info);
-            }
+        $auth = ExternalAuth::authenticate($request->input('key'), $request->input('secret'));
+        if (! $auth) {
+            return response()->json([]);
         }
-        return response()->json([]);
+
+        return response()->json(['brand' => $auth->brand]);
     }
 
-    public function fetch(Request $request)
+    public function fetch(Request $request): JsonResponse
     {
-        if ($request->has('key') && $request->has('secret')) {
-            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
-            if ($ext_auth->count() > 0) {
-                $ext_auth = $ext_auth->first();
-                $stations = [];
-                if ($ext_auth->brand == 'READONLY' || $ext_auth->brand == 'WRITEREAD') {
-                    $stations = FuelStation::all();
-                } else {
-                    $stations = FuelStation::where('brand', '=', $ext_auth->brand)->orWhere('brand_management', '=', $ext_auth->brand)->get();
-                }
-                $output = [];
-                foreach ($stations as $station) {
-                    $output[] = [
-                        'id'            => $station->id,
-                        'name'          => $station->name,
-                        'brand'         => $station->brand,
-                        'sell_gasoline' => $station->sell_gasoline,
-                        'sell_diesel'   => $station->sell_diesel,
-                        'sell_lpg'      => $station->sell_lpg,
-                        'has_gasoline'  => $station->has_gasoline,
-                        'has_diesel'    => $station->has_diesel,
-                        'has_lpg'       => $station->has_lpg,
-                        'lat'           => $station->long,
-                        'long'          => $station->lat,
-                        'repa'          => $station->repa,
-                        'county'        => $station->county,
-                        'district'      => $station->district,
-                    ];
-                }
-                return response()->json($output);
-            }
+        $auth = ExternalAuth::authenticate($request->input('key'), $request->input('secret'));
+        if (! $auth) {
+            return response()->json([]);
         }
-        return response()->json([]);
+
+        $stations = $auth->canReadAll()
+            ? FuelStation::all()
+            : FuelStation::query()
+                ->where('brand', $auth->brand)
+                ->orWhere('brand_management', $auth->brand)
+                ->get();
+
+        return response()->json($stations->map(fn (FuelStation $station) => [
+            'id' => $station->id,
+            'name' => $station->name,
+            'brand' => $station->brand,
+            'sell_gasoline' => $station->sell_gasoline,
+            'sell_diesel' => $station->sell_diesel,
+            'sell_lpg' => $station->sell_lpg,
+            'has_gasoline' => $station->has_gasoline,
+            'has_diesel' => $station->has_diesel,
+            'has_lpg' => $station->has_lpg,
+            'lat' => $station->lat,
+            'long' => $station->long,
+            'repa' => $station->repa,
+            'county' => $station->county,
+            'district' => $station->district,
+        ])->all());
     }
 
-    public function push(Request $request)
+    public function push(Request $request): JsonResponse
     {
-        $output = ['success' => 0];
-        if ($request->has('key') && $request->has('secret') && $request->has('has_gasoline') && $request->has('has_diesel') && $request->has('has_lpg') && $request->has('id')) {
-            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
-            if ($ext_auth->count() > 0) {
-                $ext_auth     = $ext_auth->first();
-                $fuel_station = FuelStation::where('id', '=', $request->input('id'));
-                if ($fuel_station->count() > 0) {
-                    $fuel_station = $fuel_station->first();
-                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD')) {
-                        $has_gasoline = \intval($request->input('has_gasoline'));
-                        $has_diesel   = \intval($request->input('has_diesel'));
-                        $has_lpg      = \intval($request->input('has_lpg'));
-                        if (! \is_nan($has_gasoline) && ! \is_nan($has_diesel) && ! \is_nan($has_lpg)) {
-                            if ($has_gasoline > 1) {
-                                $has_gasoline = 1;
-                            } elseif ($has_gasoline < 0) {
-                                $has_gasoline = 0;
-                            }
-                            if ($has_diesel > 1) {
-                                $has_diesel = 1;
-                            } elseif ($has_diesel < 0) {
-                                $has_diesel = 0;
-                            }
-                            if ($has_lpg > 1) {
-                                $has_lpg = 1;
-                            } elseif ($has_lpg < 0) {
-                                $has_lpg = 0;
-                            }
-                            $fuel_station->update([
-                                'has_gasoline' => $has_gasoline,
-                                'has_diesel'   => $has_diesel,
-                                'has_lpg'      => $has_lpg,
-                            ]);
-                            $fuel_station->save();
-                            $cacheController = new CacheController();
-                            $cacheController->updateStations();
-                            $output = ['success' => 1];
-                        }
-                    }
-                }
-            }
+        $data = $request->validate([
+            'key' => 'required|string',
+            'secret' => 'required|string',
+            'id' => 'required|integer|exists:fuel_stations,id',
+            'has_gasoline' => 'required|boolean',
+            'has_diesel' => 'required|boolean',
+            'has_lpg' => 'required|boolean',
+        ]);
+
+        $auth = ExternalAuth::authenticate($data['key'], $data['secret']);
+        if (! $auth) {
+            return response()->json(['success' => 0]);
         }
-        return response()->json($output);
-    }
 
-    public function add(Request $request)
-    {
-        $output = ['success' => 0];
-        if ($request->has('key') && $request->has('secret') && $request->has('name') && $request->has('brand') && $request->has('repa') && $request->has('sell_gasoline') && $request->has('sell_diesel') && $request->has('sell_lpg') && $request->has('county') && $request->has('district') && $request->has('lat') && $request->has('long')) {
-            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
-            if ($ext_auth->count() > 0) {
-                $ext_auth      = $ext_auth->first();
-                $sell_gasoline = \intval($request->input('sell_gasoline'));
-                $sell_diesel   = \intval($request->input('sell_diesel'));
-                $sell_lpg      = \intval($request->input('sell_lpg'));
-                if (! \is_nan($sell_gasoline) && ! \is_nan($sell_diesel) && ! \is_nan($sell_lpg)) {
-                    $brand            = $request->input('brand');
-                    $management_brand = '';
-                    if ($brand != $ext_auth->brand && $ext_auth->brand != 'WRITEREAD') {
-                        $management_brand = $ext_auth->brand;
-                    }
-                    if ($sell_gasoline > 1) {
-                        $sell_gasoline = 1;
-                    } elseif ($sell_gasoline < 0) {
-                        $sell_gasoline = 0;
-                    }
-                    if ($sell_diesel > 1) {
-                        $sell_diesel = 1;
-                    } elseif ($sell_diesel < 0) {
-                        $sell_diesel = 0;
-                    }
-                    if ($sell_lpg > 1) {
-                        $sell_lpg = 1;
-                    } elseif ($sell_lpg < 0) {
-                        $sell_lpg = 0;
-                    }
-                    $county = $request->input('county');
-                    if ($county == null) {
-                        $county = '';
-                    }
-                    $district = $request->input('district');
-                    if ($district == null) {
-                        $district = '';
-                    }
-                    $repa = $request->input('repa');
-                    if ($repa == null) {
-                        $repa = '';
-                    }
-                    $data = [
-                                'repa'             => $repa,
-                                'source_id'        => 'api',
-                                'brand'            => $request->input('brand'),
-                                'brand_management' => $management_brand,
-                                'name'             => $request->input('name'),
-                                'sell_gasoline'    => $sell_gasoline,
-                                'sell_diesel'      => $sell_diesel,
-                                'sell_lpg'         => $sell_lpg,
-                                'has_gasoline'     => $sell_gasoline,
-                                'has_diesel'       => $sell_diesel,
-                                'has_lpg'          => $sell_lpg,
-                                'long'             => \floatval($request->input('lat')),
-                                'lat'              => \floatval($request->input('long')),
-                                'county'           => $county,
-                                'district'         => $district,
-                            ];
-                    $fuel_station = new FuelStation();
-                    $fuel_station->fill($data);
-                    $fuel_station->save();
-                    $cacheController = new CacheController();
-                    $cacheController->updateStations();
-                    $output = ['success' => 1];
-                }
-            }
+        $station = FuelStation::findOrFail($data['id']);
+        if (! $auth->ownsStation($station)) {
+            return response()->json(['success' => 0]);
         }
-        return response()->json($output);
+
+        $station->update([
+            'has_gasoline' => (bool) $data['has_gasoline'],
+            'has_diesel' => (bool) $data['has_diesel'],
+            'has_lpg' => (bool) $data['has_lpg'],
+        ]);
+
+        UpdateStationsCacheJob::dispatch();
+
+        return response()->json(['success' => 1]);
     }
 
-    public function change(Request $request)
+    public function add(Request $request): JsonResponse
     {
-        $output = ['success' => 0];
-        if ($request->has('key') && $request->has('secret') && $request->has('name') && $request->has('brand') && $request->has('repa') && $request->has('sell_gasoline') && $request->has('sell_diesel') && $request->has('sell_lpg') && $request->has('id') && $request->has('county') && $request->has('district') && $request->has('lat') && $request->has('long')) {
-            $ext_auth = ExternalAuth::where([['key', '=', $request->input('key')],['secret', '=', $request->input('secret')]]);
-            if ($ext_auth->count() > 0) {
-                $ext_auth     = $ext_auth->first();
-                $fuel_station = FuelStation::where('id', '=', $request->input('id'));
-                if ($fuel_station->count() > 0) {
-                    $fuel_station = $fuel_station->first();
-                    if (($fuel_station->brand == $ext_auth->brand) || ($fuel_station->brand_management == $ext_auth->brand) || ($ext_auth->brand == 'WRITEREAD')) {
-                        $brand            = $request->input('brand');
-                        $management_brand = '';
-                        if ($brand != $ext_auth->brand && $ext_auth->brand != 'WRITEREAD') {
-                            $management_brand = $ext_auth->brand;
-                        }
-                        $sell_gasoline = \intval($request->input('sell_gasoline'));
-                        $sell_diesel   = \intval($request->input('sell_diesel'));
-                        $sell_lpg      = \intval($request->input('sell_lpg'));
-                        if (! \is_nan($sell_gasoline) && ! \is_nan($sell_diesel) && ! \is_nan($sell_lpg)) {
-                            if ($sell_gasoline > 1) {
-                                $sell_gasoline = 1;
-                            } elseif ($sell_gasoline < 0) {
-                                $sell_gasoline = 0;
-                            }
-                            if ($sell_diesel > 1) {
-                                $sell_diesel = 1;
-                            } elseif ($sell_diesel < 0) {
-                                $sell_diesel = 0;
-                            }
-                            if ($sell_lpg > 1) {
-                                $sell_lpg = 1;
-                            } elseif ($sell_lpg < 0) {
-                                $sell_lpg = 0;
-                            }
-                            $county = $request->input('county');
-                            if ($county == null) {
-                                $county = '';
-                            }
-                            $district = $request->input('district');
-                            if ($district == null) {
-                                $district = '';
-                            }
-                            $repa = $request->input('repa');
-                            if ($repa == null) {
-                                $repa = '';
-                            }
-                            $data = [
-                                'repa'             => $repa,
-                                'source_id'        => 'api',
-                                'brand'            => $request->input('brand'),
-                                'brand_management' => $management_brand,
-                                'name'             => $request->input('name'),
-                                'sell_gasoline'    => $sell_gasoline,
-                                'sell_diesel'      => $sell_diesel,
-                                'sell_lpg'         => $sell_lpg,
-                                'has_gasoline'     => $sell_gasoline,
-                                'has_diesel'       => $sell_diesel,
-                                'has_lpg'          => $sell_lpg,
-                                'long'             => \floatval($request->input('lat')),
-                                'lat'              => \floatval($request->input('long')),
-                                'county'           => $county,
-                                'district'         => $district,
-                            ];
-                            $fuel_station->fill($data);
-                            $fuel_station->save();
-                            $cacheController = new CacheController();
-                            $cacheController->updateStations();
-                            $output = ['success' => 1];
-                        }
-                    }
-                }
-            }
+        $data = $request->validate([
+            'key' => 'required|string',
+            'secret' => 'required|string',
+            'name' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
+            'repa' => 'required',
+            'sell_gasoline' => 'required|boolean',
+            'sell_diesel' => 'required|boolean',
+            'sell_lpg' => 'required|boolean',
+            'county' => 'nullable|string',
+            'district' => 'nullable|string',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+        ]);
+
+        $auth = ExternalAuth::authenticate($data['key'], $data['secret']);
+        if (! $auth) {
+            return response()->json(['success' => 0]);
         }
-        return response()->json($output);
+
+        $management = $data['brand'] !== $auth->brand && ! $auth->canWriteAny()
+            ? $auth->brand
+            : null;
+
+        FuelStation::create([
+            'name' => $data['name'],
+            'brand' => $data['brand'],
+            'brand_management' => $management,
+            'repa' => (bool) $data['repa'],
+            'source_id' => 'api',
+            'sell_gasoline' => (bool) $data['sell_gasoline'],
+            'sell_diesel' => (bool) $data['sell_diesel'],
+            'sell_lpg' => (bool) $data['sell_lpg'],
+            'has_gasoline' => (bool) $data['sell_gasoline'],
+            'has_diesel' => (bool) $data['sell_diesel'],
+            'has_lpg' => (bool) $data['sell_lpg'],
+            'lat' => (float) $data['lat'],
+            'long' => (float) $data['long'],
+            'county' => $data['county'] ?? '',
+            'district' => $data['district'] ?? '',
+        ]);
+
+        UpdateStationsCacheJob::dispatch();
+
+        return response()->json(['success' => 1]);
     }
 
-    public function fetch_csv()
+    public function change(Request $request): JsonResponse
     {
-        $headers = [
-            'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=file.csv',
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
-        ];
+        $data = $request->validate([
+            'key' => 'required|string',
+            'secret' => 'required|string',
+            'id' => 'required|integer|exists:fuel_stations,id',
+            'name' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
+            'repa' => 'required',
+            'sell_gasoline' => 'required|boolean',
+            'sell_diesel' => 'required|boolean',
+            'sell_lpg' => 'required|boolean',
+            'county' => 'nullable|string',
+            'district' => 'nullable|string',
+            'lat' => 'required|numeric',
+            'long' => 'required|numeric',
+        ]);
 
-        $columns = [
-            'id',
-            'name',
-            'brand',
-            'lat',
-            'long',
-            'repa',
-            'sell_gasoline',
-            'sell_diesel',
-            'sell_lpg',
-            'has_gasoline',
-            'has_diesel',
-            'has_lpg',
-            'district',
-            'county',
-            'ense_id',
-            'ense_gasoline',
-            'ense_diesel',
-        ];
+        $auth = ExternalAuth::authenticate($data['key'], $data['secret']);
+        if (! $auth) {
+            return response()->json(['success' => 0]);
+        }
 
-        $fuel_stations = FuelStation::all($columns);
+        $station = FuelStation::findOrFail($data['id']);
+        if (! $auth->ownsStation($station)) {
+            return response()->json(['success' => 0]);
+        }
 
-        $cb = function () use ($fuel_stations, $columns) {
-            $file = \fopen('php://output', 'w');
-            \fprintf($file, \chr(0xEF).\chr(0xBB).\chr(0xBF));
-            \fputcsv($file, $columns);
+        $management = $data['brand'] !== $auth->brand && ! $auth->canWriteAny()
+            ? $auth->brand
+            : null;
 
-            foreach ($fuel_stations as $fuel_station) {
-                if ($fuel_station['brand'] != 'POSTO ES') {
-                    $long_save            = $fuel_station['long'];
-                    $fuel_station['long'] = $fuel_station['lat'];
-                    $fuel_station['lat']  = $long_save;
-                    \fputcsv($file, $fuel_station->toArray());
-                }
-            }
-            \fclose($file);
-        };
+        $station->update([
+            'name' => $data['name'],
+            'brand' => $data['brand'],
+            'brand_management' => $management,
+            'repa' => (bool) $data['repa'],
+            'source_id' => 'api',
+            'sell_gasoline' => (bool) $data['sell_gasoline'],
+            'sell_diesel' => (bool) $data['sell_diesel'],
+            'sell_lpg' => (bool) $data['sell_lpg'],
+            'has_gasoline' => (bool) $data['sell_gasoline'],
+            'has_diesel' => (bool) $data['sell_diesel'],
+            'has_lpg' => (bool) $data['sell_lpg'],
+            'lat' => (float) $data['lat'],
+            'long' => (float) $data['long'],
+            'county' => $data['county'] ?? '',
+            'district' => $data['district'] ?? '',
+        ]);
 
-        return response()->stream($cb, 200, $headers);
+        UpdateStationsCacheJob::dispatch();
+
+        return response()->json(['success' => 1]);
     }
 
-    public function fetch_api_csv()
+    public function fetchCsv(): StreamedResponse
     {
-        $password = Input::get('password');
-        if ($password != env('API_V1_DOWNLOAD_API_CSV')) {
+        return $this->streamCsv(
+            FuelStation::query()->where('brand', '!=', 'POSTO ES')->get(),
+            [
+                'id', 'name', 'brand', 'lat', 'long', 'repa',
+                'sell_gasoline', 'sell_diesel', 'sell_lpg',
+                'has_gasoline', 'has_diesel', 'has_lpg',
+                'district', 'county', 'ense_id', 'ense_gasoline', 'ense_diesel',
+            ]
+        );
+    }
+
+    public function fetchApiCsv(Request $request): StreamedResponse|Response
+    {
+        if ($request->input('password') !== config('services.api_v1.csv_password')) {
             return response('0', 200)->header('Content-Type', 'text/plain');
         }
-        $headers = [
-            'Content-type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=file.csv',
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
-        ];
 
-        $columns = [
-            'id',
-            'name',
-            'brand',
-            'lat',
-            'long',
-            'repa',
-            'sell_gasoline',
-            'sell_diesel',
-            'sell_lpg',
-            'has_gasoline',
-            'has_diesel',
-            'has_lpg',
-            'district',
-            'county',
-            'source_id',
-        ];
+        return $this->streamCsv(
+            FuelStation::query()
+                ->where('brand', '!=', 'POSTO ES')
+                ->where('source_id', 'api')
+                ->get(),
+            [
+                'id', 'name', 'brand', 'lat', 'long', 'repa',
+                'sell_gasoline', 'sell_diesel', 'sell_lpg',
+                'has_gasoline', 'has_diesel', 'has_lpg',
+                'district', 'county', 'source_id',
+            ]
+        );
+    }
 
-        $fuel_stations = FuelStation::all($columns)->where('source_id', '=', 'api');
-        $cb            = function () use ($fuel_stations, $columns) {
-            $file = \fopen('php://output', 'w');
-            \fprintf($file, \chr(0xEF).\chr(0xBB).\chr(0xBF));
-            \fputcsv($file, $columns);
-
-            foreach ($fuel_stations as $fuel_station) {
-                if ($fuel_station['brand'] != 'POSTO ES') {
-                    $long_save            = $fuel_station['long'];
-                    $fuel_station['long'] = $fuel_station['lat'];
-                    $fuel_station['lat']  = $long_save;
-                    \fputcsv($file, $fuel_station->toArray());
-                }
+    private function streamCsv($stations, array $columns): StreamedResponse
+    {
+        return response()->stream(function () use ($stations, $columns) {
+            $file = fopen('php://output', 'w');
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, $columns);
+            foreach ($stations as $station) {
+                fputcsv($file, array_map(fn ($col) => $station[$col], $columns));
             }
-            \fclose($file);
-        };
-
-        return response()->stream($cb, 200, $headers);
+            fclose($file);
+        }, 200, [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=fuel_stations.csv',
+            'Cache-Control' => 'no-store',
+        ]);
     }
 }

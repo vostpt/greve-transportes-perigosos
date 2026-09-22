@@ -1,0 +1,75 @@
+@import "variables";
+@import "mapbox-gl/dist/mapbox-gl.css";
+@import "@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css";
+
+.map-wrapper {
+    position: fixed;
+    inset: 56px 0 0 0;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.map-overlay {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 320px;
+    font-size: 0.9rem;
+
+    h4 {
+        font-size: 1rem;
+        margin-top: 0.75rem;
+    }
+
+    fieldset {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.map-overlay-toggle {
+    top: 12px;
+    right: 12px;
+    padding: 6px 10px;
+}
+
+.map-overlay-filters {
+    top: 60px;
+    right: 12px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.map-overlay-legend {
+    bottom: 12px;
+    left: 12px;
+
+    img {
+        width: 22px;
+        height: 22px;
+        vertical-align: middle;
+        margin-right: 6px;
+    }
+
+    label {
+        margin-bottom: 2px;
+    }
+}
+
+.map-popup {
+    max-width: 260px;
+
+    dl {
+        margin: 0;
+    }
+
+    dt {
+        font-weight: 600;
+    }
+}

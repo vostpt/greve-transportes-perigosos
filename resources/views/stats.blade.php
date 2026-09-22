@@ -1,61 +1,63 @@
 @extends('layouts.app')
 
-@section('viewport')
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-@endsection
-
-@section('styles')
-<style>
-    @media (min-width: 768px) {
-        iframe {
-            height: 500px;
-        }
-    }
-
-    @media  (max-width: 768px) {
-        iframe {
-            height: 900px;
-        }
-    }
-</style>
-@endsection
+@section('title', 'Estatísticas · ' . config('app.name'))
 
 @section('content')
-<div class="container text-center">
-    <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
-    <div class="row">
-        <iframe frameborder="0" scrolling="no" id="global_stats" style="width:100%;" src="/graphs/stats"></iframe>
-    </div>
-    <div class="row">
-        <iframe frameborder="0" scrolling="no" id="entries_stats" style="width:50%;" src="/graphs/entries"></iframe>
-        <iframe frameborder="0" scrolling="no" id="brand_stats" style="width:50%;" src="/graphs/brands"></iframe>
-    </div>
-    <div class="row" style="display:none">
-        <div class="col-md-12">
-            <h2>Estatisticas Por Localização</h2>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="district_selection">Distrito:</label>
-                <select class="form-control" id="district_selection">
-                    <option value="none">Todos</option>
-                </select>
+    <div class="container my-4">
+        <h1 class="mb-4">Estatísticas</h1>
+
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-muted small text-uppercase">Postos totais</div>
+                        <div class="h2 mb-0" id="stations-total">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-muted small text-uppercase">Submissões total</div>
+                        <div class="h2 mb-0" id="entries-total">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-muted small text-uppercase">Última hora</div>
+                        <div class="h2 mb-0" id="entries-last-hour">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="text-muted small text-uppercase">Últimas 24h</div>
+                        <div class="h2 mb-0" id="entries-last-day">0</div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="form-group">
-                <label for="county_selection">Concelho:</label>
-                <select class="form-control" id="county_selection" disabled>
-                    <option value="none">Todos</option>
-                </select>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">Disponibilidade global</div>
+                    <div class="card-body"><canvas id="stations-chart" height="220"></canvas></div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header">Combustíveis: venda vs. rutura</div>
+                    <div class="card-body"><canvas id="shortages-chart" height="220"></canvas></div>
+                </div>
             </div>
         </div>
-        <iframe frameborder="0" scrolling="no" id="selected_stats" style="width:100%;" src="/graphs/stats"></iframe>
     </div>
-</div>
 @endsection
 
-@section('javascript')
-    <script src="{{ mix('/js/helpers.js') }}" charset="utf-8"></script>
-    <script src="{{ mix('/js/stats.js') }}" charset="utf-8"></script>
-@endsection
+@push('scripts')
+    @vite(['resources/js/graphs.js'])
+@endpush

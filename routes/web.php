@@ -1,128 +1,87 @@
 <?php
+
 declare(strict_types=1);
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\EntriesController;
+use App\Http\Controllers\ErrorController;
+use App\Http\Controllers\ExternalAuthController;
+use App\Http\Controllers\FuelStationsController;
+use App\Http\Controllers\GraphsController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OptionsController;
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('map');
-})->name('map');
+Route::view('/', 'map')->name('map');
+Route::view('/stats', 'stats')->name('stats');
+Route::view('/arcgis', 'arcgis')->name('arcgis');
+Route::view('/about', 'about')->name('about');
+Route::view('/media', 'media')->name('media');
+Route::view('/help', 'help')->name('help');
 
-Route::get('/stats', function () {
-    return view('stats');
-})->name('stats');
-
-Route::get('/arcgis', function () {
-    return view('arcgis');
-})->name('arcgis');
-
-
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
-
-Route::get('/media', function () {
-    return view('media');
-})->name('media');
-
-Route::get('/help', function () {
-    return view('help');
-})->name('help');
-
-
-Auth::routes(['register' => false, 'verify' => true]);
-Route::get('panel/login', 'Auth\LoginController@showLoginForm')->name('login');
-Route::post('panel/login', 'Auth\LoginController@login');
-Route::post('panel/logout', 'Auth\LoginController@logout')->name('logout');
-Route::get('panel/password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
-Route::post('panel/password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
-Route::get('panel/password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
-Route::post('panel/password/reset', 'Auth\ResetPasswordController@reset');
-
-
-Route::prefix('panel')->group(function () {
-    Route::get('/home', 'HomeController@index')->name('home');
-    Route::prefix('users')->name('users.')->middleware('auth')->group(function () {
-        Route::get('add', 'UsersController@add')->name('add');
-        Route::post('create', 'UsersController@create')->name('create');
-        Route::get('list', 'UsersController@list')->name('list');
-        Route::prefix('fetch')->name('fetch.')->group(function () {
-            Route::get('verified', 'UsersController@fetch_verified')->name('verified');
-            Route::get('not_verified', 'UsersController@fetch_not_verified')->name('not_verified');
-        });
-        Route::get('password', 'UsersController@password')->name('password');
-        Route::post('verify', 'UsersController@verify')->name('verify');
-        Route::post('delete', 'UsersController@delete')->name('delete');
-        Route::post('updatePassword', 'UsersController@updatePassword')->name('updatePassword');
-    });
-
-    Route::prefix('entries')->name('entries.')->group(function () {
-        Route::get('list', 'EntriesController@list')->middleware('auth')->name('list');
-        Route::prefix('fetch')->name('fetch.')->middleware('auth')->group(function () {
-            Route::get('pending', 'EntriesController@fetch_pending')->name('pending');
-        });
-        Route::post('push', 'EntriesController@push')->middleware('auth')->name('push');
-        Route::post('add', 'EntriesController@add')->name('add');
-    });
-
-    Route::prefix('stations')->name('stations.')->middleware('auth')->group(function () {
-        Route::get('list', 'FuelStationsController@list')->name('list');
-        Route::prefix('fetch')->name('fetch.')->group(function () {
-            Route::get('pending', 'FuelStationsController@fetch_all')->name('all');
-        });
-        Route::post('update', 'FuelStationsController@update')->name('update');
-        Route::post('update-available', 'FuelStationsController@updateAvailable')->name('update_available');
-    });
-
-    Route::prefix('options')->name('options.')->middleware('auth')->group(function () {
-        Route::get('list', 'OptionsController@list')->name('list');
-        Route::prefix('fetch')->name('fetch.')->group(function () {
-            Route::get('all', 'OptionsController@fetch_all')->name('all');
-        });
-        Route::post('update', 'OptionsController@update')->name('update');
-    });
-
-    Route::prefix('externalauth')->name('externalauth.')->middleware('auth')->group(function () {
-        Route::get('add', 'ExternalAuthController@add')->name('add');
-        Route::post('create', 'ExternalAuthController@create')->name('create');
-        Route::get('list', 'ExternalAuthController@list')->name('list');
-        Route::prefix('fetch')->name('fetch.')->group(function () {
-            Route::get('all', 'ExternalAuthController@fetch_all')->name('all');
-        });
-        Route::post('delete', 'ExternalAuthController@delete')->name('delete');
-    });
+Route::prefix('graphs')->name('graphs.')->controller(GraphsController::class)->group(function () {
+    Route::get('/stats', 'stats')->name('stats');
+    Route::get('/brands', 'brands')->name('brands');
+    Route::get('/entries', 'entries')->name('entries');
 });
 
-Route::prefix('api/v1')->name('api.')->group(function () {
-    Route::get('/', 'APIController@home')->name('home');
-    Route::post('fetch', 'APIController@fetch')->name('fetch');
-    Route::post('push', 'APIController@push')->name('push');
-    Route::post('info', 'APIController@info')->name('info');
-    Route::post('add', 'APIController@add')->name('add');
-    Route::post('change', 'APIController@change')->name('change');
-    Route::get('fetchcsv', 'APIController@fetch_csv')->name('fetch_csv');
-    Route::get('fetchapicsv', 'APIController@fetch_api_csv')->name('fetch_api_csv');
+Route::prefix('error')->name('error.')->controller(ErrorController::class)->group(function () {
+    Route::get('/', 'new')->name('new');
+    Route::get('/edit', 'edit')->name('edit');
+    Route::get('/submitted', 'submitted')->name('submitted');
+    Route::post('/push', 'push')->middleware('throttle:6,1')->name('push');
 });
 
+Route::post('/entries/add', [EntriesController::class, 'add'])
+    ->middleware('throttle:20,1')
+    ->name('entries.add');
 
-Route::prefix('graphs')->name('graphs.')->group(function () {
-    Route::get('/stats', 'GraphsController@stats')->name('stats');
-    Route::get('/brands', 'GraphsController@brands')->name('brands');
-    Route::get('/entries', 'GraphsController@entries')->name('entries');
-});
+Route::prefix('panel')->name('panel.')->group(function () {
+    Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login')->middleware('guest');
+    Route::post('/login', [LoginController::class, 'login'])->middleware(['guest', 'throttle:login']);
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
+    Route::middleware('auth')->group(function () {
+        Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::prefix('error')->name('error.')->group(function () {
-    Route::get('/', 'ErrorController@new')->name('new');
-    Route::get('edit', 'ErrorController@edit')->name('edit');
-    Route::get('submitted', 'ErrorController@submitted')->name('submitted');
-    Route::post('push', 'ErrorController@push')->name('push');
+        Route::prefix('users')->name('users.')->controller(UsersController::class)->group(function () {
+            Route::get('/add', 'add')->name('add');
+            Route::post('/create', 'create')->name('create');
+            Route::get('/list', 'list')->name('list');
+            Route::get('/password', 'password')->name('password');
+            Route::get('/fetch/verified', 'fetchVerified')->name('fetch.verified');
+            Route::get('/fetch/not_verified', 'fetchNotVerified')->name('fetch.not_verified');
+            Route::post('/verify', 'verify')->name('verify');
+            Route::post('/delete', 'delete')->name('delete');
+            Route::post('/update-password', 'updatePassword')->name('updatePassword');
+        });
+
+        Route::prefix('entries')->name('entries.')->controller(EntriesController::class)->group(function () {
+            Route::get('/list', 'list')->name('list');
+            Route::get('/fetch/pending', 'fetchPending')->name('fetch.pending');
+            Route::post('/push', 'push')->name('push');
+        });
+
+        Route::prefix('stations')->name('stations.')->controller(FuelStationsController::class)->group(function () {
+            Route::get('/list', 'list')->name('list');
+            Route::get('/fetch/all', 'fetchAll')->name('fetch.all');
+            Route::post('/update', 'update')->name('update');
+            Route::post('/update-available', 'updateAvailable')->name('update_available');
+        });
+
+        Route::prefix('options')->name('options.')->controller(OptionsController::class)->group(function () {
+            Route::get('/list', 'list')->name('list');
+            Route::get('/fetch/all', 'fetchAll')->name('fetch.all');
+            Route::post('/update', 'update')->name('update');
+        });
+
+        Route::prefix('externalauth')->name('externalauth.')->controller(ExternalAuthController::class)->group(function () {
+            Route::get('/add', 'add')->name('add');
+            Route::post('/create', 'create')->name('create');
+            Route::get('/list', 'list')->name('list');
+            Route::get('/fetch/all', 'fetchAll')->name('fetch.all');
+            Route::post('/delete', 'delete')->name('delete');
+        });
+    });
 });
