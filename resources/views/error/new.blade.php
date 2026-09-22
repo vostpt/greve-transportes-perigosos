@@ -1,80 +1,47 @@
 @extends('layouts.app')
-@section('styles')
-@endsection
+@section('title', 'Reportar erro · ' . config('app.name'))
 
 @section('content')
-<div class="container">
-    <div class="text-center">
-        <img src="/img/VOSTPT_FuelCrisisPT_JNDPA_Logo_With_VOSTPT_Logo_800pxX800px.png" style="width:20em" />
-    </div>
-    <h2>Reportar Posto de Combustível em Falta</h2>
-    <form method="POST" id="modal_form" class="ui form" action="{{ route('error.push') }}">
-        <input id="station_id" type="hidden" name="id" value="" />
-        <input id="recaptchaResponse" type="hidden" name="captcha" value="0" />
-        <div class="form-group">
-            <label for="email">O Seu Endereço de Email</label>
-            <input type="email" class="form-control" id="email" placeholder="O Seu Endereço de Email" name="email"
-                required>
-        </div>
-        <div class="form-group">
-            <label for="station_brand">Marca</label>
-            <input type="text" class="form-control" id="station_brand" placeholder="Marca" name="brand" required>
-        </div>
-        <div class="form-group">
-            <label for="station_vostie">VOSTie <small>(Código de controlo interno da VOST Portugal. Se não és voluntário
-                    VOST deixa o campo em branco)</small></label>
-            <input type="text" class="form-control" id="station_vostie" placeholder="" name="vostie">
-        </div>
-        <h5>Localização Exata</h5>
-        <div class="row">
-            <div class="form-group col-6">
-                <label for="station_long">Longitude</label>
-                <input type="number" step="0.0000000001" class="form-control" id="station_long" name="long" value="0"
-                    required>
-            </div>
-            <div class="form-group col-6">
-                <label for="station_lat">Latitude</label>
-                <input type="number" step="0.0000000001" class="form-control" id="station_lat" name="lat" value="0" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="station_sell_gasoline">{{ __('Vende Gasolina?') }}</label>
-            <select class="form-control" id="station_sell_gasoline" name="sell_gasoline" required>
-                <option value="0">Não</option>
-                <option value="1">Sim</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="station_sell_diesel">{{ __('Vende Gasóleo?') }}</label>
-            <select class="form-control" id="station_sell_diesel" name="sell_diesel" required>
-                <option value="0">Não</option>
-                <option value="1">Sim</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="station_sell_lpg">{{ __('Vende GPL?') }}</label>
-            <select class="form-control" id="station_sell_lpg" name="sell_lpg" required>
-                <option value="0">Não</option>
-                <option value="1">Sim</option>
-            </select>
-        </div>
-        <div class="modal-footer">
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Reportar</button>
-            </div>
-        </div>
-    </form>
-</div>
-@endsection
+    <div class="container my-4" style="max-width: 720px;">
+        <h1>Reportar erro</h1>
+        <p class="text-muted">Preencha o formulário para nos comunicar uma correção sobre um posto específico.</p>
 
-@section('javascript')
-<script src="https://www.google.com/recaptcha/api.js?render=6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX"></script>
-<script>
-    grecaptcha.ready(function () {
-    grecaptcha.execute('6LcD9rAUAAAAAIn4-wNkOpAmr49ItnAZnBtroGCX', { action: 'contact' }).then(function (token) {
-        var recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
-    });
-});
-</script>
+        <form method="POST" action="{{ route('error.push') }}" class="card card-body shadow-sm">
+            @csrf
+            <div class="mb-3">
+                <label class="form-label" for="brand">Marca</label>
+                <input type="text" class="form-control" name="brand" id="brand" required>
+            </div>
+            <div class="row g-2">
+                <div class="col">
+                    <label class="form-label" for="lat">Latitude</label>
+                    <input type="number" step="0.0000001" class="form-control" name="lat" id="lat" required>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="long">Longitude</label>
+                    <input type="number" step="0.0000001" class="form-control" name="long" id="long" required>
+                </div>
+            </div>
+            <div class="row g-2 mt-2">
+                <div class="col">
+                    <label class="form-label" for="sell_gasoline">Vende gasolina?</label>
+                    <select class="form-select" name="sell_gasoline" id="sell_gasoline"><option value="1">Sim</option><option value="0">Não</option></select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="sell_diesel">Vende gasóleo?</label>
+                    <select class="form-select" name="sell_diesel" id="sell_diesel"><option value="1">Sim</option><option value="0">Não</option></select>
+                </div>
+                <div class="col">
+                    <label class="form-label" for="sell_lpg">Vende GPL?</label>
+                    <select class="form-select" name="sell_lpg" id="sell_lpg"><option value="1">Sim</option><option value="0">Não</option></select>
+                </div>
+            </div>
+            <div class="mb-3 mt-3">
+                <label class="form-label" for="email">Email de contacto</label>
+                <input type="email" class="form-control" name="email" id="email" required>
+            </div>
+            <input type="hidden" name="captcha" value="disabled">
+            <button type="submit" class="btn btn-danger">Submeter</button>
+        </form>
+    </div>
 @endsection

@@ -1,44 +1,15 @@
-@extends('layouts.app') 
+@extends('layouts.app')
+@section('title', 'Adicionar utilizador · ' . config('app.name'))
+
 @section('content')
-<div class="container">
-    <h1 class="text-center">{{ __('Add User') }}</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-12">            
-            <form method="post" action=" {{ route('users.create') }}">
-                @csrf
-                <div class="form-group">
-                    <label for="nameInput">{{ __('Name') }}</label>
-                    <input name="name" id="nameInput" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Name') }}" value="{{ old('name') }}">
-                    @if ($errors->has('name'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('name') }}</strong>
-                    </span> 
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="emailAddressInput">{{ __('Email address') }}</label>
-                    <input name="email" id="emailAddressInput" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" 
-                    placeholder="{{ __('Email address') }}" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('email') }}</strong>
-                    </span> 
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="passwordInput">{{ __('Password') }}</label>
-                    <input name="password" id="passwordInput" type="password" 
-                    class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="{{ __('Password') }}">
-                    @if ($errors->has('password'))
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $errors->first('password') }}</strong>
-                    </span> 
-                    @endif
-                </div>
-                <button type="submit" class="btn btn-primary">{{ __('Create') }}</button>
-            </form>
-        </div>
+    <div class="container my-4" style="max-width: 520px;">
+        <h1 class="mb-4">Adicionar utilizador</h1>
+        <form method="POST" action="{{ route('panel.users.create') }}" class="card card-body shadow-sm">
+            @csrf
+            <div class="mb-3"><label class="form-label" for="name">Nome</label><input type="text" name="name" id="name" required class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">@error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+            <div class="mb-3"><label class="form-label" for="email">Email</label><input type="email" name="email" id="email" required class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}">@error('email')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+            <div class="mb-3"><label class="form-label" for="password">Password</label><input type="password" name="password" id="password" required class="form-control @error('password') is-invalid @enderror">@error('password')<div class="invalid-feedback">{{ $message }}</div>@enderror</div>
+            <button class="btn btn-danger">Criar</button>
+        </form>
     </div>
-</div>
 @endsection

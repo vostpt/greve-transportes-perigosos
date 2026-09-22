@@ -22,6 +22,3 @@ storage/app/public/data/*
 bootstrap/cache/*.php
 
 docker-compose*.yml
-
-*.md
-!README.md

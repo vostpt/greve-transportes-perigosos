@@ -1,58 +1,36 @@
-## VOST Portugal - Já Não Dá Para Abastecer - Version 2.0
+# VOST Portugal — Já Não Dá Para Abastecer (v3)
 
-> **Legacy baseline.** This branch is Laravel 5.8 / PHP 7.4. The modern rewrite lives on the `v3` branch (Laravel 11 / PHP 8.3). See `/Users/tomahock/.claude/plans/isto-um-projeto-rippling-shell.md` for the migration roadmap.
+Crowd-sourced map of fuel-station availability in Portugal during hazardous-materials driver strikes. Users report gasoline/diesel/LPG availability at each station; consensus among distinct IPs auto-promotes the report to public state. Third parties can consume the same data through a key/secret API.
 
-## Running with Docker (recommended)
+**Stack:** Laravel 12 · PHP 8.4 · MariaDB 10.11 LTS · Redis 7 · Vite + Bootstrap 5 · Mapbox GL 3.
 
-Three services: `app` (PHP 7.4-fpm-alpine), `nginx` (:8080), `db` (MariaDB 10.3). Uses **Composer 1** inside the image because Laravel 5.8.12 predates the Composer 2 `installed.json` format.
+**Legacy:** the 2019 Laravel 5.8 codebase lives on branch `master`. This branch (`v3`) is the ground-up rewrite, tracked in `/Users/tomahock/.claude/plans/isto-um-projeto-rippling-shell.md`.
+
+## Running with Docker
 
 ```sh
 docker compose up -d
-docker compose exec app composer install
 docker compose exec app cp .env.docker .env
 docker compose exec app php artisan key:generate
-docker compose exec app php artisan migrate --seed
+docker compose exec app php artisan migrate
 docker compose exec app php artisan storage:link
 ```
 
-App at http://localhost:8080. MariaDB exposed on host port `3307` (creds `greve` / `greve`).
+App at http://localhost:8080.
 
-## Running without Docker
+Host ports:
 
-Install dependencies:
-```sh
-composer install
-```
-
-Copy the `.env` file:
-```sh
-cp .env.example .env
-```
-
-Generate an encryption key:
-```sh
-php artisan key:generate
-```
-
-### Database
-Execute the migration and seeders:
-```sh
-php artisan migrate:refresh --seed
-```
-
-## Testing
-To run the tests, execute:
-
-```sh
-vendor/bin/phpunit --dump-xdebug-filter xdebug-filter.php
-vendor/bin/phpunit --prepend xdebug-filter.php
-```
+| Service | Port |
+|---------|------|
+| nginx | 8080 |
+| MariaDB | 3308 (creds `greve` / `greve`) |
+| Redis | 6380 |
+| Vite dev server | 5173 (`docker compose --profile dev up node`) |
 
 ## Contributing
-Contributions are always welcome, but before anything else, make sure you get acquainted with the [CONTRIBUTING](CONTRIBUTING.md) guide.
 
-## Credits
-- [VOST Portugal](https://github.com/vostpt)
+See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## License
-This project is open source software licensed under the [MIT LICENSE](LICENSE).
+
+MIT — see [LICENSE](LICENSE).

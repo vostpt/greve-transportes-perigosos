@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 RUN apk add --no-cache \
         freetype-dev \
@@ -11,6 +11,8 @@ RUN apk add --no-cache \
         git \
         unzip \
         bash \
+        linux-headers \
+    && apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" \
         pdo_mysql \
@@ -21,9 +23,13 @@ RUN apk add --no-cache \
         intl \
         opcache \
         xml \
-    && rm -rf /var/cache/apk/*
+        pcntl \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && apk del .build-deps \
+    && rm -rf /var/cache/apk/* /tmp/pear
 
-COPY --from=composer:1 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 COPY docker/php/php.ini /usr/local/etc/php/conf.d/zz-app.ini
 

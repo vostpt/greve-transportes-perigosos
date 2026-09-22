@@ -1,100 +1,38 @@
 @extends('layouts.app')
+@section('title', 'External Auth · ' . config('app.name'))
+
 @section('content')
-<div class="container">
-    <h1 class="text-center">{{ __('External Auth List') }}</h1>
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <table id="ext_auth_list" class="table table-striped table-bordered" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('Key') }}</th>
-                        <th>{{ __('Secret') }}</th>
-                        <th>{{ __('Brand') }}</th>
-                        <th>{{ __('Actions') }}</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>{{ __('ID') }}</th>
-                        <th>{{ __('Key') }}</th>
-                        <th>{{ __('Secret') }}</th>
-                        <th>{{ __('Brand') }}</th>
-                        <th>{{ __('Actions') }}</th>
-                    </tr>
-                </tfoot>
-            </table>
+    <div class="container my-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Credenciais externas</h1>
+            <a href="{{ route('panel.externalauth.add') }}" class="btn btn-danger">Adicionar</a>
         </div>
-    </div>
-</div>
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"> Confirmar Ação - <span id="action_title">Titulo da ação</span></h5>
-            </div>
-            <div class="modal-body">
-                <p><span id="action_description">Descrição da ação</span></p>
-            </div>
-            <div class="modal-footer">
-                <form method="POST" id="modal_form" class="ui form" action="{{ route('externalauth.delete') }}">
-                    @csrf
-                    <input id="ext_auth_id" type="hidden" name="id" value="0" />
-                    <button type="submit" class="btn btn-primary">Confirmar</button>
-                </form>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <table class="table table-sm" id="ea-table">
+                    <thead><tr><th>Key</th><th>Brand</th><th>Criado</th><th>Estado</th><th></th></tr></thead>
+                    <tbody></tbody>
+                </table>
             </div>
         </div>
     </div>
-</div>
 @endsection
 
-@section('javascript')
-<script type="text/javascript">
-    function copyStringToClipboard (str) {
-       // Create new element
-       var el = document.createElement('textarea');
-       // Set value (string to be copied)
-       el.value = str;
-       // Set non-editable to avoid focus and move outside of view
-       el.setAttribute('readonly', '');
-       el.style = {position: 'absolute', left: '-9999px'};
-       document.body.appendChild(el);
-       // Select text inside element
-       el.select();
-       // Copy text to clipboard
-       document.execCommand('copy');
-       // Remove temporary element
-       document.body.removeChild(el);
-    }
-    function deleteExtAuth(id) {
-        $('#modal_form').attr('action', '{{ route('externalauth.delete') }}');
-        $('#action_title').html("Eliminar Autenticação Externa nº"+id);
-        $('#action_description').html("Esta ação irá eliminar a autenticação externa nº"+id+", esta não poderá ser novamente utilizada para atualizar bombas de combustivel.");
-        $("#ext_auth_id").val(id);
-        $('.modal').modal('show');
-    }
-    $(document).ready(function() {
-        $('#ext_auth_list').DataTable( {
-            "ajax": { 
-                "url": "{{ route('externalauth.fetch.all') }}",
-                "dataSrc": function (json) {
-                    json.data.forEach((element,index) => {
-                        json.data[index]["secret"] = '<a href="#" onclick="copyStringToClipboard(\''+json.data[index]["secret"]+'\')">Copiar</a>';
-                        json.data[index]["actions"] = '<a href="#" onclick="deleteExtAuth('+json.data[index]["id"]+')"><i class="fas fa-trash"></i></a>';
-                    });
-                    return json.data;
-                }
-            },   
-            "columns": [
-                { "data": "id" },
-                { "data": "key" },
-                { "data": "secret" },
-                { "data": "brand" },
-                { "data": "actions" }
-            ]   
-        });
+@push('scripts')
+<script>
+    fetch('/panel/externalauth/fetch/all').then((r) => r.json()).then(({ data }) => {
+        const rows = data.map((ea) => `
+            <tr class="${ea.deleted_at ? 'table-secondary' : ''}">
+                <td><code>${ea.key}</code></td>
+                <td>${ea.brand}</td>
+                <td class="text-muted small">${ea.created_at ?? ''}</td>
+                <td>${ea.deleted_at ? 'Removida' : 'Ativa'}</td>
+                <td>
+                    ${ea.deleted_at ? '' : `<form method="POST" action="{{ route('panel.externalauth.delete') }}"><input type="hidden" name="_token" value="{{ csrf_token() }}"><input type="hidden" name="id" value="${ea.id}"><button class="btn btn-sm btn-outline-danger">Remover</button></form>`}
+                </td>
+            </tr>`).join('');
+        document.querySelector('#ea-table tbody').innerHTML = rows || '<tr><td colspan="5" class="text-muted">Sem credenciais.</td></tr>';
     });
-
 </script>
-@endsection
+@endpush
